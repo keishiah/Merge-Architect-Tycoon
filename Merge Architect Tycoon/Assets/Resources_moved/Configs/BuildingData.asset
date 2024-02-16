@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22dd05c3a4554d1fa9ccdac71a75c119, type: 3}
+  m_Name: BuildingData
+  m_EditorClassIdentifier: 
+  buildings:
+  - buildingName: Name
+    buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
+    timeToCreate: 5
+  placeToBuildSprite: {fileID: 21300000, guid: 8a7f16ffec6fbd045b7e71775be8f3df, type: 3}
+  buildInProgressSprite: {fileID: 21300000, guid: 10c338214e56f7b4f8414b759297a0d0, type: 3}
