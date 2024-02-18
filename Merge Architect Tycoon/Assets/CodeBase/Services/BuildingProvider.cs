@@ -16,7 +16,9 @@ namespace CodeBase.Services
         public void CreateBuilding(string buildingName)
         {
             if (_sceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            {
                 buildingPlace.StartCreatingBuilding();
+            }
         }
     }
 }

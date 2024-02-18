@@ -23,13 +23,11 @@ namespace CodeBase.Logic.Buildings
     {
         public BuildingView buildingView;
         public string buildingName;
-
-        private string _buildingToCreateName;
-
+        
         private IStaticDataService _staticDataService;
         private BuildingCreator _buildingCreator;
-        private CancellationTokenSource _activityToken;
         private BuildingProvider _buildingProvider;
+        private CancellationTokenSource _activityToken;
 
 
         [Inject]
@@ -57,7 +55,7 @@ namespace CodeBase.Logic.Buildings
                     break;
                 case BuildingStateEnum.BuildingFinished:
                     buildingView.SetViewBuildCreated();
-                    buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(_buildingToCreateName)
+                    buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
                         .buildingSprite);
                     break;
             }
