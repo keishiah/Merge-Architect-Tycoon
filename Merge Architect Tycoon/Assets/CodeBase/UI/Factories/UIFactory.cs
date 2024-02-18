@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagment;
+using CodeBase.Services;
 using CodeBase.Services.SceneContextProvider;
 using CodeBase.UI.Elements;
 using Cysharp.Threading.Tasks;
@@ -45,7 +46,9 @@ namespace CodeBase.UI.Factories
             var prefab = await _assetProvider.Load<GameObject>(AssetPath.CreateBuildingPopup);
             var element = _sceneContextProvider.GetCurrentSceneContextInstantiator()
                 .InstantiatePrefab(prefab, uiRoot.transform);
-            _uiPresenter._createBuildingPopupPresenter.Construct(_sceneContextProvider.Resolve<ItemsCatalogue>());
+            _uiPresenter._createBuildingPopupPresenter = _sceneContextProvider.Resolve<CreateBuildingPopupPresenter>();
+            // _uiPresenter._createBuildingPopupPresenter.SceneConstruct(_sceneContextProvider.Resolve<ItemsCatalogue>(),
+            //     _sceneContextProvider.Resolve<BuildingProvider>());
             _uiPresenter.SubscribeUIElementToPresenter(element.GetComponent<CreateBuildingPopup>());
         }
 

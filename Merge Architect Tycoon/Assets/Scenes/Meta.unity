@@ -167,14 +167,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2115247566}
     m_Modifications:
-    - target: {fileID: 749712272979783385, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5229597491070808278, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5551444372418504172, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
       propertyPath: m_Name
       value: BuildingPlace
@@ -186,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 8560551839134577660, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560551839134577660, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560551839134577660, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
       propertyPath: m_AnchorMax.x

@@ -31,6 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8560551839134577660}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -166,6 +167,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8560551839134577660}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -265,7 +267,6 @@ GameObject:
   - component: {fileID: 8560551839134577660}
   - component: {fileID: 2627047868228665529}
   - component: {fileID: 4600403394031284534}
-  - component: {fileID: 1036297840724006982}
   m_Layer: 5
   m_Name: BuildingPlace
   m_TagString: Untagged
@@ -288,6 +289,7 @@ RectTransform:
   - {fileID: 7364816413685967081}
   - {fileID: 3623040190111749425}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -321,17 +323,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingStateImage: {fileID: 7003670103506048181}
   timerText: {fileID: 8615757462735288477}
---- !u!114 &1036297840724006982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5551444372418504172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1033cc82a95d4e77b0083447501242bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingPlace: {fileID: 2627047868228665529}
-  stateToSet: 2

@@ -1,3 +1,4 @@
+using CodeBase.Services;
 using CodeBase.UI;
 using UnityEngine;
 using Zenject;
@@ -11,7 +12,9 @@ namespace CodeBase.CompositionRoot
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<SceneObjectsProvider>().AsSingle();
-
+            Container.BindInterfacesAndSelfTo<BuildingProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
+            
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();
             Container.Bind<MergeItemsManager>().AsSingle();

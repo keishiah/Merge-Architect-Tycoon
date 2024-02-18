@@ -51,7 +51,7 @@ namespace CodeBase.CompositionRoot
         private void BindUiPresenter()
         {
             Container.BindInterfacesAndSelfTo<UiPresenter>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
         }
 
         private void BindSceneContextProvider()

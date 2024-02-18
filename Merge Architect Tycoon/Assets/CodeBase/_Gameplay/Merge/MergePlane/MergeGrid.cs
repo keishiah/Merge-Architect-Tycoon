@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
-using CodeBase.Services.PlayerProgressService;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,15 +17,7 @@ public class MergeGrid : MonoBehaviour
     [Inject] private DiContainer _container;
     [Inject] private MergeLevel level;
     [Inject] private MergeItemsManager mergeItemsGeneralOpened;
-
-    private IPlayerProgressService _playerProgressService;
-
-    [Inject]
-    void Construct(IPlayerProgressService playerProgressService)
-    {
-        _playerProgressService = playerProgressService;
-    }
-
+    
     private void Start()
     {
         if (level.isNeedResetLevel)
@@ -98,20 +88,7 @@ public class MergeGrid : MonoBehaviour
             }
 
             var content = contentBuilder.ToString();
-
-            // string content = string.Empty;
-            //
-            // for (int i = 0; i < slotsManager.Slots.Count; i++)
-            // {
-            //     Slot slot = slotsManager.Slots[i];
-            //     if (!slot.IsEmpty)
-            //     {
-            //         string itemName = slot.CurrentItem == null ? EMPTY_ITEM_NAME : slot.CurrentItem.name;
-            //
-            //         content += i + "-" + itemName + "-" + (int)slot.SlotState + ";";
-            //     }
-            // }
-
+            
             PlayerPrefs.SetString("mergeContent", content);
             PlayerPrefs.Save();
         }

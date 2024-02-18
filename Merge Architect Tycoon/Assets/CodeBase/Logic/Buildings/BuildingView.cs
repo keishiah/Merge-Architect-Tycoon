@@ -16,9 +16,7 @@ namespace CodeBase.Logic.Buildings
             timerText.gameObject.SetActive(false);
             buildingStateImage.gameObject.SetActive(false);
         }
-
-        public void SetViewPlaceToBuild() => buildingStateImage.raycastTarget = true;
-
+        
         public void SetViewBuildInProgress()
         {
             buildingStateImage.raycastTarget = false;

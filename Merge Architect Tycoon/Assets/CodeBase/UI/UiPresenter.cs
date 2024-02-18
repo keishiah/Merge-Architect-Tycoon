@@ -12,18 +12,16 @@ namespace CodeBase.UI
     public class UiPresenter
     {
         public IPlayerProgressService PlayerProgressService;
-        public CreateBuildingPopupPresenter _createBuildingPopupPresenter;
         public IStaticDataService _staticDataService;
 
         private List<UiViewBase> _uiElements = new();
+        public CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
 
         [Inject]
-        void Construct(IPlayerProgressService playerProgressService,
-            CreateBuildingPopupPresenter createBuildingPopupPresenter, IStaticDataService staticDataService)
+        void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService)
         {
             PlayerProgressService = playerProgressService;
-            _createBuildingPopupPresenter = createBuildingPopupPresenter;
             _staticDataService = staticDataService;
         }
 
