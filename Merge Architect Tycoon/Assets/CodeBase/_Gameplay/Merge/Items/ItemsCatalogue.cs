@@ -6,20 +6,19 @@ public class ItemsCatalogue : MonoBehaviour
 {
     public List<MergeItem> mergeItemsCatalogue;
 
-    [Inject]
-    SlotsManager slotsManager;
-    [Inject]
-    InformationPanel informationPanel;
-    [Inject]
-    MergeItemsManager mergeItemsGeneralOpenedManager;
-    public int CheckHasItem(MergeItem item)
-    {
-        int counter = 0;
-        List<Slot> slots = new List<Slot>();
+    [Inject] SlotsManager slotsManager;
+    [Inject] InformationPanel informationPanel;
+    [Inject] MergeItemsManager mergeItemsGeneralOpenedManager;
 
-        slots.AddRange(slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
-        counter = slots.Count;
-        return counter;
+    public bool CheckHasItem(MergeItem item)
+    {
+        return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count > 0;
+        // int counter = 0;
+        // List<Slot> slots = new List<Slot>();
+        //
+        // slots.AddRange(slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
+        // counter = slots.Count;
+        // return counter;
     }
 
     public void TakeItems(MergeItem item, int count)
@@ -37,6 +36,7 @@ public class ItemsCatalogue : MonoBehaviour
                 {
                     informationPanel.ActivateInfromPanel(false);
                 }
+
                 slots[i].RemoveItem();
             }
         else
@@ -55,5 +55,3 @@ public class ItemsCatalogue : MonoBehaviour
         mergeItemsCatalogue.Remove(item);
     }
 }
-
-

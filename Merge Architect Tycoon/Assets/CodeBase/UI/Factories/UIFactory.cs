@@ -45,6 +45,7 @@ namespace CodeBase.UI.Factories
             var prefab = await _assetProvider.Load<GameObject>(AssetPath.CreateBuildingPopup);
             var element = _sceneContextProvider.GetCurrentSceneContextInstantiator()
                 .InstantiatePrefab(prefab, uiRoot.transform);
+            _uiPresenter._createBuildingPopupPresenter.Construct(_sceneContextProvider.Resolve<ItemsCatalogue>());
             _uiPresenter.SubscribeUIElementToPresenter(element.GetComponent<CreateBuildingPopup>());
         }
 

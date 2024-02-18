@@ -1,45 +1,26 @@
-﻿using CodeBase.Logic.Buildings;
-using UniRx;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 
 namespace CodeBase.UI.Elements
 {
     public class CreateBuildingPopup : UiViewBase
     {
-        public Button buildButton;
+        public List<CreateBuildingButton> createBuildingButtons;
+
         private UiPresenter _uiPresenter;
+        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
             uiPresenter.AddUiElementToElementsList(this);
-            gameObject.SetActive(false);
+
             _uiPresenter = uiPresenter;
-            _uiPresenter.PlayerProgressService.Progress.Coins._coinsCount.Subscribe(newValue =>
-                MakeButtonInteractable(newValue));
+            _createBuildingPopupPresenter = uiPresenter._createBuildingPopupPresenter;
+            gameObject.SetActive(false);
         }
 
-        public void SubscribeToCreateBuilding()
+        public void InitPopupButtons()
         {
-            buildButton.onClick.AddListener(() =>
-            {
-                if (_uiPresenter.PlayerProgressService.Progress.Coins.CurrentCoinsCount < 10) return;
-                GameObject.Find("BuildingPlace").GetComponent<BuildingPlace>().StartCreatingBuilding("Name");
-                _uiPresenter.PlayerProgressService.Progress.Coins.SpendCoins(10);
-
-                // buildingPlace.StartCreatingBuilding("Name");
-                gameObject.SetActive(false);
-            });
-        }
-
-        private void MakeButtonInteractable(int coinsvalue)
-        {
-            buildButton.interactable = coinsvalue >= 10;
-        }
-
-        private void OnDisable()
-        {
-            buildButton.onClick.RemoveAllListeners();
+            _createBuildingPopupPresenter.SetUpBuildingButtons(createBuildingButtons);
         }
     }
 }

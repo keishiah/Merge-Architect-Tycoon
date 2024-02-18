@@ -1,18 +1,27 @@
 using System.Collections.Generic;
+using CodeBase.Services.PlayerProgressService;
 using UnityEngine;
+using Zenject;
 
 public class SlotsManager
 {
-    [SerializeField]
-    private List<Slot> slots = new List<Slot>();
+    [SerializeField] private List<Slot> slots = new List<Slot>();
 
 
-    [SerializeField]
-    private int emptySlotsCount = 0;
+    [SerializeField] private int emptySlotsCount = 0;
+    
 
-    public int EmptySlotsCount { get { return slots.Count; } }
+    public int EmptySlotsCount
+    {
+        get { return slots.Count; }
+    }
 
-    public List<Slot> Slots { get { return slots; } }
+    public List<Slot> Slots
+    {
+        get { return slots; }
+    }
+
+
 
     public void InitialItems(List<ItemDropSlot> allDropSlots = null)
     {
@@ -20,14 +29,15 @@ public class SlotsManager
         {
             if (slots[i].IsEmpty) emptySlotsCount++;
             InitEvents(i);
-            
-            if(allDropSlots != null)
+
+            if (allDropSlots != null)
             {
                 slots[i].ChangeState(allDropSlots[i].slotState);
                 slots[i].AddItem(allDropSlots[i].mergeItem);
             }
         }
     }
+
     public void InitNeighbours(int slotsColumns)
     {
         for (int i = 0; i < slots.Count; i++)
@@ -36,29 +46,24 @@ public class SlotsManager
             int slot_y = i / slotsColumns;
             List<Slot> neighbours = new();
 
-            if (slot_x > 0)//left
+            if (slot_x > 0) //left
                 neighbours.Add(slots[i - 1]);
-            if (slot_x < slotsColumns-1)//right
+            if (slot_x < slotsColumns - 1) //right
                 neighbours.Add(slots[i + 1]);
 
-            if (slot_y > 0)//up
+            if (slot_y > 0) //up
                 neighbours.Add(slots[i - slotsColumns]);
-            if (i < slots.Count - slotsColumns)//down
+            if (i < slots.Count - slotsColumns) //down
                 neighbours.Add(slots[i + slotsColumns]);
 
             slots[i].SetNeighbours(neighbours.ToArray());
         }
     }
+
     private void InitEvents(int i)
     {
-        slots[i].addItemEvent += () =>
-        {
-            emptySlotsCount--;
-        };
-        slots[i].removeItemEvent += () =>
-        {
-            emptySlotsCount++;
-        };
+        slots[i].addItemEvent += () => { emptySlotsCount--; };
+        slots[i].removeItemEvent += () => { emptySlotsCount++; };
     }
 
     public void AddItemToEmptySlot(MergeItem mergeItem)
@@ -78,7 +83,6 @@ public class SlotsManager
             m_slot.AddItem(mergeItem);
             return;
         }
-
     }
 
     public bool CheckSlotIsEmpty(Slot slot)

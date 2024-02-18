@@ -70,13 +70,12 @@ namespace CodeBase.Logic.Buildings
         {
             _buildingToCreateName = buildingToCreateName;
             SetBuildingState(BuildingStateEnum.BuildInProgress);
-            _buildingCreator.CreateProductInTimeAsync(this, buildingToCreateName, _activityToken).Forget();
+            _buildingCreator.CreateBuildingInTimeAsync(this, buildingToCreateName, _activityToken).Forget();
         }
 
         private void SubscribeToOpenCreateBuildingPopup()
         {
-            buildingView.buildingStateImage.GetComponent<Button>().onClick
-                .AddListener(() => _uiPresenter.OpenCreateBuildingPopup(this));
+
         }
 
         public void UpdateTimerText(int totalSeconds)

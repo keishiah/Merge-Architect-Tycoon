@@ -1,3 +1,4 @@
+using CodeBase.UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,9 +11,12 @@ namespace CodeBase.CompositionRoot
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<SceneObjectsProvider>().AsSingle();
+
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();
             Container.Bind<MergeItemsManager>().AsSingle();
+            Container.Bind<ItemsCatalogue>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<InformationPanel>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

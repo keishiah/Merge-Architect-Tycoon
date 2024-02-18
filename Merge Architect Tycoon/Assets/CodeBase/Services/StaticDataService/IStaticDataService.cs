@@ -1,4 +1,5 @@
-﻿using CodeBase.StaticData;
+﻿using System.Collections.Generic;
+using CodeBase.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Services.StaticDataService
@@ -8,6 +9,7 @@ namespace CodeBase.Services.StaticDataService
         void Initialize();
         Sprite PlaceToBuildSprite { get; }
         Sprite BuildInProgressSprite { get; }
+        Dictionary<string, BuildingInfo> BuildingData { get; }
         BuildingInfo GetBuildingData(string buildingName);
     }
 }

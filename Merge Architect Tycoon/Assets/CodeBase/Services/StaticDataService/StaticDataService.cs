@@ -12,6 +12,7 @@ namespace CodeBase.Services.StaticDataService
         private const string BuildingsDataPath = "BuildingData";
 
         private Dictionary<string, BuildingInfo> _buildingData;
+        public Dictionary<string, BuildingInfo> BuildingData => _buildingData;
 
         private Sprite _placeToBuildSprite;
 

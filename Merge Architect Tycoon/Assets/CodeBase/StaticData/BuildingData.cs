@@ -18,5 +18,7 @@ namespace CodeBase.StaticData
         public string buildingName;
         public Sprite buildingSprite;
         public int timeToCreate;
+        public int coinsCountToCreate;
+        public MergeItem itemToCreate;
     }
 }
