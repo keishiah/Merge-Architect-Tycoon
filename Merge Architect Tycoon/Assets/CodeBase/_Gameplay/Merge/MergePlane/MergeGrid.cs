@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,21 +9,15 @@ public class MergeGrid : MonoBehaviour
 {
     private const string EMPTY_ITEM_NAME = "Empty";
 
-    [SerializeField]
-    public InformationPanel informationPanel;
+    [SerializeField] public InformationPanel informationPanel;
 
-    [SerializeField] 
-    private Slot slotPrefab;
-    [Inject]
-    public SlotsManager slotsManager;
+    [SerializeField] private Slot slotPrefab;
+    [Inject] public SlotsManager slotsManager;
 
-    [Inject]
-    private DiContainer _container;
-    [Inject]
-    private MergeLevel level;
-    [Inject]
-    private MergeItemsManager mergeItemsGeneralOpened;
-
+    [Inject] private DiContainer _container;
+    [Inject] private MergeLevel level;
+    [Inject] private MergeItemsManager mergeItemsGeneralOpened;
+    
     private void Start()
     {
         if (level.isNeedResetLevel)
@@ -76,7 +70,7 @@ public class MergeGrid : MonoBehaviour
 
     public void SaveInventory()
     {
-        string content = string.Empty;
+        StringBuilder contentBuilder = new StringBuilder();
 
         for (int i = 0; i < slotsManager.Slots.Count; i++)
         {
@@ -85,12 +79,19 @@ public class MergeGrid : MonoBehaviour
             {
                 string itemName = slot.CurrentItem == null ? EMPTY_ITEM_NAME : slot.CurrentItem.name;
 
-                content += i + "-" + itemName + "-" + (int)slot.SlotState + ";";
+                contentBuilder.Append(i)
+                    .Append("-")
+                    .Append(itemName)
+                    .Append("-")
+                    .Append((int)slot.SlotState)
+                    .Append(";");
             }
 
+            var content = contentBuilder.ToString();
+            
+            PlayerPrefs.SetString("mergeContent", content);
+            PlayerPrefs.Save();
         }
-        PlayerPrefs.SetString("mergeContent", content);
-        PlayerPrefs.Save();
     }
 
     public void LoadInventory()
@@ -112,7 +113,7 @@ public class MergeGrid : MonoBehaviour
                     int index = int.Parse(splitedValue[0]);
                     int slotState = int.Parse(splitedValue[2]);
                     slotsManager.Slots[index].ChangeState((SlotState)slotState);
-                    if(splitedValue[1] != EMPTY_ITEM_NAME)
+                    if (splitedValue[1] != EMPTY_ITEM_NAME)
                         slotsManager.Slots[index].AddItem(
                             Resources.Load<MergeItem>($"Items/{splitedValue[1]}"));
                 }
@@ -132,5 +133,3 @@ public class MergeGrid : MonoBehaviour
             slotsManager.InitialItems(level.allDropSlots);
     }
 }
-
-

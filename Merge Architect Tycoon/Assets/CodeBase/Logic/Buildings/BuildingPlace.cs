@@ -15,7 +15,6 @@ namespace CodeBase.Logic.Buildings
     public enum BuildingStateEnum
     {
         Inactive,
-        PlaceToBuild,
         BuildInProgress,
         BuildingFinished
     }
@@ -23,23 +22,24 @@ namespace CodeBase.Logic.Buildings
     public class BuildingPlace : MonoBehaviour
     {
         public BuildingView buildingView;
-
-        private string _buildingToCreateName;
-
+        public string buildingName;
+        
         private IStaticDataService _staticDataService;
-        private UiPresenter _uiPresenter;
         private BuildingCreator _buildingCreator;
-
+        private BuildingProvider _buildingProvider;
         private CancellationTokenSource _activityToken;
 
 
         [Inject]
-        void Construct(IStaticDataService staticDataService, UiPresenter uiPresenter, BuildingCreator buildingCreator)
+        void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
+            BuildingProvider buildingProvider)
         {
             _staticDataService = staticDataService;
-            _uiPresenter = uiPresenter;
             _buildingCreator = buildingCreator;
+            _buildingProvider = buildingProvider;
+
             _activityToken = new CancellationTokenSource();
+            _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
         }
 
         public void SetBuildingState(BuildingStateEnum state)
@@ -49,34 +49,23 @@ namespace CodeBase.Logic.Buildings
                 case BuildingStateEnum.Inactive:
                     buildingView.SetViewInactive();
                     break;
-                case BuildingStateEnum.PlaceToBuild:
-                    buildingView.SetViewPlaceToBuild();
-                    buildingView.ShowBuildSprite(_staticDataService.PlaceToBuildSprite);
-                    SubscribeToOpenCreateBuildingPopup();
-                    break;
                 case BuildingStateEnum.BuildInProgress:
                     buildingView.SetViewBuildInProgress();
                     buildingView.ShowBuildSprite(_staticDataService.BuildInProgressSprite);
                     break;
                 case BuildingStateEnum.BuildingFinished:
                     buildingView.SetViewBuildCreated();
-                    buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(_buildingToCreateName)
+                    buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
                         .buildingSprite);
                     break;
             }
         }
 
-        public void StartCreatingBuilding(string buildingToCreateName)
+        public void StartCreatingBuilding()
         {
-            _buildingToCreateName = buildingToCreateName;
             SetBuildingState(BuildingStateEnum.BuildInProgress);
-            _buildingCreator.CreateProductInTimeAsync(this, buildingToCreateName, _activityToken).Forget();
-        }
 
-        private void SubscribeToOpenCreateBuildingPopup()
-        {
-            buildingView.buildingStateImage.GetComponent<Button>().onClick
-                .AddListener(() => _uiPresenter.OpenCreateBuildingPopup(this));
+            _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, _activityToken).Forget();
         }
 
         public void UpdateTimerText(int totalSeconds)

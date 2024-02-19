@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Logic.Buildings;
 using CodeBase.Services.PlayerProgressService;
+using CodeBase.Services.StaticDataService;
 using CodeBase.UI.Elements;
 using Zenject;
 
@@ -10,28 +11,24 @@ namespace CodeBase.UI
 {
     public class UiPresenter
     {
-        private IPlayerProgressService _playerProgressService;
-        public IPlayerProgressService PlayerProgressService => _playerProgressService;
+        public IPlayerProgressService PlayerProgressService;
+        public IStaticDataService _staticDataService;
 
         private List<UiViewBase> _uiElements = new();
+        public CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+
 
         [Inject]
-        void Construct(IPlayerProgressService playerProgressService)
+        void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService)
         {
-            _playerProgressService = playerProgressService;
-        }
-
-        public void OpenCreateBuildingPopup(BuildingPlace buildingPlace)
-        {
-            CreateBuildingPopup popup = GetUiElementFromElementsList<CreateBuildingPopup>();
-            popup.SubscribeToCreateBuilding();
-            popup.gameObject.SetActive(true);
+            PlayerProgressService = playerProgressService;
+            _staticDataService = staticDataService;
         }
 
         public void OpenCreateBuildingPopup()
         {
             CreateBuildingPopup popup = GetUiElementFromElementsList<CreateBuildingPopup>();
-            popup.SubscribeToCreateBuilding();
+            popup.InitPopupButtons();
             popup.gameObject.SetActive(true);
         }
 

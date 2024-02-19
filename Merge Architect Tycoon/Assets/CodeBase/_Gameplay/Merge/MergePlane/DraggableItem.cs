@@ -40,11 +40,6 @@ public class
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
         if (slot.SlotState == SlotState.Draggable)
