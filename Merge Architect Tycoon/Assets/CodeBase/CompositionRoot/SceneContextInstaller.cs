@@ -11,7 +11,6 @@ namespace CodeBase.CompositionRoot
 
         public override void InstallBindings()
         {
-            Container.Bind<SceneObjectsProvider>().AsSingle();
             Container.Bind<BuildingProvider>().AsSingle();
             Container.Bind<CreateBuildingPopupPresenter>().AsSingle();
             
