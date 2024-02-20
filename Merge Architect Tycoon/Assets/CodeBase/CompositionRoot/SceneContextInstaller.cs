@@ -11,9 +11,8 @@ namespace CodeBase.CompositionRoot
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<SceneObjectsProvider>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BuildingProvider>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
+            Container.Bind<BuildingProvider>().AsSingle();
+            Container.Bind<CreateBuildingPopupPresenter>().AsSingle();
             
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();

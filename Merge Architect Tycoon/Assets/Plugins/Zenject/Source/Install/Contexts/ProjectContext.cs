@@ -21,6 +21,7 @@ namespace Zenject
 
         static ProjectContext _instance;
 
+        // TODO: Set this to false the next time major version is incremented
         [Tooltip("When true, objects that are created at runtime will be parented to the ProjectContext")]
         [SerializeField]
         bool _parentNewObjectsUnderContext = true;

@@ -6,13 +6,20 @@ namespace CodeBase.Infrastructure
 {
     public class GameRunner : MonoBehaviour
     {
-        IStateFactory _stateFactory;
+        private IStateFactory _stateFactory;
 
         [Inject]
-        void Construct(IStateFactory stateFactory) =>
+        void Construct(IStateFactory stateFactory)
+        {
             _stateFactory = stateFactory;
+        }
 
         private void Awake()
+        {
+            CreateGameBootstrapper();
+        }
+
+        private void CreateGameBootstrapper()
         {
             var bootstrapper = FindObjectOfType<GameBootstrapper>();
 

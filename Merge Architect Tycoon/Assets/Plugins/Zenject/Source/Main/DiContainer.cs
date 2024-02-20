@@ -290,6 +290,7 @@ namespace Zenject
             {
 #if ZEN_MULTITHREADING
                 // When multithreading is supported we can't use a static field to track the lookup
+                // TODO: We could look at the inject context though
                 return false;
 #else
                 return true;
@@ -1186,6 +1187,7 @@ namespace Zenject
         void GetDecoratedInstances(
             IProvider provider, InjectContext context, List<object> buffer)
         {
+            // TODO:  This is flawed since it doesn't allow binding new decorators in subcontainers
             var decoratorProvider = TryGetDecoratorProvider(context.BindingId.Type);
 
             if (decoratorProvider != null)
