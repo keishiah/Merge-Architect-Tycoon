@@ -23,7 +23,6 @@ namespace CodeBase.CompositionRoot
 
             BindStaticDataService();
 
-            BindGameFactory();
             
             BindPlayerProgressService();
 
@@ -95,10 +94,6 @@ namespace CodeBase.CompositionRoot
                 .AsSingle();
         }
 
-        private void BindGameFactory()
-        {
-            Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
-        }
 
         private void BindSceneLoader() =>
             Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();

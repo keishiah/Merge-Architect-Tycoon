@@ -11,7 +11,6 @@ namespace CodeBase.Infrastructure.States
     {
         private IGameStateMachine _gameStateMachine;
         private readonly ISceneLoader _sceneLoader;
-        private readonly IGameFactory _gameFactory;
         private readonly ISceneContextProvider _sceneContextProvider;
         private readonly IPlayerProgressService _playerProgressService;
 
@@ -19,18 +18,16 @@ namespace CodeBase.Infrastructure.States
 
 
         public LoadLevelState(ISceneLoader sceneLoader, ISceneContextProvider
-                sceneContextProvider, IGameFactory gameFactory,
+                sceneContextProvider,
             IPlayerProgressService playerProgressService)
         {
             _sceneLoader = sceneLoader;
             _sceneContextProvider = sceneContextProvider;
-            _gameFactory = gameFactory;
             _playerProgressService = playerProgressService;
         }
 
         public void Enter(string sceneName)
         {
-            _gameFactory.Cleanup();
 
             _sceneLoader.Load(sceneName, OnLoaded);
             _sceneName = sceneName;
@@ -51,7 +48,6 @@ namespace CodeBase.Infrastructure.States
             _sceneContextProvider.Resolve<SceneObjectsProvider>().InitializeSceneObjects();
 
             await InitLevel();
-            await _gameFactory.WarmUp();
         }
 
         private async UniTask InitLevel()
