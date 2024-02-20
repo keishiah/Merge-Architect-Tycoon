@@ -12,16 +12,20 @@ namespace CodeBase.UI
 {
     public class CreateBuildingPopupPresenter
     {
+        private string _currentBuildingName;
+        private CreateBuildingUiElement _currentSelectedBuildingUiElement;
+
+        private List<BuildingInfo> _buildings = new();
+        private List<BuildingInfo> _readyToBuild = new();
+        private List<BuildingInfo> _almostReady = new();
+        private List<BuildingInfo> _otherBuildings = new();
+
         private ItemsCatalogue _itemsCatalogue;
         private IStaticDataService _staticDataService;
         private BuildingProvider _buildingProvider;
         private IPlayerProgressService _playerProgressService;
         private CreateBuildingPopup _createBuildingPopup;
 
-        private List<BuildingInfo> _buildings = new();
-        private List<BuildingInfo> _readyToBuild = new();
-        private List<BuildingInfo> _almostReady = new();
-        private List<BuildingInfo> _otherBuildings = new();
 
         [Inject]
         void Construct(IStaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
@@ -38,7 +42,7 @@ namespace CodeBase.UI
             _createBuildingPopup = popup;
         }
 
-        public void SetUpBuildingButtons(List<CreateBuildingUiElement> buttons)
+        public void SetUpBuildingElements(List<CreateBuildingUiElement> buttons)
         {
             var buildingInfo = _staticDataService.BuildingData.Values.ToList();
             _buildings.Clear();
@@ -67,17 +71,28 @@ namespace CodeBase.UI
 
             for (int x = 0; x < _buildings.Count; x++)
             {
-                buttons[x].SetPriceText(_buildings[x].coinsCountToCreate.ToString());
+                buttons[x].SetBuildingImage(_buildings[x].buildingSprite);
+                buttons[x].SetCoinsImage(_buildings[x].buildingSprite);
+                buttons[x].SetResourceImage(_buildings[x].buildingSprite);
+                buttons[x].SetCoinsPriceText(_buildings[x].coinsCountToCreate.ToString());
+                buttons[x].SetResourcesPriceText(_buildings[x].coinsCountToCreate.ToString());
+                buttons[x].SetBuildingName(_buildings[x].buildingName);
 
                 buttons[x].SetCreateButtonInteractable(CheckButtonIsInteractable(_buildings[x].itemToCreate,
                     _buildings[x].coinsCountToCreate));
 
-                buttons[x].SetButtonListener(() =>
-                    CreateBuilding(_buildings[x].itemToCreate,
-                        _buildings[x].coinsCountToCreate, _buildings[x].buildingName));
+                buttons[x].SetPresenter(this);
             }
         }
 
+        public void SelectBuilding(CreateBuildingUiElement selectedBuilding)
+        {
+            if (_currentSelectedBuildingUiElement)
+                _currentSelectedBuildingUiElement.buildingImageOutline.enabled = false;
+            
+            _currentSelectedBuildingUiElement = selectedBuilding;
+            selectedBuilding.buildingImageOutline.enabled = true;
+        }
 
         private bool HasEnoughResources(BuildingInfo building)
         {
@@ -92,15 +107,15 @@ namespace CodeBase.UI
                 itemToCreate) && _playerProgressService.Progress.Coins.CurrentCoinsCount >= coinsToCreate;
         }
 
-        private void CreateBuilding(MergeItem item, int coinsToCreate, string buildingName)
-        {
-            if (_playerProgressService.Progress.Coins.SpendCoins(coinsToCreate))
-            {
-                _itemsCatalogue.TakeItems(item, 1);
-                _buildingProvider.CreateBuilding(buildingName);
-
-                _createBuildingPopup.gameObject.SetActive(false);
-            }
-        }
+        // private void SelectBuilding(MergeItem item, int coinsToCreate, string buildingName)
+        // {
+        //     if (_playerProgressService.Progress.Coins.SpendCoins(coinsToCreate))
+        //     {
+        //         _itemsCatalogue.TakeItems(item, 1);
+        //         _buildingProvider.CreateBuilding(buildingName);
+        //
+        //         _createBuildingPopup.gameObject.SetActive(false);
+        //     }
+        // }
     }
 }

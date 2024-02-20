@@ -29,7 +29,7 @@ namespace CodeBase.UI.Elements
 
         public void InitPopupElements()
         {
-            _createBuildingPopupPresenter.SetUpBuildingButtons(createBuildingElements);
+            _createBuildingPopupPresenter.SetUpBuildingElements(createBuildingElements);
         }
     }
 }
