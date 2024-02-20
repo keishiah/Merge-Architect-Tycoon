@@ -1,18 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Zenject;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class
+    DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
+        IDragHandler //, IPointerClickHandler, IPointerExitHandler
 {
-    public bool isClicked = false;
-    public Slot slot;
     public Image image;
-
+    public Slot slot;
     private Transform parentAfterDrag;
+    public bool isClicked = false;
     private Vector3 startMousePosition;
-    [Inject]
-    private Canvas canvas;
+    
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -34,8 +34,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                     transform.SetParent(transform.parent.parent.parent);
                     transform.SetAsLastSibling();
                     image.raycastTarget = false;
-                    startMousePosition 
-                        = Input.mousePosition / canvas.scaleFactor - transform.localPosition;
+                    startMousePosition = Input.mousePosition - transform.localPosition;
                 }
             }
         }
@@ -48,10 +47,27 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             if (!slot.IsEmpty)
             {
                 transform.localPosition
-                    = Input.mousePosition / canvas.scaleFactor - startMousePosition;
+                    = Input.mousePosition - startMousePosition;
             }
         }
     }
+
+    // public void OnDrag(PointerEventData eventData)
+    // {
+    //     if (slot.SlotState == SlotState.Draggable)
+    //     {
+    //         if (!slot.IsEmpty)
+    //         {
+    //             if (eventData.clickCount < 2)
+    //             {
+    //                 Vector2 pos;
+    //                 RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.root as RectTransform,
+    //                     eventData.position, _camera, out pos);
+    //                 transform.position = transform.root.TransformPoint(pos);
+    //             }
+    //         }
+    //     }
+    // }
 
     public void OnEndDrag(PointerEventData eventData)
     {
