@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Logic.Buildings;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.StaticDataService;
 using CodeBase.UI.Elements;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI
@@ -15,7 +15,6 @@ namespace CodeBase.UI
         public IStaticDataService _staticDataService;
 
         private List<UiViewBase> _uiElements = new();
-        public CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
 
         [Inject]
@@ -28,8 +27,8 @@ namespace CodeBase.UI
         public void OpenCreateBuildingPopup()
         {
             CreateBuildingPopup popup = GetUiElementFromElementsList<CreateBuildingPopup>();
-            popup.InitPopupButtons();
             popup.gameObject.SetActive(true);
+            popup.InitPopupElements();
         }
 
         public void CloseCreateBuildingPopup() =>
@@ -39,12 +38,7 @@ namespace CodeBase.UI
         {
             PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
         }
-
-        public void SubscribeUIElementToPresenter(UiViewBase uiElement)
-        {
-            uiElement.InitUiElement(this);
-        }
-
+        
         public void AddUiElementToElementsList(UiViewBase element)
         {
             _uiElements.Add(element);

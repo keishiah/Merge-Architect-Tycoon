@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace CodeBase.UI.Elements
 {
@@ -11,6 +12,12 @@ namespace CodeBase.UI.Elements
 
         private UiPresenter _uiPresenter;
 
+        [Inject]
+        void Construct(UiPresenter uiPresenter)
+        {
+            _uiPresenter = uiPresenter;
+            InitUiElement(_uiPresenter);
+        }
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
@@ -18,6 +25,7 @@ namespace CodeBase.UI.Elements
             RenderMoneyCount(currentMoneyCount);
 
             _uiPresenter = uiPresenter;
+
             uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
             addCoinsButton.onClick.AddListener(AddCoins);
         }
