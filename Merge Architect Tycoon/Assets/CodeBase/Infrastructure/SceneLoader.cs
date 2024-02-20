@@ -1,5 +1,5 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,21 +14,17 @@ namespace CodeBase.Infrastructure
     {
         public void Load(string name, Action onLoaded = null)
         {
-            LoadScene(name, onLoaded).Forget();
+            if(SceneManager.GetActiveScene().name != name)
+                LoadScene(name).Forget();
+            
+            onLoaded?.Invoke();
         }
 
-        private async UniTask LoadScene(string nextScene, Action onLoaded = null)
+        private async UniTask LoadScene(string nextScene)
         {
-            // if (SceneManager.GetActiveScene().name == nextScene)
-            // {
-            //     onLoaded?.Invoke();
-            //     yield break;
-            // }
-
-            await SceneManager.LoadSceneAsync(nextScene).ToUniTask();
-
-            await UniTask.DelayFrame(1);
-            onLoaded?.Invoke();
+            //No need to switch the scene instantly
+            await SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive).ToUniTask();
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
         }
     }
 }

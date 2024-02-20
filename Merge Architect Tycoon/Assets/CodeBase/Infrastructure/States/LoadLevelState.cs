@@ -33,11 +33,12 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter(string sceneName)
         {
+            _sceneName = sceneName;
+
             _gameFactory.Cleanup();
             _uiFactory.Cleanup();
 
             _sceneLoader.Load(sceneName, OnLoaded);
-            _sceneName = sceneName;
         }
 
         public void SetGameStateMachine(IGameStateMachine gameStateMachine)

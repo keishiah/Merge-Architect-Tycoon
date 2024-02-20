@@ -39,6 +39,7 @@ namespace ModestTree
         }
 
 #if !(UNITY_WSA && ENABLE_DOTNET)
+        // TODO: Is it possible to do this on WSA?
         public static bool IsAssignableToGenericType(Type givenType, Type genericType)
         {
             var interfaceTypes = givenType.Interfaces();
