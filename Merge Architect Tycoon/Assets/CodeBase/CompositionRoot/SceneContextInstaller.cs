@@ -17,6 +17,7 @@ namespace CodeBase.CompositionRoot
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();
             Container.Bind<MergeItemsManager>().AsSingle();
+            Container.Bind<DraggableItem>().AsSingle();
             Container.Bind<ItemsCatalogue>().FromComponentInHierarchy().AsSingle();
             Container.Bind<InformationPanel>().FromComponentInHierarchy().AsSingle();
         }
