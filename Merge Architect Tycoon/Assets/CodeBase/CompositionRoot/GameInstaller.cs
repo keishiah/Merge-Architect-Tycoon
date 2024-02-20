@@ -9,7 +9,6 @@ using CodeBase.Services.SaveLoadService;
 using CodeBase.Services.SceneContextProvider;
 using CodeBase.Services.StaticDataService;
 using CodeBase.UI;
-using CodeBase.UI.Factories;
 using Zenject;
 
 namespace CodeBase.CompositionRoot
@@ -25,9 +24,7 @@ namespace CodeBase.CompositionRoot
             BindStaticDataService();
 
             BindGameFactory();
-
-            BindUIFactory();
-
+            
             BindPlayerProgressService();
 
             BindSaveLoadService();
@@ -51,7 +48,6 @@ namespace CodeBase.CompositionRoot
         private void BindUiPresenter()
         {
             Container.BindInterfacesAndSelfTo<UiPresenter>().AsSingle();
-            // Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
         }
 
         private void BindSceneContextProvider()
@@ -102,11 +98,6 @@ namespace CodeBase.CompositionRoot
         private void BindGameFactory()
         {
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
-        }
-
-        private void BindUIFactory()
-        {
-            Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
         }
 
         private void BindSceneLoader() =>

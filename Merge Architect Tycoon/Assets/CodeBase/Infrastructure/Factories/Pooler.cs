@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Factories;
-using CodeBase.UI.Elements;
-using CodeBase.UI.Factories;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

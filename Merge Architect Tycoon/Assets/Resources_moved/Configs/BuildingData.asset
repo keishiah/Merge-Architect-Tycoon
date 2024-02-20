@@ -23,5 +23,10 @@ MonoBehaviour:
     timeToCreate: 5
     coinsCountToCreate: 18
     itemToCreate: {fileID: 11400000, guid: a923c4a42694be047ae700bfe18ac6a1, type: 2}
+  - buildingName: 2
+    buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
+    timeToCreate: 5
+    coinsCountToCreate: 1
+    itemToCreate: {fileID: 11400000, guid: 72bb531f53e78344c92eb24c04d8f44a, type: 2}
   placeToBuildSprite: {fileID: 21300000, guid: 8a7f16ffec6fbd045b7e71775be8f3df, type: 3}
   buildInProgressSprite: {fileID: 21300000, guid: 10c338214e56f7b4f8414b759297a0d0, type: 3}

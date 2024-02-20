@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.Elements
 {
-    public class CreateBuildingButton : MonoBehaviour
+    public class CreateBuildingUiElement : MonoBehaviour
     {
         public Button createButton;
         public TextMeshProUGUI priceTex;
@@ -18,7 +18,10 @@ namespace CodeBase.UI.Elements
 
         public void SetPriceText(string text) => priceTex.text = text;
 
-        public void SetCreateButtonInteractable(bool interactable) => createButton.interactable = interactable;
+        public void SetCreateButtonInteractable(bool interactable)
+        {
+            createButton.interactable = interactable;
+        }
 
         private void OnDisable() => createButton.onClick.RemoveAllListeners();
     }
