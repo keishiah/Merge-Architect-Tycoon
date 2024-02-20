@@ -17,8 +17,8 @@ public class MergeGrid : MonoBehaviour
     [Inject] private DiContainer _container;
     [Inject] private MergeLevel level;
     [Inject] private MergeItemsManager mergeItemsGeneralOpened;
-    
-    private void Start()
+
+    public void InitializeGrid()
     {
         if (level.isNeedResetLevel)
         {
@@ -88,7 +88,7 @@ public class MergeGrid : MonoBehaviour
             }
 
             var content = contentBuilder.ToString();
-            
+
             PlayerPrefs.SetString("mergeContent", content);
             PlayerPrefs.Save();
         }
@@ -96,6 +96,7 @@ public class MergeGrid : MonoBehaviour
 
     public void LoadInventory()
     {
+        print("Load inventory");
         CreateLayout();
 
         bool isLoadSuccess = false;
