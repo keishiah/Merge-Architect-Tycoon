@@ -44,9 +44,13 @@ namespace CodeBase.CompositionRoot
 
             BindUiPresenter();
 
-            Container.Bind<BuildingCreator>().AsSingle();
+            BindBuilder();
         }
 
+        private void BindBuilder()
+        {
+            Container.Bind<BuildingCreator>().AsSingle();
+        }
 
         private void BindUiPresenter()
         {

@@ -13,10 +13,11 @@ public class PreStart : MonoBehaviour
     [SerializeField]
     private GameObject GameRunner;
 
-    private float fakeLoadDuration = 1f;
+    private float fakeLoadDuration = .5f;
 
-    private void Awake()
+    private IEnumerator Start()
     {
+        yield return null;
         GameRunner.SetActive(true);
     }
 

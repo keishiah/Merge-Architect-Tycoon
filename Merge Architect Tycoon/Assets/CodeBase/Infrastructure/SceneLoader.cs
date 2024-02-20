@@ -14,23 +14,17 @@ namespace CodeBase.Infrastructure
     {
         public void Load(string name, Action onLoaded = null)
         {
-            if(SceneManager.GetActiveScene().name == name)
-            {
-                onLoaded?.Invoke();
-                return;
-            }
-
-            LoadScene(name, onLoaded).Forget();
+            if(SceneManager.GetActiveScene().name != name)
+                LoadScene(name).Forget();
+            
+            onLoaded?.Invoke();
         }
 
-        private async UniTask LoadScene(string nextScene, Action onLoaded = null)
+        private async UniTask LoadScene(string nextScene)
         {
             //No need to switch the scene instantly
             await SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive).ToUniTask();
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
-
-            await UniTask.DelayFrame(1);
-            onLoaded?.Invoke();
         }
     }
 }
