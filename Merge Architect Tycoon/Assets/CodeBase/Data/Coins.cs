@@ -35,7 +35,8 @@ namespace CodeBase.Data
 
         public void OnAfterDeserialize()
         {
-            _coinsCount.Value = Mathf.Max(_defaultValue, savedValue);
+            // _coinsCount.Value = Mathf.Max(_defaultValue, savedValue);
+            _coinsCount.Value = 10;
         }
 
         public void OnBeforeSerialize()

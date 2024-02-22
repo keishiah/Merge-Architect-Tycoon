@@ -1,35 +1,55 @@
-﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.UI.Elements
 {
-    public class CreateBuildingPopup : UiViewBase
+    public class CreateBuildingPopup : MonoBehaviour
     {
-        public List<CreateBuildingUiElement> createBuildingElements;
+        public Button goToMergePanelButton;
+        public Button createBuildingButton;
 
-        private UiPresenter _uiPresenter;
+        public GameObject mergePanel;
+        public Button closeButton;
+
+
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
         [Inject]
-        void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
+        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
-            _uiPresenter = uiPresenter;
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
-            InitUiElement(_uiPresenter);
+            _createBuildingPopupPresenter.InitializePopup(this);
+            ClosePanelButtons();
+
+            goToMergePanelButton.onClick.AddListener(GoToMergePanel);
+            createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
         }
 
-        public override void InitUiElement(UiPresenter uiPresenter)
+        public void ClosePanelButtons()
         {
-            uiPresenter.AddUiElementToElementsList(this);
-
-            _uiPresenter = uiPresenter;
-            _createBuildingPopupPresenter.SetupPopup(this);
-            gameObject.SetActive(false);
+            goToMergePanelButton.gameObject.SetActive(false);
+            createBuildingButton.gameObject.SetActive(false);
         }
 
-        public void InitPopupElements()
+        private void GoToMergePanel()
         {
-            _createBuildingPopupPresenter.SetUpBuildingButtons(createBuildingElements);
+            _createBuildingPopupPresenter.CLoseScroller();
+            mergePanel.SetActive(true);
+            closeButton.gameObject.SetActive(true);
+            ClosePanelButtons();
+        }
+
+        public void OpenMergeButton()
+        {
+            goToMergePanelButton.gameObject.SetActive(true);
+            createBuildingButton.gameObject.SetActive(false);
+        }
+
+        public void OpenCreateBuildingButton()
+        {
+            createBuildingButton.gameObject.SetActive(true);
+            goToMergePanelButton.gameObject.SetActive(false);
         }
     }
 }
