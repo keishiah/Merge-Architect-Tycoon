@@ -34,7 +34,6 @@ namespace CodeBase.UI.Elements
         public void SetResourceImage(Sprite buildingSprite) => resourceImage.sprite = buildingSprite;
         public void SetCoinsPriceText(string text) => coinsPriceTex.text = text;
         public void SetResourcesPriceText(string text) => resourcePriceTex.text = text;
-        public void SetCreateButtonInteractable(bool interactable) => buildingButton.interactable = interactable;
 
         public void SetBuildingName(string newName)
         {

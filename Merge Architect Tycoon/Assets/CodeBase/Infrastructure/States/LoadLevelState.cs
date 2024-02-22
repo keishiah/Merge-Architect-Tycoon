@@ -1,6 +1,7 @@
 ﻿using CodeBase.CompositionRoot;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PlayerProgressService;
+using CodeBase.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -11,14 +12,17 @@ namespace CodeBase.Infrastructure.States
         private IGameStateMachine _gameStateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IPlayerProgressService _playerProgressService;
+        private readonly UiPresenter _uiPresenter;
 
         private string _sceneName;
 
 
-        public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService)
+        public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
+            UiPresenter uiPresenter)
         {
             _sceneLoader = sceneLoader;
             _playerProgressService = playerProgressService;
+            _uiPresenter = uiPresenter;
         }
 
         public void Enter(string sceneName)
@@ -38,12 +42,12 @@ namespace CodeBase.Infrastructure.States
         {
         }
 
-        private async void OnLoaded()
+        private void OnLoaded()
         {
-            await InitLevel();
+            InitLevel();
         }
 
-        private async UniTask InitLevel()
+        private void InitLevel()
         {
         }
     }

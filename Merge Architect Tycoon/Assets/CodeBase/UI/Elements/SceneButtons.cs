@@ -1,5 +1,3 @@
-using System;
-using CodeBase.Services;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -13,15 +11,15 @@ namespace CodeBase.UI.Elements
         public Button closeButton;
 
         public GameObject mergePanel;
-        public GameObject buildingConstructMenu;
-        
-        private UiPresenter _uiPresenter;
+
+        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
         [Inject]
-        void Construct(UiPresenter uiPresenter)
+        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
-            _uiPresenter = uiPresenter;
+            _createBuildingPopupPresenter = createBuildingPopupPresenter;
         }
+
         private void Start()
         {
             buildingConstructMenuButton.onClick.AddListener(OpenBuildingConstructMenu);
@@ -33,7 +31,7 @@ namespace CodeBase.UI.Elements
         private void CloseElement()
         {
             mergePanel.gameObject.SetActive(false);
-            buildingConstructMenu.gameObject.SetActive(false);
+            _createBuildingPopupPresenter.CLoseScroller();
             gameObject.SetActive(true);
             closeButton.gameObject.SetActive(false);
         }
@@ -41,7 +39,7 @@ namespace CodeBase.UI.Elements
         private void OpenBuildingConstructMenu()
         {
             gameObject.SetActive(false);
-            _uiPresenter.OpenCreateBuildingPopup();
+            _createBuildingPopupPresenter.OpenScroller();
             closeButton.gameObject.SetActive(true);
         }
 
