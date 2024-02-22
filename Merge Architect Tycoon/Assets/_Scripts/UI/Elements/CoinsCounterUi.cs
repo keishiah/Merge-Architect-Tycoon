@@ -41,7 +41,7 @@ namespace CodeBase.UI.Elements
 
         private void RenderMoneyCount(int newValue)
         {
-            moneyCountText.text = $"Coins:{newValue.ToString()}";
+            moneyCountText.text = newValue.ToString();
         }
     }
 }

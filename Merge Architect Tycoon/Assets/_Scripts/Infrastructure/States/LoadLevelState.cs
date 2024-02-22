@@ -3,6 +3,8 @@ using CodeBase.Infrastructure.Factories;
 using CodeBase.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 namespace CodeBase.Infrastructure.States
 {
@@ -11,14 +13,21 @@ namespace CodeBase.Infrastructure.States
         private IGameStateMachine _gameStateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IPlayerProgressService _playerProgressService;
+        private readonly UiPresenter _uiPresenter;
 
         private string _sceneName;
+        private readonly QuestsPresenter _questsPresenter;
+
+        private readonly SceneContextProvider _sceneContextProvider;
 
 
-        public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService)
+        public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
+            UiPresenter uiPresenter, SceneContextProvider sceneContextProvider)
         {
             _sceneLoader = sceneLoader;
             _playerProgressService = playerProgressService;
+            _uiPresenter = uiPresenter;
+            _sceneContextProvider = sceneContextProvider;
         }
 
         public void Enter(string sceneName)
@@ -37,12 +46,13 @@ namespace CodeBase.Infrastructure.States
         {
         }
 
-        private async void OnLoaded()
+        private void OnLoaded()
         {
-            await InitLevel();
+            _sceneContextProvider.SetCurrentSceneContext(_sceneName);
+            _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
         }
 
-        private async UniTask InitLevel()
+        private void InitLevel()
         {
         }
     }

@@ -13,7 +13,8 @@ namespace CodeBase.CompositionRoot
         {
             Container.Bind<BuildingProvider>().AsSingle();
             Container.Bind<CreateBuildingPopupPresenter>().AsSingle();
-            
+            Container.Bind<QuestsPresenter>().AsSingle();
+
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();
             Container.Bind<MergeItemsManager>().AsSingle();

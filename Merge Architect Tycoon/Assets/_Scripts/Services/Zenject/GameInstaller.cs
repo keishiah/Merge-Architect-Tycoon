@@ -32,6 +32,7 @@ namespace CodeBase.CompositionRoot
             BindUiPresenter();
 
             BindBuilder();
+            Container.Bind<SceneContextProvider>().AsSingle();
         }
 
         private void BindBuilder()

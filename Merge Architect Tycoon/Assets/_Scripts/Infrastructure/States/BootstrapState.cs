@@ -1,4 +1,6 @@
 ﻿using CodeBase.Services;
+using Cysharp.Threading.Tasks;
+
 
 namespace CodeBase.Infrastructure.States
 {
@@ -17,15 +19,15 @@ namespace CodeBase.Infrastructure.States
             _gameStateMachine = gameStateMachine;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            InitServices();
+            await InitServices();
             _gameStateMachine.Enter<LoadPlayerProgressState>();
         }
 
-        private void InitServices()
+        private async UniTask InitServices()
         {
-            _staticDataService.Initialize();
+            await _staticDataService.Initialize();
         }
 
         public void Exit()

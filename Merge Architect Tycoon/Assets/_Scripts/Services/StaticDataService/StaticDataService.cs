@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.StaticData;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 namespace CodeBase.Services
@@ -36,7 +38,7 @@ namespace CodeBase.Services
             _assetProvider = assetProvider;
         }
 
-        public async void Initialize()
+        public async UniTask Initialize()
         {
             BuildingData buildingData = await _assetProvider.Load<BuildingData>(BuildingsDataPath);
             _buildingData = buildingData.buildings.ToDictionary(x => x.buildingName, x => x);
