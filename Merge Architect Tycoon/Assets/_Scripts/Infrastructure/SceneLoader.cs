@@ -1,0 +1,29 @@
+﻿using Cysharp.Threading.Tasks;
+using System;
+using UnityEngine.SceneManagement;
+
+namespace CodeBase.Infrastructure
+{
+    public interface ISceneLoader
+    {
+        void Load(string name, Action onLoaded = null);
+    }
+
+    public class SceneLoader : ISceneLoader
+    {
+        public void Load(string name, Action onLoaded = null)
+        {
+            if(SceneManager.GetActiveScene().name != name)
+                LoadScene(name).Forget();
+            
+            onLoaded?.Invoke();
+        }
+
+        private async UniTask LoadScene(string nextScene)
+        {
+            //No need to switch the scene instantly
+            await SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive).ToUniTask();
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
+        }
+    }
+}
