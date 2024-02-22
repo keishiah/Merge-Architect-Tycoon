@@ -6,6 +6,7 @@ using CodeBase.Services;
 using CodeBase.Services.Input;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SaveLoadService;
+using CodeBase.Services.SceneContextProvider;
 using CodeBase.Services.StaticDataService;
 using CodeBase.UI;
 using Zenject;
@@ -37,6 +38,7 @@ namespace CodeBase.CompositionRoot
             BindUiPresenter();
 
             BindBuilder();
+            Container.Bind<SceneContextProvider>().AsSingle();
         }
 
         private void BindBuilder()

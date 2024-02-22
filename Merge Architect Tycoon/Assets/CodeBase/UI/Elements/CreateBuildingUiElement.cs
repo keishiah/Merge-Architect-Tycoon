@@ -30,7 +30,6 @@ namespace CodeBase.UI.Elements
 
 
         public void SetBuildingImage(Sprite buildingSprite) => buildingImage.sprite = buildingSprite;
-        public void SetCoinsImage(Sprite buildingSprite) => coinsImage.sprite = buildingSprite;
         public void SetResourceImage(Sprite buildingSprite) => resourceImage.sprite = buildingSprite;
         public void SetCoinsPriceText(string text) => coinsPriceTex.text = text;
         public void SetResourcesPriceText(string text) => resourcePriceTex.text = text;

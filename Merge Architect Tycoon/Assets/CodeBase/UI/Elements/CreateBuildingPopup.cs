@@ -23,9 +23,10 @@ namespace CodeBase.UI.Elements
             ClosePanelButtons();
 
             goToMergePanelButton.onClick.AddListener(GoToMergePanel);
+            createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
         }
 
-        private void ClosePanelButtons()
+        public void ClosePanelButtons()
         {
             goToMergePanelButton.gameObject.SetActive(false);
             createBuildingButton.gameObject.SetActive(false);

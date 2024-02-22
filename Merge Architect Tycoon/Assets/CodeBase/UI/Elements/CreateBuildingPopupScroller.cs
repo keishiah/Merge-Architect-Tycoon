@@ -39,12 +39,16 @@ namespace CodeBase.UI.Elements
         {
             if (!_popupInitialized)
             {
-                _createBuildingPopupPresenter.SetBuildingElements(createBuildingElements);
-                _createBuildingPopupPresenter.SortBuildingElements(createBuildingElements);
+                
+                _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
+                _createBuildingPopupPresenter.SetBuildingElements();
+                _createBuildingPopupPresenter.SortBuildingElements();
+                _createBuildingPopupPresenter.RenderSortedList();
             }
             else
             {
-                _createBuildingPopupPresenter.SortBuildingElements(createBuildingElements);
+                // _createBuildingPopupPresenter.SortBuildingElements();
+                _createBuildingPopupPresenter.RenderSortedList();
             }
         }
     }
