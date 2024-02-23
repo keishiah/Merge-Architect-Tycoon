@@ -52,7 +52,6 @@ public class MergeGrid : MonoBehaviour
 
             RectTransform slotRect = initSlot.GetComponent<RectTransform>();
 
-            initSlot.SlotID = i;
             initSlot.name = $"Slot: {slot_y}_{slot_x} ID: {i}";
             initSlot.transform.SetParent(transform);
 

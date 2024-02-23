@@ -25,6 +25,26 @@ MonoBehaviour:
     m_Address: BuildingPlace
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 964855170fa8e2447a6bcc8107bdcd34
+    m_Address: NonTouchableSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MergeSlotImage
+  - m_GUID: 6753277b66ec0644d805e4b79935e999
+    m_Address: BlockedSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MergeSlotImage
+  - m_GUID: fbde1cd0a7b01b14aa16b1a673f0ad62
+    m_Address: SlotIcon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MergeSlotImage
+  - m_GUID: 3b248ed7cc44f4b45b2900b1a69c3103
+    m_Address: DeliveryZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MergeSlotImage
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f1c40488f69db546a4333e2bffb2c19, type: 2}
   m_SchemaSet:

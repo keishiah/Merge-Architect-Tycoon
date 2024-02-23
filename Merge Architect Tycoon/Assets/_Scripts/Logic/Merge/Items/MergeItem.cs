@@ -28,9 +28,6 @@ public class MergeItem : ScriptableObject
     public MergeItem nextItem;
 
 
-    public virtual void UseItem()
-    {
-
-    }
+    public virtual void UseItem() { }
 
 }

@@ -1,8 +1,14 @@
+using CodeBase.Services;
 using TMPro;
 using UnityEngine;
+using Zenject;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InformationPanel : MonoBehaviour
 {
+    [Inject]
+    private IPlayerProgressService _player;
+
     [Header("Texts")]
     public TMP_Text itemNameText;
     public TMP_Text itemDescriptionText;
@@ -16,21 +22,16 @@ public class InformationPanel : MonoBehaviour
     public GameObject deleteButton;
     public GameObject sellButton;
 
-
     public SelectedItem selectedItem;
 
-    public ProgressItemInfo progressItemInfo;
+    public ProgressItemInfo _progressItemInfo;
 
     public void ConfigPanel(Slot slot)
     {
-        if (slotCurrent)
-        {
-            if (slotCurrent != slot)
-            {
-                if (slotCurrent.currentDraggableItem)
-                    slotCurrent.currentDraggableItem.isClicked = false;
-            }
-        }
+        if (slotCurrent
+            && slotCurrent != slot
+            && slotCurrent.currentDraggableItem() != null)
+                slotCurrent.currentDraggableItem().isClicked = false;
 
         slotCurrent = slot;
 
@@ -46,8 +47,8 @@ public class InformationPanel : MonoBehaviour
         itemCostText.text = $"+{mergeItem.itemCost}";
         sellButton.SetActive(false);
         deleteButton.SetActive(false);
-        //selectedItem.SelectSlot(slotCurrent);
-        if (slot.SlotState == SlotState.Draggable)
+        if (slot.SlotState == SlotState.Draggable 
+            || slot.SlotState == SlotState.Unloading)
         {
             switch (mergeItem.itemType)
             {
@@ -62,7 +63,6 @@ public class InformationPanel : MonoBehaviour
                     }
                     break;
                 case ItemType.spawner:
-
                     break;
                 case ItemType.unsellable:
                     break;
@@ -73,7 +73,7 @@ public class InformationPanel : MonoBehaviour
 
     public void OpenProgressInfoPanel()
     {
-        //progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
+        _progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
     }
 
     public void ActivateInfromPanel(bool state)
@@ -81,18 +81,18 @@ public class InformationPanel : MonoBehaviour
         //selectedItem.gameObject.SetActive(state);
         informPanel.SetActive(state);
 
-        if (state == false)
-        {
-            if (slotCurrent)
-                slotCurrent.currentDraggableItem.isClicked = false;
-        }
+        if (state == false && slotCurrent != null)
+            slotCurrent.currentDraggableItem().isClicked = false;
     }
 
     public void SellItem()
     {
         if (slotCurrent.IsEmpty)
             return;
-        Debug.Log($"Item sell to: {slotCurrent.CurrentItem.itemCost}");
+
+        int coins = (int)slotCurrent.CurrentItem.itemCost;
+        _player.Progress.AddCoins(coins);
+        Debug.Log($"Item sell to: {coins}");
 
         DeleteItem();
     }
@@ -101,7 +101,7 @@ public class InformationPanel : MonoBehaviour
     {
         if (slotCurrent.IsEmpty)
             return;
-        slotCurrent.RemoveItem();
+        slotCurrent.RemoveItem(isNeedSave: true);
         ActivateInfromPanel(false);
     }
 

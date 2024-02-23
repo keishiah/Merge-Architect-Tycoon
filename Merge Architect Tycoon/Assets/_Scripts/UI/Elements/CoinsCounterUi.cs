@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using CodeBase.Data;
+using CodeBase.Services;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -25,7 +27,10 @@ namespace CodeBase.UI.Elements
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
-            int currentMoneyCount = uiPresenter.PlayerProgressService.Progress.Coins.CurrentCoinsCount;
+            IPlayerProgressService a = uiPresenter.PlayerProgressService;
+            Progress b = a.Progress;
+            Coins c = b.Coins;
+            int currentMoneyCount = c.CurrentCoinsCount;
             RenderMoneyCount(currentMoneyCount);
 
             _uiPresenter = uiPresenter;

@@ -74,10 +74,8 @@ namespace CodeBase.CompositionRoot
 
         private void BindPlayerProgressService()
         {
+            Container.Bind<Progress>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerProgressService>().AsSingle();
-
-            Progress progress = Container.Resolve<PlayerProgressService>().Progress;
-            Container.BindInstance<Progress>(progress).AsSingle();
         }
 
         private void BindSceneLoader() =>

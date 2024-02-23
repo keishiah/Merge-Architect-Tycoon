@@ -2,37 +2,35 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
-public class
-    DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
-        IDragHandler //, IPointerClickHandler, IPointerExitHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //, IPointerClickHandler, IPointerExitHandler
 {
     public Image image;
     public Slot slot;
-    private Transform parentAfterDrag;
     public bool isClicked = false;
+
+    [Inject(Id = "TransformForInhandItem")]
+    private RectTransform _playerHand;
     private Vector3 startMousePosition;
     
-
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (slot.SlotState == SlotState.Draggable)
+        if (slot.SlotState == SlotState.Draggable
+            || slot.SlotState == SlotState.Unloading)
         {
             isClicked = false;
-            if (slot != null)
+            if (slot == null)
             {
                 slot = GetComponentInParent<Slot>();
             }
 
-            parentAfterDrag = transform.parent;
             if (!slot.IsEmpty)
             {
                 slot.OnClick();
                 slot.DisableSelected();
-                // if (Inp < 2)
+                transform.SetParent(_playerHand);
                 {
-                    transform.SetParent(transform.parent.parent.parent);
-                    transform.SetAsLastSibling();
                     image.raycastTarget = false;
                     startMousePosition = Input.mousePosition - transform.localPosition;
                 }
@@ -42,7 +40,8 @@ public class
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (slot.SlotState == SlotState.Draggable)
+        if (slot.SlotState == SlotState.Draggable
+            || slot.SlotState == SlotState.Unloading)
         {
             if (!slot.IsEmpty)
             {
@@ -52,28 +51,12 @@ public class
         }
     }
 
-    // public void OnDrag(PointerEventData eventData)
-    // {
-    //     if (slot.SlotState == SlotState.Draggable)
-    //     {
-    //         if (!slot.IsEmpty)
-    //         {
-    //             if (eventData.clickCount < 2)
-    //             {
-    //                 Vector2 pos;
-    //                 RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.root as RectTransform,
-    //                     eventData.position, _camera, out pos);
-    //                 transform.position = transform.root.TransformPoint(pos);
-    //             }
-    //         }
-    //     }
-    // }
-
     public void OnEndDrag(PointerEventData eventData)
     {
         if (slot.SlotState == SlotState.Draggable)
         {
-            transform.SetParent(parentAfterDrag);
+            transform.SetParent(slot.transform);
+            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             image.raycastTarget = true;
         }
     }

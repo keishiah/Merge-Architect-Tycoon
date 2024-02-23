@@ -103,6 +103,9 @@ namespace CodeBase.UI
 
         public void RenderSortedList()
         {
+            if(_buildings.Count == 0)
+                return;
+
             foreach (var element in _elements)
             {
                 element.transform.SetSiblingIndex(

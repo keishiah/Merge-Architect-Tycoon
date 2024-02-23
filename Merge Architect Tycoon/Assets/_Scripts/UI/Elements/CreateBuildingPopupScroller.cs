@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using Zenject;
 
 namespace CodeBase.UI.Elements
@@ -47,7 +45,7 @@ namespace CodeBase.UI.Elements
             }
             else
             {
-                // _createBuildingPopupPresenter.SortBuildingElements();
+                //_createBuildingPopupPresenter.SortBuildingElements();
                 _createBuildingPopupPresenter.RenderSortedList();
             }
         }

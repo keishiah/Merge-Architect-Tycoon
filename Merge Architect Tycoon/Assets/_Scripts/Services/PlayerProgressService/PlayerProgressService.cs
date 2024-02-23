@@ -1,9 +1,12 @@
 ﻿using CodeBase.Data;
+using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Services
 {
     public class PlayerProgressService : IPlayerProgressService
     {
+        [Inject]
         private Progress _progress;
         public Progress Progress
         {
@@ -11,6 +14,8 @@ namespace CodeBase.Services
             { 
                 if (_progress != null)
                     return _progress;
+
+                Debug.LogError("There is null Progress!");
                 return new();
             }
             set
