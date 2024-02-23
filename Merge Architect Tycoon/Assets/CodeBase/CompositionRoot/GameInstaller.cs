@@ -33,8 +33,6 @@ namespace CodeBase.CompositionRoot
 
             BindStateFactory();
             
-            BindAssetProvider();
-
             BindUiPresenter();
 
             BindBuilder();
@@ -78,11 +76,6 @@ namespace CodeBase.CompositionRoot
             Container
                 .BindInterfacesAndSelfTo<SaveLoadService>()
                 .AsSingle();
-        }
-
-        private void BindAssetProvider()
-        {
-            Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
         }
 
         private void BindPlayerProgressService()

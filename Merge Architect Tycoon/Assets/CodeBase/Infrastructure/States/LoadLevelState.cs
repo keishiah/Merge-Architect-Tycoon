@@ -2,9 +2,7 @@
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SceneContextProvider;
 using CodeBase.UI;
-using CodeBase.UI.Elements;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 
 namespace CodeBase.Infrastructure.States

@@ -25,13 +25,9 @@ namespace CodeBase.UI.Elements
 
         public void RenderElement1(string buildingName, int coins, int resourceCount, MergeItem resource)
         {
-            widgetElements[0].text = $"Строй {buildingName},тебе надо {coins} копеек и {resourceCount} {resource}";
-        }
-
-        public void RenderWidgetValues(string value1, string value2, string value3)
-        {
-            widgetElements[1].text = value2;
-            widgetElements[1].text = value3;
+            widgetElements[0].text = $"Строй {buildingName}";
+            widgetElements[1].text = $"тебе надо {coins} копеек";
+            widgetElements[2].text = $"тебе надо {resourceCount} {resource}";
         }
     }
 }

@@ -96,7 +96,6 @@ public class MergeGrid : MonoBehaviour
 
     public void LoadInventory()
     {
-        print("Load inventory");
         CreateLayout();
 
         bool isLoadSuccess = false;

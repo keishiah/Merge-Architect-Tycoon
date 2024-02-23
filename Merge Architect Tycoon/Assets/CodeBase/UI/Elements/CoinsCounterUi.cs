@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using CodeBase.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -21,12 +22,13 @@ namespace CodeBase.UI.Elements
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
-            int currentMoneyCount = uiPresenter.PlayerProgressService.Progress.Coins.CurrentCoinsCount;
-            RenderMoneyCount(currentMoneyCount);
+            Coins coins = uiPresenter.PlayerProgressService.Progress.Coins;
+            int coinsCurrentCoinsCount = coins.CurrentCoinsCount;
+            RenderCoinsCount(coinsCurrentCoinsCount);
 
             _uiPresenter = uiPresenter;
 
-            uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
+            uiPresenter.SubscribeMoneyCountChanged(RenderCoinsCount);
             addCoinsButton.onClick.AddListener(AddCoins);
         }
 
@@ -35,7 +37,7 @@ namespace CodeBase.UI.Elements
             _uiPresenter.PlayerProgressService.Progress.Coins.AddCoins(5);
         }
 
-        private void RenderMoneyCount(int newValue)
+        private void RenderCoinsCount(int newValue)
         {
             moneyCountText.text = newValue.ToString();
         }
