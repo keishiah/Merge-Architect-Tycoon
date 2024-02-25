@@ -21,8 +21,6 @@ namespace CodeBase.CompositionRoot
 
             BindPlayerProgressService();
 
-            BindInputService();
-
             BindGameStates();
 
             BindStateFactory();
@@ -49,12 +47,6 @@ namespace CodeBase.CompositionRoot
         private void BindStateFactory()
         {
             Container.Bind<IStateFactory>().To<StateFactory>().AsSingle();
-        }
-
-        private void BindInputService()
-        {
-            Container.BindInterfacesAndSelfTo<MobileInputService>()
-                .AsSingle();
         }
 
         private void BindGameStates()

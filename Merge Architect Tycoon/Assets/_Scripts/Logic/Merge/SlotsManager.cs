@@ -1,15 +1,24 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SlotsManager
 {
     [SerializeField] private List<Slot> slots = new List<Slot>();
 
     [SerializeField] private int emptySlotsCount = 0;
-    
+    [SerializeField] private int emptyUnloadSlotsCount = 0;
+
+    public Action OnNewEmptySlotAppears;
+
     public int EmptySlotsCount
     {
-        get { return slots.Count; }
+        get { return emptySlotsCount; }
+    }
+    public int EmptyUnloadSlotsCount
+    {
+        get { return emptyUnloadSlotsCount; }
     }
 
     public List<Slot> Slots
@@ -58,17 +67,24 @@ public class SlotsManager
     {
         slots[i].addItemEvent += () => { emptySlotsCount--; };
         slots[i].removeItemEvent += () => { emptySlotsCount++; };
+        slots[i].endMoveEvent += () => 
+        { 
+            if(emptySlotsCount > 0) 
+                OnNewEmptySlotAppears?.Invoke(); 
+        };
     }
 
-    public void AddItemToEmptySlot(MergeItem mergeItem)
+    public void AddItemToEmptySlot(MergeItem mergeItem, bool isToUnloadSlot = false)
     {
-        if (emptySlotsCount == 0)
+        SlotState slotState = isToUnloadSlot ? SlotState.Unloading : SlotState.Draggable;
+
+        List<Slot> m_slotsList = Slots.FindAll(slot => slot.IsEmpty && slot.SlotState == slotState);
+
+        if (m_slotsList.Count == 0)
         {
             Debug.Log("No empty slots");
             return;
         }
-
-        List<Slot> m_slotsList = Slots.FindAll(slot => slot.IsEmpty);
 
         Slot m_slot = m_slotsList[Random.Range(0, m_slotsList.Count)];
 

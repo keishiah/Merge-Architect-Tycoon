@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Services;
 using CodeBase.UI.Elements;
-using Unity.VisualScripting;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI
@@ -20,11 +18,6 @@ namespace CodeBase.UI
         {
             PlayerProgressService = playerProgressService;
             StaticDataService = staticDataService;
-        }
-
-        public void SubscribeMoneyCountChanged(Action<int> actionOnCoinsCountChanged)
-        {
-            PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
         }
 
         public void AddUiElementToElementsList(UiViewBase element)

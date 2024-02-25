@@ -6,8 +6,7 @@ public enum ItemType
 {
     sellable,
     unsellable,
-    spawner,
-
+    spawner
 }
 
 [CreateAssetMenu(menuName = "Merge Items/Merge Item", order = 2, fileName = "New Merge Item")]

@@ -34,7 +34,7 @@ public class Slot : MonoBehaviour, IDropHandler
     public delegate void SlotDelegate();
     public SlotDelegate addItemEvent;
     public SlotDelegate removeItemEvent;
-    public SlotDelegate saveEvent;
+    public SlotDelegate endMoveEvent;
 
     public bool IsEmpty => _item == null;
     public bool IsOpen => _slotState == SlotState.Draggable;
@@ -59,7 +59,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
         addItemEvent?.Invoke();
         if (isNeedSave)
-            saveEvent?.Invoke();
+            endMoveEvent?.Invoke();
     }
 
     public void RemoveItem(bool isNeedSave = false)
@@ -69,7 +69,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
         removeItemEvent?.Invoke();
         if(isNeedSave)
-            saveEvent?.Invoke();
+            endMoveEvent?.Invoke();
     }
 
     private void UpgradeItem()
@@ -132,7 +132,7 @@ public class Slot : MonoBehaviour, IDropHandler
         {
             CheckNeighbour();
             MergeItems(fromSlot, this);
-            saveEvent?.Invoke();
+            endMoveEvent?.Invoke();
             return;
         }
 
@@ -142,7 +142,7 @@ public class Slot : MonoBehaviour, IDropHandler
             CheckNeighbour();
             fromSlot.RemoveItem();
             AddItem(droppedItem);
-            saveEvent?.Invoke();
+            endMoveEvent?.Invoke();
             return;
         }
 
@@ -157,7 +157,7 @@ public class Slot : MonoBehaviour, IDropHandler
         AddItem(droppedItem);
         fromSlot.RemoveItem();
         fromSlot.AddItem(toItem);
-        saveEvent?.Invoke();
+        endMoveEvent?.Invoke();
     }
 
     private void MergeItems(Slot slotFrom, Slot slotTo)

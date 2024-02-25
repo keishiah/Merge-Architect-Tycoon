@@ -10,7 +10,7 @@ namespace CodeBase.Data
         public int CurrentCoinsCount => _coinsCount.Value;
 
         public ReactiveProperty<int> _coinsCount = new();
-        private int _defaultValue = 0;
+        //private int _defaultValue = 0;
         [SerializeField] private int savedValue;
 
         public Coins()
@@ -26,7 +26,7 @@ namespace CodeBase.Data
             return true;
         }
 
-        public void AddCoins(int count) => _coinsCount.Value += count;
+        public void Add(int count) => _coinsCount.Value += count;
 
         public IDisposable SubscribeToCoinsCountChanges(Action<int> onCoinsCountChanged)
         {

@@ -21,6 +21,11 @@ public class MergeGrid : MonoBehaviour
     [Inject] private MergeLevel level;
     [Inject] private MergeItemsManager mergeItemsGeneralOpened;
 
+    private void Start()
+    {
+        InitializeGrid();
+    }
+
     public void InitializeGrid()
     {
         if (level.isNeedResetLevel)
@@ -48,7 +53,7 @@ public class MergeGrid : MonoBehaviour
 
             Slot initSlot = _container.InstantiatePrefabForComponent<Slot>(slotPrefab);
 
-            initSlot.saveEvent += SaveInventory;
+            initSlot.endMoveEvent += SaveInventory;
 
             RectTransform slotRect = initSlot.GetComponent<RectTransform>();
 

@@ -10,14 +10,16 @@ namespace CodeBase.UI.Elements
     public class CoinsCounterUi : UiViewBase
     {
         public TextMeshProUGUI moneyCountText;
-        public Button addCoinsButton;
+        public TextMeshProUGUI diamandCountText;
 
         private UiPresenter _uiPresenter;
+        private Progress _progress;
 
         [Inject]
-        void Construct(UiPresenter uiPresenter)
+        void Construct(UiPresenter uiPresenter, Progress progress)
         {
             _uiPresenter = uiPresenter;
+            _progress = progress;
         }
 
         private void Awake()
@@ -28,25 +30,42 @@ namespace CodeBase.UI.Elements
         public override void InitUiElement(UiPresenter uiPresenter)
         {
             IPlayerProgressService a = uiPresenter.PlayerProgressService;
-            Progress b = a.Progress;
-            Coins c = b.Coins;
-            int currentMoneyCount = c.CurrentCoinsCount;
+            Progress progress = a.Progress;
+            Coins coins = progress.Coins;
+            int currentMoneyCount = coins.CurrentCoinsCount;
             RenderMoneyCount(currentMoneyCount);
 
             _uiPresenter = uiPresenter;
 
-            uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
-            addCoinsButton.onClick.AddListener(AddCoins);
+            progress.Coins.SubscribeToCoinsCountChanges(RenderMoneyCount);
+            progress.Diamands.SubscribeToCoinsCountChanges(RenderDiamandCount);
         }
 
-        private void AddCoins()
+        public void AddCoins()
         {
-            _uiPresenter.PlayerProgressService.Progress.Coins.AddCoins(5);
+#if UNITY_EDITOR
+            if (Application.version.StartsWith("d"))
+            {
+                _progress.AddCoins(100500);
+                _progress.AddDiamonds(100500);
+            }
+            else
+            {
+#endif
+                //Shop.TryToBuy();
+#if UNITY_EDITOR
+            }
+#endif
         }
 
         private void RenderMoneyCount(int newValue)
         {
             moneyCountText.text = newValue.ToString();
+        }
+
+        private void RenderDiamandCount(int newValue)
+        {
+            diamandCountText.text = newValue.ToString();
         }
     }
 }
