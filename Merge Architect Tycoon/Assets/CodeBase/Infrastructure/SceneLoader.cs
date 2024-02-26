@@ -21,7 +21,8 @@ namespace CodeBase.Infrastructure
         private async UniTask LoadScene(string nextScene, Action onLoaded = null)
         {
             //No need to switch the scene instantly
-            await SceneManager.LoadSceneAsync(nextScene,LoadSceneMode.Additive).ToUniTask();
+            await SceneManager.LoadSceneAsync(nextScene).ToUniTask();
+            // await SceneManager.LoadSceneAsync(nextScene,LoadSceneMode.Additive).ToUniTask();
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
             await UniTask.DelayFrame(1);
             onLoaded?.Invoke();

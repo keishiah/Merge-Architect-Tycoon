@@ -78,9 +78,9 @@ MonoBehaviour:
     slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 927c1933fe530aa468c6442d26edc1a0, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 927c1933fe530aa468c6442d26edc1a0, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 2
