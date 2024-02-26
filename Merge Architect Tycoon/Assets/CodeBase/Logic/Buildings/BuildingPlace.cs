@@ -23,7 +23,7 @@ namespace CodeBase.Logic.Buildings
     {
         public BuildingView buildingView;
         public string buildingName;
-        
+
         private IStaticDataService _staticDataService;
         private BuildingCreator _buildingCreator;
         private BuildingProvider _buildingProvider;
@@ -61,11 +61,11 @@ namespace CodeBase.Logic.Buildings
             }
         }
 
-        public void StartCreatingBuilding()
+        public UniTask StartCreatingBuilding()
         {
             SetBuildingState(BuildingStateEnum.BuildInProgress);
 
-            _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, _activityToken).Forget();
+            return _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, _activityToken);
         }
 
         public void UpdateTimerText(int totalSeconds)

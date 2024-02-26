@@ -38,7 +38,5 @@ namespace CodeBase.UI.Elements
         {
             buildingName = newName;
         }
-
-        private void OnDisable() => buildingButton.onClick.RemoveAllListeners();
     }
 }

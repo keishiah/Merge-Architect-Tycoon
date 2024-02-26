@@ -17,7 +17,7 @@ namespace CodeBase.Services
             _staticDataService = staticDataService;
         }
 
-        public async UniTaskVoid CreateBuildingInTimeAsync(BuildingPlace buildingPlace, string buildingName,
+        public async UniTask CreateBuildingInTimeAsync(BuildingPlace buildingPlace, string buildingName,
             CancellationTokenSource cancellationTokenSource)
         {
             var timeToCreate = _staticDataService.GetBuildingData(buildingName).timeToCreate;

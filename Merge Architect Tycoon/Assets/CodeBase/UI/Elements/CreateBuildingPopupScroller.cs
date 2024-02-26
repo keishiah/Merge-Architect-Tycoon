@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using Zenject;
 
@@ -9,19 +10,11 @@ namespace CodeBase.UI.Elements
     {
         public List<CreateBuildingUiElement> createBuildingElements;
 
-        private UiPresenter _uiPresenter;
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
-        private bool _popupInitialized = false;
-
-        public CreateBuildingPopupScroller()
-        {
-            _popupInitialized = false;
-        }
 
         [Inject]
         void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
-            _uiPresenter = uiPresenter;
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
             InitUiElement(uiPresenter);
             gameObject.SetActive(false);
@@ -31,24 +24,21 @@ namespace CodeBase.UI.Elements
         {
             uiPresenter.AddUiElementToElementsList(this);
 
-            _uiPresenter = uiPresenter;
             _createBuildingPopupPresenter.InitializeScroller(this);
+            _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
         }
 
         public void SortBuildingElements()
         {
-            if (!_popupInitialized)
-            {
-                _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
-                _createBuildingPopupPresenter.SetBuildingElements();
-                _createBuildingPopupPresenter.SortBuildingElements();
-                _createBuildingPopupPresenter.RenderSortedList();
-            }
-            else
-            {
-                // _createBuildingPopupPresenter.SortBuildingElements();
-                _createBuildingPopupPresenter.RenderSortedList();
-            }
+            _createBuildingPopupPresenter.RenderSortedList();
+        }
+
+        public void RemoveBuildingElementFromPopup(string buildingName)
+        {
+            var removingElement =
+                createBuildingElements.FirstOrDefault(element => element.buildingName == buildingName);
+            if (removingElement)
+                removingElement.gameObject.SetActive(false);
         }
     }
 }

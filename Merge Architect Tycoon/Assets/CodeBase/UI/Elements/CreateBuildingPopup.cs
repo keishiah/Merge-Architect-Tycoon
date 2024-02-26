@@ -26,12 +26,6 @@ namespace CodeBase.UI.Elements
             createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
         }
 
-        public void ClosePanelButtons()
-        {
-            goToMergePanelButton.gameObject.SetActive(false);
-            createBuildingButton.gameObject.SetActive(false);
-        }
-
         private void GoToMergePanel()
         {
             _createBuildingPopupPresenter.CLoseScroller();
@@ -50,6 +44,12 @@ namespace CodeBase.UI.Elements
         {
             createBuildingButton.gameObject.SetActive(true);
             goToMergePanelButton.gameObject.SetActive(false);
+        }
+
+        public void ClosePanelButtons()
+        {
+            goToMergePanelButton.gameObject.SetActive(false);
+            createBuildingButton.gameObject.SetActive(false);
         }
     }
 }

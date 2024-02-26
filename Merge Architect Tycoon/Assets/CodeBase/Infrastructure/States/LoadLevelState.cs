@@ -4,7 +4,6 @@ using CodeBase.Services.SceneContextProvider;
 using CodeBase.UI;
 
 
-
 namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPaylodedState<string>
@@ -12,7 +11,6 @@ namespace CodeBase.Infrastructure.States
         private IGameStateMachine _gameStateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IPlayerProgressService _playerProgressService;
-        private readonly UiPresenter _uiPresenter;
 
         private string _sceneName;
         private readonly QuestsPresenter _questsPresenter;
@@ -21,11 +19,10 @@ namespace CodeBase.Infrastructure.States
 
 
         public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
-            UiPresenter uiPresenter, SceneContextProvider sceneContextProvider)
+            SceneContextProvider sceneContextProvider)
         {
             _sceneLoader = sceneLoader;
             _playerProgressService = playerProgressService;
-            _uiPresenter = uiPresenter;
             _sceneContextProvider = sceneContextProvider;
         }
 
@@ -48,10 +45,19 @@ namespace CodeBase.Infrastructure.States
         {
             _sceneContextProvider.SetCurrentSceneContext(_sceneName);
             _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
+
+            InitLevel();
         }
 
         private void InitLevel()
         {
+            InitializePopupPresenter();
+        }
+
+        private void InitializePopupPresenter()
+        {
+            var createBuildingPopupPresenter = _sceneContextProvider.Resolve<CreateBuildingPopupPresenter>();
+            createBuildingPopupPresenter.InitializePresenter();
         }
     }
 }
