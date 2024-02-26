@@ -54,18 +54,20 @@ namespace CodeBase.UI
         {
             SetBuildingElements();
             SortBuildingElements();
-        }
-
-        public void OpenScroller()
-        {
-            _createBuildingPopupScroller.gameObject.SetActive(true);
-            _createBuildingPopupScroller.SortBuildingElements();
 
             var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
             foreach (string building in createdBuildings)
             {
                 _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
             }
+
+            _createBuildingPopupScroller.SetContentWidth();
+        }
+
+        public void OpenScroller()
+        {
+            _createBuildingPopupScroller.gameObject.SetActive(true);
+            _createBuildingPopupScroller.SortBuildingElements();
         }
 
         public void CLoseScroller()
@@ -154,6 +156,7 @@ namespace CodeBase.UI
                 _itemsCatalogue.TakeItems(item, 1);
                 _buildingProvider.CreateBuildingInTimeAsync(buildingName);
                 _createBuildingPopupScroller.RemoveBuildingElementFromPopup(buildingName);
+                _createBuildingPopupScroller.SetContentWidth();
             }
         }
 

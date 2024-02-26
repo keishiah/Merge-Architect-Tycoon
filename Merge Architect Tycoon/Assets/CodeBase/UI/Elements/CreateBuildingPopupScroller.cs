@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.UI.Elements
@@ -9,8 +11,11 @@ namespace CodeBase.UI.Elements
     public class CreateBuildingPopupScroller : UiViewBase
     {
         public List<CreateBuildingUiElement> createBuildingElements;
-
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+        public RectTransform scrollerRectTransform;
+
+
+        private float _elementWidth;
 
         [Inject]
         void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
@@ -26,6 +31,8 @@ namespace CodeBase.UI.Elements
 
             _createBuildingPopupPresenter.InitializeScroller(this);
             _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
+
+            _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
         }
 
         public void SortBuildingElements()
@@ -39,6 +46,12 @@ namespace CodeBase.UI.Elements
                 createBuildingElements.FirstOrDefault(element => element.buildingName == buildingName);
             if (removingElement)
                 removingElement.gameObject.SetActive(false);
+        }
+
+        public void SetContentWidth()
+        {
+            scrollerRectTransform.sizeDelta = new Vector2(_elementWidth * createBuildingElements.Count,
+                scrollerRectTransform.sizeDelta.y);
         }
     }
 }
