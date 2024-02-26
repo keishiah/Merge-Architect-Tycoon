@@ -25,8 +25,7 @@ public class MergeItem : ScriptableObject
 
     [Space]
     public MergeItem nextItem;
-
-
-    public virtual void UseItem() { }
-
+    [Space]
+    public int InItemsCount;
+    public MergeItem InItem;
 }

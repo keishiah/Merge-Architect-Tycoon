@@ -8,7 +8,6 @@ public class SlotsManager
     [SerializeField] private List<Slot> slots = new List<Slot>();
 
     [SerializeField] private int emptySlotsCount = 0;
-    [SerializeField] private int emptyUnloadSlotsCount = 0;
 
     public Action OnNewEmptySlotAppears;
 
@@ -18,7 +17,12 @@ public class SlotsManager
     }
     public int EmptyUnloadSlotsCount
     {
-        get { return emptyUnloadSlotsCount; }
+        get
+        {
+            return 
+                Slots.FindAll(slot => slot.IsEmpty && slot.SlotState == SlotState.Unloading)
+                .Count; 
+        }
     }
 
     public List<Slot> Slots

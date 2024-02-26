@@ -81,8 +81,14 @@ public class InformationPanel : MonoBehaviour
         //selectedItem.gameObject.SetActive(state);
         informPanel.SetActive(state);
 
-        if (state == false && slotCurrent != null)
-            slotCurrent.currentDraggableItem().isClicked = false;
+        if (!(state == false && slotCurrent != null))
+            return;
+
+        DraggableItem draggableItem = slotCurrent.currentDraggableItem();
+        if (draggableItem == null)
+            return;
+
+        draggableItem.isClicked = false;
     }
 
     public void SellItem()

@@ -21,7 +21,8 @@ public enum SlotState
 
 public class Slot : MonoBehaviour, IDropHandler
 {
-    [Inject] private IPlayerProgressService PlayerProgressService;
+    [Inject] private IPlayerProgressService _playerProgressService;
+    [Inject] private SlotsManager _slotsManager;
 
     [SerializeField] private Image _itemImage;
     [SerializeField] private SlotState _slotState;
@@ -61,7 +62,6 @@ public class Slot : MonoBehaviour, IDropHandler
         if (isNeedSave)
             endMoveEvent?.Invoke();
     }
-
     public void RemoveItem(bool isNeedSave = false)
     {
         _item = null;
@@ -101,17 +101,13 @@ public class Slot : MonoBehaviour, IDropHandler
     }
     public void OnDrop(PointerEventData eventData)
     {
-        if (_slotState == SlotState.Blocked 
-            || _slotState == SlotState.Unloading)
-        {
+        if (_slotState == SlotState.Blocked)
             return;
-        }
 
         GameObject dropped = eventData.pointerDrag;
         DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
 
-        if (draggableItem.slot == this 
-            || draggableItem.slot._slotState != SlotState.Draggable)
+        if (draggableItem.slot == this)
             return;
 
         ChangeSlot(draggableItem.slot);
@@ -137,7 +133,7 @@ public class Slot : MonoBehaviour, IDropHandler
         }
 
         //3 move
-        if (IsEmpty)
+        if (IsEmpty && _slotState != SlotState.Unloading)
         {
             CheckNeighbour();
             fromSlot.RemoveItem();
@@ -151,6 +147,9 @@ public class Slot : MonoBehaviour, IDropHandler
             return;
 
         //5 switch
+        if (_slotState != SlotState.Draggable
+            || fromSlot._slotState != SlotState.Draggable)
+            return;
         CheckNeighbour();
         MergeItem toItem = CurrentItem;
         RemoveItem();
@@ -168,7 +167,7 @@ public class Slot : MonoBehaviour, IDropHandler
         if (slotFrom.CurrentItem != slotTo.CurrentItem)
             return;
 
-        PlayerProgressService.Progress.AddCoins(10);
+        _playerProgressService.Progress.AddCoins(10);
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();
@@ -179,19 +178,14 @@ public class Slot : MonoBehaviour, IDropHandler
         if (!IsEmpty)
         {
             if (SlotState == SlotState.Blocked)
-            {
                 return;
-            }
+
             transform.parent.GetComponent<MergeGrid>().informationPanel.ConfigPanel(this);
 
             if (currentDraggableItem().isClicked)
-            {
-                CurrentItem.UseItem();
-            }
+                UseItemInside();
             else
-            {
                 currentDraggableItem().isClicked = true;
-            }
         }
         else
         {
@@ -205,7 +199,6 @@ public class Slot : MonoBehaviour, IDropHandler
         _slotState = m_slotState;
         CheckState();
     }
-
     private void CheckState()
     {
         if (!isActiveAndEnabled)
@@ -252,9 +245,13 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void UseItemInside()
     {
-        if (!IsEmpty)
-        {
-            CurrentItem.UseItem();
-        }
+        if (IsEmpty)
+            return;
+
+        if (CurrentItem.InItemsCount == 0)
+            return;
+
+        MergeItem item = CurrentItem.InItem;
+        _slotsManager.AddItemToEmptySlot(item);
     }
 }

@@ -19,7 +19,7 @@ public class TruckButtonInit : MonoBehaviour
 
     private void AddNewTruck()
     {
-        truckPresenter.AddNewTruck(truck);
+        truckPresenter.AddNewTruck(truck.Clone());
         truckMenu.SetActive(false);
     }
 }

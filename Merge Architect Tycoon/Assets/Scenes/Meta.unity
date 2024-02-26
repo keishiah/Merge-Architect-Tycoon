@@ -1558,14 +1558,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5723ed11dab53b444a7eb4c5a12f6525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startXPosition: -450
-  _stopXPosition: 600
-  _endXPosition: 1450
-  _speed: 500
   _resources:
   - {fileID: 248422261}
   - {fileID: 1313970720}
   - {fileID: 1584957259}
+  _newTruckButton: {fileID: 1976713026}
+  _startXPosition: -450
+  _stopXPosition: 600
+  _endXPosition: 1450
+  _speed: 500
 --- !u!114 &605758878
 MonoBehaviour:
   m_ObjectHideFlags: 0

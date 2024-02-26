@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -8,120 +7,117 @@ using Zenject;
 [RequireComponent(typeof(Image))]
 public class TruckPresenter : MonoBehaviour
 {
-    [SerializeField] private float _startXPosition;
-    [SerializeField] private float _stopXPosition;
-    [SerializeField] private float _endXPosition;
-
-    [SerializeField] private float _speed = 5f;
-
     [SerializeField] private Image[] _resources;
 
-    [Inject] private SlotsManager slotsManager;
+    [SerializeField] public float _startXPosition;
+    [SerializeField] public float _stopXPosition;
+    [SerializeField] public float _endXPosition;
+    [SerializeField] public float _speed;
 
-    private RectTransform _rectTtransform;
+    [Inject] private SlotsManager _slotsManager;
     private Queue<Truck> _trucks = new();
-    private DateTime _time;
-    private bool isTruckFull => _trucks.Count > 0 && _trucks.Peek().TruckCargo.Count > 0;
-    private bool isUnloading;
+    private TruckBehaviour _truckBehaviour;
 
     private void Awake()
     {
-        slotsManager.OnNewEmptySlotAppears += () => { enabled = true; };
-        _rectTtransform = GetComponent<RectTransform>();
-        _rectTtransform.anchoredPosition = new Vector2(_startXPosition, 0);
+        _slotsManager.OnNewEmptySlotAppears += () => { enabled = true; };
     }
-    public void AddNewTruck(Truck truck)
+
+    private void OnEnable()
     {
-        bool needToPaint = false;
-
-        if(_trucks.Count == 0)
-        {
-            _time = DateTime.Now;
-            needToPaint = true;
-        }
-
-        _trucks.Enqueue(truck);
-
-        if(needToPaint)
-            PaintTheTruck();
-
-        enabled = true;
+        if (_trucks.Count > 0 && _truckBehaviour == null)
+            ToNextTruck();
     }
 
-    private void Update()
+    private void NextStage()
+    {
+        switch (_truckBehaviour)
+        {
+            case TruckToUnload behaviour:
+                NextStageUnloadind();
+                break;
+            case TruckUnloading behaviour:
+                NextStageGoAway();
+                break;
+            case TruckGoAway behaviour:
+                _trucks.Dequeue();
+                ToNextTruck();
+                if (_truckBehaviour == null)
+                    return;
+                break;
+            default:
+                throw new NotImplementedException("Unknown type of truck behavior!");
+        }
+    }
+    private void ToNextTruck()
     {
         if (_trucks.Count == 0)
         {
-            enabled = false;
-            return;
-        }
-
-        if(_rectTtransform.anchoredPosition.x > _endXPosition)
-        {
-            ToNewTruck();
-        }
-
-        if(isTruckFull && _rectTtransform.anchoredPosition.x >= _stopXPosition)
-        {
-            if(!isUnloading)
-                Unloading();
-            return;
-        }
-
-        //move truck
-        float startPosition = isTruckFull ? _startXPosition : _stopXPosition;
-        TimeSpan inWayTime = DateTime.Now - _time;
-        float traversedPath = (float)inWayTime.TotalSeconds * _speed;
-        _rectTtransform.anchoredPosition = new Vector2(startPosition + traversedPath, 0);
-    }
-
-    private async void Unloading()
-    {
-        isUnloading = true;
-
-        while (true)
-        {
-            if (_trucks.Peek().TruckCargo.Count == 0)
-            {
-                isUnloading = false;
-                _time = DateTime.Now;
-                return;
-            }
-
-            await Task.Delay(1000);
-
-            if (slotsManager.EmptySlotsCount == 0)
-            {
-                enabled = false;
-                return;
-            }
-
-            MergeItem mergeItem = _trucks.Peek().DequeueItem();
-            foreach(var resource in _resources)
-            {
-                if(resource.enabled && mergeItem.itemSprite == resource.sprite)
-                {
-                    resource.enabled = false;
-                    break;
-                }
-            }
-            slotsManager.AddItemToEmptySlot(mergeItem, isToUnloadSlot: true);
-        }
-    }
-
-    private void ToNewTruck()
-    {
-        _trucks.Dequeue();
-        _rectTtransform.anchoredPosition = new Vector2(_startXPosition, 0);
-
-        if(_trucks.Count == 0)
-        {
-            enabled = false;
+            UpdateOff();
+            _truckBehaviour = null;
             return;
         }
 
         PaintTheTruck();
-        _time = DateTime.Now;
+
+        _truckBehaviour = new TruckToUnload()
+        {
+            _rectTtransform = GetComponent<RectTransform>(),
+            _startXPosition = _startXPosition,
+            _endXPosition = _stopXPosition,
+            _speed = _speed,
+        };
+        _truckBehaviour.Enter();
+    }
+    private void NextStageUnloadind()
+    {
+        _truckBehaviour = new TruckUnloading()
+        {
+            _slotsManager = _slotsManager,
+            _truck = _trucks.Peek(),
+            _resources = _resources,
+            _truckPresenter = this,
+
+        };
+        _truckBehaviour.Enter();
+    }
+    private void NextStageGoAway()
+    {
+        _truckBehaviour = new TruckGoAway()
+        {
+            _rectTtransform = GetComponent<RectTransform>(),
+            _startXPosition = _stopXPosition,
+            _endXPosition = _endXPosition,
+            _speed = _speed,
+        };
+        _truckBehaviour.Enter();
+    }
+
+    public void AddNewTruck(Truck truck)
+    {
+        _trucks.Enqueue(truck);
+        UpdateOn();
+    }
+    private void Update()
+    {
+        if (_truckBehaviour == null)
+        {
+            UpdateOff();
+            return;
+        }
+
+        _truckBehaviour.Update();
+
+        if (_truckBehaviour.IsComplete)
+            NextStage();
+    }
+    public void UpdateOn()
+    {
+        enabled = true;
+    }
+    public void UpdateOff()
+    {
+        enabled = false;
     }
     private void PaintTheTruck()
     {
