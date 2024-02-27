@@ -66,6 +66,7 @@ namespace CodeBase.UI
         public void OpenScroller()
         {
             _createBuildingPopupScroller.gameObject.SetActive(true);
+            SortBuildingElements();
             _createBuildingPopupScroller.SortBuildingElements();
         }
 
@@ -77,7 +78,6 @@ namespace CodeBase.UI
 
         public void SortBuildingElements()
         {
-            Debug.Log("sort");
             _buildings.Clear();
             _readyToBuild.Clear();
             _otherBuildings.Clear();
