@@ -2,6 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Services;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -47,8 +48,7 @@ namespace CodeBase.Infrastructure.States
         {
             _progressService.Progress =
                 SaveLoadService.Load<Progress>(SaveKey.Progress);
-
-            if(_progressService.Progress == null)
+            if (_progressService.Progress == null)
                 _progressService.Progress = NewProgress();
 
             return _progressService.Progress;

@@ -52,6 +52,7 @@ namespace CodeBase.UI
         {
             SetBuildingElements();
             SortBuildingElements();
+            InitializeBuildingInfo();
 
             var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
             foreach (string building in createdBuildings)
@@ -76,6 +77,7 @@ namespace CodeBase.UI
 
         public void SortBuildingElements()
         {
+            Debug.Log("sort");
             _buildings.Clear();
             _readyToBuild.Clear();
             _otherBuildings.Clear();
@@ -103,9 +105,6 @@ namespace CodeBase.UI
 
         public void RenderSortedList()
         {
-            if(_buildings.Count == 0)
-                return;
-
             foreach (var element in _elements)
             {
                 element.transform.SetSiblingIndex(

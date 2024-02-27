@@ -1,8 +1,6 @@
 ﻿using CodeBase.Logic.Buildings;
 using System.Collections.Generic;
 using CodeBase.Data;
-using CodeBase.Services.PlayerProgressService;
-using CodeBase.UI;
 using Zenject;
 
 namespace CodeBase.Services
@@ -30,11 +28,10 @@ namespace CodeBase.Services
 
         public async void CreateBuildingInTimeAsync(string buildingName)
         {
-            Buldings buildings = _playerProgressService.Progress.Buldings;
             if (_sceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             {
                 await buildingPlace.StartCreatingBuilding();
-                buildings.AddCreatedBuildingToList(buildingName);
+                _playerProgressService.Progress.AddBuilding(buildingName);
             }
         }
 

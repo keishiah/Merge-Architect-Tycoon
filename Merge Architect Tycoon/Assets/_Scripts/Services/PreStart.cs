@@ -48,7 +48,7 @@ public class PreStart : MonoBehaviour
             LoadingSlider.value += step * Time.deltaTime;
         }
 
-        Destroy(gameObject);
-        // SceneManager.UnloadSceneAsync(0);
+        // Destroy(gameObject);
+        SceneManager.UnloadSceneAsync(0);
     }
 }

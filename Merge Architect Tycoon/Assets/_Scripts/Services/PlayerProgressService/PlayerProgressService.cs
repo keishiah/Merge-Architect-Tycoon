@@ -12,11 +12,12 @@ namespace CodeBase.Services
         {
             get
             { 
-                if (_progress != null)
-                    return _progress;
-
-                Debug.LogError("There is null Progress!");
-                return new();
+                return _progress;
+                // if (_progress != null)
+                //     return _progress;
+                //
+                // Debug.LogError("There is null Progress!");
+                // return new();
             }
             set
             {

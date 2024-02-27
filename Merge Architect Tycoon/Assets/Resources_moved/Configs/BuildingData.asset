@@ -39,4 +39,4 @@ MonoBehaviour:
     coinsCountToCreate: 34
     itemToCreate: {fileID: 11400000, guid: ddab63366e9abad4199bf564e6aa9249, type: 2}
   placeToBuildSprite: {fileID: 21300000, guid: 8a7f16ffec6fbd045b7e71775be8f3df, type: 3}
-  buildInProgressSprite: {fileID: 21300000, guid: 10c338214e56f7b4f8414b759297a0d0, type: 3}
+  buildInProgressSprite: {fileID: 21300000, guid: 4a76d864c1e35634582a131cd8196730, type: 3}
