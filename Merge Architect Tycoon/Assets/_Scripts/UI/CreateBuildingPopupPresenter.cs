@@ -50,9 +50,9 @@ namespace CodeBase.UI
 
         public void InitializePresenter()
         {
+            InitializeBuildingInfo();
             SetBuildingElements();
             SortBuildingElements();
-            InitializeBuildingInfo();
 
             var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
             foreach (string building in createdBuildings)
