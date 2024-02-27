@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 831e854846e2306438cab01bb3827e95
+  m_SerializeEntries:
+  - m_GUID: d434a3d39d820f04bb2e993be2b6becb
+    m_Address: BuildingData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 327821d7a87a0154aa2ec14d5090aa78
+    m_Address: BuildingPlace
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 964855170fa8e2447a6bcc8107bdcd34
+    m_Address: NonTouchableSlot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6753277b66ec0644d805e4b79935e999
+    m_Address: BlockedSlot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fbde1cd0a7b01b14aa16b1a673f0ad62
+    m_Address: SlotIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3b248ed7cc44f4b45b2900b1a69c3103
+    m_Address: DeliveryZone
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: aa8a7b4b1f9e5b04ea9fb98c6b137a01, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5600e674dec63cd48ac6ed3ae28fb010, type: 2}
+    - {fileID: 11400000, guid: 82bf3c0b9076565469ad453adfbb13c6, type: 2}

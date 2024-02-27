@@ -26,7 +26,10 @@ namespace CodeBase.Data
             return true;
         }
 
-        public void Add(int count) => _coinsCount.Value += count;
+        public void Add(int count)
+        {
+            _coinsCount.Value += count;
+        }
 
         public IDisposable SubscribeToCoinsCountChanges(Action<int> onCoinsCountChanged)
         {

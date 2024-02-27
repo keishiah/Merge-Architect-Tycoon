@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPaylodedState<string>
@@ -48,7 +49,6 @@ namespace CodeBase.Infrastructure.States
         {
             _sceneContextProvider.SetCurrentSceneContext(_sceneName);
             _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
-
             InitLevel();
         }
 

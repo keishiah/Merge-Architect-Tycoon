@@ -28,6 +28,7 @@ namespace CodeBase.UI.Elements
             buildingButton.onClick.AddListener(() => _createBuildingPopupPresenter.SelectBuilding(this));
         }
 
+
         public void SetBuildingImage(Sprite buildingSprite) => buildingImage.sprite = buildingSprite;
         public void SetResourceImage(Sprite buildingSprite) => resourceImage.sprite = buildingSprite;
         public void SetCoinsPriceText(string text) => coinsPriceTex.text = text;
