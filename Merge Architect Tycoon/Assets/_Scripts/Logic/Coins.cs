@@ -26,7 +26,10 @@ namespace CodeBase.Data
             return true;
         }
 
-        public void Add(int count) => _coinsCount.Value += count;
+        public void Add(int count)
+        {
+            _coinsCount.Value += count;
+        }
 
         public IDisposable SubscribeToCoinsCountChanges(Action<int> onCoinsCountChanged)
         {
@@ -36,7 +39,7 @@ namespace CodeBase.Data
         public void OnAfterDeserialize()
         {
             // _coinsCount.Value = Mathf.Max(_defaultValue, savedValue);
-            _coinsCount.Value = 10;
+            _coinsCount.Value = savedValue;
         }
 
         public void OnBeforeSerialize()

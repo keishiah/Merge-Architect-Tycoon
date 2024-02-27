@@ -21,7 +21,6 @@ namespace CodeBase.UI
         private IStaticDataService _staticDataService;
         private BuildingProvider _buildingProvider;
         private IPlayerProgressService _playerProgressService;
-        private QuestsPresenter _questsPresenter;
 
         private CreateBuildingPopupScroller _createBuildingPopupScroller;
         private CreateBuildingPopup _createBuildingPopup;
@@ -32,39 +31,42 @@ namespace CodeBase.UI
 
         [Inject]
         void Construct(IStaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
-            BuildingProvider buildingProvider, IPlayerProgressService playerProgressService,
-            QuestsPresenter questsPresenter)
+            BuildingProvider buildingProvider, IPlayerProgressService playerProgressService)
         {
             _staticDataService = staticDataService;
             _itemsCatalogue = itemsCatalogue;
             _buildingProvider = buildingProvider;
             _playerProgressService = playerProgressService;
-            _questsPresenter = questsPresenter;
         }
 
-        public void InitializeScroller(CreateBuildingPopupScroller popupScroller)
-        {
+        public void InitializeScroller(CreateBuildingPopupScroller popupScroller) =>
             _createBuildingPopupScroller = popupScroller;
-        }
 
-        public void InitializePopup(CreateBuildingPopup popup)
-        {
-            _createBuildingPopup = popup;
-        }
+        public void InitializePopup(CreateBuildingPopup popup) => _createBuildingPopup = popup;
 
-        public void InitializeBuildingElements(List<CreateBuildingUiElement> elements)
-        {
-            _elements = elements;
-        }
+        public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
 
-        public void InitializeBuildingInfo()
+        public void InitializeBuildingInfo() => _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+
+        public void InitializePresenter()
         {
-            _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+            InitializeBuildingInfo();
+            SetBuildingElements();
+            SortBuildingElements();
+
+            var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
+            foreach (string building in createdBuildings)
+            {
+                _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
+            }
+
+            _createBuildingPopupScroller.SetContentWidth();
         }
 
         public void OpenScroller()
         {
             _createBuildingPopupScroller.gameObject.SetActive(true);
+            SortBuildingElements();
             _createBuildingPopupScroller.SortBuildingElements();
         }
 
@@ -103,28 +105,10 @@ namespace CodeBase.UI
 
         public void RenderSortedList()
         {
-            if(_buildings.Count == 0)
-                return;
-
             foreach (var element in _elements)
             {
                 element.transform.SetSiblingIndex(
                     _buildings.IndexOf(_buildings.FirstOrDefault(x => x.buildingName == element.buildingName)));
-            }
-        }
-
-        public void SetBuildingElements()
-        {
-            for (int x = 0; x < _buildingInfo.Count; x++)
-            {
-                _elements[x].SetBuildingImage(_buildingInfo[x].buildingSprite);
-                _elements[x].SetResourceImage(_buildingInfo[x].itemToCreate.itemSprite);
-
-                _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
-                _elements[x].SetResourcesPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
-                _elements[x].SetBuildingName(_buildingInfo[x].buildingName);
-
-                _elements[x].SetPresenter(this);
             }
         }
 
@@ -150,6 +134,32 @@ namespace CodeBase.UI
                 buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
         }
 
+        private void SetBuildingElements()
+        {
+            for (int x = 0; x < _buildingInfo.Count; x++)
+            {
+                _elements[x].SetBuildingImage(_buildingInfo[x].buildingSprite);
+                _elements[x].SetResourceImage(_buildingInfo[x].itemToCreate.itemSprite);
+
+                _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
+                _elements[x].SetResourcesPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
+                _elements[x].SetBuildingName(_buildingInfo[x].buildingName);
+
+                _elements[x].SetPresenter(this);
+            }
+        }
+
+        private void CreateBuilding(MergeItem item, int coinsToCreate, string buildingName)
+        {
+            if (_playerProgressService.Progress.Coins.SpendCoins(coinsToCreate))
+            {
+                _itemsCatalogue.TakeItems(item, 1);
+                _buildingProvider.CreateBuildingInTimeAsync(buildingName);
+                _createBuildingPopupScroller.RemoveBuildingElementFromPopup(buildingName);
+                _createBuildingPopupScroller.SetContentWidth();
+            }
+        }
+
         private bool HasEnoughResources(BuildingInfo building)
         {
             return building.coinsCountToCreate <= _playerProgressService.Progress.Coins.CurrentCoinsCount &&
@@ -162,15 +172,6 @@ namespace CodeBase.UI
                 _currentSelectedBuildingUiElement.buildingImageOutline.enabled = false;
             _currentSelectedBuildingUiElement = selectedBuilding;
             selectedBuilding.buildingImageOutline.enabled = true;
-        }
-
-        private void CreateBuilding(MergeItem item, int coinsToCreate, string buildingName)
-        {
-            if (_playerProgressService.Progress.Coins.SpendCoins(coinsToCreate))
-            {
-                _itemsCatalogue.TakeItems(item, 1);
-                _buildingProvider.CreateBuilding(buildingName);
-            }
         }
     }
 }

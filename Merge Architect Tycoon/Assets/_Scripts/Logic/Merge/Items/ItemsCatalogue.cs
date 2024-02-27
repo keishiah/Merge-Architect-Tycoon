@@ -26,9 +26,7 @@ public class ItemsCatalogue : MonoBehaviour
         List<Slot> slots = new List<Slot>();
 
         slots.AddRange(slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
-
-        Debug.Log(slots.Count);
-
+        
         if (slots.Count >= count)
             for (int i = 0; i < count; i++)
             {

@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.UI.Elements
@@ -6,48 +11,48 @@ namespace CodeBase.UI.Elements
     public class CreateBuildingPopupScroller : UiViewBase
     {
         public List<CreateBuildingUiElement> createBuildingElements;
-
-        private UiPresenter _uiPresenter;
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
-        private bool _popupInitialized = false;
+        public RectTransform scrollerRectTransform;
 
-        public CreateBuildingPopupScroller()
-        {
-            _popupInitialized = false;
-        }
+
+        private float _elementWidth;
 
         [Inject]
         void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
-            _uiPresenter = uiPresenter;
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
-            InitUiElement(uiPresenter);
             gameObject.SetActive(false);
+            
+            InitUiElement(uiPresenter);
         }
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
             uiPresenter.AddUiElementToElementsList(this);
 
-            _uiPresenter = uiPresenter;
             _createBuildingPopupPresenter.InitializeScroller(this);
+            _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
+
+            _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
         }
 
         public void SortBuildingElements()
         {
-            if (!_popupInitialized)
-            {
-                
-                _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
-                _createBuildingPopupPresenter.SetBuildingElements();
-                _createBuildingPopupPresenter.SortBuildingElements();
-                _createBuildingPopupPresenter.RenderSortedList();
-            }
-            else
-            {
-                //_createBuildingPopupPresenter.SortBuildingElements();
-                _createBuildingPopupPresenter.RenderSortedList();
-            }
+            _createBuildingPopupPresenter.RenderSortedList();
+        }
+
+        public void RemoveBuildingElementFromPopup(string buildingName)
+        {
+            var removingElement =
+                createBuildingElements.FirstOrDefault(element => element.buildingName == buildingName);
+            if (removingElement)
+                removingElement.gameObject.SetActive(false);
+        }
+
+        public void SetContentWidth()
+        {
+            scrollerRectTransform.sizeDelta = new Vector2(_elementWidth * createBuildingElements.Count,
+                scrollerRectTransform.sizeDelta.y);
         }
     }
 }

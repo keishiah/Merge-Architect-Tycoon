@@ -13,11 +13,17 @@ namespace CodeBase.UI
         public IStaticDataService StaticDataService;
         private List<UiViewBase> _uiElements = new();
 
+
         [Inject]
         void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService)
         {
             PlayerProgressService = playerProgressService;
             StaticDataService = staticDataService;
+        }
+
+        public void SubscribeMoneyCountChanged(Action<int> actionOnCoinsCountChanged)
+        {
+            PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
         }
 
         public void AddUiElementToElementsList(UiViewBase element)

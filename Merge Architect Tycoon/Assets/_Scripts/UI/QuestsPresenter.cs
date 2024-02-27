@@ -36,11 +36,11 @@ namespace CodeBase.UI
 
         private void SetWidgetValues(int coins)
         {
-            _createBuildingPopupPresenter.InitializeBuildingInfo();
-            _createBuildingPopupPresenter.SortBuildingElements();
-            var buildingInfo = _createBuildingPopupPresenter._buildings[0];
-            _questWidget.RenderElement1(buildingInfo.buildingName, buildingInfo.coinsCountToCreate, 1,
-                buildingInfo.itemToCreate);
+            // _createBuildingPopupPresenter.InitializeBuildingInfo();
+            // _createBuildingPopupPresenter.SortBuildingElements();
+            // var buildingInfo = _createBuildingPopupPresenter._buildings[0];
+            // _questWidget.RenderElement1(buildingInfo.buildingName, buildingInfo.coinsCountToCreate, 1,
+            //     buildingInfo.itemToCreate);
         }
     }
 }

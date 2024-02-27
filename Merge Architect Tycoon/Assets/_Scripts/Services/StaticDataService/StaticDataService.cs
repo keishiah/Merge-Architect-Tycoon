@@ -40,6 +40,8 @@ namespace CodeBase.Services
 
         public async UniTask Initialize()
         {
+            // var buildingData = Resources.Load<BuildingData>("BuildingData");
+            // _buildInProgressSprite = Resources.Load<Sprite>("Classroom");
             BuildingData buildingData = await _assetProvider.Load<BuildingData>(BuildingsDataPath);
             _buildingData = buildingData.buildings.ToDictionary(x => x.buildingName, x => x);
 
