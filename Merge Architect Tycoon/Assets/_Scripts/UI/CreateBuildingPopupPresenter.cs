@@ -76,33 +76,6 @@ namespace CodeBase.UI
             _createBuildingPopup.ClosePanelButtons();
         }
 
-        public void SortBuildingElements()
-        {
-            _buildings.Clear();
-            _readyToBuild.Clear();
-            _otherBuildings.Clear();
-
-            foreach (var building in _buildingInfo)
-            {
-                if (HasEnoughResources(building))
-                {
-                    _readyToBuild.Add(building);
-                }
-                else
-                {
-                    _otherBuildings.Add(building);
-                }
-            }
-
-
-            _readyToBuild.Sort((a, b) => a.coinsCountToCreate.CompareTo(b.coinsCountToCreate));
-            _otherBuildings.Sort((a, b) => a.coinsCountToCreate.CompareTo(b.coinsCountToCreate));
-
-
-            _buildings.AddRange(_readyToBuild);
-            _buildings.AddRange(_otherBuildings);
-        }
-
         public void RenderSortedList()
         {
             foreach (var element in _elements)
@@ -132,6 +105,33 @@ namespace CodeBase.UI
             var buildingData = _staticDataService.BuildingData[_selectedBuildingElement.buildingName];
             CreateBuilding(buildingData.itemToCreate,
                 buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
+        }
+
+        private void SortBuildingElements()
+        {
+            _buildings.Clear();
+            _readyToBuild.Clear();
+            _otherBuildings.Clear();
+
+            foreach (var building in _buildingInfo)
+            {
+                if (HasEnoughResources(building))
+                {
+                    _readyToBuild.Add(building);
+                }
+                else
+                {
+                    _otherBuildings.Add(building);
+                }
+            }
+
+
+            _readyToBuild.Sort((a, b) => a.coinsCountToCreate.CompareTo(b.coinsCountToCreate));
+            _otherBuildings.Sort((a, b) => a.coinsCountToCreate.CompareTo(b.coinsCountToCreate));
+
+
+            _buildings.AddRange(_readyToBuild);
+            _buildings.AddRange(_otherBuildings);
         }
 
         private void SetBuildingElements()

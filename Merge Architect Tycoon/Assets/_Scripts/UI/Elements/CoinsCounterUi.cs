@@ -13,13 +13,13 @@ namespace CodeBase.UI.Elements
         public TextMeshProUGUI diamandCountText;
 
         private UiPresenter _uiPresenter;
-        private Progress _progress;
+        private IPlayerProgressService _playerProgressService;
 
         [Inject]
-        void Construct(UiPresenter uiPresenter, Progress progress)
+        void Construct(UiPresenter uiPresenter, IPlayerProgressService playerProgressService)
         {
             _uiPresenter = uiPresenter;
-            _progress = progress;
+            _playerProgressService = playerProgressService;
         }
 
         private void Awake()
@@ -46,8 +46,8 @@ namespace CodeBase.UI.Elements
 #if UNITY_EDITOR
             if (Application.version.StartsWith("d"))
             {
-                _progress.AddCoins(100500);
-                _progress.AddDiamonds(100500);
+                _playerProgressService.Progress.AddCoins(100500);
+                _playerProgressService.Progress.AddDiamonds(100500);
             }
             else
             {
