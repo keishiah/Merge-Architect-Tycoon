@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 
 namespace CodeBase.Infrastructure.States
@@ -23,6 +24,7 @@ namespace CodeBase.Infrastructure.States
         {
             await InitServices();
             _gameStateMachine.Enter<LoadPlayerProgressState>();
+            
         }
 
         private async UniTask InitServices()

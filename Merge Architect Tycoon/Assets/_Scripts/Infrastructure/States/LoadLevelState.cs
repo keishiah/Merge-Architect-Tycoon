@@ -61,6 +61,7 @@ namespace CodeBase.Infrastructure.States
         {
             var createBuildingPopupPresenter = _sceneContextProvider.Resolve<CreateBuildingPopupPresenter>();
             createBuildingPopupPresenter.InitializePresenter();
+            _sceneContextProvider.Resolve<BuildingProvider>().LoadCreatedBuildings();
         }
     }
 }
