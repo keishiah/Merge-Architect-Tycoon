@@ -10,7 +10,6 @@ namespace CodeBase.UI.Elements
     {
         public Button buildingButton;
         public Image buildingImage;
-        public Image coinsImage;
         public Image resourceImage;
 
         public TextMeshProUGUI coinsPriceTex;

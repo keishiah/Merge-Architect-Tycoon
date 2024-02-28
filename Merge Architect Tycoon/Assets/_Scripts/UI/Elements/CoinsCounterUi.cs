@@ -7,19 +7,17 @@ using Zenject;
 
 namespace CodeBase.UI.Elements
 {
-    public class CoinsCounterUi : UiViewBase
+    public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
     {
         public TextMeshProUGUI moneyCountText;
         public TextMeshProUGUI diamandCountText;
 
         private UiPresenter _uiPresenter;
-        private IPlayerProgressService _playerProgressService;
 
         [Inject]
-        void Construct(UiPresenter uiPresenter, IPlayerProgressService playerProgressService)
+        void Construct(UiPresenter uiPresenter)
         {
             _uiPresenter = uiPresenter;
-            _playerProgressService = playerProgressService;
         }
 
         private void Awake()
@@ -29,16 +27,19 @@ namespace CodeBase.UI.Elements
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
-            IPlayerProgressService a = uiPresenter.PlayerProgressService;
-            Progress progress = a.Progress;
-            Coins coins = progress.Coins;
-            int currentMoneyCount = coins.CurrentCoinsCount;
-            RenderMoneyCount(currentMoneyCount);
-
             _uiPresenter = uiPresenter;
+            _uiPresenter.AddUiElementToElementsList(this);
+        }
 
-            progress.Coins.SubscribeToCoinsCountChanges(RenderMoneyCount);
-            progress.Diamands.SubscribeToCoinsCountChanges(RenderDiamandCount);
+        public void OnSceneLoaded()
+        {
+            var progress = _uiPresenter.PlayerProgressService.Progress;
+
+            RenderMoneyCount(progress.Coins.CurrentCoinsCount);
+            RenderDiamandCount(progress.Diamonds.CurrentCoinsCount);
+
+            _uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
+            _uiPresenter.SubscribeDiamondsCountChanged(RenderDiamandCount);
         }
 
         public void AddCoins()
@@ -46,8 +47,8 @@ namespace CodeBase.UI.Elements
 #if UNITY_EDITOR
             if (Application.version.StartsWith("d"))
             {
-                _playerProgressService.Progress.AddCoins(100500);
-                _playerProgressService.Progress.AddDiamonds(100500);
+                _uiPresenter.PlayerProgressService.Progress.AddCoins(100500);
+                _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);
             }
             else
             {

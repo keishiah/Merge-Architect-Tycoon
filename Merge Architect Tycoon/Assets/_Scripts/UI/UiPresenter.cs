@@ -21,14 +21,28 @@ namespace CodeBase.UI
             StaticDataService = staticDataService;
         }
 
+        public void AddUiElementToElementsList(UiViewBase element)
+        {
+            _uiElements.Add(element);
+        }
+
         public void SubscribeMoneyCountChanged(Action<int> actionOnCoinsCountChanged)
         {
             PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
         }
 
-        public void AddUiElementToElementsList(UiViewBase element)
+        public void SubscribeDiamondsCountChanged(Action<int> actionOnDiamondsCountChanged)
         {
-            _uiElements.Add(element);
+            PlayerProgressService.Progress.Diamonds.SubscribeToCoinsCountChanges(actionOnDiamondsCountChanged);
+        }
+
+        public void InitializeElementsOnSceneLoaded()
+        {
+            foreach (var element in _uiElements)
+            {
+                if (element.GetComponent<IInitializableOnSceneLoaded>() != null)
+                    element.GetComponent<IInitializableOnSceneLoaded>().OnSceneLoaded();
+            }
         }
 
         private T GetUiElementFromElementsList<T>() where T : UiViewBase
