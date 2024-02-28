@@ -31,6 +31,20 @@ namespace CodeBase.UI
             PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
         }
 
+        public void SubscribeDiamondsCountChanged(Action<int> actionOnDiamondsCountChanged)
+        {
+            PlayerProgressService.Progress.Diamonds.SubscribeToCoinsCountChanges(actionOnDiamondsCountChanged);
+        }
+
+        public void InitializeElementsOnSceneLoaded()
+        {
+            foreach (var element in _uiElements)
+            {
+                if (element.GetComponent<IInitializableOnSceneLoaded>() != null)
+                    element.GetComponent<IInitializableOnSceneLoaded>().OnSceneLoaded();
+            }
+        }
+
         private T GetUiElementFromElementsList<T>() where T : UiViewBase
         {
             return (T)_uiElements.FirstOrDefault(element => element.GetType() == typeof(T));

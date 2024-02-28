@@ -17,16 +17,18 @@ namespace CodeBase.Infrastructure.States
 
         private string _sceneName;
         private readonly QuestsPresenter _questsPresenter;
+        private readonly UiPresenter _uiPresenter;
 
         private readonly SceneContextProvider _sceneContextProvider;
 
 
         public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
-            SceneContextProvider sceneContextProvider)
+            SceneContextProvider sceneContextProvider, UiPresenter uiPresenter)
         {
             _sceneLoader = sceneLoader;
             _playerProgressService = playerProgressService;
             _sceneContextProvider = sceneContextProvider;
+            _uiPresenter = uiPresenter;
         }
 
         public void Enter(string sceneName)
@@ -54,6 +56,7 @@ namespace CodeBase.Infrastructure.States
 
         private void InitLevel()
         {
+            _uiPresenter.InitializeElementsOnSceneLoaded();
             InitializePopupPresenter();
         }
 

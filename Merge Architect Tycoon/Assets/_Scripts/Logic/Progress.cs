@@ -8,14 +8,14 @@ namespace CodeBase.Data
     public class Progress
     {
         public Coins Coins;
-        public Coins Diamands;
+        public Coins Diamonds;
         public Buldings Buldings;
         public Cities Cities;
 
         public Progress()
         {
             Coins = new Coins();
-            Diamands = new Coins();
+            Diamonds = new Coins();
             Buldings = new Buldings();
             Cities = new Cities();
         }
@@ -28,7 +28,7 @@ namespace CodeBase.Data
 
         public void AddDiamonds(int coins)
         {
-            Diamands.Add(coins);
+            Diamonds.Add(coins);
             SaveLoadService.Save(SaveKey.Progress, this);
         }
 

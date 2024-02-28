@@ -8,7 +8,7 @@ using Zenject;
 
 namespace CodeBase.UI.Elements
 {
-    public class CreateBuildingPopupScroller : UiViewBase
+    public class CreateBuildingPopupScroller : UiViewBase, IInitializableOnSceneLoaded
     {
         public List<CreateBuildingUiElement> createBuildingElements;
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
@@ -22,14 +22,17 @@ namespace CodeBase.UI.Elements
         {
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
             gameObject.SetActive(false);
-            
+
             InitUiElement(uiPresenter);
         }
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
             uiPresenter.AddUiElementToElementsList(this);
+        }
 
+        public void OnSceneLoaded()
+        {
             _createBuildingPopupPresenter.InitializeScroller(this);
             _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
 

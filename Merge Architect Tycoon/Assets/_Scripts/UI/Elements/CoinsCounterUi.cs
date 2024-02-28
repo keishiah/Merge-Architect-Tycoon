@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CodeBase.UI.Elements
 {
-    public class CoinsCounterUi : UiViewBase
+    public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
     {
         public TextMeshProUGUI moneyCountText;
         public TextMeshProUGUI diamandCountText;
@@ -27,16 +27,19 @@ namespace CodeBase.UI.Elements
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
-            IPlayerProgressService a = uiPresenter.PlayerProgressService;
-            Progress progress = a.Progress;
-            Coins coins = progress.Coins;
-            int currentMoneyCount = coins.CurrentCoinsCount;
-            RenderMoneyCount(currentMoneyCount);
-
             _uiPresenter = uiPresenter;
+            _uiPresenter.AddUiElementToElementsList(this);
+        }
 
-            uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
-            // progress.Diamands.SubscribeToCoinsCountChanges(RenderDiamandCount);
+        public void OnSceneLoaded()
+        {
+            var progress = _uiPresenter.PlayerProgressService.Progress;
+
+            RenderMoneyCount(progress.Coins.CurrentCoinsCount);
+            RenderDiamandCount(progress.Diamonds.CurrentCoinsCount);
+
+            _uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
+            _uiPresenter.SubscribeDiamondsCountChanged(RenderDiamandCount);
         }
 
         public void AddCoins()

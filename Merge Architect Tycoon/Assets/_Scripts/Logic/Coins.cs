@@ -9,15 +9,7 @@ namespace CodeBase.Data
     {
         public int CurrentCoinsCount => _coinsCount.Value;
 
-        public ReactiveProperty<int> _coinsCount = new();
-
-        //private int _defaultValue = 0;
-        [SerializeField] private int savedValue;
-
-        public Coins()
-        {
-            _coinsCount.Subscribe((newValue => savedValue = newValue));
-        }
+        [SerializeField] private ReactiveProperty<int> _coinsCount = new();
 
         public bool SpendCoins(int count)
         {
