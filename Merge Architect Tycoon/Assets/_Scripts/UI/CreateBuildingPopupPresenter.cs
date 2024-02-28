@@ -46,7 +46,10 @@ namespace CodeBase.UI
 
         public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
 
-        public void InitializeBuildingInfo() => _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+        public void InitializeBuildingInfo()
+        {
+            _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+        }
 
         public void InitializePresenter()
         {
