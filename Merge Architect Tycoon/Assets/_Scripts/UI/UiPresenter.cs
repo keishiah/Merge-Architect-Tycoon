@@ -21,14 +21,14 @@ namespace CodeBase.UI
             StaticDataService = staticDataService;
         }
 
-        public void SubscribeMoneyCountChanged(Action<int> actionOnCoinsCountChanged)
-        {
-            PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
-        }
-
         public void AddUiElementToElementsList(UiViewBase element)
         {
             _uiElements.Add(element);
+        }
+
+        public void SubscribeMoneyCountChanged(Action<int> actionOnCoinsCountChanged)
+        {
+            PlayerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(actionOnCoinsCountChanged);
         }
 
         private T GetUiElementFromElementsList<T>() where T : UiViewBase

@@ -5,11 +5,12 @@ using UnityEngine;
 namespace CodeBase.Data
 {
     [Serializable]
-    public class Coins : ISerializationCallbackReceiver
+    public class Coins
     {
         public int CurrentCoinsCount => _coinsCount.Value;
 
         public ReactiveProperty<int> _coinsCount = new();
+
         //private int _defaultValue = 0;
         [SerializeField] private int savedValue;
 
@@ -34,16 +35,6 @@ namespace CodeBase.Data
         public IDisposable SubscribeToCoinsCountChanges(Action<int> onCoinsCountChanged)
         {
             return _coinsCount.Subscribe(onCoinsCountChanged);
-        }
-
-        public void OnAfterDeserialize()
-        {
-            // _coinsCount.Value = Mathf.Max(_defaultValue, savedValue);
-            _coinsCount.Value = savedValue;
-        }
-
-        public void OnBeforeSerialize()
-        {
         }
     }
 }
