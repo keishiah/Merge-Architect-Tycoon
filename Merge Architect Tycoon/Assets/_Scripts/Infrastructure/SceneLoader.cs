@@ -17,11 +17,11 @@ namespace CodeBase.Infrastructure
             if (SceneManager.GetActiveScene().name == name)
             {
                 onLoaded?.Invoke();
-                return;
             }
-
-            if (SceneManager.GetActiveScene().name != name)
+            else
+            {
                 LoadScene(name, onLoaded).Forget();
+            }
         }
 
         private async UniTask LoadScene(string nextScene, Action onLoaded = null)
