@@ -42,14 +42,16 @@ namespace _Scripts.UI.Presenters
 
         public void SetCurrentDistrict(int currentDistrictId) => _currentDistrictId = currentDistrictId;
 
-        private void StartEarningCurrencyOnInitialization() =>
-            AddCreatedBuildingToDistrictsDict(_playerProgressService.Progress.Buldings.CreatedBuildings);
+        private void StartEarningCurrencyOnInitialization()
+        {
+            // Todo create initialization on load
+        }
 
-        private void AddCreatedBuildingToDistrictsDict(List<string> createdBuildings)
+        private void AddCreatedBuildingToDistrictsDict(string createdBuilding)
         {
             foreach (var building in _buildingProvider.SceneBuildingsDictionary)
             {
-                if (createdBuildings.Contains(building.Key))
+                if (building.Key == createdBuilding)
                     if (!_districtsCreatedBuildings.Keys.Contains(building.Value.districtId))
                         AddCreatedBuildingToDistrictDict(building.Value.districtId);
             }

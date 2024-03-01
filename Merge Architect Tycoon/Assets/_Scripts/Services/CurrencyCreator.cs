@@ -3,6 +3,7 @@ using System.Threading;
 using _Scripts.Services.StaticDataService;
 using _Scripts.UI.Elements;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Services
@@ -19,8 +20,9 @@ namespace _Scripts.Services
 
         public async UniTask CreateCurrencyInTimeAsync(DistrictUi district)
         {
+            district.coinsSlider.gameObject.SetActive(true);
             float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
-            district.SetSliderValue(timeToCreate);
+            district.SetSliderMaxValue(timeToCreate);
 
             while (timeToCreate > 0)
             {
@@ -30,7 +32,6 @@ namespace _Scripts.Services
                 timeToCreate--;
                 district.SetSliderValue(timeToCreate);
             }
-
         }
     }
 }

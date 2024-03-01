@@ -8,18 +8,24 @@ namespace _Scripts.Logic
     [Serializable]
     public class Buldings
     {
-        private ReactiveProperty<List<string>> _createdBuildings = new(new List<string>());
+        private ReactiveCollection<string> _createdBuildings = new();
 
-        public List<string> CreatedBuildings => _createdBuildings.Value;
+        public ReactiveCollection<string> CreatedBuildings => _createdBuildings;
+
+        public IObservable<string> SubscribeToBuildingsChanges()
+        {
+            return _createdBuildings.ObserveAdd()
+                .Select(evt => evt.Value);
+        }
 
         public void AddCreatedBuildingToList(string buildingName)
         {
-            _createdBuildings.Value.Add(buildingName);
+            _createdBuildings.Add(buildingName);
         }
 
-        public void SubscribeToBuildingsChanges(Action<List<string>> onBuildingCreated)
+        public void SubscribeToBuildingsChanges(Action<string> onBuildingCreated)
         {
-            _createdBuildings.Subscribe(onBuildingCreated);
+            SubscribeToBuildingsChanges().Subscribe(onBuildingCreated);
         }
     }
 }

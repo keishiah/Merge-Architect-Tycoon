@@ -15,7 +15,6 @@ namespace _Scripts.Logic.Merge.Items
 
         public bool CheckHasItem(MergeItem item)
         {
-            print(slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count > 0);
             return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count > 0;
             // int counter = 0;
             // List<Slot> slots = new List<Slot>();

@@ -17,26 +17,25 @@ MonoBehaviour:
     buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
     timeToCreate: 5
     coinsCountToCreate: 6
-    itemToCreate: {fileID: 11400000, guid: 4bb367666d999984a8873553522e990f, type: 2}
+    itemToCreate: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
   - buildingName: 1
     buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
     timeToCreate: 5
     coinsCountToCreate: 18
     itemToCreate: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
   - buildingName: 2
-    buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
+    buildingSprite: {fileID: -40607893, guid: 18013fbac8bed1f43a628d87c5622055, type: 3}
     timeToCreate: 5
     coinsCountToCreate: 1
-    itemToCreate: {fileID: 11400000, guid: fa6a3e5b13397b24d8fa1427e0d67a72, type: 2}
+    itemToCreate: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
   - buildingName: 3
     buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
     timeToCreate: 5
     coinsCountToCreate: 11
-    itemToCreate: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
+    itemToCreate: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
   - buildingName: 4
     buildingSprite: {fileID: 21300000, guid: 827c4ba7be2f0ba4697fc2b641d1f8ba, type: 3}
     timeToCreate: 5
     coinsCountToCreate: 34
-    itemToCreate: {fileID: 11400000, guid: ddab63366e9abad4199bf564e6aa9249, type: 2}
-  placeToBuildSprite: {fileID: 21300000, guid: 8a7f16ffec6fbd045b7e71775be8f3df, type: 3}
+    itemToCreate: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
   buildInProgressSprite: {fileID: 21300000, guid: 4a76d864c1e35634582a131cd8196730, type: 3}

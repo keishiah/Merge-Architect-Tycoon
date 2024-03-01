@@ -6,11 +6,12 @@ using _Scripts.Services;
 using _Scripts.Services.PlayerProgressService;
 using _Scripts.Services.StaticDataService;
 using _Scripts.UI.Elements.CreateBuildingPopup;
+using UnityEngine;
 using Zenject;
 
 namespace _Scripts.UI.Presenters
 {
-    public class CreateBuildingPopupPresenter 
+    public class CreateBuildingPopupPresenter
     {
         private string _currentBuildingName;
         private CreateBuildingUiElement _currentSelectedBuildingUiElement;
@@ -94,7 +95,6 @@ namespace _Scripts.UI.Presenters
         {
             TurnOfPreviousOutline(selectedBuilding);
             _selectedBuildingElement = selectedBuilding;
-
             if (HasEnoughResources(_staticDataService.BuildingData[selectedBuilding.buildingName]))
             {
                 _createBuildingPopup.OpenCreateBuildingButton();

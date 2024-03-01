@@ -25,7 +25,7 @@ namespace _Scripts.UI.Elements
             ActivityToken = new CancellationTokenSource();
         }
 
-        public void SetSliderMaxValue(int maxValue) => coinsSlider.maxValue = maxValue;
+        public void SetSliderMaxValue(float maxValue) => coinsSlider.maxValue = maxValue;
         public void SetSliderValue(float value) => coinsSlider.value = value;
 
         private void Initialize()
