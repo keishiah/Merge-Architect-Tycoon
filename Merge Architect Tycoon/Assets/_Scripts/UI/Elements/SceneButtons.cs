@@ -1,16 +1,19 @@
+using _Scripts.UI.Presenters;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI.Elements
+namespace _Scripts.UI.Elements
 {
     public class SceneButtons : MonoBehaviour
     {
         public Button buildingConstructMenuButton;
         public Button mergeMenuButton;
         public Button closeButton;
+        public Button goToMapButton;
 
         public GameObject mergePanel;
+        public GameObject citiesMapPopup;
 
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
@@ -23,9 +26,17 @@ namespace CodeBase.UI.Elements
         private void Start()
         {
             buildingConstructMenuButton.onClick.AddListener(OpenBuildingConstructMenu);
+
             mergeMenuButton.onClick.AddListener(OpenMergeMenuButton);
             closeButton.onClick.AddListener(CloseElement);
+            goToMapButton.onClick.AddListener(OpenCitiesMap);
+
             closeButton.gameObject.SetActive(false);
+        }
+
+        private void OpenCitiesMap()
+        {
+            citiesMapPopup.gameObject.SetActive(true);
         }
 
         private void CloseElement()

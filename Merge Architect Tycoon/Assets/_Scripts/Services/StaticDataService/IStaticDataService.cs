@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using CodeBase.StaticData;
+using _Scripts.Logic.Buildings;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace CodeBase.Services
+namespace _Scripts.Services.StaticDataService
 {
     public interface IStaticDataService
     {

@@ -1,35 +1,39 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Logic.Merge.Items;
 using UnityEngine;
 
-[Serializable]
-public class Truck
+namespace _Scripts.Logic.Trucks
 {
-    public Sprite SpriteImage;
-    public List<MergeItem> TruckCargo;
-
-    public Truck Clone()
+    [Serializable]
+    public class Truck
     {
-        List<MergeItem> _truckCargo = new();
-        foreach (var item in TruckCargo)
+        public Sprite SpriteImage;
+        public List<MergeItem> TruckCargo;
+
+        public Truck Clone()
         {
-            _truckCargo.Add(item);
+            List<MergeItem> _truckCargo = new();
+            foreach (var item in TruckCargo)
+            {
+                _truckCargo.Add(item);
+            }
+
+            Truck clone = new Truck();
+            clone.SpriteImage = this.SpriteImage;
+            clone.TruckCargo = _truckCargo;
+
+            return clone;
         }
 
-        Truck clone = new Truck();
-        clone.SpriteImage = this.SpriteImage;
-        clone.TruckCargo = _truckCargo;
+        public MergeItem DequeueItem()
+        {
+            if(TruckCargo == null || TruckCargo.Count == 0)
+                return null;
 
-        return clone;
-    }
-
-    public MergeItem DequeueItem()
-    {
-        if(TruckCargo == null || TruckCargo.Count == 0)
-            return null;
-
-        MergeItem item = TruckCargo[0];
-        TruckCargo.Remove(item);
-        return item;
+            MergeItem item = TruckCargo[0];
+            TruckCargo.Remove(item);
+            return item;
+        }
     }
 }

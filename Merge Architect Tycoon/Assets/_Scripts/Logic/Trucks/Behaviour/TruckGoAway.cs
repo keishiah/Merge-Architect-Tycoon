@@ -1,30 +1,33 @@
 ﻿using System;
 using UnityEngine;
 
-public class TruckGoAway : TruckBehaviour
+namespace _Scripts.Logic.Trucks.Behaviour
 {
-    public float _startXPosition;
-    public float _endXPosition;
-    public float _speed = 250f;
-
-    public RectTransform _rectTtransform;
-
-    public override void Enter()
+    public class TruckGoAway : TruckBehaviour
     {
-        _startXPosition = _rectTtransform.anchoredPosition.x;
-        _time = DateTime.Now;
-    }
+        public float _startXPosition;
+        public float _endXPosition;
+        public float _speed = 250f;
 
-    public override void Update()
-    {
-        if (_rectTtransform.anchoredPosition.x > _endXPosition)
+        public RectTransform _rectTtransform;
+
+        public override void Enter()
         {
-            IsComplete = true;
-            return;
+            _startXPosition = _rectTtransform.anchoredPosition.x;
+            _time = DateTime.Now;
         }
 
-        TimeSpan inWayTime = DateTime.Now - _time;
-        float traversedPath = (float)inWayTime.TotalSeconds * _speed;
-        _rectTtransform.anchoredPosition = new Vector2(_startXPosition + traversedPath, 0);
+        public override void Update()
+        {
+            if (_rectTtransform.anchoredPosition.x > _endXPosition)
+            {
+                IsComplete = true;
+                return;
+            }
+
+            TimeSpan inWayTime = DateTime.Now - _time;
+            float traversedPath = (float)inWayTime.TotalSeconds * _speed;
+            _rectTtransform.anchoredPosition = new Vector2(_startXPosition + traversedPath, 0);
+        }
     }
 }

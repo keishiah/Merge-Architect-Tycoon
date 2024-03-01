@@ -1,10 +1,9 @@
-using CodeBase.Infrastructure.States;
-using CodeBase.Services;
-using CodeBase.UI.Elements;
-using UnityEngine;
+using _Scripts.Infrastructure.States;
+using _Scripts.Services.PlayerProgressService;
+using _Scripts.UI.Elements;
 using Zenject;
 
-namespace CodeBase.UI
+namespace _Scripts.UI.Presenters
 {
     public class QuestsPresenter
     {

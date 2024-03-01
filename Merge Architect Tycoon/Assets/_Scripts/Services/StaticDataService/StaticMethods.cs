@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Data
+﻿namespace _Scripts.Services.StaticDataService
 {
     public static class StaticMethods
     {

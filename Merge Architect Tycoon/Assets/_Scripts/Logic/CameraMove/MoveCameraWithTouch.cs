@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Logic.CameraMove
+namespace _Scripts.Logic.CameraMove
 {
     public class MoveCameraWithTouch : MonoBehaviour
     {

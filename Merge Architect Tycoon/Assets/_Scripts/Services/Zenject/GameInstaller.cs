@@ -1,13 +1,12 @@
-using CodeBase.Data;
-using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Infrastructure.States;
-using CodeBase.Services;
-using CodeBase.UI;
+using _Scripts.Infrastructure;
+using _Scripts.Infrastructure.AssetManagment;
+using _Scripts.Infrastructure.Factories;
+using _Scripts.Infrastructure.States;
+using _Scripts.Logic;
+using _Scripts.UI.Presenters;
 using Zenject;
 
-namespace CodeBase.CompositionRoot
+namespace _Scripts.Services.Zenject
 {
     public class GameInstaller : MonoInstaller
     {
@@ -57,7 +56,7 @@ namespace CodeBase.CompositionRoot
         }
 
         private void BindStaticDataService() =>
-            Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StaticDataService.StaticDataService>().AsSingle();
 
         private void BindAssetProvider()
         {
@@ -67,7 +66,7 @@ namespace CodeBase.CompositionRoot
         private void BindPlayerProgressService()
         {
             Container.Bind<Progress>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerProgressService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerProgressService.PlayerProgressService>().AsSingle();
         }
 
         private void BindSceneLoader() =>

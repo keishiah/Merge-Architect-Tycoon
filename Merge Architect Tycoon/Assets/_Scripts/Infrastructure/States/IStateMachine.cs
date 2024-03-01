@@ -1,4 +1,4 @@
-namespace CodeBase.Infrastructure.States
+namespace _Scripts.Infrastructure.States
 {
     public interface IStateMachine
     {

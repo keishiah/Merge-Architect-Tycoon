@@ -1,10 +1,10 @@
-﻿using CodeBase.Logic.Buildings;
-using System.Collections.Generic;
-using CodeBase.Data;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using _Scripts.Logic;
+using _Scripts.Logic.Buildings;
+using _Scripts.Services.PlayerProgressService;
 using Zenject;
 
-namespace CodeBase.Services
+namespace _Scripts.Services
 {
     public class BuildingProvider
     {
@@ -33,14 +33,7 @@ namespace CodeBase.Services
 
         public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
         {
-            Buldings buildings = _playerProgressService.Progress.Buldings;
-
             _sceneBuildingsDictionary.Add(buildingName, buildingPlace);
-
-            // if (buildings.CreatedBuildings.Contains(buildingName))
-            // {
-            //     CreateBuildingOnStart(buildingName);
-            // }
         }
 
         public async void CreateBuildingInTimeAsync(string buildingName)

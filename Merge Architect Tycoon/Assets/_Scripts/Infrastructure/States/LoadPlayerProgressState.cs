@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Data;
-using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.Services;
-using UnityEngine;
+using _Scripts.Infrastructure.AssetManagment;
+using _Scripts.Logic;
+using _Scripts.Services.PlayerProgressService;
+using _Scripts.Services.SaveLoadService;
 
-namespace CodeBase.Infrastructure.States
+namespace _Scripts.Infrastructure.States
 {
     public class LoadPlayerProgressState : IState
     {
