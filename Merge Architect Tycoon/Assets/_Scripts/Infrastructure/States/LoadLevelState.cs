@@ -6,16 +6,15 @@ namespace _Scripts.Infrastructure.States
 {
     public class LoadLevelState : IPaylodedState<string>
     {
-        private IGameStateMachine _gameStateMachine;
-        private readonly ISceneLoader _sceneLoader;
-        private readonly IPlayerProgressService _playerProgressService;
-
         private string _sceneName;
         private readonly QuestsPresenter _questsPresenter;
         private readonly UiPresenter _uiPresenter;
 
         private readonly SceneContextProvider _sceneContextProvider;
 
+        private IGameStateMachine _gameStateMachine;
+        private readonly ISceneLoader _sceneLoader;
+        private readonly IPlayerProgressService _playerProgressService;
 
         public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
             SceneContextProvider sceneContextProvider, UiPresenter uiPresenter)
@@ -45,13 +44,14 @@ namespace _Scripts.Infrastructure.States
         private void OnLoaded()
         {
             _sceneContextProvider.SetCurrentSceneContext(_sceneName);
-            _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
             InitLevel();
         }
 
         private void InitLevel()
         {
+            _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
             _uiPresenter.InitializeElementsOnSceneLoaded();
+            _sceneContextProvider.Resolve<DistrictsPresenter>().InitializeDistrictsPresenter();
             InitializePopupPresenter();
         }
 
@@ -59,7 +59,7 @@ namespace _Scripts.Infrastructure.States
         {
             var createBuildingPopupPresenter = _sceneContextProvider.Resolve<CreateBuildingPopupPresenter>();
             createBuildingPopupPresenter.InitializePresenter();
-            _sceneContextProvider.Resolve<BuildingProvider>().LoadCreatedBuildings();
+            _sceneContextProvider.Resolve<BuildingProvider>().OnSceneLoaded();
         }
     }
 }

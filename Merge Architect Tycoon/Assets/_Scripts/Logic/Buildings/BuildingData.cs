@@ -9,7 +9,6 @@ namespace _Scripts.Logic.Buildings
     public class BuildingData : ScriptableObject
     {
         public List<BuildingInfo> buildings;
-        public Sprite placeToBuildSprite;
         public Sprite buildInProgressSprite;
     }
 

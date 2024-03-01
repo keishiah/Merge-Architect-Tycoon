@@ -16,7 +16,8 @@ namespace _Scripts.Services.Zenject
             Container.Bind<BuildingProvider>().AsSingle();
             Container.Bind<CreateBuildingPopupPresenter>().AsSingle();
             Container.Bind<QuestsPresenter>().AsSingle();
-            Container.Bind<DistricsSwitcher>().AsSingle();
+            Container.Bind<DistrictsPresenter>().AsSingle();
+            Container.Bind<CurrencyCreator>().AsSingle();
 
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();

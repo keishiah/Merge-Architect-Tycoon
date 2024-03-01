@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace _Scripts.Logic
@@ -7,12 +8,18 @@ namespace _Scripts.Logic
     [Serializable]
     public class Buldings
     {
-        [SerializeField] private List<string> _createdBuildings = new();
-        public List<string> CreatedBuildings => _createdBuildings;
+        private ReactiveProperty<List<string>> _createdBuildings = new(new List<string>());
+
+        public List<string> CreatedBuildings => _createdBuildings.Value;
 
         public void AddCreatedBuildingToList(string buildingName)
         {
-            _createdBuildings.Add(buildingName);
+            _createdBuildings.Value.Add(buildingName);
+        }
+
+        public void SubscribeToBuildingsChanges(Action<List<string>> onBuildingCreated)
+        {
+            _createdBuildings.Subscribe(onBuildingCreated);
         }
     }
 }

@@ -2,13 +2,14 @@
 using _Scripts.Logic;
 using _Scripts.Logic.Buildings;
 using _Scripts.Services.PlayerProgressService;
+using _Scripts.UI;
 using Zenject;
 
 namespace _Scripts.Services
 {
-    public class BuildingProvider
+    public class BuildingProvider : IInitializableOnSceneLoaded
     {
-        private readonly Dictionary<string, BuildingPlace> _sceneBuildingsDictionary = new();
+        public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
 
         private IPlayerProgressService _playerProgressService;
 
@@ -18,11 +19,16 @@ namespace _Scripts.Services
             _playerProgressService = playerProgressService;
         }
 
-        public void LoadCreatedBuildings()
+        public void OnSceneLoaded()
+        {
+            LoadCreatedBuildings();
+        }
+
+        private void LoadCreatedBuildings()
         {
             Buldings buildings = _playerProgressService.Progress.Buldings;
 
-            foreach (var buildingName in _sceneBuildingsDictionary.Keys)
+            foreach (var buildingName in SceneBuildingsDictionary.Keys)
             {
                 if (buildings.CreatedBuildings.Contains(buildingName))
                 {
@@ -33,12 +39,12 @@ namespace _Scripts.Services
 
         public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
         {
-            _sceneBuildingsDictionary.Add(buildingName, buildingPlace);
+            SceneBuildingsDictionary.Add(buildingName, buildingPlace);
         }
 
         public async void CreateBuildingInTimeAsync(string buildingName)
         {
-            if (_sceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            if (SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             {
                 await buildingPlace.StartCreatingBuilding();
                 _playerProgressService.Progress.AddBuilding(buildingName);
@@ -47,7 +53,7 @@ namespace _Scripts.Services
 
         private void CreateBuildingOnStart(string buildingName)
         {
-            _sceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
+            SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
         }
     }
 }

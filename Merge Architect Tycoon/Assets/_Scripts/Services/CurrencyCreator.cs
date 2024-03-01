@@ -16,22 +16,21 @@ namespace _Scripts.Services
         {
             _staticDataService = staticDataService;
         }
-        public async UniTask CreateCurrencyInTimeAsync(DistrictUi district, string districtName,
-            CancellationTokenSource cancellationTokenSource)
+
+        public async UniTask CreateCurrencyInTimeAsync(DistrictUi district)
         {
-            // var timeToCreate = _staticDataService.GetBuildingData(buildingName).timeToCreate;
-            // buildingPlace.UpdateTimerText(timeToCreate);
-            //
-            // while (timeToCreate > 0)
-            // {
-            //     var delayTimeSpan = TimeSpan.FromSeconds(1f);
-            //
-            //     await UniTask.Delay(delayTimeSpan, cancellationToken: cancellationTokenSource.Token);
-            //     timeToCreate--;
-            //     buildingPlace.UpdateTimerText(timeToCreate);
-            // }
-            //
-            // CreateBuilding(buildingPlace);
+            float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
+            district.SetSliderValue(timeToCreate);
+
+            while (timeToCreate > 0)
+            {
+                var delayTimeSpan = TimeSpan.FromSeconds(1f);
+
+                await UniTask.Delay(delayTimeSpan, cancellationToken: district.ActivityToken.Token);
+                timeToCreate--;
+                district.SetSliderValue(timeToCreate);
+            }
+
         }
     }
 }

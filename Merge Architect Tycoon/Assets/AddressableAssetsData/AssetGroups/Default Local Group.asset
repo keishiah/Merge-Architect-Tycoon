@@ -41,6 +41,10 @@ MonoBehaviour:
     m_Address: DeliveryZone
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 991890a890c7eab4ca64c9309dbf4b9d
+    m_Address: DistrictsData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: aa8a7b4b1f9e5b04ea9fb98c6b137a01, type: 2}
   m_SchemaSet:
