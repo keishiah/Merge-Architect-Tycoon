@@ -12,4 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Meta.unity
     guid: 228971872b88e3c49b3031c13ba6dc07
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: d26aea8649d6ecc469a6b9c21fad198b, type: 2}
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: a0b2fc06550d1c84ca28f31c1b8c875c, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 77c544ff5d542b242974ce76ea2ec8f3, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: cfd874072dd7b074f9c1bb4eaa6938c6, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 7b6b6add770908a4e9767519bf6a7274, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 4c7697961fc097e40ae8c6141f27b557, type: 2}
