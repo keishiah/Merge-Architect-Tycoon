@@ -1,6 +1,6 @@
-﻿using CodeBase.Data;
+﻿using _Scripts.Logic;
 
-namespace CodeBase.Services
+namespace _Scripts.Services.PlayerProgressService
 {
     public interface IPlayerProgressService
     {

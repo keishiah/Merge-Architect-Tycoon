@@ -1,15 +1,18 @@
 using System;
 
-public class Inventory
+namespace _Scripts.Logic.Merge.MergePlane
 {
-    public int GridX, GridY;
-
-    public Slot[] items;
-
-    [Serializable]
-    public struct Slot
+    public class Inventory
     {
-        public SlotState SlotState;
-        public string ItemID;
+        public int GridX, GridY;
+
+        public Slot[] items;
+
+        [Serializable]
+        public struct Slot
+        {
+            public SlotState SlotState;
+            public string ItemID;
+        }
     }
 }

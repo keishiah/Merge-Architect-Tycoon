@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Scripts.Logic.Merge.Items;
 using UnityEngine;
 
-namespace CodeBase.StaticData
+namespace _Scripts.Logic.Buildings
 {
     [CreateAssetMenu(fileName = "BuildingData", menuName = "StaticData/BuildingData", order = 0)]
     public class BuildingData : ScriptableObject

@@ -1,10 +1,11 @@
-using _Scripts.UI;
+using _Scripts.Logic.Merge;
+using _Scripts.Logic.Merge.Items;
+using _Scripts.Logic.Merge.MergePlane;
 using _Scripts.UI.Presenters;
-using CodeBase.Services;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.CompositionRoot
+namespace _Scripts.Services.Zenject
 {
     public class SceneContextInstaller : MonoInstaller
     {

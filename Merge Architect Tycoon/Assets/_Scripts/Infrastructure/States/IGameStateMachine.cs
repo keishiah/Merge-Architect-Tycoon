@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace CodeBase.Infrastructure.States
+﻿namespace _Scripts.Infrastructure.States
 {
     public interface IGameStateMachine : IStateMachine
     {

@@ -2,64 +2,67 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
-public class SelectedItem : MonoBehaviour
+namespace _Scripts.Logic.Merge.MergePlane
 {
-    public Slot selectedSlot;
-
-    public float approachSpeed = 0.02f;
-    public float growthBound = 2f;
-    public float shrinkBound = 0.5f;
-
-    private float currentRatio = 1;
-    private Image image;
-    private bool keepGoing = true;
-
-    private void Awake()
+    [RequireComponent(typeof(Image))]
+    public class SelectedItem : MonoBehaviour
     {
-        image = GetComponent<Image>();
-    }
-    private void OnEnable()
-    {
-        StartCoroutine(_PulseAnimation());
-    }
-    private void OnDisable()
-    {
-        StopCoroutine(_PulseAnimation());
-    }
+        public Slot selectedSlot;
 
-    public void SelectSlot(Slot slot)
-    {
-        selectedSlot = slot;
-        transform.transform.position = (slot.transform.position);
-    }
+        public float approachSpeed = 0.02f;
+        public float growthBound = 2f;
+        public float shrinkBound = 0.5f;
 
-    private IEnumerator _PulseAnimation()
-    {
-        while (keepGoing)
+        private float currentRatio = 1;
+        private Image image;
+        private bool keepGoing = true;
+
+        private void Awake()
         {
-            // Get bigger for a few seconds
-            while (currentRatio != growthBound)
+            image = GetComponent<Image>();
+        }
+        private void OnEnable()
+        {
+            StartCoroutine(_PulseAnimation());
+        }
+        private void OnDisable()
+        {
+            StopCoroutine(_PulseAnimation());
+        }
+
+        public void SelectSlot(Slot slot)
+        {
+            selectedSlot = slot;
+            transform.transform.position = (slot.transform.position);
+        }
+
+        private IEnumerator _PulseAnimation()
+        {
+            while (keepGoing)
             {
-                // Determine the new ratio to use
-                currentRatio = Mathf.MoveTowards(currentRatio, growthBound, approachSpeed);
+                // Get bigger for a few seconds
+                while (currentRatio != growthBound)
+                {
+                    // Determine the new ratio to use
+                    currentRatio = Mathf.MoveTowards(currentRatio, growthBound, approachSpeed);
 
-                // Update our text element
-                image.transform.localScale = Vector3.one * currentRatio;
+                    // Update our text element
+                    image.transform.localScale = Vector3.one * currentRatio;
 
-                yield return new WaitForEndOfFrame();
-            }
+                    yield return new WaitForEndOfFrame();
+                }
 
-            // Shrink for a few seconds
-            while (currentRatio != shrinkBound)
-            {
-                // Determine the new ratio to use
-                currentRatio = Mathf.MoveTowards(currentRatio, shrinkBound, approachSpeed);
+                // Shrink for a few seconds
+                while (currentRatio != shrinkBound)
+                {
+                    // Determine the new ratio to use
+                    currentRatio = Mathf.MoveTowards(currentRatio, shrinkBound, approachSpeed);
 
-                // Update our text element
-                image.transform.localScale = Vector3.one * currentRatio;
+                    // Update our text element
+                    image.transform.localScale = Vector3.one * currentRatio;
 
-                yield return new WaitForEndOfFrame();
+                    yield return new WaitForEndOfFrame();
+                }
             }
         }
     }

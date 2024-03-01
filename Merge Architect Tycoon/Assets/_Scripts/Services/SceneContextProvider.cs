@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace CodeBase.Services
+namespace _Scripts.Services
 {
     public class SceneContextProvider 
     {

@@ -1,8 +1,7 @@
 using System;
 using System.Threading;
+using _Scripts.Services.StaticDataService;
 using _Scripts.UI.Elements;
-using CodeBase.Logic.Buildings;
-using CodeBase.Services;
 using Cysharp.Threading.Tasks;
 using Zenject;
 

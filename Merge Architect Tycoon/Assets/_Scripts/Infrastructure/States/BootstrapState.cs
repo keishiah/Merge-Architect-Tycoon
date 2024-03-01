@@ -1,9 +1,7 @@
-﻿using CodeBase.Services;
+﻿using _Scripts.Services.StaticDataService;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
-
-namespace CodeBase.Infrastructure.States
+namespace _Scripts.Infrastructure.States
 {
     public class BootstrapState : IState
     {

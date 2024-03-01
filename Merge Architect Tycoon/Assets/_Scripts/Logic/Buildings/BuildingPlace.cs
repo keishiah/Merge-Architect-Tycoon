@@ -1,14 +1,11 @@
-﻿using System;
-using System.Threading;
-using CodeBase.Data;
-using CodeBase.Services;
+﻿using System.Threading;
+using _Scripts.Services;
+using _Scripts.Services.StaticDataService;
 using Cysharp.Threading.Tasks;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.Logic.Buildings
+namespace _Scripts.Logic.Buildings
 {
     public enum BuildingStateEnum
     {

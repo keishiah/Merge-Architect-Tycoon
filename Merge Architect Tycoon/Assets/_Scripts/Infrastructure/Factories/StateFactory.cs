@@ -1,9 +1,9 @@
-﻿using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.Infrastructure.States;
+﻿using _Scripts.Infrastructure.AssetManagment;
+using _Scripts.Infrastructure.States;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure.Factories
+namespace _Scripts.Infrastructure.Factories
 {
     public class StateFactory : IStateFactory
     {

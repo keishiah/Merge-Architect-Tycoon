@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Services.PlayerProgressService;
+using _Scripts.Services.StaticDataService;
 using _Scripts.UI.Elements;
-using CodeBase.Services;
 using Zenject;
 
-namespace _Scripts.UI
+namespace _Scripts.UI.Presenters
 {
     public class UiPresenter
     {

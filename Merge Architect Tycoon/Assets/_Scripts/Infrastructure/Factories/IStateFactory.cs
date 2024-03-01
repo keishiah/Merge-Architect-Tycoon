@@ -1,7 +1,7 @@
-using CodeBase.Infrastructure.States;
+using _Scripts.Infrastructure.States;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factories
+namespace _Scripts.Infrastructure.Factories
 {
     public interface IStateFactory
     {

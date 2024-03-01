@@ -1,8 +1,8 @@
-﻿using CodeBase.Infrastructure.Factories;
+﻿using _Scripts.Infrastructure.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Infrastructure
+namespace _Scripts.Infrastructure
 {
     public class GameRunner : MonoBehaviour
     {
