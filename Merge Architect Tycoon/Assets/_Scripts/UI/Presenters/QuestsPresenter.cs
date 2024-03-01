@@ -1,10 +1,10 @@
+using _Scripts.UI.Elements;
+using _Scripts.UI.Presenters;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services;
-using CodeBase.UI.Elements;
-using UnityEngine;
 using Zenject;
 
-namespace CodeBase.UI
+namespace _Scripts.UI
 {
     public class QuestsPresenter
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.UI.Elements;
 using CodeBase.Services;
-using CodeBase.UI.Elements;
 using Zenject;
 
-namespace CodeBase.UI
+namespace _Scripts.UI
 {
     public class UiPresenter
     {

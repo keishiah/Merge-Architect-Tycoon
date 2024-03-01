@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Scripts.UI.Elements.CreateBuildingPopup;
 using CodeBase.Services;
 using CodeBase.StaticData;
-using CodeBase.UI.Elements;
-using UnityEngine;
 using Zenject;
 
-namespace CodeBase.UI
+namespace _Scripts.UI.Presenters
 {
-    public class CreateBuildingPopupPresenter
+    public class CreateBuildingPopupPresenter 
     {
         private string _currentBuildingName;
         private CreateBuildingUiElement _currentSelectedBuildingUiElement;
@@ -102,6 +101,7 @@ namespace CodeBase.UI
                 _createBuildingPopup.OpenMergeButton();
             }
         }
+
 
         public void CreateBuildingButtonClicked()
         {

@@ -1,5 +1,6 @@
+using _Scripts.UI;
+using _Scripts.UI.Presenters;
 using CodeBase.Services;
-using CodeBase.UI;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,7 @@ namespace CodeBase.CompositionRoot
             Container.Bind<BuildingProvider>().AsSingle();
             Container.Bind<CreateBuildingPopupPresenter>().AsSingle();
             Container.Bind<QuestsPresenter>().AsSingle();
+            Container.Bind<DistricsSwitcher>().AsSingle();
 
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();

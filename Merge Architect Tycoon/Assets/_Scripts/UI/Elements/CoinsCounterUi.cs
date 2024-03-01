@@ -1,11 +1,8 @@
-﻿using CodeBase.Data;
-using CodeBase.Services;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI.Elements
+namespace _Scripts.UI.Elements
 {
     public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
     {

@@ -2,7 +2,6 @@
 using System.Threading;
 using CodeBase.Data;
 using CodeBase.Services;
-using CodeBase.UI;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;

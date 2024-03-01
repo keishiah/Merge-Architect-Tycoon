@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.UI.Elements
+namespace _Scripts.UI.Elements
 {
     public class QuestWidget : MonoBehaviour
     {

@@ -33,14 +33,7 @@ namespace CodeBase.Services
 
         public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
         {
-            Buldings buildings = _playerProgressService.Progress.Buldings;
-
             _sceneBuildingsDictionary.Add(buildingName, buildingPlace);
-
-            // if (buildings.CreatedBuildings.Contains(buildingName))
-            // {
-            //     CreateBuildingOnStart(buildingName);
-            // }
         }
 
         public async void CreateBuildingInTimeAsync(string buildingName)

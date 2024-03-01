@@ -43,6 +43,10 @@ namespace CodeBase.Data
     {
         private ReactiveDictionary<string, string> _createdCitiesDictionary = new();
 
+        public Cities()
+        {
+        }
+
         public void AddCityToDictionary(string cityName)
         {
             _createdCitiesDictionary.Add(cityName, null);

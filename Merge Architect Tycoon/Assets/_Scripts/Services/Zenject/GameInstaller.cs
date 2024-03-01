@@ -1,10 +1,10 @@
+using _Scripts.UI;
 using CodeBase.Data;
 using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services;
-using CodeBase.UI;
 using Zenject;
 
 namespace CodeBase.CompositionRoot

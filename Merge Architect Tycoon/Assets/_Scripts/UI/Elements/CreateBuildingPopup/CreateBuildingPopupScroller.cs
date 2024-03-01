@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+using _Scripts.UI.Presenters;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI.Elements
+namespace _Scripts.UI.Elements.CreateBuildingPopup
 {
     public class CreateBuildingPopupScroller : UiViewBase, IInitializableOnSceneLoaded
     {
