@@ -6,11 +6,13 @@ namespace CodeBase.UI.Elements
 {
     public class SceneButtons : MonoBehaviour
     {
-        public Button buildingConstructMenuButton;
-        public Button mergeMenuButton;
-        public Button closeButton;
+        private int _selectedButtonIndex = -1;
 
-        public GameObject mergePanel;
+        [SerializeField]
+        private Button[] _menuButtons;
+
+        [SerializeField]
+        private GameObject[] _panel;
 
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
@@ -20,34 +22,34 @@ namespace CodeBase.UI.Elements
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
         }
 
-        private void Start()
+        private void Awake()
         {
-            buildingConstructMenuButton.onClick.AddListener(OpenBuildingConstructMenu);
-            mergeMenuButton.onClick.AddListener(OpenMergeMenuButton);
-            closeButton.onClick.AddListener(CloseElement);
-            closeButton.gameObject.SetActive(false);
+            for(int i = 0; i < _menuButtons.Length; i++)
+            {
+                int index = i;//allocate new "instance" EACH Step of loop
+                _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
+            }
+        }
+        public void OnMenuButtonClick(int i)
+        {
+            bool needToSelect = _selectedButtonIndex != i;
+
+            if (_selectedButtonIndex != -1)
+            {
+                _panel[_selectedButtonIndex].SetActive(false);
+                _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(TriggerNormal);
+                _selectedButtonIndex = -1;
+            }
+
+            if (!needToSelect)
+                return;
+
+            _selectedButtonIndex = i;
+            _panel[_selectedButtonIndex].SetActive(true);
+            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(TriggerSelected);
         }
 
-        private void CloseElement()
-        {
-            mergePanel.gameObject.SetActive(false);
-            _createBuildingPopupPresenter.CLoseScroller();
-            gameObject.SetActive(true);
-            closeButton.gameObject.SetActive(false);
-        }
-
-        private void OpenBuildingConstructMenu()
-        {
-            gameObject.SetActive(false);
-            _createBuildingPopupPresenter.OpenScroller();
-            closeButton.gameObject.SetActive(true);
-        }
-
-        private void OpenMergeMenuButton()
-        {
-            gameObject.SetActive(false);
-            mergePanel.SetActive(true);
-            closeButton.gameObject.SetActive(true);
-        }
+        private const string TriggerNormal = "Normal";
+        private const string TriggerSelected = "Selected";
     }
 }

@@ -12,13 +12,18 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     [Inject(Id = "TransformForInhandItem")]
     private RectTransform _playerHand;
+    [Inject]
+    private CanvasScaler _canvas;
     private Vector3 startMousePosition;
     
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (slot.SlotState != SlotState.Draggable
             && slot.SlotState != SlotState.Unloading)
+        {
+            eventData.pointerDrag = null;
             return;
+        }
 
         isClicked = false;
         if (slot == null)
@@ -32,7 +37,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(_playerHand);
 
         image.raycastTarget = false;
-        startMousePosition = Input.mousePosition - transform.localPosition;
+        startMousePosition = Input.mousePosition / _canvas.scaleFactor - transform.localPosition;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -44,7 +49,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             && slot.SlotState != SlotState.Unloading)
             return;
 
-        transform.localPosition = Input.mousePosition - startMousePosition;
+        transform.localPosition = Input.mousePosition / _canvas.scaleFactor - startMousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)

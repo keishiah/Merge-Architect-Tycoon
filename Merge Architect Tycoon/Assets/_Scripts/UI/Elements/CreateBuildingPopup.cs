@@ -10,8 +10,6 @@ namespace CodeBase.UI.Elements
         public Button createBuildingButton;
 
         public GameObject mergePanel;
-        public Button closeButton;
-
 
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
@@ -30,7 +28,7 @@ namespace CodeBase.UI.Elements
         {
             _createBuildingPopupPresenter.CLoseScroller();
             mergePanel.SetActive(true);
-            closeButton.gameObject.SetActive(true);
+
             ClosePanelButtons();
         }
 

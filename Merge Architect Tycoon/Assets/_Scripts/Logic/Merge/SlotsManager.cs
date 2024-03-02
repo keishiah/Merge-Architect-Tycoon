@@ -90,7 +90,11 @@ public class SlotsManager
             return;
         }
 
-        Slot m_slot = m_slotsList[Random.Range(0, m_slotsList.Count)];
+        Slot m_slot;
+        if (isToUnloadSlot)
+            m_slot = slots[0];//For truck no random
+        else
+            m_slot = m_slotsList[Random.Range(0, m_slotsList.Count)];
 
         if (m_slot.IsEmpty)
             m_slot.AddItem(mergeItem);

@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingView: {fileID: 4600403394031284534}
+  buildingName: 
 --- !u!114 &4600403394031284534
 MonoBehaviour:
   m_ObjectHideFlags: 0
