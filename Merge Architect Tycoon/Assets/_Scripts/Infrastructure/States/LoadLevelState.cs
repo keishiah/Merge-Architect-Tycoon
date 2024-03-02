@@ -1,13 +1,8 @@
-﻿using CodeBase.CompositionRoot;
-using CodeBase.Infrastructure.Factories;
-using CodeBase.Services;
-using CodeBase.UI;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using _Scripts.Services;
+using _Scripts.Services.PlayerProgressService;
+using _Scripts.UI.Presenters;
 
-
-namespace CodeBase.Infrastructure.States
+namespace _Scripts.Infrastructure.States
 {
     public class LoadLevelState : IPaylodedState<string>
     {

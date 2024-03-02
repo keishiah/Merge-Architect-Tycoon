@@ -1,8 +1,7 @@
-﻿using CodeBase.Data;
-using UnityEngine;
+﻿using _Scripts.Logic;
 using Zenject;
 
-namespace CodeBase.Services
+namespace _Scripts.Services.PlayerProgressService
 {
     public class PlayerProgressService : IPlayerProgressService
     {

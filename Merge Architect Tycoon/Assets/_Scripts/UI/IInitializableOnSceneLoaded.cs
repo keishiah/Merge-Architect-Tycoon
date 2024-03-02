@@ -1,4 +1,4 @@
-namespace CodeBase.UI
+namespace _Scripts.UI
 {
     public interface IInitializableOnSceneLoaded
     {

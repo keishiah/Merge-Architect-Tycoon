@@ -1,10 +1,11 @@
-﻿using CodeBase.Logic.Buildings;
-using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using System.Threading;
+using _Scripts.Logic.Buildings;
+using _Scripts.Services.StaticDataService;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
-namespace CodeBase.Services
+namespace _Scripts.Services
 {
     public class BuildingCreator
     {

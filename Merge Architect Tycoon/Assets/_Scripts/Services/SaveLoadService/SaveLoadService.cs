@@ -1,7 +1,7 @@
-﻿using CodeBase.Data;
+﻿using _Scripts.Services.StaticDataService;
 using UnityEngine;
 
-namespace CodeBase.Services
+namespace _Scripts.Services.SaveLoadService
 {
     public enum SaveKey
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Infrastructure.Factories;
+using _Scripts.Infrastructure.Factories;
 
-namespace CodeBase.Infrastructure.States
+namespace _Scripts.Infrastructure.States
 {
     public class GameStateMachine : IGameStateMachine
     {

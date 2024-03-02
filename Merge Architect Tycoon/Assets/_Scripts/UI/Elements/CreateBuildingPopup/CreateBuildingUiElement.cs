@@ -1,10 +1,9 @@
-﻿using System;
+﻿using _Scripts.UI.Presenters;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace CodeBase.UI.Elements
+namespace _Scripts.UI.Elements.CreateBuildingPopup
 {
     public class CreateBuildingUiElement : MonoBehaviour
     {

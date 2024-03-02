@@ -1,8 +1,9 @@
+using _Scripts.UI.Presenters;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI.Elements
+namespace _Scripts.UI.Elements.CreateBuildingPopup
 {
     public class CreateBuildingPopup : MonoBehaviour
     {

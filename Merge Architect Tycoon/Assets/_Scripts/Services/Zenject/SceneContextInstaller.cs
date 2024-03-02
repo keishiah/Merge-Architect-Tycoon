@@ -1,9 +1,11 @@
-using CodeBase.Services;
-using CodeBase.UI;
+using _Scripts.Logic.Merge;
+using _Scripts.Logic.Merge.Items;
+using _Scripts.Logic.Merge.MergePlane;
+using _Scripts.UI.Presenters;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.CompositionRoot
+namespace _Scripts.Services.Zenject
 {
     public class SceneContextInstaller : MonoInstaller
     {
@@ -14,6 +16,7 @@ namespace CodeBase.CompositionRoot
             Container.Bind<BuildingProvider>().AsSingle();
             Container.Bind<CreateBuildingPopupPresenter>().AsSingle();
             Container.Bind<QuestsPresenter>().AsSingle();
+            Container.Bind<DistricsSwitcher>().AsSingle();
 
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();

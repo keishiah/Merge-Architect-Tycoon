@@ -1,44 +1,49 @@
 ﻿using System;
+using _Scripts.Logic.Merge;
+using _Scripts.Logic.Merge.Items;
 using UnityEngine.UI;
 
-public class TruckUnloading : TruckBehaviour
+namespace _Scripts.Logic.Trucks.Behaviour
 {
-    public SlotsManager _slotsManager;
-    public Truck _truck;
-    public Image[] _resources;
-    public TruckPresenter _truckPresenter;
-    public float _unloadSpeed = 1f;
-
-    public override void Update()
+    public class TruckUnloading : TruckBehaviour
     {
-        if (_truck.TruckCargo.Count == 0)
-        {
-            IsComplete = true;
-            return;
-        }
+        public SlotsManager _slotsManager;
+        public Truck _truck;
+        public Image[] _resources;
+        public TruckPresenter _truckPresenter;
+        public float _unloadSpeed = 1f;
 
-        TimeSpan inUnloadTime = DateTime.Now - _time;
-        float unloadPersentage = (float)inUnloadTime.TotalSeconds / _unloadSpeed;
-        if (unloadPersentage < 1)
-            return;
-
-        if (_slotsManager.EmptyUnloadSlotsCount == 0)
+        public override void Update()
         {
-            _truckPresenter.UpdateOff();
-            return;
-        }
-
-        MergeItem mergeItem = _truck.DequeueItem();
-        foreach (var resource in _resources)
-        {
-            if (resource.enabled && mergeItem.itemSprite == resource.sprite)
+            if (_truck.TruckCargo.Count == 0)
             {
-                resource.enabled = false;
-                break;
+                IsComplete = true;
+                return;
             }
-        }
-        _slotsManager.AddItemToEmptySlot(mergeItem, isToUnloadSlot: true);
 
-        _time = DateTime.Now;
+            TimeSpan inUnloadTime = DateTime.Now - _time;
+            float unloadPersentage = (float)inUnloadTime.TotalSeconds / _unloadSpeed;
+            if (unloadPersentage < 1)
+                return;
+
+            if (_slotsManager.EmptyUnloadSlotsCount == 0)
+            {
+                _truckPresenter.UpdateOff();
+                return;
+            }
+
+            MergeItem mergeItem = _truck.DequeueItem();
+            foreach (var resource in _resources)
+            {
+                if (resource.enabled && mergeItem.itemSprite == resource.sprite)
+                {
+                    resource.enabled = false;
+                    break;
+                }
+            }
+            _slotsManager.AddItemToEmptySlot(mergeItem, isToUnloadSlot: true);
+
+            _time = DateTime.Now;
+        }
     }
 }

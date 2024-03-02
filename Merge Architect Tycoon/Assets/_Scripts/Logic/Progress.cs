@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using CodeBase.Services;
+﻿using _Scripts.Services.SaveLoadService;
 using UniRx;
-using UnityEngine;
 
-namespace CodeBase.Data
+namespace _Scripts.Logic
 {
     public class Progress
     {
@@ -42,6 +40,10 @@ namespace CodeBase.Data
     public class Cities
     {
         private ReactiveDictionary<string, string> _createdCitiesDictionary = new();
+
+        public Cities()
+        {
+        }
 
         public void AddCityToDictionary(string cityName)
         {

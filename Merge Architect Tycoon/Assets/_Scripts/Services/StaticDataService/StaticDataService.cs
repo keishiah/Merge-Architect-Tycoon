@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.StaticData;
+using _Scripts.Infrastructure.AssetManagment;
+using _Scripts.Logic.Buildings;
 using Cysharp.Threading.Tasks;
-using UniRx;
 using UnityEngine;
 
-namespace CodeBase.Services
+namespace _Scripts.Services.StaticDataService
 {
     public class StaticDataService : IStaticDataService
     {

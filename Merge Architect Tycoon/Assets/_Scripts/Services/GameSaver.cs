@@ -1,9 +1,9 @@
-﻿using CodeBase.Data;
-using CodeBase.Services;
+﻿using _Scripts.Logic;
+using _Scripts.Services.SaveLoadService;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase._Gameplay
+namespace _Scripts.Services
 {
     public class GameSaver : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace CodeBase._Gameplay
 
         void OnApplicationQuit()
         {
-            SaveLoadService.Save(SaveKey.Progress, _progress);
+            SaveLoadService.SaveLoadService.Save(SaveKey.Progress, _progress);
         }
     }
 }

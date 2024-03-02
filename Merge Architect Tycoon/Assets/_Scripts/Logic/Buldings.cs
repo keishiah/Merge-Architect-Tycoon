@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Mono.Collections.Generic;
 using UnityEngine;
 
-namespace CodeBase.Data
+namespace _Scripts.Logic
 {
     [Serializable]
     public class Buldings

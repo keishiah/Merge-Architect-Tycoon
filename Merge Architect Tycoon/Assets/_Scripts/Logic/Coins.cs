@@ -2,7 +2,7 @@ using System;
 using UniRx;
 using UnityEngine;
 
-namespace CodeBase.Data
+namespace _Scripts.Logic
 {
     [Serializable]
     public class Coins

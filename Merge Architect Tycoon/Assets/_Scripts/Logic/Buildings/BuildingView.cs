@@ -1,9 +1,8 @@
-﻿using CodeBase.Data;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Logic.Buildings
+namespace _Scripts.Logic.Buildings
 {
     public class BuildingView : MonoBehaviour
     {

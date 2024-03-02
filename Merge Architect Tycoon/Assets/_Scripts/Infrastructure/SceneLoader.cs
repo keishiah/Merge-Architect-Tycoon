@@ -1,9 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
-using UnityEngine;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace CodeBase.Infrastructure
+namespace _Scripts.Infrastructure
 {
     public interface ISceneLoader
     {
