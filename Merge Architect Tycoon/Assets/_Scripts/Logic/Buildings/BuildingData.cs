@@ -19,6 +19,6 @@ namespace _Scripts.Logic.Buildings
         public Sprite buildingSprite;
         public int timeToCreate;
         public int coinsCountToCreate;
-        public MergeItem itemToCreate;
+        public List<MergeItem> itemsToCreate;
     }
 }
