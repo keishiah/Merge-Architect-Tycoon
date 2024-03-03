@@ -1,26 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace CodeBase.UI.Elements
 {
+    public enum SceneButtonsEnum
+    {
+        Quest, Merge, Build, District, Shop
+    }
     public class SceneButtons : MonoBehaviour
     {
         private int _selectedButtonIndex = -1;
 
         [SerializeField]
         private Button[] _menuButtons;
-
         [SerializeField]
-        private GameObject[] _panel;
+        private Widget[] _widgets;
 
-        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
-
-        [Inject]
-        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
-        {
-            _createBuildingPopupPresenter = createBuildingPopupPresenter;
-        }
+        private const string AnimatorTriggerNormal = "Normal";
+        private const string AnimatorTriggerSelected = "Selected";
 
         private void Awake()
         {
@@ -30,14 +27,18 @@ namespace CodeBase.UI.Elements
                 _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
             }
         }
+        public void OnMenuButtonClick(SceneButtonsEnum i)
+        {
+            OnMenuButtonClick((int)i);
+        }
         public void OnMenuButtonClick(int i)
         {
             bool needToSelect = _selectedButtonIndex != i;
 
             if (_selectedButtonIndex != -1)
             {
-                _panel[_selectedButtonIndex].SetActive(false);
-                _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(TriggerNormal);
+                _widgets[_selectedButtonIndex].OnDisable();
+                _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
                 _selectedButtonIndex = -1;
             }
 
@@ -45,11 +46,8 @@ namespace CodeBase.UI.Elements
                 return;
 
             _selectedButtonIndex = i;
-            _panel[_selectedButtonIndex].SetActive(true);
-            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(TriggerSelected);
+            _widgets[_selectedButtonIndex].OnEnable();
+            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerSelected);
         }
-
-        private const string TriggerNormal = "Normal";
-        private const string TriggerSelected = "Selected";
     }
 }

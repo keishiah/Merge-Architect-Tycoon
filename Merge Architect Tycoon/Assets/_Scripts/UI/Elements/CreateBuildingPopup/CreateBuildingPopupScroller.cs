@@ -19,8 +19,6 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
         void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
-            gameObject.SetActive(false);
-
             InitUiElement(uiPresenter);
         }
 
