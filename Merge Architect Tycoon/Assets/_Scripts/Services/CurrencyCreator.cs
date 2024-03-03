@@ -32,6 +32,8 @@ namespace _Scripts.Services
                 timeToCreate--;
                 district.SetSliderValue(timeToCreate);
             }
+            
+            district.TurnOnEarnButton();
         }
     }
 }

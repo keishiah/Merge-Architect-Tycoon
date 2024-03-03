@@ -12,7 +12,9 @@ namespace _Scripts.UI.Elements
         public int districtId;
         public Slider coinsSlider;
         public Button openDistrictOne;
+        public Button earnCurrencyButton;
         public District districtOne;
+
         public CancellationTokenSource ActivityToken;
 
         private DistrictsPresenter _districtsPresenter;
@@ -21,7 +23,7 @@ namespace _Scripts.UI.Elements
         void Construct(DistrictsPresenter districtsPresenter)
         {
             _districtsPresenter = districtsPresenter;
-            
+
             Initialize();
         }
 
@@ -34,6 +36,17 @@ namespace _Scripts.UI.Elements
 
             _districtsPresenter.AddDistrict(this);
             openDistrictOne.onClick.AddListener(OpenDistrict);
+            earnCurrencyButton.onClick.AddListener(EarnCurrency);
+
+            coinsSlider.gameObject.SetActive(false);
+            earnCurrencyButton.gameObject.SetActive(false);
+        }
+
+        private void EarnCurrency()
+        {
+            _districtsPresenter.EarnCurrency(districtId);
+            earnCurrencyButton.gameObject.SetActive(false);
+
         }
 
         private void OpenDistrict()
@@ -43,6 +56,10 @@ namespace _Scripts.UI.Elements
             _districtsPresenter.SetCurrentDistrict(1);
         }
 
+        public void TurnOnEarnButton()
+        {
+            earnCurrencyButton.gameObject.SetActive(true);
+        }
         public void OnDestroy()
         {
             ActivityToken?.Cancel();

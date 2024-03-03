@@ -21,6 +21,7 @@ namespace _Scripts.Logic
 
         public void AddCoins(int coins)
         {
+            Debug.Log($"add{coins}");
             Coins.Add(coins);
             SaveLoadService.Save(SaveKey.Progress, this);
         }
@@ -51,7 +52,7 @@ namespace _Scripts.Logic
             _createdCitiesDictionary.Add(cityName, null);
         }
 
-        public void AddDistrictToCity(string cityName,string districtName)
+        public void AddDistrictToCity(string cityName, string districtName)
         {
             _createdCitiesDictionary.Add(cityName, districtName);
         }

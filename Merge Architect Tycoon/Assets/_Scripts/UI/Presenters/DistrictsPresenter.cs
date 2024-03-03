@@ -3,6 +3,7 @@ using System.Linq;
 using _Scripts.Logic;
 using _Scripts.Services;
 using _Scripts.Services.PlayerProgressService;
+using _Scripts.Services.StaticDataService;
 using _Scripts.UI.Elements;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -18,28 +19,43 @@ namespace _Scripts.UI.Presenters
 
         private Dictionary<int, int> _districtsCreatedBuildings = new();
         private readonly Dictionary<int, DistrictUi> _districts = new();
+        private readonly Dictionary<int, int> _tempoDistrictsCount = new();
 
         private IPlayerProgressService _playerProgressService;
         private BuildingProvider _buildingProvider;
         private CurrencyCreator _currencyCreator;
+        private IStaticDataService _staticDataService;
 
         [Inject]
-        void Construct(IPlayerProgressService playerProgressService, BuildingProvider buildingProvider,
+        void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService,
+            BuildingProvider buildingProvider,
             CurrencyCreator currencyCreator)
         {
             _playerProgressService = playerProgressService;
             _buildingProvider = buildingProvider;
             _currencyCreator = currencyCreator;
+            _staticDataService = staticDataService;
         }
+
         public void OnSceneLoaded()
         {
             _playerProgressService.Progress.Buldings.SubscribeToBuildingsChanges(AddCreatedBuildingToDistrictsDict);
-            StartEarningCurrencyOnInitialization();        }
+            StartEarningCurrencyOnInitialization();
+        }
 
 
         public void AddDistrict(DistrictUi districtUi) => _districts.Add(districtUi.districtId, districtUi);
 
         public void SetCurrentDistrict(int currentDistrictId) => _currentDistrictId = currentDistrictId;
+
+        public void EarnCurrency(int districtId)
+        {
+            var coinsForDistrict = _staticDataService.GetDistrictData(districtId).currencyCount;
+            var coinsToAdd = Mathf.RoundToInt(coinsForDistrict * .1f * _tempoDistrictsCount[districtId]);
+            _playerProgressService.Progress.AddCoins(coinsToAdd);
+            
+            TurnOnCurrencyEarningCountdown(districtId);
+        }
 
         private void AddCreatedBuildingToDistrictsDict(string createdBuilding)
         {
@@ -63,6 +79,7 @@ namespace _Scripts.UI.Presenters
 
         private void TurnOnCurrencyEarningCountdown(int districtId)
         {
+            _tempoDistrictsCount[districtId] = _districtsCreatedBuildings[districtId];
             _currencyCreator.CreateCurrencyInTimeAsync(_districts[districtId]).Forget();
         }
 
