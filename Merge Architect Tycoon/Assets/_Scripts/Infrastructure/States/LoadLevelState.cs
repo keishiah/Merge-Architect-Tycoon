@@ -51,7 +51,7 @@ namespace _Scripts.Infrastructure.States
         {
             _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
             _uiPresenter.InitializeElementsOnSceneLoaded();
-            _sceneContextProvider.Resolve<DistrictsPresenter>().InitializeDistrictsPresenter();
+            _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
             InitializePopupPresenter();
         }
 

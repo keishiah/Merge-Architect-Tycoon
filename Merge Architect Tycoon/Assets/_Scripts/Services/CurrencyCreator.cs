@@ -20,9 +20,9 @@ namespace _Scripts.Services
 
         public async UniTask CreateCurrencyInTimeAsync(DistrictUi district)
         {
-            district.coinsSlider.gameObject.SetActive(true);
             float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
             district.SetSliderMaxValue(timeToCreate);
+            district.coinsSlider.gameObject.SetActive(true);
 
             while (timeToCreate > 0)
             {

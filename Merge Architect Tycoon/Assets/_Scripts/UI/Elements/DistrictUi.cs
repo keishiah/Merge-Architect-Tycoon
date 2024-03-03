@@ -21,8 +21,8 @@ namespace _Scripts.UI.Elements
         void Construct(DistrictsPresenter districtsPresenter)
         {
             _districtsPresenter = districtsPresenter;
+            
             Initialize();
-            ActivityToken = new CancellationTokenSource();
         }
 
         public void SetSliderMaxValue(float maxValue) => coinsSlider.maxValue = maxValue;
@@ -30,6 +30,8 @@ namespace _Scripts.UI.Elements
 
         private void Initialize()
         {
+            ActivityToken = new CancellationTokenSource();
+
             _districtsPresenter.AddDistrict(this);
             openDistrictOne.onClick.AddListener(OpenDistrict);
         }

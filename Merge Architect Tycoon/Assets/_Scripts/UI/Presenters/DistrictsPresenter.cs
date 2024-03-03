@@ -10,7 +10,7 @@ using Zenject;
 
 namespace _Scripts.UI.Presenters
 {
-    public class DistrictsPresenter
+    public class DistrictsPresenter : IInitializableOnSceneLoaded
     {
         public GameObject CitiesMapPopup;
         private int _currentDistrictId;
@@ -31,30 +31,21 @@ namespace _Scripts.UI.Presenters
             _buildingProvider = buildingProvider;
             _currencyCreator = currencyCreator;
         }
-
-        public void InitializeDistrictsPresenter()
+        public void OnSceneLoaded()
         {
             _playerProgressService.Progress.Buldings.SubscribeToBuildingsChanges(AddCreatedBuildingToDistrictsDict);
-            StartEarningCurrencyOnInitialization();
-        }
+            StartEarningCurrencyOnInitialization();        }
+
 
         public void AddDistrict(DistrictUi districtUi) => _districts.Add(districtUi.districtId, districtUi);
 
         public void SetCurrentDistrict(int currentDistrictId) => _currentDistrictId = currentDistrictId;
 
-        private void StartEarningCurrencyOnInitialization()
-        {
-            // Todo create initialization on load
-        }
-
         private void AddCreatedBuildingToDistrictsDict(string createdBuilding)
         {
-            foreach (var building in _buildingProvider.SceneBuildingsDictionary)
-            {
-                if (building.Key == createdBuilding)
-                    if (!_districtsCreatedBuildings.Keys.Contains(building.Value.districtId))
-                        AddCreatedBuildingToDistrictDict(building.Value.districtId);
-            }
+            var createdBuildingDistrictId = _buildingProvider.SceneBuildingsDictionary[createdBuilding].districtId;
+
+            AddCreatedBuildingToDistrictDict(createdBuildingDistrictId);
         }
 
         private void AddCreatedBuildingToDistrictDict(int districtId)
@@ -73,6 +64,29 @@ namespace _Scripts.UI.Presenters
         private void TurnOnCurrencyEarningCountdown(int districtId)
         {
             _currencyCreator.CreateCurrencyInTimeAsync(_districts[districtId]).Forget();
+        }
+
+        private void StartEarningCurrencyOnInitialization()
+        {
+            var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
+
+            foreach (var building in createdBuildings)
+            {
+                var createdBuildingDistrictId = _buildingProvider.SceneBuildingsDictionary[building].districtId;
+                if (_districtsCreatedBuildings.Keys.Contains(createdBuildingDistrictId))
+                {
+                    _districtsCreatedBuildings[createdBuildingDistrictId] += 1;
+                }
+                else
+                {
+                    _districtsCreatedBuildings[createdBuildingDistrictId] = 1;
+                }
+
+                foreach (var districtId in _districtsCreatedBuildings.Keys)
+                {
+                    TurnOnCurrencyEarningCountdown(districtId);
+                }
+            }
         }
     }
 }
