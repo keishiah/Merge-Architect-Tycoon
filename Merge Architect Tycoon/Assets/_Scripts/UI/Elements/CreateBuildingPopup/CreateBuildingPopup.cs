@@ -1,4 +1,5 @@
 using _Scripts.UI.Presenters;
+using CodeBase.UI.Elements;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,18 +11,16 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
         public Button goToMergePanelButton;
         public Button createBuildingButton;
 
-        public GameObject mergePanel;
-        public Button closeButton;
-
-
+        private SceneButtons _sceneButtons;
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
         [Inject]
-        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
+        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter,
+            SceneButtons _sceneButtons)
         {
+            this._sceneButtons = _sceneButtons;
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
             _createBuildingPopupPresenter.InitializePopup(this);
-            ClosePanelButtons();
 
             goToMergePanelButton.onClick.AddListener(GoToMergePanel);
             createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
@@ -29,10 +28,7 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
 
         private void GoToMergePanel()
         {
-            _createBuildingPopupPresenter.CLoseScroller();
-            mergePanel.SetActive(true);
-            closeButton.gameObject.SetActive(true);
-            ClosePanelButtons();
+            _sceneButtons.OnMenuButtonClick(SceneButtonsEnum.Merge);
         }
 
         public void OpenMergeButton()
@@ -45,12 +41,6 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
         {
             createBuildingButton.gameObject.SetActive(true);
             goToMergePanelButton.gameObject.SetActive(false);
-        }
-
-        public void ClosePanelButtons()
-        {
-            goToMergePanelButton.gameObject.SetActive(false);
-            createBuildingButton.gameObject.SetActive(false);
         }
     }
 }
