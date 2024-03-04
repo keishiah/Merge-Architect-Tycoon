@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using _Scripts.Logic.Buildings;
+using _Scripts.Logic.CityData;
 using _Scripts.Logic.Merge;
 using _Scripts.Logic.Merge.Items;
 using _Scripts.Logic.Merge.MergePlane;
@@ -13,6 +16,7 @@ namespace _Scripts.Services.Zenject
         [SerializeField] private MergeLevel _mergeLevel;
         [SerializeField] private CreateBuildingPopup createBuildingPopup;
         [SerializeField] private CreateBuildingPopupScroller createBuildingPopupScroller;
+        [SerializeField] private District district;
 
         public override void InstallBindings()
         {
@@ -23,6 +27,7 @@ namespace _Scripts.Services.Zenject
             Container.Bind<CurrencyCreator>().AsSingle();
             Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();
             Container.Bind<CreateBuildingPopupScroller>().FromInstance(createBuildingPopupScroller).AsSingle();
+            Container.Bind<District>().FromInstance(district).AsSingle();
 
             Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
             Container.Bind<SlotsManager>().AsSingle();

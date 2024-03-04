@@ -51,15 +51,15 @@ namespace _Scripts.Infrastructure.States
         {
             _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
             _uiPresenter.InitializeElementsOnSceneLoaded();
-            _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
-            InitializePopupPresenter();
+            InitializePopupPresenters();
         }
 
-        private void InitializePopupPresenter()
+        private void InitializePopupPresenters()
         {
             var createBuildingPopupPresenter = _sceneContextProvider.Resolve<CreateBuildingPopupPresenter>();
             createBuildingPopupPresenter.InitializePresenter();
             _sceneContextProvider.Resolve<BuildingProvider>().OnSceneLoaded();
+            _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
         }
     }
 }

@@ -13,24 +13,20 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
         private float _elementWidth;
 
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
-        private UiPresenter _uiPresenter;
 
         [Inject]
-        void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
+        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
-            _uiPresenter = uiPresenter;
         }
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
             gameObject.SetActive(false);
-            uiPresenter.AddUiElementToElementsList(this);
         }
 
         public void InitializeScroller()
         {
-            InitUiElement(_uiPresenter);
             _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
             _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
         }

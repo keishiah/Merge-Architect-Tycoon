@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Scripts.Logic;
 using _Scripts.Logic.Buildings;
+using _Scripts.Logic.CityData;
 using _Scripts.Services.PlayerProgressService;
 using _Scripts.UI;
 using Zenject;
@@ -12,15 +13,22 @@ namespace _Scripts.Services
         public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
 
         private IPlayerProgressService _playerProgressService;
+        private District _district;
 
         [Inject]
-        void Construct(IPlayerProgressService playerProgressService)
+        void Construct(IPlayerProgressService playerProgressService, District district)
         {
             _playerProgressService = playerProgressService;
+            _district = district;
         }
 
         public void OnSceneLoaded()
         {
+            foreach (var building in _district.GetComponentsInChildren<BuildingPlace>())
+            {
+                building.InitializeBuilding(_district.districtId);
+            }
+
             LoadCreatedBuildings();
         }
 
