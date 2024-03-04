@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _Scripts.Logic.Merge.MergePlane;
 using UnityEngine;
 using Zenject;
@@ -15,33 +16,44 @@ namespace _Scripts.Logic.Merge.Items
 
         public bool CheckHasItem(MergeItem item)
         {
-            return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count > 0;
-            // int counter = 0;
-            // List<Slot> slots = new List<Slot>();
-            //
-            // slots.AddRange(slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
-            // counter = slots.Count;
-            // return counter;
+            return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count >
+                   0;
         }
 
-        public void TakeItems(MergeItem item, int count)
+        public bool CheckHasItems(List<MergeItem> items)
+        {
+            return items.All(item =>
+                slotsManager.Slots.Exists(s =>
+                    s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable));
+        }
+
+        public void TakeItems(List<MergeItem> items)
         {
             List<Slot> slots = new List<Slot>();
 
-            slots.AddRange(slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
-        
-            if (slots.Count >= count)
-                for (int i = 0; i < count; i++)
+            foreach (var item in items)
+            {
+                slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
+                                                                 s.CurrentItem.itemName == item.itemName &&
+                                                                 s.SlotState == SlotState.Draggable));
+            }
+
+            if (slots.Count >= items.Count)
+            {
+                foreach (var slot in slots)
                 {
-                    if (informationPanel.slotCurrent == slots[i])
+                    if (informationPanel.slotCurrent == slot)
                     {
                         informationPanel.ActivateInfromPanel(false);
                     }
 
-                    slots[i].RemoveItem();
+                    slot.RemoveItem();
                 }
+            }
             else
+            {
                 Debug.Log("Non Items");
+            }
         }
 
         public void AddItem(MergeItem m_item, Slot m_slot)

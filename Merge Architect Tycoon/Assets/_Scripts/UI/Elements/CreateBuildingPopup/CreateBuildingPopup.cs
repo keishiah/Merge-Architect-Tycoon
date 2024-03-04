@@ -20,8 +20,11 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
         {
             this._sceneButtons = _sceneButtons;
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
-            _createBuildingPopupPresenter.InitializePopup(this);
+        }
 
+        public void InitializePopup()
+        {
+            // ClosePanelButtons();
             goToMergePanelButton.onClick.AddListener(GoToMergePanel);
             createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
         }

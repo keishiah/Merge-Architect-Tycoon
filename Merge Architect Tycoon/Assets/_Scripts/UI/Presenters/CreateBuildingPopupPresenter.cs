@@ -6,19 +6,16 @@ using _Scripts.Services;
 using _Scripts.Services.PlayerProgressService;
 using _Scripts.Services.StaticDataService;
 using _Scripts.UI.Elements.CreateBuildingPopup;
+using UnityEngine;
 using Zenject;
 
 namespace _Scripts.UI.Presenters
 {
-    public class CreateBuildingPopupPresenter 
+    public class CreateBuildingPopupPresenter
     {
         private string _currentBuildingName;
         private CreateBuildingUiElement _currentSelectedBuildingUiElement;
-
-        public List<BuildingInfo> _buildings = new();
-        private List<BuildingInfo> _readyToBuild = new();
-        private List<BuildingInfo> _otherBuildings = new();
-
+        
         private ItemsCatalogue _itemsCatalogue;
         private IStaticDataService _staticDataService;
         private BuildingProvider _buildingProvider;
@@ -30,32 +27,29 @@ namespace _Scripts.UI.Presenters
         private List<BuildingInfo> _buildingInfo = new();
         private List<CreateBuildingUiElement> _elements = new();
 
+        private List<BuildingInfo> _buildings = new();
+        private List<BuildingInfo> _readyToBuild = new();
+        private List<BuildingInfo> _otherBuildings = new();
 
         [Inject]
         void Construct(IStaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
-            BuildingProvider buildingProvider, IPlayerProgressService playerProgressService)
+            BuildingProvider buildingProvider, IPlayerProgressService playerProgressService,
+            CreateBuildingPopup createBuildingPopup, CreateBuildingPopupScroller createBuildingPopupScroller)
         {
             _staticDataService = staticDataService;
             _itemsCatalogue = itemsCatalogue;
             _buildingProvider = buildingProvider;
             _playerProgressService = playerProgressService;
-        }
-
-        public void InitializeScroller(CreateBuildingPopupScroller popupScroller) =>
-            _createBuildingPopupScroller = popupScroller;
-
-        public void InitializePopup(CreateBuildingPopup popup) => _createBuildingPopup = popup;
-
-        public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
-
-        private void InitializeBuildingInfo()
-        {
-            _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+            _createBuildingPopup = createBuildingPopup;
+            _createBuildingPopupScroller = createBuildingPopupScroller;
         }
 
         public void InitializePresenter()
         {
-            InitializeBuildingInfo();
+            _createBuildingPopup.InitializePopup();
+            _createBuildingPopupScroller.InitializeScroller();
+            _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+            
             SetBuildingElements();
             SortBuildingElements();
 
@@ -68,8 +62,11 @@ namespace _Scripts.UI.Presenters
             _createBuildingPopupScroller.SetContentWidth();
         }
 
+        public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
+
         public void OpenScroller()
         {
+            _createBuildingPopupScroller.gameObject.SetActive(true);
             SortBuildingElements();
             _createBuildingPopupScroller.SortBuildingElements();
         }
@@ -87,7 +84,6 @@ namespace _Scripts.UI.Presenters
         {
             TurnOfPreviousOutline(selectedBuilding);
             _selectedBuildingElement = selectedBuilding;
-
             if (HasEnoughResources(_staticDataService.BuildingData[selectedBuilding.buildingName]))
             {
                 _createBuildingPopup.OpenCreateBuildingButton();
@@ -98,11 +94,10 @@ namespace _Scripts.UI.Presenters
             }
         }
 
-
         public void CreateBuildingButtonClicked()
         {
             var buildingData = _staticDataService.BuildingData[_selectedBuildingElement.buildingName];
-            CreateBuilding(buildingData.itemToCreate,
+            CreateBuilding(buildingData.itemsToCreate,
                 buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
         }
 
@@ -138,7 +133,7 @@ namespace _Scripts.UI.Presenters
             for (int x = 0; x < _buildingInfo.Count; x++)
             {
                 _elements[x].SetBuildingImage(_buildingInfo[x].buildingSprite);
-                _elements[x].SetResourceImage(_buildingInfo[x].itemToCreate.itemSprite);
+                _elements[x].SetResourceImage(_buildingInfo[x].itemsToCreate[0].itemSprite);
 
                 _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
                 _elements[x].SetResourcesPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
@@ -148,11 +143,11 @@ namespace _Scripts.UI.Presenters
             }
         }
 
-        private void CreateBuilding(MergeItem item, int coinsToCreate, string buildingName)
+        private void CreateBuilding(List<MergeItem> items, int coinsToCreate, string buildingName)
         {
             if (_playerProgressService.Progress.Coins.SpendCoins(coinsToCreate))
             {
-                _itemsCatalogue.TakeItems(item, 1);
+                _itemsCatalogue.TakeItems(items);
                 _buildingProvider.CreateBuildingInTimeAsync(buildingName);
                 _createBuildingPopupScroller.RemoveBuildingElementFromPopup(buildingName);
                 _createBuildingPopupScroller.SetContentWidth();
@@ -162,7 +157,7 @@ namespace _Scripts.UI.Presenters
         private bool HasEnoughResources(BuildingInfo building)
         {
             return building.coinsCountToCreate <= _playerProgressService.Progress.Coins.CurrentCoinsCount &&
-                   _itemsCatalogue.CheckHasItem(building.itemToCreate);
+                   _itemsCatalogue.CheckHasItems(building.itemsToCreate);
         }
 
         private void TurnOfPreviousOutline(CreateBuildingUiElement selectedBuilding)
