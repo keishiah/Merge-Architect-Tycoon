@@ -53,7 +53,7 @@ namespace _Scripts.UI.Presenters
             var coinsForDistrict = _staticDataService.GetDistrictData(districtId).currencyCount;
             var coinsToAdd = Mathf.RoundToInt(coinsForDistrict * .1f * _tempoDistrictsCount[districtId]);
             _playerProgressService.Progress.AddCoins(coinsToAdd);
-            
+
             TurnOnCurrencyEarningCountdown(districtId);
         }
 

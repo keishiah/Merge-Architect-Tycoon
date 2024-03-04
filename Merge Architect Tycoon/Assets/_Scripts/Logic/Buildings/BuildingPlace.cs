@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using _Scripts.Logic.CityData;
 using _Scripts.Services;
 using _Scripts.Services.StaticDataService;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -21,7 +19,7 @@ namespace _Scripts.Logic.Buildings
     {
         public BuildingView buildingView;
         public string buildingName;
-        public int districtId;
+        [HideInInspector] public int districtId;
 
         private IStaticDataService _staticDataService;
         private BuildingCreator _buildingCreator;
@@ -37,7 +35,7 @@ namespace _Scripts.Logic.Buildings
             _buildingProvider = buildingProvider;
         }
 
-        private void Start()
+        private void Awake()
         {
             districtId = GetComponentInParent<District>().districtId;
             _activityToken = new CancellationTokenSource();
