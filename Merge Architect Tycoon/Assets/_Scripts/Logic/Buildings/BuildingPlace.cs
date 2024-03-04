@@ -1,6 +1,8 @@
 ﻿using System.Threading;
+using _Scripts.Logic.CityData;
 using _Scripts.Services;
 using _Scripts.Services.StaticDataService;
+using _Scripts.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -18,6 +20,7 @@ namespace _Scripts.Logic.Buildings
     {
         public BuildingView buildingView;
         public string buildingName;
+        [HideInInspector] public int districtId;
 
         private IStaticDataService _staticDataService;
         private BuildingCreator _buildingCreator;
@@ -31,7 +34,11 @@ namespace _Scripts.Logic.Buildings
             _staticDataService = staticDataService;
             _buildingCreator = buildingCreator;
             _buildingProvider = buildingProvider;
+        }
 
+        public void InitializeBuilding(int district)
+        {
+            districtId = district;
             _activityToken = new CancellationTokenSource();
             _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
         }

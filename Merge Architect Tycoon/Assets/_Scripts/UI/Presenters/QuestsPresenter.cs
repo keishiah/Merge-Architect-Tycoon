@@ -9,7 +9,7 @@ namespace _Scripts.UI.Presenters
     {
         private IPlayerProgressService _playerProgressService;
 
-        private QuestWidget _questWidget;
+        private QuestPopup _questPopup;
         private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
         private LoadLevelState _loadLevelState;
 
@@ -28,9 +28,9 @@ namespace _Scripts.UI.Presenters
         }
 
 
-        public void SetQuestWidget(QuestWidget questWidget)
+        public void SetQuestWidget(QuestPopup questPopup)
         {
-            _questWidget = questWidget;
+            _questPopup = questPopup;
         }
 
         private void SetWidgetValues(int coins)

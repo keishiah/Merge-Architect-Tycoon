@@ -6,32 +6,28 @@ using Zenject;
 
 namespace _Scripts.UI.Elements.CreateBuildingPopup
 {
-    public class CreateBuildingPopupScroller : UiViewBase, IInitializableOnSceneLoaded
+    public class CreateBuildingPopupScroller : UiViewBase
     {
         public List<CreateBuildingUiElement> createBuildingElements;
-        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
         public RectTransform scrollerRectTransform;
-
-
         private float _elementWidth;
 
+        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+
         [Inject]
-        void Construct(UiPresenter uiPresenter, CreateBuildingPopupPresenter createBuildingPopupPresenter)
+        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
         {
             _createBuildingPopupPresenter = createBuildingPopupPresenter;
-            InitUiElement(uiPresenter);
         }
 
         public override void InitUiElement(UiPresenter uiPresenter)
         {
-            uiPresenter.AddUiElementToElementsList(this);
+            gameObject.SetActive(false);
         }
 
-        public void OnSceneLoaded()
+        public void InitializeScroller()
         {
-            _createBuildingPopupPresenter.InitializeScroller(this);
             _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
-
             _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
         }
 

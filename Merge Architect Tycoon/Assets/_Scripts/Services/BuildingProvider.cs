@@ -1,28 +1,42 @@
 ﻿using System.Collections.Generic;
 using _Scripts.Logic;
 using _Scripts.Logic.Buildings;
+using _Scripts.Logic.CityData;
 using _Scripts.Services.PlayerProgressService;
+using _Scripts.UI;
 using Zenject;
 
 namespace _Scripts.Services
 {
-    public class BuildingProvider
+    public class BuildingProvider : IInitializableOnSceneLoaded
     {
-        private readonly Dictionary<string, BuildingPlace> _sceneBuildingsDictionary = new();
+        public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
 
         private IPlayerProgressService _playerProgressService;
+        private District _district;
 
         [Inject]
-        void Construct(IPlayerProgressService playerProgressService)
+        void Construct(IPlayerProgressService playerProgressService, District district)
         {
             _playerProgressService = playerProgressService;
+            _district = district;
         }
 
-        public void LoadCreatedBuildings()
+        public void OnSceneLoaded()
+        {
+            foreach (var building in _district.GetComponentsInChildren<BuildingPlace>())
+            {
+                building.InitializeBuilding(_district.districtId);
+            }
+
+            LoadCreatedBuildings();
+        }
+
+        private void LoadCreatedBuildings()
         {
             Buldings buildings = _playerProgressService.Progress.Buldings;
 
-            foreach (var buildingName in _sceneBuildingsDictionary.Keys)
+            foreach (var buildingName in SceneBuildingsDictionary.Keys)
             {
                 if (buildings.CreatedBuildings.Contains(buildingName))
                 {
@@ -33,12 +47,12 @@ namespace _Scripts.Services
 
         public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
         {
-            _sceneBuildingsDictionary.Add(buildingName, buildingPlace);
+            SceneBuildingsDictionary.Add(buildingName, buildingPlace);
         }
 
         public async void CreateBuildingInTimeAsync(string buildingName)
         {
-            if (_sceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            if (SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             {
                 await buildingPlace.StartCreatingBuilding();
                 _playerProgressService.Progress.AddBuilding(buildingName);
@@ -47,7 +61,7 @@ namespace _Scripts.Services
 
         private void CreateBuildingOnStart(string buildingName)
         {
-            _sceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
+            SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
         }
     }
 }
