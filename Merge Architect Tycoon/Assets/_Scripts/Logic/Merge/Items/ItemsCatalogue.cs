@@ -23,7 +23,8 @@ namespace _Scripts.Logic.Merge.Items
         public bool CheckHasItems(List<MergeItem> items)
         {
             return items.All(item =>
-                slotsManager.Slots.Exists(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
+                slotsManager.Slots.Exists(s =>
+                    s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable));
         }
 
         public void TakeItems(List<MergeItem> items)
@@ -32,7 +33,9 @@ namespace _Scripts.Logic.Merge.Items
 
             foreach (var item in items)
             {
-                slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable));
+                slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
+                                                                 s.CurrentItem.itemName == item.itemName &&
+                                                                 s.SlotState == SlotState.Draggable));
             }
 
             if (slots.Count >= items.Count)

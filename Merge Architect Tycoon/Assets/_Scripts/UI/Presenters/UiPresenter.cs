@@ -34,7 +34,7 @@ namespace _Scripts.UI.Presenters
 
         public void SubscribeDiamondsCountChanged(Action<int> actionOnDiamondsCountChanged)
         {
-            PlayerProgressService.Progress.Diamonds.SubscribeToCoinsCountChanges(actionOnDiamondsCountChanged);
+            // PlayerProgressService.Progress.Diamonds.SubscribeToCoinsCountChanges(actionOnDiamondsCountChanged);
         }
 
         public void InitializeElementsOnSceneLoaded()

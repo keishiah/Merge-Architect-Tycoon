@@ -21,6 +21,8 @@ namespace _Scripts.Logic
 
         public void Add(int count)
         {
+            Debug.Log("added in Coins");
+
             _coinsCount.Value += count;
         }
 

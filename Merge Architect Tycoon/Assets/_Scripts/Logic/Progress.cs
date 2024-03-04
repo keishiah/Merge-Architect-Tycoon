@@ -7,28 +7,28 @@ namespace _Scripts.Logic
     public class Progress
     {
         public Coins Coins;
-        public Coins Diamonds;
+        // public Coins Diamonds;
         public Buldings Buldings;
         public Cities Cities;
 
         public Progress()
         {
             Coins = new Coins();
-            Diamonds = new Coins();
+            // Diamonds = new Coins();
             Buldings = new Buldings();
             Cities = new Cities();
         }
 
         public void AddCoins(int coins)
         {
-            Debug.Log($"add{coins}");
+
             Coins.Add(coins);
             SaveLoadService.Save(SaveKey.Progress, this);
         }
 
         public void AddDiamonds(int coins)
         {
-            Diamonds.Add(coins);
+            // Diamonds.Add(coins);
             SaveLoadService.Save(SaveKey.Progress, this);
         }
 
