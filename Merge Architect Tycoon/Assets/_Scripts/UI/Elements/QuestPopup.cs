@@ -7,7 +7,7 @@ using Zenject;
 
 namespace _Scripts.UI.Elements
 {
-    public class QuestWidget : MonoBehaviour
+    public class QuestPopup : MonoBehaviour
     {
         public List<TextMeshProUGUI> widgetElements;
 

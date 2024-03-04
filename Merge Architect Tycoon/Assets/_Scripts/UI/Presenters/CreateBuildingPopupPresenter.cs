@@ -15,11 +15,7 @@ namespace _Scripts.UI.Presenters
     {
         private string _currentBuildingName;
         private CreateBuildingUiElement _currentSelectedBuildingUiElement;
-
-        public List<BuildingInfo> _buildings = new();
-        private List<BuildingInfo> _readyToBuild = new();
-        private List<BuildingInfo> _otherBuildings = new();
-
+        
         private ItemsCatalogue _itemsCatalogue;
         private IStaticDataService _staticDataService;
         private BuildingProvider _buildingProvider;
@@ -31,32 +27,29 @@ namespace _Scripts.UI.Presenters
         private List<BuildingInfo> _buildingInfo = new();
         private List<CreateBuildingUiElement> _elements = new();
 
+        private List<BuildingInfo> _buildings = new();
+        private List<BuildingInfo> _readyToBuild = new();
+        private List<BuildingInfo> _otherBuildings = new();
 
         [Inject]
         void Construct(IStaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
-            BuildingProvider buildingProvider, IPlayerProgressService playerProgressService)
+            BuildingProvider buildingProvider, IPlayerProgressService playerProgressService,
+            CreateBuildingPopup createBuildingPopup, CreateBuildingPopupScroller createBuildingPopupScroller)
         {
             _staticDataService = staticDataService;
             _itemsCatalogue = itemsCatalogue;
             _buildingProvider = buildingProvider;
             _playerProgressService = playerProgressService;
-        }
-
-        public void InitializeScroller(CreateBuildingPopupScroller popupScroller) =>
-            _createBuildingPopupScroller = popupScroller;
-
-        public void InitializePopup(CreateBuildingPopup popup) => _createBuildingPopup = popup;
-
-        public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
-
-        private void InitializeBuildingInfo()
-        {
-            _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+            _createBuildingPopup = createBuildingPopup;
+            _createBuildingPopupScroller = createBuildingPopupScroller;
         }
 
         public void InitializePresenter()
         {
-            InitializeBuildingInfo();
+            _createBuildingPopup.InitializePopup();
+            _createBuildingPopupScroller.InitializeScroller();
+            _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+            
             SetBuildingElements();
             SortBuildingElements();
 
@@ -68,6 +61,8 @@ namespace _Scripts.UI.Presenters
 
             _createBuildingPopupScroller.SetContentWidth();
         }
+
+        public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
 
         public void OpenScroller()
         {
@@ -104,7 +99,6 @@ namespace _Scripts.UI.Presenters
                 _createBuildingPopup.OpenMergeButton();
             }
         }
-
 
         public void CreateBuildingButtonClicked()
         {
