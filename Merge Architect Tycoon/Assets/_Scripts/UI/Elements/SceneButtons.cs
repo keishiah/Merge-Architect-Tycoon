@@ -1,64 +1,53 @@
-using _Scripts.UI.Presenters;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
-namespace _Scripts.UI.Elements
+namespace CodeBase.UI.Elements
 {
+    public enum SceneButtonsEnum
+    {
+        Quest, Merge, Build, District, Shop
+    }
     public class SceneButtons : MonoBehaviour
     {
-        public Button buildingConstructMenuButton;
-        public Button mergeMenuButton;
-        public Button closeButton;
-        public Button goToMapButton;
+        private int _selectedButtonIndex = -1;
 
-        public GameObject mergePanel;
-        public GameObject citiesMapPopup;
+        [SerializeField]
+        private Button[] _menuButtons;
+        [SerializeField]
+        private Widget[] _widgets;
 
-        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+        private const string AnimatorTriggerNormal = "Normal";
+        private const string AnimatorTriggerSelected = "Selected";
 
-        [Inject]
-        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
+        private void Awake()
         {
-            _createBuildingPopupPresenter = createBuildingPopupPresenter;
+            for(int i = 0; i < _menuButtons.Length; i++)
+            {
+                int index = i;//allocate new "instance" EACH Step of loop
+                _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
+            }
         }
-
-        private void Start()
+        public void OnMenuButtonClick(SceneButtonsEnum i)
         {
-            buildingConstructMenuButton.onClick.AddListener(OpenBuildingConstructMenu);
-
-            mergeMenuButton.onClick.AddListener(OpenMergeMenuButton);
-            closeButton.onClick.AddListener(CloseElement);
-            goToMapButton.onClick.AddListener(OpenCitiesMap);
-
-            closeButton.gameObject.SetActive(false);
+            OnMenuButtonClick((int)i);
         }
-
-        private void OpenCitiesMap()
+        public void OnMenuButtonClick(int i)
         {
-            citiesMapPopup.gameObject.SetActive(true);
-        }
+            bool needToSelect = _selectedButtonIndex != i;
 
-        private void CloseElement()
-        {
-            mergePanel.gameObject.SetActive(false);
-            _createBuildingPopupPresenter.CLoseScroller();
-            gameObject.SetActive(true);
-            closeButton.gameObject.SetActive(false);
-        }
+            if (_selectedButtonIndex != -1)
+            {
+                _widgets[_selectedButtonIndex].OnDisable();
+                _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
+                _selectedButtonIndex = -1;
+            }
 
-        private void OpenBuildingConstructMenu()
-        {
-            gameObject.SetActive(false);
-            _createBuildingPopupPresenter.OpenScroller();
-            closeButton.gameObject.SetActive(true);
-        }
+            if (!needToSelect)
+                return;
 
-        private void OpenMergeMenuButton()
-        {
-            gameObject.SetActive(false);
-            mergePanel.SetActive(true);
-            closeButton.gameObject.SetActive(true);
+            _selectedButtonIndex = i;
+            _widgets[_selectedButtonIndex].OnEnable();
+            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerSelected);
         }
     }
 }

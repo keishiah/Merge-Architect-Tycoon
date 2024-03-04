@@ -66,15 +66,8 @@ namespace _Scripts.UI.Presenters
 
         public void OpenScroller()
         {
-            _createBuildingPopupScroller.gameObject.SetActive(true);
             SortBuildingElements();
             _createBuildingPopupScroller.SortBuildingElements();
-        }
-
-        public void CLoseScroller()
-        {
-            _createBuildingPopupScroller.gameObject.SetActive(false);
-            _createBuildingPopup.ClosePanelButtons();
         }
 
         public void RenderSortedList()
