@@ -1,9 +1,4 @@
-﻿using _Scripts.Logic;
-
-namespace _Scripts.Services.PlayerProgressService
+﻿public interface IProgressReader
 {
-    public interface IProgressReader
-    {
-        void LoadProgress(Progress progress);
-    }
+    void LoadProgress(Progress progress);
 }

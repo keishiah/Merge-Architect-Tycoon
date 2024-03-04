@@ -1,35 +1,31 @@
-using _Scripts.Logic.Merge.Items;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts.Logic.Merge.MergePlane
+public class ItemInfoSlot : MonoBehaviour
 {
-    public class ItemInfoSlot : MonoBehaviour
+    private MergeItem mergeItem;
+    [SerializeField]
+    private Image itemImage;
+    [SerializeField]
+    private Image questionMarkImage;
+    [SerializeField]
+    private Image nextItemArrowImage;
+
+    public void SetItem(MergeItem m_mergeItem, bool isOpened)
     {
-        private MergeItem mergeItem;
-        [SerializeField]
-        private Image itemImage;
-        [SerializeField]
-        private Image questionMarkImage;
-        [SerializeField]
-        private Image nextItemArrowImage;
+        questionMarkImage.gameObject.SetActive(false);
+        nextItemArrowImage.gameObject.SetActive(false);
+        itemImage.sprite = m_mergeItem.itemSprite;
+        mergeItem = m_mergeItem;
 
-        public void SetItem(MergeItem m_mergeItem, bool isOpened)
+        if (!isOpened)
         {
-            questionMarkImage.gameObject.SetActive(false);
-            nextItemArrowImage.gameObject.SetActive(false);
-            itemImage.sprite = m_mergeItem.itemSprite;
-            mergeItem = m_mergeItem;
-
-            if (!isOpened)
-            {
-                questionMarkImage.gameObject.SetActive(true);
-            }
-            if (m_mergeItem.nextItem != null)
-            {
-                nextItemArrowImage.gameObject.SetActive(true);
-            }
-
+            questionMarkImage.gameObject.SetActive(true);
         }
+        if (m_mergeItem.nextItem != null)
+        {
+            nextItemArrowImage.gameObject.SetActive(true);
+        }
+
     }
 }

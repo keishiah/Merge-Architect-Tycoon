@@ -1,84 +1,70 @@
 ﻿using System.Threading;
-using _Scripts.Logic.CityData;
-using _Scripts.Services;
-using _Scripts.Services.StaticDataService;
-using _Scripts.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace _Scripts.Logic.Buildings
+public class BuildingPlace : MonoBehaviour
 {
-    public enum BuildingStateEnum
+    public BuildingView buildingView;
+    public string buildingName;
+    [HideInInspector] public int districtId;
+
+    private IStaticDataService _staticDataService;
+    private BuildingCreator _buildingCreator;
+    private BuildingProvider _buildingProvider;
+    private CancellationTokenSource _activityToken;
+
+    [Inject]
+    void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
+        BuildingProvider buildingProvider)
     {
-        Inactive,
-        BuildInProgress,
-        BuildingFinished
+        _staticDataService = staticDataService;
+        _buildingCreator = buildingCreator;
+        _buildingProvider = buildingProvider;
     }
 
-    public class BuildingPlace : MonoBehaviour
+    public void InitializeBuilding(int district)
     {
-        public BuildingView buildingView;
-        public string buildingName;
-        [HideInInspector] public int districtId;
+        districtId = district;
+        _activityToken = new CancellationTokenSource();
+        _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
+    }
 
-        private IStaticDataService _staticDataService;
-        private BuildingCreator _buildingCreator;
-        private BuildingProvider _buildingProvider;
-        private CancellationTokenSource _activityToken;
-
-        [Inject]
-        void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
-            BuildingProvider buildingProvider)
+    public void SetBuildingState(BuildingStateEnum state)
+    {
+        switch (state)
         {
-            _staticDataService = staticDataService;
-            _buildingCreator = buildingCreator;
-            _buildingProvider = buildingProvider;
+            case BuildingStateEnum.Inactive:
+                buildingView.SetViewInactive();
+                break;
+            case BuildingStateEnum.BuildInProgress:
+                buildingView.SetViewBuildInProgress();
+                buildingView.ShowBuildSprite(_staticDataService.BuildInProgressSprite);
+                break;
+            case BuildingStateEnum.BuildingFinished:
+                buildingView.SetViewBuildCreated();
+                buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
+                    .buildingSprite);
+                break;
         }
+    }
 
-        public void InitializeBuilding(int district)
-        {
-            districtId = district;
-            _activityToken = new CancellationTokenSource();
-            _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
-        }
+    public UniTask StartCreatingBuilding()
+    {
+        SetBuildingState(BuildingStateEnum.BuildInProgress);
 
-        public void SetBuildingState(BuildingStateEnum state)
-        {
-            switch (state)
-            {
-                case BuildingStateEnum.Inactive:
-                    buildingView.SetViewInactive();
-                    break;
-                case BuildingStateEnum.BuildInProgress:
-                    buildingView.SetViewBuildInProgress();
-                    buildingView.ShowBuildSprite(_staticDataService.BuildInProgressSprite);
-                    break;
-                case BuildingStateEnum.BuildingFinished:
-                    buildingView.SetViewBuildCreated();
-                    buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
-                        .buildingSprite);
-                    break;
-            }
-        }
+        return _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, _activityToken);
+    }
 
-        public UniTask StartCreatingBuilding()
-        {
-            SetBuildingState(BuildingStateEnum.BuildInProgress);
+    public void UpdateTimerText(int totalSeconds)
+    {
+        buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
+    }
 
-            return _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, _activityToken);
-        }
-
-        public void UpdateTimerText(int totalSeconds)
-        {
-            buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
-        }
-
-        public void OnDestroy()
-        {
-            _activityToken?.Cancel();
-            _activityToken?.Dispose();
-            _activityToken = null;
-        }
+    public void OnDestroy()
+    {
+        _activityToken?.Cancel();
+        _activityToken?.Dispose();
+        _activityToken = null;
     }
 }

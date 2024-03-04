@@ -1,57 +1,53 @@
 using System.Collections;
-using _Scripts.Infrastructure.AssetManagment;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace _Scripts.Services
+public class PreStart : MonoBehaviour
 {
-    public class PreStart : MonoBehaviour
+    [SerializeField] private GameObject Button;
+
+    [SerializeField] private Slider LoadingSlider;
+    [SerializeField] private GameObject GameRunner;
+
+    private float fakeLoadDuration = .5f;
+
+    private IEnumerator Start()
     {
-        [SerializeField] private GameObject Button;
+        yield return null;
+        GameRunner.SetActive(true);
+        DontDestroyOnLoad(this);
+    }
 
-        [SerializeField] private Slider LoadingSlider;
-        [SerializeField] private GameObject GameRunner;
+    public void FakeLoad()
+    {
+        StartCoroutine(fakeLoad());
+    }
 
-        private float fakeLoadDuration = .5f;
+    private IEnumerator fakeLoad()
+    {
+        Button.SetActive(false);
+        LoadingSlider.gameObject.SetActive(true);
+        LoadingSlider.value = 0;
 
-        private IEnumerator Start()
+        float step = 1 / fakeLoadDuration;
+
+        while (LoadingSlider.value < 0.8f)
         {
             yield return null;
-            GameRunner.SetActive(true);
-            DontDestroyOnLoad(this);
+            LoadingSlider.value += step * Time.deltaTime;
         }
 
-        public void FakeLoad()
+        while (SceneManager.GetActiveScene().name != AssetPath.StartGameScene)
+            yield return null;
+
+        while (LoadingSlider.value < 1f)
         {
-            StartCoroutine(fakeLoad());
+            yield return null;
+            LoadingSlider.value += step * Time.deltaTime;
         }
 
-        private IEnumerator fakeLoad()
-        {
-            Button.SetActive(false);
-            LoadingSlider.gameObject.SetActive(true);
-            LoadingSlider.value = 0;
-
-            float step = 1 / fakeLoadDuration;
-
-            while (LoadingSlider.value < 0.8f)
-            {
-                yield return null;
-                LoadingSlider.value += step * Time.deltaTime;
-            }
-
-            while (SceneManager.GetActiveScene().name != AssetPath.StartGameScene)
-                yield return null;
-
-            while (LoadingSlider.value < 1f)
-            {
-                yield return null;
-                LoadingSlider.value += step * Time.deltaTime;
-            }
-
-            // Destroy(gameObject);
-            SceneManager.UnloadSceneAsync(0);
-        }
+        // Destroy(gameObject);
+        SceneManager.UnloadSceneAsync(0);
     }
 }

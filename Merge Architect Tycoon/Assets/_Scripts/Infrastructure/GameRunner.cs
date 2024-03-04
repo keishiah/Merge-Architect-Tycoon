@@ -1,31 +1,27 @@
-﻿using _Scripts.Infrastructure.Factories;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-namespace _Scripts.Infrastructure
+public class GameRunner : MonoBehaviour
 {
-    public class GameRunner : MonoBehaviour
+    private IStateFactory _stateFactory;
+
+    [Inject]
+    void Construct(IStateFactory stateFactory)
     {
-        private IStateFactory _stateFactory;
+        _stateFactory = stateFactory;
+    }
 
-        [Inject]
-        void Construct(IStateFactory stateFactory)
-        {
-            _stateFactory = stateFactory;
-        }
+    private void Start()
+    {
+        CreateGameBootstrapper();
+    }
 
-        private void Start()
-        {
-            CreateGameBootstrapper();
-        }
+    private void CreateGameBootstrapper()
+    {
+        var bootstrapper = FindObjectOfType<GameBootstrapper>();
 
-        private void CreateGameBootstrapper()
-        {
-            var bootstrapper = FindObjectOfType<GameBootstrapper>();
+        if (bootstrapper != null) return;
 
-            if (bootstrapper != null) return;
-
-            _stateFactory.CreateGameBootstrapper();
-        }
+        _stateFactory.CreateGameBootstrapper();
     }
 }

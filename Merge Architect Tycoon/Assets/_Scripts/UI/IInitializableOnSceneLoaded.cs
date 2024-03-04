@@ -1,7 +1,4 @@
-namespace _Scripts.UI
+public interface IInitializableOnSceneLoaded
 {
-    public interface IInitializableOnSceneLoaded
-    {
-        void OnSceneLoaded();
-    }
+    void OnSceneLoaded();
 }

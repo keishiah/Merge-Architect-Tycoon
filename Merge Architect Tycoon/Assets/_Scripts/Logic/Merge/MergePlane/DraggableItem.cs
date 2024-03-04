@@ -1,10 +1,10 @@
-using _Scripts.Logic.Merge.MergePlane;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //, IPointerClickHandler, IPointerExitHandler
+public class DraggableItem : MonoBehaviour,
+    IBeginDragHandler, IDragHandler, IEndDragHandler //, IPointerClickHandler, IPointerExitHandler
 {
     public Image image;
     public Slot slot;

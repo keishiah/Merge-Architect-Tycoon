@@ -1,71 +1,67 @@
-﻿using _Scripts.UI.Presenters;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace _Scripts.UI.Elements
+public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 {
-    public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
+    public TextMeshProUGUI moneyCountText;
+    public TextMeshProUGUI diamandCountText;
+
+    private UiPresenter _uiPresenter;
+
+    [Inject]
+    void Construct(UiPresenter uiPresenter)
     {
-        public TextMeshProUGUI moneyCountText;
-        public TextMeshProUGUI diamandCountText;
+        _uiPresenter = uiPresenter;
+    }
 
-        private UiPresenter _uiPresenter;
+    private void Awake()
+    {
+        InitUiElement(_uiPresenter);
+    }
 
-        [Inject]
-        void Construct(UiPresenter uiPresenter)
-        {
-            _uiPresenter = uiPresenter;
-        }
+    public override void InitUiElement(UiPresenter uiPresenter)
+    {
+        _uiPresenter = uiPresenter;
+        _uiPresenter.AddUiElementToElementsList(this);
+    }
 
-        private void Awake()
-        {
-            InitUiElement(_uiPresenter);
-        }
+    public void OnSceneLoaded()
+    {
+        var progress = _uiPresenter.PlayerProgressService.Progress;
 
-        public override void InitUiElement(UiPresenter uiPresenter)
-        {
-            _uiPresenter = uiPresenter;
-            _uiPresenter.AddUiElementToElementsList(this);
-        }
+        RenderMoneyCount(progress.Coins.CurrentCoinsCount);
+        // RenderDiamandCount(progress.Diamonds.CurrentCoinsCount);
 
-        public void OnSceneLoaded()
-        {
-            var progress = _uiPresenter.PlayerProgressService.Progress;
+        _uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
+        _uiPresenter.SubscribeDiamondsCountChanged(RenderDiamandCount);
+    }
 
-            RenderMoneyCount(progress.Coins.CurrentCoinsCount);
-            // RenderDiamandCount(progress.Diamonds.CurrentCoinsCount);
-
-            _uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
-            _uiPresenter.SubscribeDiamondsCountChanged(RenderDiamandCount);
-        }
-
-        public void AddCoins()
-        {
+    public void AddCoins()
+    {
 // #if UNITY_EDITOR
-            if (Application.version.StartsWith("d"))
-            {
-                Debug.Log("add button clicked");
-                _uiPresenter.PlayerProgressService.Progress.AddCoins(100500);
-                _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);
-            }
-            // else
-            // {
+        if (Application.version.StartsWith("d"))
+        {
+            Debug.Log("add button clicked");
+            _uiPresenter.PlayerProgressService.Progress.AddCoins(100500);
+            _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);
+        }
+        // else
+        // {
 // #endif
-                //Shop.TryToBuy();
+            //Shop.TryToBuy();
 // #if UNITY_EDITOR
 //             }
 // #endif
-        }
+    }
 
-        public void RenderMoneyCount(int newValue)
-        {
-            moneyCountText.text = newValue.ToString();
-        }
+    public void RenderMoneyCount(int newValue)
+    {
+        moneyCountText.text = newValue.ToString();
+    }
 
-        public void RenderDiamandCount(int newValue)
-        {
-            diamandCountText.text = newValue.ToString();
-        }
+    public void RenderDiamandCount(int newValue)
+    {
+        diamandCountText.text = newValue.ToString();
     }
 }

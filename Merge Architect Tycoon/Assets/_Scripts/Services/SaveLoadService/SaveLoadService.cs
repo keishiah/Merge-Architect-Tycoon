@@ -1,28 +1,24 @@
-﻿using _Scripts.Services.StaticDataService;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Scripts.Services.SaveLoadService
+public enum SaveKey
 {
-    public enum SaveKey
+    Progress,
+    Inventory
+}
+
+public static class SaveLoadService
+{
+    public static void Save<T>(SaveKey key, T data)
     {
-        Progress,
-        Inventory
+        PlayerPrefs.SetString(key.ToString(), data.ToJson());
     }
 
-    public static class SaveLoadService
+    public static T Load<T>(SaveKey key)
     {
-        public static void Save<T>(SaveKey key, T data)
-        {
-            PlayerPrefs.SetString(key.ToString(), data.ToJson());
-        }
+        string stringKey = key.ToString();
+        if (!PlayerPrefs.HasKey(stringKey))
+            return default(T);
 
-        public static T Load<T>(SaveKey key)
-        {
-            string stringKey = key.ToString();
-            if (!PlayerPrefs.HasKey(stringKey))
-                return default(T);
-
-            return PlayerPrefs.GetString(stringKey).ToDeserialized<T>();
-        }
+        return PlayerPrefs.GetString(stringKey).ToDeserialized<T>();
     }
 }
