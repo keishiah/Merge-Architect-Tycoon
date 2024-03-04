@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -45,7 +46,7 @@ public class CreateBuildingPopupPresenter
         SetBuildingElements();
         SortBuildingElements();
 
-        var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
+        ReactiveCollection<string> createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
         foreach (string building in createdBuildings)
         {
             _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
@@ -65,7 +66,7 @@ public class CreateBuildingPopupPresenter
 
     public void RenderSortedList()
     {
-        foreach (var element in _elements)
+        foreach (CreateBuildingUiElement element in _elements)
         {
             element.transform.SetSiblingIndex(
                 _buildings.IndexOf(_buildings.FirstOrDefault(x => x.buildingName == element.buildingName)));

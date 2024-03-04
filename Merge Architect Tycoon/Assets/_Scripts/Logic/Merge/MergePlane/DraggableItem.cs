@@ -13,7 +13,7 @@ public class DraggableItem : MonoBehaviour,
     [Inject(Id = "TransformForInhandItem")]
     private RectTransform _playerHand;
     [Inject]
-    private CanvasScaler _canvas;
+    private Canvas _canvas;
     private Vector3 startMousePosition;
     
     public void OnBeginDrag(PointerEventData eventData)

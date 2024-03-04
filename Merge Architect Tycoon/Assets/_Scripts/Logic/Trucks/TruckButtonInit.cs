@@ -5,9 +5,16 @@ using Zenject;
 [RequireComponent(typeof(Button))]
 public class TruckButtonInit : MonoBehaviour
 {
-    [Inject] TruckPresenter truckPresenter;
-    [SerializeField] GameObject truckMenu;
-    [SerializeField] Truck truck;
+    [Inject]
+    private TruckPresenter _truckPresenter;
+    [Inject]
+    private IPlayerProgressService _playerProgressService;
+    [SerializeField]
+    private GameObject _truckMenu;
+    [SerializeField]
+    private Truck _truck;
+    [SerializeField]
+    private int _cost;
 
     void Start()
     {
@@ -16,7 +23,8 @@ public class TruckButtonInit : MonoBehaviour
 
     private void AddNewTruck()
     {
-        truckPresenter.AddNewTruck(truck.Clone());
-        truckMenu.SetActive(false);
+        if(_playerProgressService.Progress.Coins.SpendCoins(_cost))
+            _truckPresenter.AddNewTruck(_truck.Clone());
+        _truckMenu.SetActive(false);
     }
 }

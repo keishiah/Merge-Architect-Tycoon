@@ -6,7 +6,6 @@ public class LoadPlayerProgressState : IState
     private readonly IEnumerable<IProgressReader> _progressReaderServices;
     private readonly IPlayerProgressService _progressService;
 
-
     public LoadPlayerProgressState(IPlayerProgressService progressService,
         IEnumerable<IProgressReader> progressReaderServices)
     {
@@ -21,7 +20,7 @@ public class LoadPlayerProgressState : IState
 
     public void Enter()
     {
-        var progress = LoadProgressOrInitNew();
+        Progress progress = LoadProgressOrInitNew();
 
         NotifyProgressReaderServices(progress);
 
@@ -30,7 +29,7 @@ public class LoadPlayerProgressState : IState
 
     private void NotifyProgressReaderServices(Progress progress)
     {
-        foreach (var reader in _progressReaderServices)
+        foreach (IProgressReader reader in _progressReaderServices)
             reader.LoadProgress(progress);
     }
 

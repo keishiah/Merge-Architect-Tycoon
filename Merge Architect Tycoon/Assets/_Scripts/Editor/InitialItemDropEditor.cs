@@ -33,14 +33,14 @@ namespace _Scripts.Editor
                 columnStyle.fixedWidth = 100;
 
                 GUIStyle rowStyle = new GUIStyle();
-                rowStyle.fixedHeight = 25;
+                rowStyle.fixedHeight = 115;
 
                 GUIStyle rowHeaderStyle = new GUIStyle();
                 rowHeaderStyle.fixedWidth = columnStyle.fixedWidth - 1;
 
                 GUIStyle columnHeaderStyle = new GUIStyle();
                 columnHeaderStyle.fixedWidth = 30;
-                columnHeaderStyle.fixedHeight = 49.5f;
+                columnHeaderStyle.fixedHeight = 139.5f;
 
                 GUIStyle columnLabelStyle = new GUIStyle();
                 columnLabelStyle.fixedWidth = rowHeaderStyle.fixedWidth - 6;
@@ -89,7 +89,7 @@ namespace _Scripts.Editor
 
                         if (x >= 0 && y >= 0)
                         {
-                            EditorGUILayout.BeginHorizontal(rowStyle);
+                            EditorGUILayout.BeginVertical(rowStyle);
                             int i = 0;
                             if (y == 0)
                             {
@@ -105,12 +105,23 @@ namespace _Scripts.Editor
                                 InitialItemDrop.allDropSlots.Add(new ItemDropSlot());
                             }
 
-                            InitialItemDrop.allDropSlots[i].mergeItem = 
+                            InitialItemDrop.allDropSlots[i].mergeItem =
                                 (MergeItem)EditorGUILayout.ObjectField(
-                                    InitialItemDrop.allDropSlots[i].mergeItem, 
-                                    typeof(MergeItem), 
-                                    allowSceneObjects: true, 
+                                    InitialItemDrop.allDropSlots[i].mergeItem,
+                                    typeof(MergeItem),
+                                    allowSceneObjects: true,
                                     GUILayout.Width(90));
+
+
+                            Sprite sprite = null;
+                            if (InitialItemDrop.allDropSlots[i].mergeItem != null)
+                                sprite = InitialItemDrop.allDropSlots[i].mergeItem.itemSprite;
+                            sprite = EditorGUILayout.ObjectField(
+                                sprite, 
+                                typeof(Sprite), 
+                                false, 
+                                GUILayout.Height(90), 
+                                GUILayout.Width(90)) as Sprite;
 
                             EditorGUILayout.EndHorizontal();
 

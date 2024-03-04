@@ -29,16 +29,20 @@ public class SceneButtons : MonoBehaviour
     {
         OnMenuButtonClick((int)i);
     }
+    public void CloseCurrentWidget()
+    {
+        if (_selectedButtonIndex == -1)
+            return;
+
+        _widgets[_selectedButtonIndex].OnDisable();
+        _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
+        _selectedButtonIndex = -1;
+    }
     public void OnMenuButtonClick(int i)
     {
         bool needToSelect = _selectedButtonIndex != i;
 
-        if (_selectedButtonIndex != -1)
-        {
-            _widgets[_selectedButtonIndex].OnDisable();
-            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
-            _selectedButtonIndex = -1;
-        }
+        CloseCurrentWidget();
 
         if (!needToSelect)
             return;

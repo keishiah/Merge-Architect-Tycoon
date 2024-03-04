@@ -20,7 +20,6 @@ public class CreateBuildingPopup : MonoBehaviour
 
     public void InitializePopup()
     {
-        // ClosePanelButtons();
         goToMergePanelButton.onClick.AddListener(GoToMergePanel);
         createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
     }

@@ -17,6 +17,7 @@ public class TruckPresenter : MonoBehaviour
     [Inject] private SlotsManager _slotsManager;
     private Queue<Truck> _trucks = new();
     private TruckBehaviour _truckBehaviour;
+    public bool _isNeedToUnload { get; private set; }
 
     private void Awake()
     {
@@ -77,7 +78,6 @@ public class TruckPresenter : MonoBehaviour
             _truck = _trucks.Peek(),
             _resources = _resources,
             _truckPresenter = this,
-
         };
         _truckBehaviour.Enter();
     }
@@ -107,10 +107,11 @@ public class TruckPresenter : MonoBehaviour
         }
 
         _truckBehaviour.Update();
-
+        _isNeedToUnload = false;
         if (_truckBehaviour.IsComplete)
             NextStage();
     }
+    public void ReadyToUnload() => _isNeedToUnload = true;
     public void UpdateOn()
     {
         enabled = true;

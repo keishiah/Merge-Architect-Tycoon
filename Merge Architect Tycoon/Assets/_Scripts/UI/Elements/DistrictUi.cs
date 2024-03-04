@@ -7,11 +7,9 @@ public class DistrictUi : MonoBehaviour
 {
     public int districtId;
     public Slider coinsSlider;
-    public Button openDistrictOne;
     public Button earnCurrencyButton;
-    public District districtOne;
 
-    public CancellationTokenSource ActivityToken;
+    public CancellationTokenSource ActivityToken { get; set; }
 
     private DistrictsPresenter _districtsPresenter;
 
@@ -31,7 +29,6 @@ public class DistrictUi : MonoBehaviour
         ActivityToken = new CancellationTokenSource();
 
         _districtsPresenter.AddDistrict(this);
-        openDistrictOne.onClick.AddListener(OpenDistrict);
         earnCurrencyButton.onClick.AddListener(EarnCurrency);
 
         coinsSlider.gameObject.SetActive(false);
@@ -45,9 +42,8 @@ public class DistrictUi : MonoBehaviour
 
     }
 
-    private void OpenDistrict()
+    public void OpenDistrict()
     {
-        districtOne.gameObject.SetActive(true);
         _districtsPresenter.CitiesMapPopup.SetActive(false);
         _districtsPresenter.SetCurrentDistrict(1);
     }
