@@ -24,7 +24,7 @@ namespace _Scripts.UI.Elements.CreateBuildingPopup
 
         public void InitializePopup()
         {
-            ClosePanelButtons();
+            // ClosePanelButtons();
             goToMergePanelButton.onClick.AddListener(GoToMergePanel);
             createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
         }

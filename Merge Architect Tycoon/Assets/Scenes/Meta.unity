@@ -1513,6 +1513,7 @@ GameObject:
   - component: {fileID: 553906265}
   - component: {fileID: 553906264}
   - component: {fileID: 553906266}
+  - component: {fileID: 553906267}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1596,6 +1597,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 4
   m_AspectRatio: 0.61621
+--- !u!114 &553906267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553906262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64a5be73d0d44ba9afb7b3caeb83208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  districtId: 1
 --- !u!1 &566373429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,6 +3596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mergeLevel: {fileID: 11400000, guid: ebd17030f57fdab41af36129d5447c0f, type: 2}
+  createBuildingPopup: {fileID: 301110683}
+  createBuildingPopupScroller: {fileID: 1619757256}
 --- !u!114 &1153209361
 MonoBehaviour:
   m_ObjectHideFlags: 0
