@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd057f6116f28847b2db4b9ad8c87bf, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  isNeedResetLevel: 0
+  columns: 6
+  rows: 7
+  allDropSlots:
+  - mergeItem: {fileID: 11400000, guid: 7960935566e61b34ebcbc6369773c7bd, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 2b959feec19dad74c9273d400fd3b6cf, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 520597cdc59e93343a226a2a6fcf3d1a, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: ddab63366e9abad4199bf564e6aa9249, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 0}
+    slotState: 1
+  - mergeItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 733596d8c5d207645b1f22f23b51ebd8, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 0}
+    slotState: 1
+  - mergeItem: {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 0}
+    slotState: 0
+  - mergeItem: {fileID: 0}
+    slotState: 0
+  - mergeItem: {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
+    slotState: 0
+  - mergeItem: {fileID: 11400000, guid: ffc3caa3e8b1ce24fa6f9acc2e9c42cf, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 0}
+    slotState: 1
+  - mergeItem: {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 0}
+    slotState: 0
+  - mergeItem: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: c186d038d99057e46a2c9fed9bafb341, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 0}
+    slotState: 1
+  - mergeItem: {fileID: 11400000, guid: ddab63366e9abad4199bf564e6aa9249, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 572d87ffd5e3c6947a384d93efb2c02d, type: 2}
+    slotState: 0
+  - mergeItem: {fileID: 0}
+    slotState: 0
+  - mergeItem: {fileID: 0}
+    slotState: 0
+  - mergeItem: {fileID: 11400000, guid: 572d87ffd5e3c6947a384d93efb2c02d, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 0}
+    slotState: 1
+  - mergeItem: {fileID: 11400000, guid: 7960935566e61b34ebcbc6369773c7bd, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
+    slotState: 2
+  - mergeItem: {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 0}
+    slotState: 1
+  - mergeItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: ffc3caa3e8b1ce24fa6f9acc2e9c42cf, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: b6d2401adea740e4392faeaea881a8a3, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 0}
+    slotState: 1

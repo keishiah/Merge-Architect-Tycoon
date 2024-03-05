@@ -1,8 +1,5 @@
-namespace _Scripts.Infrastructure.States
+public interface IExitableState
 {
-    public interface IExitableState
-    {
-        void SetGameStateMachine(IGameStateMachine gameStateMachine);
-        void Exit();
-    }
+    void SetGameStateMachine(IGameStateMachine gameStateMachine);
+    void Exit();
 }

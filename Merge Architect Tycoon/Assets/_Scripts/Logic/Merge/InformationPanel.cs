@@ -1,122 +1,116 @@
-using _Scripts.Logic.Merge.Items;
-using _Scripts.Logic.Merge.MergePlane;
-using _Scripts.Services.PlayerProgressService;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace _Scripts.Logic.Merge
+public class InformationPanel : MonoBehaviour
 {
-    public class InformationPanel : MonoBehaviour
+    [Inject]
+    private IPlayerProgressService _player;
+
+    [Header("Texts")]
+    public TMP_Text itemNameText;
+    public TMP_Text itemDescriptionText;
+    public TMP_Text itemLvlText;
+    public TMP_Text itemCostText;
+
+    public Slot slotCurrent;
+
+    [Space, Header("Panels")]
+    public GameObject informPanel;
+    public GameObject deleteButton;
+    public GameObject sellButton;
+
+    public SelectedItem selectedItem;
+
+    public ProgressItemInfo _progressItemInfo;
+
+    public void ConfigPanel(Slot slot)
     {
-        [Inject]
-        private IPlayerProgressService _player;
+        if (slotCurrent
+            && slotCurrent != slot
+            && slotCurrent.currentDraggableItem() != null)
+            slotCurrent.currentDraggableItem().isClicked = false;
 
-        [Header("Texts")]
-        public TMP_Text itemNameText;
-        public TMP_Text itemDescriptionText;
-        public TMP_Text itemLvlText;
-        public TMP_Text itemCostText;
+        slotCurrent = slot;
 
-        public Slot slotCurrent;
+        MergeItem mergeItem = slot.CurrentItem;
+        if (mergeItem == null)
+            return;
 
-        [Space, Header("Panels")]
-        public GameObject informPanel;
-        public GameObject deleteButton;
-        public GameObject sellButton;
+        ActivateInfromPanel(true);
 
-        public SelectedItem selectedItem;
-
-        public ProgressItemInfo _progressItemInfo;
-
-        public void ConfigPanel(Slot slot)
+        itemNameText.text = mergeItem.itemName;
+        itemDescriptionText.text = mergeItem.itemDescrpition;
+        itemLvlText.text = $"(Lvl {mergeItem.itemLevel})";
+        itemCostText.text = $"+{mergeItem.itemCost}";
+        sellButton.SetActive(false);
+        deleteButton.SetActive(false);
+        if (slot.SlotState == SlotState.Draggable 
+            || slot.SlotState == SlotState.Unloading)
         {
-            if (slotCurrent
-                && slotCurrent != slot
-                && slotCurrent.currentDraggableItem() != null)
-                slotCurrent.currentDraggableItem().isClicked = false;
-
-            slotCurrent = slot;
-
-            MergeItem mergeItem = slot.CurrentItem;
-            if (mergeItem == null)
-                return;
-
-            ActivateInfromPanel(true);
-
-            itemNameText.text = mergeItem.itemName;
-            itemDescriptionText.text = mergeItem.itemDescrpition;
-            itemLvlText.text = $"(Lvl {mergeItem.itemLevel})";
-            itemCostText.text = $"+{mergeItem.itemCost}";
-            sellButton.SetActive(false);
-            deleteButton.SetActive(false);
-            if (slot.SlotState == SlotState.Draggable 
-                || slot.SlotState == SlotState.Unloading)
+            switch (mergeItem.itemType)
             {
-                switch (mergeItem.itemType)
-                {
-                    case ItemType.sellable:
-                        if (mergeItem.itemCost > 0)
-                        {
-                            sellButton.SetActive(true);
-                        }
-                        else
-                        {
-                            deleteButton.SetActive(true);
-                        }
-                        break;
-                    case ItemType.spawner:
-                        break;
-                    case ItemType.unsellable:
-                        break;
-                }
+                case ItemType.sellable:
+                    if (mergeItem.itemCost > 0)
+                    {
+                        sellButton.SetActive(true);
+                    }
+                    else
+                    {
+                        deleteButton.SetActive(true);
+                    }
+                    break;
+                case ItemType.spawner:
+                    break;
+                case ItemType.unsellable:
+                    break;
             }
-
         }
 
-        public void OpenProgressInfoPanel()
-        {
-            _progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
-        }
+    }
 
-        public void ActivateInfromPanel(bool state)
-        {
-            //selectedItem.gameObject.SetActive(state);
-            informPanel.SetActive(state);
+    public void OpenProgressInfoPanel()
+    {
+        _progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
+    }
 
-            if (!(state == false && slotCurrent != null))
-                return;
+    public void ActivateInfromPanel(bool state)
+    {
+        //selectedItem.gameObject.SetActive(state);
+        informPanel.SetActive(state);
 
-            DraggableItem draggableItem = slotCurrent.currentDraggableItem();
-            if (draggableItem == null)
-                return;
+        if (!(state == false && slotCurrent != null))
+            return;
 
-            draggableItem.isClicked = false;
-        }
+        DraggableItem draggableItem = slotCurrent.currentDraggableItem();
+        if (draggableItem == null)
+            return;
 
-        public void SellItem()
-        {
-            if (slotCurrent.IsEmpty)
-                return;
+        draggableItem.isClicked = false;
+    }
 
-            int coins = (int)slotCurrent.CurrentItem.itemCost;
-            _player.Progress.AddCoins(coins);
-            Debug.Log($"Item sell to: {coins}");
+    public void SellItem()
+    {
+        if (slotCurrent.IsEmpty)
+            return;
 
-            DeleteItem();
-        }
+        int coins = (int)slotCurrent.CurrentItem.itemCost;
+        _player.Progress.AddCoins(coins);
+        Debug.Log($"Item sell to: {coins}");
 
-        public void DeleteItem()
-        {
-            if (slotCurrent.IsEmpty)
-                return;
-            slotCurrent.RemoveItem(isNeedSave: true);
-            ActivateInfromPanel(false);
-        }
+        DeleteItem();
+    }
 
-        private void OnDisable()
-        {
-            ActivateInfromPanel(false);
-        }
+    public void DeleteItem()
+    {
+        if (slotCurrent.IsEmpty)
+            return;
+        slotCurrent.RemoveItem(isNeedSave: true);
+        ActivateInfromPanel(false);
+    }
+
+    private void OnDisable()
+    {
+        ActivateInfromPanel(false);
     }
 }

@@ -1,10 +1,10 @@
-using _Scripts.Logic.Merge.MergePlane;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //, IPointerClickHandler, IPointerExitHandler
+public class DraggableItem : MonoBehaviour,
+    IBeginDragHandler, IDragHandler, IEndDragHandler //, IPointerClickHandler, IPointerExitHandler
 {
     public Image image;
     public Slot slot;
@@ -13,7 +13,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [Inject(Id = "TransformForInhandItem")]
     private RectTransform _playerHand;
     [Inject]
-    private CanvasScaler _canvas;
+    private Canvas _canvas;
     private Vector3 startMousePosition;
     
     public void OnBeginDrag(PointerEventData eventData)

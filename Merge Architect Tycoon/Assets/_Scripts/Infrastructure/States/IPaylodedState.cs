@@ -1,7 +1,4 @@
-namespace _Scripts.Infrastructure.States
+public interface IPaylodedState<TPayload> : IExitableState
 {
-    public interface IPaylodedState<TPayload> : IExitableState
-    {
-        void Enter(TPayload payload);
-    }
+    void Enter(TPayload payload);
 }

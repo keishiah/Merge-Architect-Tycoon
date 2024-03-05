@@ -1,70 +1,61 @@
 using System.Threading;
-using _Scripts.Logic.CityData;
-using _Scripts.UI.Presenters;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace _Scripts.UI.Elements
+public class DistrictUi : MonoBehaviour
 {
-    public class DistrictUi : MonoBehaviour
+    public int districtId;
+    public Slider coinsSlider;
+    public Button earnCurrencyButton;
+
+    public CancellationTokenSource ActivityToken { get; set; }
+
+    private DistrictsPresenter _districtsPresenter;
+
+    [Inject]
+    void Construct(DistrictsPresenter districtsPresenter)
     {
-        public int districtId;
-        public Slider coinsSlider;
-        public Button openDistrictOne;
-        public Button earnCurrencyButton;
-        public District districtOne;
+        _districtsPresenter = districtsPresenter;
 
-        public CancellationTokenSource ActivityToken;
+        Initialize();
+    }
 
-        private DistrictsPresenter _districtsPresenter;
+    public void SetSliderMaxValue(float maxValue) => coinsSlider.maxValue = maxValue;
+    public void SetSliderValue(float value) => coinsSlider.value = value;
 
-        [Inject]
-        void Construct(DistrictsPresenter districtsPresenter)
-        {
-            _districtsPresenter = districtsPresenter;
+    private void Initialize()
+    {
+        ActivityToken = new CancellationTokenSource();
 
-            Initialize();
-        }
+        _districtsPresenter.AddDistrict(this);
+        earnCurrencyButton.onClick.AddListener(EarnCurrency);
 
-        public void SetSliderMaxValue(float maxValue) => coinsSlider.maxValue = maxValue;
-        public void SetSliderValue(float value) => coinsSlider.value = value;
+        coinsSlider.gameObject.SetActive(false);
+        earnCurrencyButton.gameObject.SetActive(false);
+    }
 
-        private void Initialize()
-        {
-            ActivityToken = new CancellationTokenSource();
+    private void EarnCurrency()
+    {
+        _districtsPresenter.EarnCurrency(districtId);
+        earnCurrencyButton.gameObject.SetActive(false);
 
-            _districtsPresenter.AddDistrict(this);
-            openDistrictOne.onClick.AddListener(OpenDistrict);
-            earnCurrencyButton.onClick.AddListener(EarnCurrency);
+    }
 
-            coinsSlider.gameObject.SetActive(false);
-            earnCurrencyButton.gameObject.SetActive(false);
-        }
+    public void OpenDistrict()
+    {
+        _districtsPresenter.CitiesMapPopup.SetActive(false);
+        _districtsPresenter.SetCurrentDistrict(1);
+    }
 
-        private void EarnCurrency()
-        {
-            _districtsPresenter.EarnCurrency(districtId);
-            earnCurrencyButton.gameObject.SetActive(false);
-
-        }
-
-        private void OpenDistrict()
-        {
-            districtOne.gameObject.SetActive(true);
-            _districtsPresenter.CitiesMapPopup.SetActive(false);
-            _districtsPresenter.SetCurrentDistrict(1);
-        }
-
-        public void TurnOnEarnButton()
-        {
-            earnCurrencyButton.gameObject.SetActive(true);
-        }
-        public void OnDestroy()
-        {
-            ActivityToken?.Cancel();
-            ActivityToken?.Dispose();
-            ActivityToken = null;
-        }
+    public void TurnOnEarnButton()
+    {
+        earnCurrencyButton.gameObject.SetActive(true);
+    }
+    public void OnDestroy()
+    {
+        ActivityToken?.Cancel();
+        ActivityToken?.Dispose();
+        ActivityToken = null;
     }
 }

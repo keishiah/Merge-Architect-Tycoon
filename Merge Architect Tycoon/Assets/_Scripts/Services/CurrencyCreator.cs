@@ -1,39 +1,32 @@
-using System;
-using System.Threading;
-using _Scripts.Services.StaticDataService;
-using _Scripts.UI.Elements;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
+using System;
 using Zenject;
 
-namespace _Scripts.Services
+public class CurrencyCreator
 {
-    public class CurrencyCreator
+    private IStaticDataService _staticDataService;
+
+    [Inject]
+    void Construct(IStaticDataService staticDataService)
     {
-        private IStaticDataService _staticDataService;
+        _staticDataService = staticDataService;
+    }
 
-        [Inject]
-        void Construct(IStaticDataService staticDataService)
+    public async UniTask CreateCurrencyInTimeAsync(DistrictUi district)
+    {
+        float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
+        district.SetSliderMaxValue(timeToCreate);
+        district.coinsSlider.gameObject.SetActive(true);
+
+        while (timeToCreate > 0)
         {
-            _staticDataService = staticDataService;
+            var delayTimeSpan = TimeSpan.FromSeconds(1f);
+
+            await UniTask.Delay(delayTimeSpan, cancellationToken: district.ActivityToken.Token);
+            timeToCreate--;
+            district.SetSliderValue(timeToCreate);
         }
-
-        public async UniTask CreateCurrencyInTimeAsync(DistrictUi district)
-        {
-            float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
-            district.SetSliderMaxValue(timeToCreate);
-            district.coinsSlider.gameObject.SetActive(true);
-
-            while (timeToCreate > 0)
-            {
-                var delayTimeSpan = TimeSpan.FromSeconds(1f);
-
-                await UniTask.Delay(delayTimeSpan, cancellationToken: district.ActivityToken.Token);
-                timeToCreate--;
-                district.SetSliderValue(timeToCreate);
-            }
             
-            district.TurnOnEarnButton();
-        }
+        district.TurnOnEarnButton();
     }
 }
