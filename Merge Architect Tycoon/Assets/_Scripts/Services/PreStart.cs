@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class PreStart : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Button;
-    [SerializeField]
-    private Slider LoadingSlider;
-    [SerializeField]
-    private GameObject GameRunner;
+    [SerializeField] private GameObject Button;
+
+    [SerializeField] private Slider LoadingSlider;
+    [SerializeField] private GameObject GameRunner;
 
     private float fakeLoadDuration = .5f;
 
@@ -18,6 +16,7 @@ public class PreStart : MonoBehaviour
     {
         yield return null;
         GameRunner.SetActive(true);
+        DontDestroyOnLoad(this);
     }
 
     public void FakeLoad()
@@ -39,7 +38,7 @@ public class PreStart : MonoBehaviour
             LoadingSlider.value += step * Time.deltaTime;
         }
 
-        while(SceneManager.GetActiveScene().name != AssetPath.StartGameScene)
+        while (SceneManager.GetActiveScene().name != AssetPath.StartGameScene)
             yield return null;
 
         while (LoadingSlider.value < 1f)
@@ -48,6 +47,7 @@ public class PreStart : MonoBehaviour
             LoadingSlider.value += step * Time.deltaTime;
         }
 
+        // Destroy(gameObject);
         SceneManager.UnloadSceneAsync(0);
     }
 }
