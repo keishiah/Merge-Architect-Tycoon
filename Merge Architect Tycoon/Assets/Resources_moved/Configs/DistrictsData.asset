@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DistrictsData
   m_EditorClassIdentifier: 
   districts:
-  - districtId: 1
+  - districtId: 0
     currencyCount: 100
     timeToEarn: 5

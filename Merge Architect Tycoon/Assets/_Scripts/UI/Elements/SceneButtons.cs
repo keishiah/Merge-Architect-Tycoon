@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,7 +47,6 @@ public class SceneButtons : MonoBehaviour
 
         if (!needToSelect)
             return;
-
         _selectedButtonIndex = i;
         _widgets[_selectedButtonIndex].OnEnable();
         _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerSelected);
