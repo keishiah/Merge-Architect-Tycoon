@@ -44,7 +44,6 @@ public class DistrictUi : MonoBehaviour
 
     public void OpenDistrict()
     {
-        _districtsPresenter.CitiesMapPopup.SetActive(false);
         _districtsPresenter.SetCurrentDistrict(1);
     }
 

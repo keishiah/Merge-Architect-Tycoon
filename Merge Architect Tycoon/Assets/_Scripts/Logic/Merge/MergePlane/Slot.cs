@@ -80,8 +80,14 @@ public class Slot : MonoBehaviour, IDropHandler
     }
     private void CheckNeighbour()
     {
+        if (_slotState == SlotState.Unloading)
+            return;
+
         if (_slotState == SlotState.NonTouchable)
             ChangeState(SlotState.Draggable);
+
+        if (_neighbours == null || _neighbours.Length == 0)
+            return;
 
         foreach(Slot neighbour in _neighbours)
         {
@@ -173,7 +179,7 @@ public class Slot : MonoBehaviour, IDropHandler
             if (SlotState == SlotState.Blocked)
                 return;
 
-            transform.parent.GetComponent<MergeGrid>().informationPanel.ConfigPanel(this);
+            //transform.parent.GetComponent<MergeGrid>().informationPanel.ConfigPanel(this);
 
             if (currentDraggableItem().isClicked)
                 UseItemInside();
