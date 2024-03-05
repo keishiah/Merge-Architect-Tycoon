@@ -1,53 +1,54 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.UI.Elements
+public enum SceneButtonsEnum
 {
-    public enum SceneButtonsEnum
+    Quest, Merge, Build, District, Shop
+}
+public class SceneButtons : MonoBehaviour
+{
+    private int _selectedButtonIndex = -1;
+
+    [SerializeField]
+    private Button[] _menuButtons;
+    [SerializeField]
+    private Widget[] _widgets;
+
+    private const string AnimatorTriggerNormal = "Normal";
+    private const string AnimatorTriggerSelected = "Selected";
+
+    private void Awake()
     {
-        Quest, Merge, Build, District, Shop
+        for(int i = 0; i < _menuButtons.Length; i++)
+        {
+            int index = i;//allocate new "instance" EACH Step of loop
+            _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
+        }
     }
-    public class SceneButtons : MonoBehaviour
+    public void OnMenuButtonClick(SceneButtonsEnum i)
     {
-        private int _selectedButtonIndex = -1;
+        OnMenuButtonClick((int)i);
+    }
+    public void CloseCurrentWidget()
+    {
+        if (_selectedButtonIndex == -1)
+            return;
 
-        [SerializeField]
-        private Button[] _menuButtons;
-        [SerializeField]
-        private Widget[] _widgets;
+        _widgets[_selectedButtonIndex].OnDisable();
+        _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
+        _selectedButtonIndex = -1;
+    }
+    public void OnMenuButtonClick(int i)
+    {
+        bool needToSelect = _selectedButtonIndex != i;
 
-        private const string AnimatorTriggerNormal = "Normal";
-        private const string AnimatorTriggerSelected = "Selected";
+        CloseCurrentWidget();
 
-        private void Awake()
-        {
-            for(int i = 0; i < _menuButtons.Length; i++)
-            {
-                int index = i;//allocate new "instance" EACH Step of loop
-                _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
-            }
-        }
-        public void OnMenuButtonClick(SceneButtonsEnum i)
-        {
-            OnMenuButtonClick((int)i);
-        }
-        public void OnMenuButtonClick(int i)
-        {
-            bool needToSelect = _selectedButtonIndex != i;
+        if (!needToSelect)
+            return;
 
-            if (_selectedButtonIndex != -1)
-            {
-                _widgets[_selectedButtonIndex].OnDisable();
-                _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
-                _selectedButtonIndex = -1;
-            }
-
-            if (!needToSelect)
-                return;
-
-            _selectedButtonIndex = i;
-            _widgets[_selectedButtonIndex].OnEnable();
-            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerSelected);
-        }
+        _selectedButtonIndex = i;
+        _widgets[_selectedButtonIndex].OnEnable();
+        _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerSelected);
     }
 }

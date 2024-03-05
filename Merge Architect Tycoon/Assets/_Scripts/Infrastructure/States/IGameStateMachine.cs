@@ -1,6 +1,3 @@
-﻿namespace _Scripts.Infrastructure.States
+﻿public interface IGameStateMachine : IStateMachine
 {
-    public interface IGameStateMachine : IStateMachine
-    {
-    }
 }

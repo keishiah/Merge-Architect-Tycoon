@@ -2,41 +2,38 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts.Logic.Buildings
+public class BuildingView : MonoBehaviour
 {
-    public class BuildingView : MonoBehaviour
+    public Image buildingStateImage;
+    public TextMeshProUGUI timerText;
+
+    public void SetViewInactive()
     {
-        public Image buildingStateImage;
-        public TextMeshProUGUI timerText;
-
-        public void SetViewInactive()
-        {
-            buildingStateImage.raycastTarget = false;
-            timerText.gameObject.SetActive(false);
-            buildingStateImage.gameObject.SetActive(false);
-        }
+        buildingStateImage.raycastTarget = false;
+        timerText.gameObject.SetActive(false);
+        buildingStateImage.gameObject.SetActive(false);
+    }
         
-        public void SetViewBuildInProgress()
-        {
-            buildingStateImage.raycastTarget = false;
-            timerText.gameObject.SetActive(true);
-        }
+    public void SetViewBuildInProgress()
+    {
+        buildingStateImage.raycastTarget = false;
+        timerText.gameObject.SetActive(true);
+    }
 
-        public void SetViewBuildCreated()
-        {
-            buildingStateImage.raycastTarget = false;
-            timerText.gameObject.SetActive(false);
-        }
+    public void SetViewBuildCreated()
+    {
+        buildingStateImage.raycastTarget = false;
+        timerText.gameObject.SetActive(false);
+    }
 
-        public void UpdateTimerText(string formattedTime)
-        {
-            timerText.text = formattedTime;
-        }
+    public void UpdateTimerText(string formattedTime)
+    {
+        timerText.text = formattedTime;
+    }
 
-        public void ShowBuildSprite(Sprite spriteToShow)
-        {
-            buildingStateImage.gameObject.SetActive(true);
-            buildingStateImage.sprite = spriteToShow;
-        }
+    public void ShowBuildSprite(Sprite spriteToShow)
+    {
+        buildingStateImage.gameObject.SetActive(true);
+        buildingStateImage.sprite = spriteToShow;
     }
 }

@@ -1,71 +1,69 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Scripts.Logic.Merge.MergePlane;
 using UnityEngine;
 using Zenject;
 
-namespace _Scripts.Logic.Merge.Items
+public class ItemsCatalogue : MonoBehaviour
 {
-    public class ItemsCatalogue : MonoBehaviour
+    public List<MergeItem> mergeItemsCatalogue;
+
+    [Inject] SlotsManager slotsManager;
+    [Inject] InformationPanel informationPanel;
+    [Inject] MergeItemsManager mergeItemsGeneralOpenedManager;
+
+    public bool CheckHasItem(MergeItem item)
     {
-        public List<MergeItem> mergeItemsCatalogue;
+        return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count >
+                0;
+    }
 
-        [Inject] SlotsManager slotsManager;
-        [Inject] InformationPanel informationPanel;
-        [Inject] MergeItemsManager mergeItemsGeneralOpenedManager;
+    public bool CheckHasItems(List<MergeItem> items)
+    {
+        return items.All(item =>
+            slotsManager.Slots.Exists(s =>
+                s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable));
+    }
 
-        public bool CheckHasItem(MergeItem item)
+    public void TakeItems(List<MergeItem> items)
+    {
+        List<Slot> slots = new List<Slot>();
+        List<Slot> managersSlots = slotsManager.Slots;
+
+        foreach (MergeItem item in items)
         {
-            return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count >
-                   0;
+            slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
+                                                                s.CurrentItem.itemName == item.itemName &&
+                                                                s.SlotState == SlotState.Draggable));
         }
 
-        public bool CheckHasItems(List<MergeItem> items)
+        if (slots.Count >= items.Count)
         {
-            return items.All(item =>
-                slotsManager.Slots.Exists(s =>
-                    s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable));
-        }
-
-        public void TakeItems(List<MergeItem> items)
-        {
-            List<Slot> slots = new List<Slot>();
-
-            foreach (var item in items)
+            foreach (var slot in slots)
             {
-                slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
-                                                                 s.CurrentItem.itemName == item.itemName &&
-                                                                 s.SlotState == SlotState.Draggable));
-            }
-
-            if (slots.Count >= items.Count)
-            {
-                foreach (var slot in slots)
+                if (informationPanel.slotCurrent == slot)
                 {
-                    if (informationPanel.slotCurrent == slot)
-                    {
-                        informationPanel.ActivateInfromPanel(false);
-                    }
-
-                    slot.RemoveItem();
+                    informationPanel.ActivateInfromPanel(false);
                 }
-            }
-            else
-            {
-                Debug.Log("Non Items");
+
+                slot.RemoveItem();
             }
         }
-
-        public void AddItem(MergeItem m_item, Slot m_slot)
+        else
         {
-            mergeItemsCatalogue.Add(m_item);
-            if (m_slot.SlotState != SlotState.Blocked)
-                mergeItemsGeneralOpenedManager.AddOpenedItem(m_item);
+            Debug.Log("Non Items");
         }
+    }
 
-        public void RemoveItem(MergeItem item)
-        {
-            mergeItemsCatalogue.Remove(item);
-        }
+    public void AddItem(MergeItem m_item, Slot m_slot)
+    {
+        mergeItemsCatalogue.Add(m_item);
+        if (m_slot.SlotState != SlotState.Blocked)
+            mergeItemsGeneralOpenedManager.AddOpenedItem(m_item);
+    }
+
+    public void RemoveItem(MergeItem item)
+    {
+        mergeItemsCatalogue.Remove(item);
     }
 }

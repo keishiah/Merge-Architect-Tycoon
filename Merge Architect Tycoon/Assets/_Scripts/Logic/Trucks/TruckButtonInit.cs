@@ -2,24 +2,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace _Scripts.Logic.Trucks
+[RequireComponent(typeof(Button))]
+public class TruckButtonInit : MonoBehaviour
 {
-    [RequireComponent(typeof(Button))]
-    public class TruckButtonInit : MonoBehaviour
+    [Inject]
+    private TruckPresenter _truckPresenter;
+    [Inject]
+    private IPlayerProgressService _playerProgressService;
+    [SerializeField]
+    private GameObject _truckMenu;
+    [SerializeField]
+    private Truck _truck;
+    [SerializeField]
+    private int _cost;
+
+    void Start()
     {
-        [Inject] TruckPresenter truckPresenter;
-        [SerializeField] GameObject truckMenu;
-        [SerializeField] Truck truck;
+        GetComponent<Button>().onClick.AddListener(AddNewTruck);
+    }
 
-        void Start()
-        {
-            GetComponent<Button>().onClick.AddListener(AddNewTruck);
-        }
-
-        private void AddNewTruck()
-        {
-            truckPresenter.AddNewTruck(truck.Clone());
-            truckMenu.SetActive(false);
-        }
+    private void AddNewTruck()
+    {
+        if(_playerProgressService.Progress.Coins.SpendCoins(_cost))
+            _truckPresenter.AddNewTruck(_truck.Clone());
+        _truckMenu.SetActive(false);
     }
 }

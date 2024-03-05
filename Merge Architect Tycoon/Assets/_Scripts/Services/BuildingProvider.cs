@@ -1,67 +1,59 @@
 ﻿using System.Collections.Generic;
-using _Scripts.Logic;
-using _Scripts.Logic.Buildings;
-using _Scripts.Logic.CityData;
-using _Scripts.Services.PlayerProgressService;
-using _Scripts.UI;
 using Zenject;
 
-namespace _Scripts.Services
+public class BuildingProvider : IInitializableOnSceneLoaded
 {
-    public class BuildingProvider : IInitializableOnSceneLoaded
+    public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
+
+    private IPlayerProgressService _playerProgressService;
+    private District _district;
+
+    [Inject]
+    void Construct(IPlayerProgressService playerProgressService, District district)
     {
-        public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
+        _playerProgressService = playerProgressService;
+        _district = district;
+    }
 
-        private IPlayerProgressService _playerProgressService;
-        private District _district;
-
-        [Inject]
-        void Construct(IPlayerProgressService playerProgressService, District district)
+    public void OnSceneLoaded()
+    {
+        foreach (var building in _district.GetComponentsInChildren<BuildingPlace>())
         {
-            _playerProgressService = playerProgressService;
-            _district = district;
+            building.InitializeBuilding(_district.districtId);
         }
 
-        public void OnSceneLoaded()
+        LoadCreatedBuildings();
+    }
+
+    private void LoadCreatedBuildings()
+    {
+        Buldings buildings = _playerProgressService.Progress.Buldings;
+
+        foreach (var buildingName in SceneBuildingsDictionary.Keys)
         {
-            foreach (var building in _district.GetComponentsInChildren<BuildingPlace>())
+            if (buildings.CreatedBuildings.Contains(buildingName))
             {
-                building.InitializeBuilding(_district.districtId);
-            }
-
-            LoadCreatedBuildings();
-        }
-
-        private void LoadCreatedBuildings()
-        {
-            Buldings buildings = _playerProgressService.Progress.Buldings;
-
-            foreach (var buildingName in SceneBuildingsDictionary.Keys)
-            {
-                if (buildings.CreatedBuildings.Contains(buildingName))
-                {
-                    CreateBuildingOnStart(buildingName);
-                }
+                CreateBuildingOnStart(buildingName);
             }
         }
+    }
 
-        public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
-        {
-            SceneBuildingsDictionary.Add(buildingName, buildingPlace);
-        }
+    public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
+    {
+        SceneBuildingsDictionary.Add(buildingName, buildingPlace);
+    }
 
-        public async void CreateBuildingInTimeAsync(string buildingName)
+    public async void CreateBuildingInTimeAsync(string buildingName)
+    {
+        if (SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
         {
-            if (SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
-            {
-                await buildingPlace.StartCreatingBuilding();
-                _playerProgressService.Progress.AddBuilding(buildingName);
-            }
+            await buildingPlace.StartCreatingBuilding();
+            _playerProgressService.Progress.AddBuilding(buildingName);
         }
+    }
 
-        private void CreateBuildingOnStart(string buildingName)
-        {
-            SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
-        }
+    private void CreateBuildingOnStart(string buildingName)
+    {
+        SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
     }
 }

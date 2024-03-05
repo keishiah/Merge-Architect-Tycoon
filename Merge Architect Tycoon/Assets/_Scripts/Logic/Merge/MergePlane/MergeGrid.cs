@@ -1,144 +1,138 @@
 using System;
 using System.Collections.Generic;
-using _Scripts.Infrastructure.AssetManagment;
-using _Scripts.Logic.Merge.Items;
-using _Scripts.Services.SaveLoadService;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace _Scripts.Logic.Merge.MergePlane
+[RequireComponent(typeof(GridLayoutGroup))]
+public class MergeGrid : MonoBehaviour
 {
-    [RequireComponent(typeof(GridLayoutGroup))]
-    public class MergeGrid : MonoBehaviour
+    private const string EMPTY_ITEM_NAME = "Empty";
+
+    [SerializeField] public InformationPanel informationPanel;
+
+    [SerializeField] private Slot slotPrefab;
+    [Inject] public SlotsManager slotsManager;
+
+    [Inject] private DiContainer _container;
+    [Inject] private MergeLevel level;
+    [Inject] private MergeItemsManager mergeItemsGeneralOpened;
+
+    private void Start()
     {
-        private const string EMPTY_ITEM_NAME = "Empty";
+        InitializeGrid();
+    }
 
-        [SerializeField] public InformationPanel informationPanel;
-
-        [SerializeField] private Slot slotPrefab;
-        [Inject] public SlotsManager slotsManager;
-
-        [Inject] private DiContainer _container;
-        [Inject] private MergeLevel level;
-        [Inject] private MergeItemsManager mergeItemsGeneralOpened;
-
-        private void Start()
+    public void InitializeGrid()
+    {
+        if (level.isNeedResetLevel)
         {
-            InitializeGrid();
+            PlayerPrefs.DeleteKey(SaveKey.Inventory.ToString());
+            level.isNeedResetLevel = false;
         }
 
-        public void InitializeGrid()
-        {
-            if (level.isNeedResetLevel)
-            {
-                PlayerPrefs.DeleteKey(SaveKey.Inventory.ToString());
-                level.isNeedResetLevel = false;
-            }
+        mergeItemsGeneralOpened.LoadItemGeneralOpened();
+        Input.multiTouchEnabled = false;
+        LoadInventory();
+    }
 
-            mergeItemsGeneralOpened.LoadItemGeneralOpened();
-            Input.multiTouchEnabled = false;
-            LoadInventory();
+    private void CreateLayout(int slotsColumns, int slotsRows)
+    {
+        int allSlots = slotsColumns * slotsRows;
+        GridLayoutGroup gridLayoutGroup = GetComponent<GridLayoutGroup>();
+
+        gridLayoutGroup.constraintCount = slotsColumns;
+
+        for (int i = 0; i < allSlots; i++)
+        {
+            int slot_x = i % slotsColumns;
+            int slot_y = i / slotsColumns;
+
+            Slot initSlot = _container.InstantiatePrefabForComponent<Slot>(slotPrefab);
+
+            initSlot.endMoveEvent += SaveInventory;
+
+            RectTransform slotRect = initSlot.GetComponent<RectTransform>();
+
+            initSlot.name = $"Slot: {slot_y}_{slot_x} ID: {i}";
+            initSlot.transform.SetParent(transform);
+
+            slotRect.localPosition = Vector3.zero;
+            slotRect.localRotation = Quaternion.Euler(Vector3.zero);
+
+            slotRect.localScale = Vector3.one;
+
+            slotsManager.Slots.Add(initSlot);
         }
 
-        private void CreateLayout(int slotsColumns, int slotsRows)
+        slotsManager.InitNeighbours(slotsColumns);
+    }
+
+    public void SaveInventory()
+    {
+        List<Inventory.Slot> itemList = new();
+
+        for (int i = 0; i < slotsManager.Slots.Count; i++)
         {
-            int allSlots = slotsColumns * slotsRows;
-            GridLayoutGroup gridLayoutGroup = GetComponent<GridLayoutGroup>();
+            Slot slot = slotsManager.Slots[i];
 
-            gridLayoutGroup.constraintCount = slotsColumns;
-
-            for (int i = 0; i < allSlots; i++)
+            Inventory.Slot slotToSave = new()
             {
-                int slot_x = i % slotsColumns;
-                int slot_y = i / slotsColumns;
-
-                Slot initSlot = _container.InstantiatePrefabForComponent<Slot>(slotPrefab);
-
-                initSlot.endMoveEvent += SaveInventory;
-
-                RectTransform slotRect = initSlot.GetComponent<RectTransform>();
-
-                initSlot.name = $"Slot: {slot_y}_{slot_x} ID: {i}";
-                initSlot.transform.SetParent(transform);
-
-                slotRect.localPosition = Vector3.zero;
-                slotRect.localRotation = Quaternion.Euler(Vector3.zero);
-
-                slotRect.localScale = Vector3.one;
-
-                slotsManager.Slots.Add(initSlot);
-            }
-
-            slotsManager.InitNeighbours(slotsColumns);
-        }
-
-        public void SaveInventory()
-        {
-            List<Inventory.Slot> itemList = new();
-
-            for (int i = 0; i < slotsManager.Slots.Count; i++)
-            {
-                Slot slot = slotsManager.Slots[i];
-
-                Inventory.Slot slotToSave = new()
-                {
-                    SlotState = slot.SlotState,
-                    ItemID = slot.CurrentItem == null ? EMPTY_ITEM_NAME : slot.CurrentItem.name,
-                };
-
-                itemList.Add(slotToSave);
-            }
-
-            Inventory saveData = new()
-            {
-                GridX = level.columns,
-                GridY = level.rows,
-                items = itemList.ToArray()
+                SlotState = slot.SlotState,
+                ItemID = slot.CurrentItem == null ? EMPTY_ITEM_NAME : slot.CurrentItem.name,
             };
 
-            SaveLoadService.Save(SaveKey.Inventory, saveData);
+            itemList.Add(slotToSave);
         }
 
-        public void LoadInventory()
+        Inventory saveData = new()
         {
-            Inventory loadData = SaveLoadService.Load<Inventory>(SaveKey.Inventory);
-            if (loadData == null || loadData.items == null)
-            {
-                CreateNewLevel();
-                return;
-            }
+            GridX = level.columns,
+            GridY = level.rows,
+            items = itemList.ToArray()
+        };
 
-            bool isLoadSuccess = false;
-            CreateLayout(loadData.GridX, loadData.GridY);
-            try
-            {
-                var items = loadData.items;
-                for (int i = 0; i < items.Length; i++)
-                {
-                    slotsManager.Slots[i].ChangeState(items[i].SlotState);
-                    if (items[i].ItemID != EMPTY_ITEM_NAME)
-                        slotsManager.Slots[i].AddItem(
-                            Resources.Load<MergeItem>(AssetPath.Items + items[i].ItemID));
-                }
+        SaveLoadService.Save(SaveKey.Inventory, saveData);
+    }
 
-                isLoadSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"LoadInventory exeption: {ex.Message}");
-            }
-
-            if (isLoadSuccess)
-                slotsManager.InitialItems();
-            else
-                slotsManager.InitialItems(level.allDropSlots);
+    public void LoadInventory()
+    {
+        Inventory loadData = SaveLoadService.Load<Inventory>(SaveKey.Inventory);
+        if (loadData == null || loadData.items == null)
+        {
+            CreateNewLevel();
+            return;
         }
 
-        private void CreateNewLevel()
+        bool isLoadSuccess = false;
+        CreateLayout(loadData.GridX, loadData.GridY);
+        try
         {
-            CreateLayout(level.columns, level.rows);
+            var items = loadData.items;
+            for (int i = 0; i < items.Length; i++)
+            {
+                slotsManager.Slots[i].ChangeState(items[i].SlotState);
+                if (items[i].ItemID != EMPTY_ITEM_NAME)
+                    slotsManager.Slots[i].AddItem(
+                        Resources.Load<MergeItem>(AssetPath.Items + items[i].ItemID));
+            }
+
+            isLoadSuccess = true;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"LoadInventory exeption: {ex.Message}");
+        }
+
+        if (isLoadSuccess)
+            slotsManager.InitialItems();
+        else
             slotsManager.InitialItems(level.allDropSlots);
-        }
+    }
+
+    private void CreateNewLevel()
+    {
+        CreateLayout(level.columns, level.rows);
+        slotsManager.InitialItems(level.allDropSlots);
     }
 }

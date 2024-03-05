@@ -1,34 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Logic.Merge.Items
+public enum ItemType
 {
-    public enum ItemType
-    {
-        sellable,
-        unsellable,
-        spawner
-    }
+    sellable,
+    unsellable,
+    spawner
+}
 
-    [CreateAssetMenu(menuName = "Merge Items/Merge Item", order = 2, fileName = "New Merge Item")]
-    public class MergeItem : ScriptableObject
-    {
-        public string itemName = "";
-        [TextArea]
-        public string itemDescrpition = "";
-        [Range(1, 7)]
-        public int itemLevel = 1;
-        public float itemCost = 0;
+[CreateAssetMenu(menuName = "Merge Items/Merge Item", order = 2, fileName = "New Merge Item")]
+public class MergeItem : ScriptableObject
+{
+    public string itemName = "";
+    [TextArea]
+    public string itemDescrpition = "";
+    [Range(1, 7)]
+    public int itemLevel = 1;
+    public float itemCost = 0;
 
-        public ItemType itemType= ItemType.sellable;
+    public ItemType itemType= ItemType.sellable;
 
-        public Sprite itemSprite;
+    public Sprite itemSprite;
 
-        [Space]
-        public MergeItem nextItem;
-        [Space]
-        public int InItemsCount;
-        public MergeItem InItem;
-    }
+    [Space]
+    public MergeItem nextItem;
+    [Space]
+    public int InItemsCount;
+    public MergeItem InItem;
 }

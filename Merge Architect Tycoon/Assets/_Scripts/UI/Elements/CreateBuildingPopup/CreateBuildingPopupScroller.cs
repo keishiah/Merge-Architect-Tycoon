@@ -1,53 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using _Scripts.UI.Presenters;
 using UnityEngine;
 using Zenject;
 
-namespace _Scripts.UI.Elements.CreateBuildingPopup
+public class CreateBuildingPopupScroller : UiViewBase
 {
-    public class CreateBuildingPopupScroller : UiViewBase
+    public List<CreateBuildingUiElement> createBuildingElements;
+    public RectTransform scrollerRectTransform;
+    private float _elementWidth;
+
+    private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+
+    [Inject]
+    void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
     {
-        public List<CreateBuildingUiElement> createBuildingElements;
-        public RectTransform scrollerRectTransform;
-        private float _elementWidth;
+        _createBuildingPopupPresenter = createBuildingPopupPresenter;
+    }
 
-        private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+    public override void InitUiElement(UiPresenter uiPresenter)
+    {
+        gameObject.SetActive(false);
+    }
 
-        [Inject]
-        void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
-        {
-            _createBuildingPopupPresenter = createBuildingPopupPresenter;
-        }
+    public void InitializeScroller()
+    {
+        _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
+        _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
+    }
 
-        public override void InitUiElement(UiPresenter uiPresenter)
-        {
-            gameObject.SetActive(false);
-        }
+    public void SortBuildingElements()
+    {
+        _createBuildingPopupPresenter.RenderSortedList();
+    }
 
-        public void InitializeScroller()
-        {
-            _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
-            _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
-        }
+    public void RemoveBuildingElementFromPopup(string buildingName)
+    {
+        var removingElement =
+            createBuildingElements.FirstOrDefault(element => element.buildingName == buildingName);
+        if (removingElement)
+            removingElement.gameObject.SetActive(false);
+    }
 
-        public void SortBuildingElements()
-        {
-            _createBuildingPopupPresenter.RenderSortedList();
-        }
-
-        public void RemoveBuildingElementFromPopup(string buildingName)
-        {
-            var removingElement =
-                createBuildingElements.FirstOrDefault(element => element.buildingName == buildingName);
-            if (removingElement)
-                removingElement.gameObject.SetActive(false);
-        }
-
-        public void SetContentWidth()
-        {
-            scrollerRectTransform.sizeDelta = new Vector2(_elementWidth * createBuildingElements.Count,
-                scrollerRectTransform.sizeDelta.y);
-        }
+    public void SetContentWidth()
+    {
+        scrollerRectTransform.sizeDelta = new Vector2(_elementWidth * createBuildingElements.Count,
+            scrollerRectTransform.sizeDelta.y);
     }
 }
