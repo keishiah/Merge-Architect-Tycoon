@@ -92,7 +92,7 @@ public class SlotsManager
 
         Slot m_slot;
         if (isToUnloadSlot)
-            m_slot = slots[0];//For truck no random
+            m_slot = m_slotsList[0];//For truck no random
         else
             m_slot = m_slotsList[Random.Range(0, m_slotsList.Count)];
 

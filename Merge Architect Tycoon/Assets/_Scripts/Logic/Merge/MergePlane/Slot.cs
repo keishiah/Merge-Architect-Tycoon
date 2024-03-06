@@ -18,6 +18,7 @@ public class Slot : MonoBehaviour, IDropHandler
 {
     [Inject] private IPlayerProgressService _playerProgressService;
     [Inject] private SlotsManager _slotsManager;
+    [Inject] private InformationPanel _informationPanel;
 
     [SerializeField] private Image _itemImage;
     [SerializeField] private SlotState _slotState;
@@ -80,8 +81,14 @@ public class Slot : MonoBehaviour, IDropHandler
     }
     private void CheckNeighbour()
     {
+        if (_slotState == SlotState.Unloading)
+            return;
+
         if (_slotState == SlotState.NonTouchable)
             ChangeState(SlotState.Draggable);
+
+        if (_neighbours == null || _neighbours.Length == 0)
+            return;
 
         foreach(Slot neighbour in _neighbours)
         {
@@ -173,7 +180,7 @@ public class Slot : MonoBehaviour, IDropHandler
             if (SlotState == SlotState.Blocked)
                 return;
 
-            transform.parent.GetComponent<MergeGrid>().informationPanel.ConfigPanel(this);
+            _informationPanel.ConfigPanel(this);
 
             if (currentDraggableItem().isClicked)
                 UseItemInside();
@@ -182,7 +189,7 @@ public class Slot : MonoBehaviour, IDropHandler
         }
         else
         {
-            transform.parent.GetComponent<MergeGrid>().informationPanel.ActivateInfromPanel(false);
+            _informationPanel.ActivateInfromPanel(false);
             currentDraggableItem().isClicked = false;
         }
     }
