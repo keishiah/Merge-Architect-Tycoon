@@ -25,6 +25,7 @@ public class QuestElement : MonoBehaviour
     {
         HideRewards();
         HideQuestPerformanceItems();
+        
         for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
         {
             rewardElements[rewardsCount].gameObject.SetActive(true);

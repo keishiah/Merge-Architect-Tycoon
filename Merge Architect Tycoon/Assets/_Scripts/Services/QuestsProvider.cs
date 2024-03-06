@@ -7,7 +7,6 @@ using Zenject;
 public class QuestsProvider : IInitializableOnSceneLoaded
 {
     private IStaticDataService _staticDataService;
-    private List<Quest> _currentQuests = new();
 
     [Inject]
     void Construct(IStaticDataService staticDataService)

@@ -9,15 +9,13 @@ public class QuestsPresenter
     private QuestPopup _questPopup;
     private Dictionary<Quest, QuestElement> _questElements = new();
 
-    private LoadLevelState _loadLevelState;
     private QuestsProvider _questsProvider;
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService, LoadLevelState loadLevelState, QuestPopup questPopup,
+    void Construct(IPlayerProgressService playerProgressService , QuestPopup questPopup,
         QuestsProvider questsProvider)
     {
         _playerProgressService = playerProgressService;
-        _loadLevelState = loadLevelState;
         _questPopup = questPopup;
         _questsProvider = questsProvider;
     }
@@ -34,9 +32,9 @@ public class QuestsPresenter
         {
             questElement.gameObject.SetActive(true);
             questElement.SetQuestText(quest.questName);
-
             questElement.SetQuestRewards(quest.rewards, quest);
             _questElements.Add(quest, questElement);
         }
     }
+    
 }
