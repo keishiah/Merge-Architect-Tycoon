@@ -9,11 +9,9 @@ public class MergeGrid : MonoBehaviour
 {
     private const string EMPTY_ITEM_NAME = "Empty";
 
-    [SerializeField] public InformationPanel informationPanel;
-
     [SerializeField] private Slot slotPrefab;
-    [Inject] public SlotsManager slotsManager;
 
+    [Inject] public SlotsManager slotsManager;
     [Inject] private DiContainer _container;
     [Inject] private MergeLevel level;
     [Inject] private MergeItemsManager mergeItemsGeneralOpened;
