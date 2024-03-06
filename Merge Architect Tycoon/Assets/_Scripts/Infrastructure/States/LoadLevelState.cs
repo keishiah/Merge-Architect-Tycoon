@@ -43,9 +43,11 @@
 
     private void InitLevel()
     {
-        _sceneContextProvider.Resolve<QuestsPresenter>().InitializeWidget();
+        _sceneContextProvider.Resolve<QuestsPresenter>().InitializePresenter();
         _uiPresenter.InitializeElementsOnSceneLoaded();
+
         InitializePopupPresenters();
+        _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
     }
 
     private void InitializePopupPresenters()
@@ -54,5 +56,6 @@
         createBuildingPopupPresenter.InitializePresenter();
         _sceneContextProvider.Resolve<BuildingProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
+        _sceneContextProvider.Resolve<QuestsProvider>().OnSceneLoaded();
     }
 }

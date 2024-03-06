@@ -7,6 +7,7 @@ public interface IStaticDataService
     UniTask Initialize();
     Sprite BuildInProgressSprite { get; }
     Dictionary<string, BuildingInfo> BuildingData { get; }
+    Dictionary<string, Quest> Quests { get; }
     BuildingInfo GetBuildingData(string buildingName);
     DistrictInfo GetDistrictData(int districtId);
 }
