@@ -20,6 +20,7 @@ public class QuestPopup : MonoBehaviour
         foreach (var questElement in questElements)
         {
             questElement.gameObject.SetActive(false);
+            questElement.InitializeElement();
         }
     }
 

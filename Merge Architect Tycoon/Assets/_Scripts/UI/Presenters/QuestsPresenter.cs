@@ -12,7 +12,7 @@ public class QuestsPresenter
     private QuestsProvider _questsProvider;
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService , QuestPopup questPopup,
+    void Construct(IPlayerProgressService playerProgressService, QuestPopup questPopup,
         QuestsProvider questsProvider)
     {
         _playerProgressService = playerProgressService;
@@ -26,15 +26,20 @@ public class QuestsPresenter
     }
 
 
-    public void ActivateQuest(Quest quest)
+    public void ActivateBuildingQuestQuest(Quest quest)
     {
         if (_questPopup.GetInactiveQuestElement(out var questElement))
         {
             questElement.gameObject.SetActive(true);
             questElement.SetQuestText(quest.questName);
-            questElement.SetQuestRewards(quest.rewards, quest);
+            questElement.ActivateBuildingQuest(quest.rewards, quest);
             _questElements.Add(quest, questElement);
         }
     }
-    
+
+    public void CompleteBuildingQuest(Quest quest)
+    {
+        _questElements.TryGetValue(quest, out var questElement);
+        questElement.SetQuestAsCompleted();
+    }
 }

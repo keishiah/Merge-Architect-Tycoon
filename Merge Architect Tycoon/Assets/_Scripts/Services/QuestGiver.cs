@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class QuestGiver : IInitializableOnSceneLoaded
 {
-    private List<Quest> _currentQuests = new();
+    private Dictionary<string, Quest> _currentQuestsDictionary = new();
 
     private QuestsPresenter _questsPresenter;
     private QuestsProvider _questsProvider;
@@ -28,22 +30,38 @@ public class QuestGiver : IInitializableOnSceneLoaded
         ActivateFirstQuest();
 
         var secondQuest = _questsProvider.GetSecondQuest();
-        _currentQuests.Add(secondQuest);
-        _questsPresenter.ActivateQuest(secondQuest);
+        _questsPresenter.ActivateBuildingQuestQuest(secondQuest);
     }
 
     private void ActivateFirstQuest()
     {
         var firstQuest = _questsProvider.GetFirstQuest();
-        _currentQuests.Add(firstQuest);
-        _questsPresenter.ActivateQuest(firstQuest);
-        var buildingProgress = _playerProgressService.Progress.Buldings;
-        buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
+        _currentQuestsDictionary.Add(firstQuest.questId, firstQuest);
+
+        ActivateQuest(firstQuest);
     }
-//todo create 2 dictionaries for 2 quest types, subscribe each changing.
-// create method for each quest type to track quest completion and correspond them ro questpresenter
+
+
+    private void ActivateQuest(Quest quest)
+    {
+        switch (quest.questType)
+        {
+            case QuestType.BuildingQuest:
+                _questsPresenter.ActivateBuildingQuestQuest(quest);
+                var buildingProgress = _playerProgressService.Progress.Buldings;
+                buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
+                break;
+        }
+    }
+
     private void OnBuildingCreated(string buildingName)
     {
-        throw new System.NotImplementedException();
+        foreach (var quest in _currentQuestsDictionary.Values)
+        {
+            if (quest.questType == QuestType.BuildingQuest && quest.buildingName == buildingName)
+            {
+                // _questsPresenter.CompleteBuildingQuest(quest);
+            }
+        }
     }
 }
