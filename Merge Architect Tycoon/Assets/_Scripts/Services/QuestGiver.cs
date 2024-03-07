@@ -47,12 +47,12 @@ public class QuestGiver : IInitializableOnSceneLoaded
         switch (quest.questType)
         {
             case QuestType.BuildingQuest:
-                _questsPresenter.ActivateBuildingQuestQuest(quest);
+                _questsPresenter.ActivateQuest(quest);
                 var buildingProgress = _playerProgressService.Progress.Buldings;
                 buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
                 break;
             case QuestType.CreateItemQuest:
-                _questsPresenter.ActivateMergeQuestQuest(quest);
+                _questsPresenter.ActivateQuest(quest);
                 // var buildingProgress = _playerProgressService.Progress.Buldings;
                 // buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
                 break;
