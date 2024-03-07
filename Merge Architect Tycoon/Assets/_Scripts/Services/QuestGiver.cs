@@ -30,7 +30,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
         ActivateFirstQuest();
 
         var secondQuest = _questsProvider.GetSecondQuest();
-        _questsPresenter.ActivateBuildingQuestQuest(secondQuest);
     }
 
     private void ActivateFirstQuest()
@@ -58,9 +57,9 @@ public class QuestGiver : IInitializableOnSceneLoaded
     {
         foreach (var quest in _currentQuestsDictionary.Values)
         {
-            if (quest.questType == QuestType.BuildingQuest && quest.buildingName == buildingName)
+            if (quest.questType == QuestType.BuildingQuest && quest.buildingName == "4")
             {
-                // _questsPresenter.CompleteBuildingQuest(quest);
+                _questsPresenter.CompleteBuildingQuest(quest);
             }
         }
     }

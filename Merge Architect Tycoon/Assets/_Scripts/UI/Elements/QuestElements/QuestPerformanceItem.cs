@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,11 +10,13 @@ namespace _Scripts.UI
     {
         public TextMeshProUGUI itemText;
         public Image performanceItemImage;
-
+        public Image checkMarkImage;
         public TextMeshProUGUI performanceItemText;
 
-        private int _itemToCreateCount;
-        private int _currentToCreateCount;
+        private void Start()
+        {
+            checkMarkImage.gameObject.SetActive(false);
+        }
 
         public void RenderBuildingQuestPerformance(string buildingToBuild, Sprite buildingImage)
         {
@@ -27,6 +30,11 @@ namespace _Scripts.UI
             itemText.text = itemToCreate.itemName;
             performanceItemImage.sprite = itemToCreate.itemSprite;
             performanceItemText.text = $"{itemToCreate.itemName} 0/{itemsCount}";
+        }
+
+        public void ItemCompleted()
+        {
+            checkMarkImage.gameObject.SetActive(true);
         }
     }
 }

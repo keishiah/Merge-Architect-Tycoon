@@ -11,6 +11,7 @@ public class QuestElement : MonoBehaviour
 {
     public TextMeshProUGUI questText;
     public List<RewardElement> rewardElements;
+
     public List<QuestPerformanceItem> questPerformanceItems;
 
     public Button claimButton;
@@ -28,12 +29,40 @@ public class QuestElement : MonoBehaviour
 
     public void ActivateBuildingQuest(List<Reward> rewards, Quest quest)
     {
-        // gameObject.GetComponent<TMP_Dropdown>().AddOptions(rewards.Select(x => x.rewardAmount.ToString()).ToList());
-
         for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
         {
             ActivateReward(rewards, rewardsCount);
-            ActivatePerformanceItem(quest, rewardsCount);
+        }
+
+        var itemsList = new List<string> { quest.buildingName };
+        ActivatePerformanceItem(quest, itemsList);
+    }
+
+    private void ActivateReward(List<Reward> rewards, int rewardsCount)
+    {
+        rewardElements[rewardsCount].gameObject.SetActive(true);
+        rewardElements[rewardsCount].RenderReward(rewards[rewardsCount].rewardAmount.ToString(),
+            rewards[rewardsCount].rewardSprite);
+    }
+
+    private void ActivatePerformanceItem(Quest quest, List<string> performanceItems)
+    {
+        questPerformanceItems[0].gameObject.SetActive(true);
+        questPerformanceItems[0].RenderBuildingQuestPerformance(quest.buildingName,
+            quest.buildingImage);
+    }
+
+    public void SetQuestAsCompleted()
+    {
+        claimButton.gameObject.SetActive(true);
+        questPerformanceItems[0].ItemCompleted();
+    }
+
+    private void HideRewards()
+    {
+        foreach (var rewardElement in rewardElements)
+        {
+            rewardElement.gameObject.SetActive(false);
         }
     }
 
@@ -63,39 +92,11 @@ public class QuestElement : MonoBehaviour
         }
     }
 
-    private void ActivateReward(List<Reward> rewards, int rewardsCount)
-    {
-        rewardElements[rewardsCount].gameObject.SetActive(true);
-        rewardElements[rewardsCount].RenderReward(rewards[rewardsCount].rewardAmount.ToString(),
-            rewards[rewardsCount].rewardSprite);
-    }
-
-    private void ActivatePerformanceItem(Quest quest, int rewardsCount)
-    {
-        int itemToActivatePositionInList = questPerformanceItems.Count - rewardsCount - 1;
-        questPerformanceItems[itemToActivatePositionInList].gameObject.SetActive(true);
-        questPerformanceItems[itemToActivatePositionInList].RenderBuildingQuestPerformance(quest.buildingName,
-            quest.buildingImage);
-    }
-
     private void HideQuestPerformanceItems()
     {
         foreach (var questPerformanceItem in questPerformanceItems)
         {
             questPerformanceItem.gameObject.SetActive(false);
         }
-    }
-
-    private void HideRewards()
-    {
-        foreach (var rewardElement in rewardElements)
-        {
-            rewardElement.gameObject.SetActive(false);
-        }
-    }
-
-    public void SetQuestAsCompleted()
-    {
-        claimButton.gameObject.SetActive(true);
     }
 }

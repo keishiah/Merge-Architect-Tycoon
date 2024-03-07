@@ -43,10 +43,10 @@
 
     private void InitLevel()
     {
-        _sceneContextProvider.Resolve<QuestsPresenter>().InitializePresenter();
         _uiPresenter.InitializeElementsOnSceneLoaded();
 
         InitializePopupPresenters();
+        _sceneContextProvider.Resolve<QuestsPresenter>().InitializePresenter();
         _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
     }
 
