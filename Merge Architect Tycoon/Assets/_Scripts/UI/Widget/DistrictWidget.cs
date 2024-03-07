@@ -11,6 +11,5 @@ public class DistrictWidget : Widget
     public override void OnEnable()
     {
         base.OnEnable();
-        _districtUi.OpenDistrict();
     }
 }

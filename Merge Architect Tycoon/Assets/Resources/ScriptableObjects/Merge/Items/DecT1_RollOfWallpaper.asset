@@ -17,5 +17,7 @@ MonoBehaviour:
   itemLevel: 1
   itemCost: 10
   itemType: 0
-  itemSprite: {fileID: 21300000, guid: 2307b0f8c2e0c2b4c927c161d72cc32a, type: 3}
+  itemSprite: {fileID: 21300000, guid: 168b299298ce7e74aa9adc73eef2797e, type: 3}
   nextItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
+  InItemsCount: 0
+  InItem: {fileID: 0}

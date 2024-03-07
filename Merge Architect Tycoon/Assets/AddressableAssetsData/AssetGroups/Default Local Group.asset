@@ -25,19 +25,19 @@ MonoBehaviour:
     m_Address: BuildingPlace
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 964855170fa8e2447a6bcc8107bdcd34
+  - m_GUID: 718bf0ffc49bbbf43a3ae4aa83cfa82f
     m_Address: NonTouchableSlot
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 6753277b66ec0644d805e4b79935e999
+  - m_GUID: 32efdbadd3a41354fa5fae40ae9fc932
     m_Address: BlockedSlot
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: fbde1cd0a7b01b14aa16b1a673f0ad62
+  - m_GUID: 63ddfff927bb62744ab72f4a1744e5f2
     m_Address: SlotIcon
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 3b248ed7cc44f4b45b2900b1a69c3103
+  - m_GUID: b865db285eb78e244931dca027324e2e
     m_Address: DeliveryZone
     m_ReadOnly: 0
     m_SerializedLabels: []

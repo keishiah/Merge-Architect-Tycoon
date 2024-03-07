@@ -31,7 +31,7 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
         var progress = _uiPresenter.PlayerProgressService.Progress;
 
         RenderMoneyCount(progress.Coins.CurrentCoinsCount);
-        // RenderDiamandCount(progress.Diamonds.CurrentCoinsCount);
+        RenderDiamandCount(progress.Diamonds.CurrentCoinsCount);
 
         _uiPresenter.SubscribeMoneyCountChanged(RenderMoneyCount);
         _uiPresenter.SubscribeDiamondsCountChanged(RenderDiamandCount);
@@ -42,9 +42,7 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 // #if UNITY_EDITOR
         if (Application.version.StartsWith("d"))
         {
-            Debug.Log("add button clicked");
             _uiPresenter.PlayerProgressService.Progress.AddCoins(100500);
-            _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);
         }
         // else
         // {
@@ -53,6 +51,13 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 // #if UNITY_EDITOR
 //             }
 // #endif
+    }
+    public void AddDiamonds()
+    {
+        if (Application.version.StartsWith("d"))
+        {
+            _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);
+        }
     }
 
     public void RenderMoneyCount(int newValue)
