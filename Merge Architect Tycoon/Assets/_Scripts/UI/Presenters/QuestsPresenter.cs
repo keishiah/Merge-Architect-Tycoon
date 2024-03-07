@@ -37,6 +37,17 @@ public class QuestsPresenter
         }
     }
 
+    public void ActivateMergeQuestQuest(Quest quest)
+    {
+        if (_questPopup.GetInactiveQuestElement(out var questElement))
+        {
+            questElement.gameObject.SetActive(true);
+            questElement.SetQuestText(quest.questName);
+            questElement.ActivateMergeQuest(quest.rewards, quest);
+            _questElements.Add(quest, questElement);
+        }
+    }
+
     public void CompleteBuildingQuest(Quest quest)
     {
         _questElements.TryGetValue(quest, out var questElement);

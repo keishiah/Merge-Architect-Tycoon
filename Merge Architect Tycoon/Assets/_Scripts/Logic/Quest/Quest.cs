@@ -15,7 +15,7 @@ public class Quest : ScriptableObject
     public Sprite buildingImage;
     
     public List<MergeItem> itemsToMerge;
-    public int itemsCount;
+    public List<int> itemsCount;
 
 
     public Quest()

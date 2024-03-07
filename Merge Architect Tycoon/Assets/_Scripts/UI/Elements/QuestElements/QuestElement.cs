@@ -34,9 +34,22 @@ public class QuestElement : MonoBehaviour
             ActivateReward(rewards, rewardsCount);
         }
 
-        var itemsList = new List<string> { quest.buildingName };
-        ActivatePerformanceItem(quest, itemsList);
+        ActivatePerformanceItem(quest);
     }
+
+    public void ActivateMergeQuest(List<Reward> rewards, Quest quest)
+    {
+        for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
+        {
+            ActivateReward(rewards, rewardsCount);
+        }
+
+        for (int x = 0; x < quest.itemsToMerge.Count; x++)
+        {
+            ActivatePerformanceItem(quest.itemsToMerge[x], quest.itemsCount[x], x);
+        }
+    }
+
 
     private void ActivateReward(List<Reward> rewards, int rewardsCount)
     {
@@ -45,11 +58,17 @@ public class QuestElement : MonoBehaviour
             rewards[rewardsCount].rewardSprite);
     }
 
-    private void ActivatePerformanceItem(Quest quest, List<string> performanceItems)
+    private void ActivatePerformanceItem(Quest quest, int itemsPosition = 0)
     {
-        questPerformanceItems[0].gameObject.SetActive(true);
-        questPerformanceItems[0].RenderBuildingQuestPerformance(quest.buildingName,
+        questPerformanceItems[itemsPosition].gameObject.SetActive(true);
+        questPerformanceItems[itemsPosition].RenderBuildingQuestPerformance(quest.buildingName,
             quest.buildingImage);
+    }
+
+    private void ActivatePerformanceItem(MergeItem item, int itemsCount, int itemsPosition)
+    {
+        questPerformanceItems[itemsPosition].gameObject.SetActive(true);
+        questPerformanceItems[itemsPosition].RenderCreateItemQuestPerformance(item, itemsCount);
     }
 
     public void SetQuestAsCompleted()
@@ -66,31 +85,31 @@ public class QuestElement : MonoBehaviour
         }
     }
 
-    public void SetQuestRewards(List<Reward> rewards, Quest quest)
-    {
-        for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
-        {
-            rewardElements[rewardsCount].gameObject.SetActive(true);
-            rewardElements[rewardsCount].RenderReward(rewards[rewardsCount].rewardAmount.ToString(),
-                rewards[rewardsCount].rewardSprite);
-
-            if (quest.questType == QuestType.BuildingQuest)
-            {
-                questPerformanceItems[rewardsCount].gameObject.SetActive(true);
-                questPerformanceItems[rewardsCount].RenderBuildingQuestPerformance(quest.buildingName,
-                    quest.buildingImage);
-            }
-            else
-            {
-                questPerformanceItems[rewardsCount].gameObject.SetActive(true);
-
-                foreach (var item in quest.itemsToMerge)
-                {
-                    questPerformanceItems[rewardsCount].RenderCreateItemQuestPerformance(item, quest.itemsCount);
-                }
-            }
-        }
-    }
+    // public void SetQuestRewards(List<Reward> rewards, Quest quest)
+    // {
+    //     for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
+    //     {
+    //         rewardElements[rewardsCount].gameObject.SetActive(true);
+    //         rewardElements[rewardsCount].RenderReward(rewards[rewardsCount].rewardAmount.ToString(),
+    //             rewards[rewardsCount].rewardSprite);
+    //
+    //         if (quest.questType == QuestType.BuildingQuest)
+    //         {
+    //             questPerformanceItems[rewardsCount].gameObject.SetActive(true);
+    //             questPerformanceItems[rewardsCount].RenderBuildingQuestPerformance(quest.buildingName,
+    //                 quest.buildingImage);
+    //         }
+    //         else
+    //         {
+    //             questPerformanceItems[rewardsCount].gameObject.SetActive(true);
+    //
+    //             foreach (var item in quest.itemsToMerge)
+    //             {
+    //                 questPerformanceItems[rewardsCount].RenderCreateItemQuestPerformance(item, quest.itemsCount);
+    //             }
+    //         }
+    //     }
+    // }
 
     private void HideQuestPerformanceItems()
     {

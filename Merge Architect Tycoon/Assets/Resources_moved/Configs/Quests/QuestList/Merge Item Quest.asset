@@ -23,4 +23,5 @@ MonoBehaviour:
   buildingImage: {fileID: 0}
   itemsToMerge:
   - {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
-  itemsCount: 2
+  - {fileID: 11400000, guid: 2b959feec19dad74c9273d400fd3b6cf, type: 2}
+  itemsCount: 0100000002000000

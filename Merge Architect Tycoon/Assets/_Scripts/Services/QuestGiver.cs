@@ -30,6 +30,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
         ActivateFirstQuest();
 
         var secondQuest = _questsProvider.GetSecondQuest();
+        ActivateQuest(secondQuest);
     }
 
     private void ActivateFirstQuest()
@@ -49,6 +50,11 @@ public class QuestGiver : IInitializableOnSceneLoaded
                 _questsPresenter.ActivateBuildingQuestQuest(quest);
                 var buildingProgress = _playerProgressService.Progress.Buldings;
                 buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
+                break;
+            case QuestType.CreateItemQuest:
+                _questsPresenter.ActivateMergeQuestQuest(quest);
+                // var buildingProgress = _playerProgressService.Progress.Buldings;
+                // buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
                 break;
         }
     }
