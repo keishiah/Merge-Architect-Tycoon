@@ -10,6 +10,8 @@ public class TruckPurchaseOffer : MonoBehaviour
     private TruckPresenter _truckPresenter;
     [Inject]
     private IPlayerProgressService _playerProgressService;
+    [Inject]
+    private InformationPanel _informationPanel;
     [SerializeField]
     private GameObject _truckMenu;
     [SerializeField]
@@ -32,7 +34,6 @@ public class TruckPurchaseOffer : MonoBehaviour
     private Image _truckImage;
     [SerializeField]
     private Image _resourceImage;
-
 
     void Start()
     {
@@ -71,5 +72,6 @@ public class TruckPurchaseOffer : MonoBehaviour
         if(_playerProgressService.Progress.Coins.SpendCoins(_cost))
             _truckPresenter.AddNewTruck(_truck.Clone());
         _truckMenu.SetActive(false);
+        _informationPanel.gameObject.SetActive(true);
     }
 }
