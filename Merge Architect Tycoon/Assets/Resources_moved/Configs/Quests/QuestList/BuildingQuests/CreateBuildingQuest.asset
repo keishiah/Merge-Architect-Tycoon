@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138746658ff3469cba4e8cdb1e442b91, type: 3}
-  m_Name: Quest
+  m_Script: {fileID: 11500000, guid: 1b4fa59837c14d04a418be0fe0abafb6, type: 3}
+  m_Name: CreateBuildingQuest
   m_EditorClassIdentifier: 
-  questId: e038d289-ffe3-4a74-8647-08947ce05522
-  questType: 0
+  questId: 94552d1c-8185-4783-89b4-92ad05962dd2
   questName: 
-  rewards: []
   buildingName: 
   buildingImage: {fileID: 0}
-  itemsToMerge: []
-  itemsCount: 

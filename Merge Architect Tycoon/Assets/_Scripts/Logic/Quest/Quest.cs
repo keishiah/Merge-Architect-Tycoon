@@ -3,31 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Quest", menuName = "StaticData/Quest", order = 0)]
-public class Quest : ScriptableObject
+public abstract class Quest : ScriptableObject
 {
     [HideInInspector] public string questId;
-    public QuestType questType;
+
     public string questName;
+    public abstract void GiveReward();
     public List<Reward> rewards;
 
-    public string buildingName;
-    public Sprite buildingImage;
-    
-    public List<MergeItem> itemsToMerge;
-    public List<int> itemsCount;
 
+    //
+    // public List<MergeItem> itemsToMerge;
+    // public List<int> itemsCount;
 
-    public Quest()
+    protected Quest()
     {
         questId = Guid.NewGuid().ToString();
     }
-}
-
-[Serializable]
-public class Reward
-{
-    public string rewardName;
-    public int rewardAmount;
-    public Sprite rewardSprite;
 }

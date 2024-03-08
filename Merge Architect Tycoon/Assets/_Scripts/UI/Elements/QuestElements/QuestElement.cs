@@ -44,10 +44,10 @@ public class QuestElement : MonoBehaviour
             ActivateReward(rewards, rewardsCount);
         }
 
-        for (int x = 0; x < quest.itemsToMerge.Count; x++)
-        {
-            ActivatePerformanceItem(quest.itemsToMerge[x], quest.itemsCount[x], x);
-        }
+        // for (int x = 0; x < quest.itemsToMerge.Count; x++)
+        // {
+        //     ActivatePerformanceItem(quest.itemsToMerge[x], quest.itemsCount[x], x);
+        // }
     }
 
 
@@ -60,9 +60,9 @@ public class QuestElement : MonoBehaviour
 
     private void ActivatePerformanceItem(Quest quest, int itemsPosition = 0)
     {
-        questPerformanceItems[itemsPosition].gameObject.SetActive(true);
-        questPerformanceItems[itemsPosition].RenderBuildingQuestPerformance(quest.buildingName,
-            quest.buildingImage);
+        // questPerformanceItems[itemsPosition].gameObject.SetActive(true);
+        // questPerformanceItems[itemsPosition].RenderBuildingQuestPerformance(quest.buildingName,
+        //     quest.buildingImage);
     }
 
     private void ActivatePerformanceItem(MergeItem item, int itemsCount, int itemsPosition)

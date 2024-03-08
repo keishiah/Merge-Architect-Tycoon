@@ -44,29 +44,29 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     private void ActivateQuest(Quest quest)
     {
-        switch (quest.questType)
-        {
-            case QuestType.BuildingQuest:
-                _questsPresenter.ActivateQuest(quest);
-                var buildingProgress = _playerProgressService.Progress.Buldings;
-                buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
-                break;
-            case QuestType.CreateItemQuest:
-                _questsPresenter.ActivateQuest(quest);
-                // var buildingProgress = _playerProgressService.Progress.Buldings;
-                // buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
-                break;
-        }
+        // switch (quest.questType)
+        // {
+        //     case QuestType.BuildingQuest:
+        //         _questsPresenter.ActivateQuest(quest);
+        //         var buildingProgress = _playerProgressService.Progress.Buldings;
+        //         buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
+        //         break;
+        //     case QuestType.CreateItemQuest:
+        //         _questsPresenter.ActivateQuest(quest);
+        //         // var buildingProgress = _playerProgressService.Progress.Buldings;
+        //         // buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
+        //         break;
+        // }
     }
 
     private void OnBuildingCreated(string buildingName)
     {
-        foreach (var quest in _currentQuestsDictionary.Values)
-        {
-            if (quest.questType == QuestType.BuildingQuest && quest.buildingName == "4")
-            {
-                _questsPresenter.CompleteBuildingQuest(quest);
-            }
-        }
+        // foreach (var quest in _currentQuestsDictionary.Values)
+        // {
+        //     if (quest.questType == QuestType.BuildingQuest && quest.buildingName == "4")
+        //     {
+        //         _questsPresenter.CompleteBuildingQuest(quest);
+        //     }
+        // }
     }
 }

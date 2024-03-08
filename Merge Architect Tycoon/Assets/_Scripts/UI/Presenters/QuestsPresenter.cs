@@ -27,22 +27,22 @@ public class QuestsPresenter
 
     public void ActivateQuest(Quest quest)
     {
-        if (_questPopup.GetInactiveQuestElement(out var questElement))
-        {
-            questElement.gameObject.SetActive(true);
-            questElement.SetQuestText(quest.questName);
-            _questElements.Add(quest, questElement);
-
-            switch (quest.questType)
-            {
-                case QuestType.BuildingQuest:
-                    questElement.ActivateBuildingQuest(quest.rewards, quest);
-                    break;
-                case QuestType.CreateItemQuest:
-                    questElement.ActivateMergeQuest(quest.rewards, quest);
-                    break;
-            }
-        }
+        // if (_questPopup.GetInactiveQuestElement(out var questElement))
+        // {
+        //     questElement.gameObject.SetActive(true);
+        //     questElement.SetQuestText(quest.questName);
+        //     _questElements.Add(quest, questElement);
+        //
+        //     switch (quest.questType)
+        //     {
+        //         case QuestType.BuildingQuest:
+        //             questElement.ActivateBuildingQuest(quest.rewards, quest);
+        //             break;
+        //         case QuestType.CreateItemQuest:
+        //             questElement.ActivateMergeQuest(quest.rewards, quest);
+        //             break;
+        //     }
+        // }
     }
 
     public void CompleteBuildingQuest(Quest quest)
