@@ -6,6 +6,7 @@ using Zenject;
 
 public class QuestsProvider : IInitializableOnSceneLoaded
 {
+    private List<Quest> _activeQuests = new();
     private IStaticDataService _staticDataService;
 
     [Inject]
@@ -18,19 +19,18 @@ public class QuestsProvider : IInitializableOnSceneLoaded
     {
     }
 
-    public Quest GetQuest(string questName)
-    {
-        _staticDataService.Quests.TryGetValue(questName, out var quest);
-        return quest;
-    }
-
     public Quest GetFirstQuest()
     {
         return _staticDataService.Quests.Values.ToList()[0];
     }
 
-    public Quest GetSecondQuest()
+    public void ActivateQuest(Quest questValue)
     {
-        return _staticDataService.Quests.Values.ToList()[1];
+        _activeQuests.Add(questValue);
+    }
+
+    public void SubscribeQuestProgress(Quest quest)
+    {
+        
     }
 }

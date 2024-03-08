@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4fa59837c14d04a418be0fe0abafb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 61b5ab94bf234e3e8ccba4fe8224f131, type: 3}
   m_Name: CreateBuildingQuest
   m_EditorClassIdentifier: 
-  questId: 94552d1c-8185-4783-89b4-92ad05962dd2
+  questId: 851c39b0-8b0b-4a2a-92b3-97cec0bfc5f6
   questName: 
   buildingName: 
   buildingImage: {fileID: 0}

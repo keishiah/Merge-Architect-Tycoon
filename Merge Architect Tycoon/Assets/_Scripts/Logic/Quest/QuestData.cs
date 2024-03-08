@@ -8,8 +8,4 @@ public class QuestData : ScriptableObject
     public List<Quest> quests;
 }
 
-public enum QuestType
-{
-    CreateItemQuest,
-    BuildingQuest
-}
+

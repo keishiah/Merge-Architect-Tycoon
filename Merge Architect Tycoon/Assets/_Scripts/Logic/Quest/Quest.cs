@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public abstract class Quest : ScriptableObject
 {
     [HideInInspector] public string questId;
-
+    [HideInInspector] public QuestType questType;
+    
     public string questName;
+    public GiveQuestCondition giveQuestCondition;
     public abstract void GiveReward();
-    public List<Reward> rewards;
 
-
-    //
     // public List<MergeItem> itemsToMerge;
     // public List<int> itemsCount;
 
@@ -20,4 +19,16 @@ public abstract class Quest : ScriptableObject
     {
         questId = Guid.NewGuid().ToString();
     }
+}
+
+public enum GiveQuestCondition
+{
+    Start,
+    Building,
+}
+
+public enum QuestType
+{
+    Merge,
+    Building,
 }

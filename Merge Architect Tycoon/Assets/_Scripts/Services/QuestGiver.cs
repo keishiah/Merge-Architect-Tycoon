@@ -5,68 +5,32 @@ using Zenject;
 
 public class QuestGiver : IInitializableOnSceneLoaded
 {
-    private Dictionary<string, Quest> _currentQuestsDictionary = new();
+    private Dictionary<GiveQuestCondition, Quest> _questByCondition;
 
-    private QuestsPresenter _questsPresenter;
     private QuestsProvider _questsProvider;
-    private IPlayerProgressService _playerProgressService;
+    private IStaticDataService _staticDataService;
 
     [Inject]
-    void Construct(QuestsPresenter questsPresenter, QuestsProvider questsProvider,
-        IPlayerProgressService playerProgressService)
+    void Construct(QuestsProvider questsProvider, IStaticDataService staticDataService)
     {
-        _questsPresenter = questsPresenter;
         _questsProvider = questsProvider;
-        _playerProgressService = playerProgressService;
+        _staticDataService = staticDataService;
     }
 
     public void OnSceneLoaded()
     {
-        ActivateQuests();
+        foreach (var quest in _staticDataService.Quests)
+        {
+            GiveQuestCondition questCondition = quest.Value.giveQuestCondition;
+            _questByCondition.Add(questCondition, quest.Value);
+            
+            if(questCondition== GiveQuestCondition.Start)
+                ActivateQuest(quest.Value);
+        }
     }
 
-    private void ActivateQuests()
+    private void ActivateQuest(Quest questValue)
     {
-        ActivateFirstQuest();
-
-        var secondQuest = _questsProvider.GetSecondQuest();
-        ActivateQuest(secondQuest);
-    }
-
-    private void ActivateFirstQuest()
-    {
-        var firstQuest = _questsProvider.GetFirstQuest();
-        _currentQuestsDictionary.Add(firstQuest.questId, firstQuest);
-
-        ActivateQuest(firstQuest);
-    }
-
-
-    private void ActivateQuest(Quest quest)
-    {
-        // switch (quest.questType)
-        // {
-        //     case QuestType.BuildingQuest:
-        //         _questsPresenter.ActivateQuest(quest);
-        //         var buildingProgress = _playerProgressService.Progress.Buldings;
-        //         buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
-        //         break;
-        //     case QuestType.CreateItemQuest:
-        //         _questsPresenter.ActivateQuest(quest);
-        //         // var buildingProgress = _playerProgressService.Progress.Buldings;
-        //         // buildingProgress.SubscribeToBuildingsChanges(OnBuildingCreated);
-        //         break;
-        // }
-    }
-
-    private void OnBuildingCreated(string buildingName)
-    {
-        // foreach (var quest in _currentQuestsDictionary.Values)
-        // {
-        //     if (quest.questType == QuestType.BuildingQuest && quest.buildingName == "4")
-        //     {
-        //         _questsPresenter.CompleteBuildingQuest(quest);
-        //     }
-        // }
+        _questsProvider.ActivateQuest(questValue);
     }
 }

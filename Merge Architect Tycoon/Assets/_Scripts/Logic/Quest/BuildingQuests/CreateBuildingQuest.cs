@@ -5,19 +5,13 @@ public class CreateBuildingQuest : Quest
 {
     public string buildingName;
     public Sprite buildingImage;
+    public CoinsReward CoinsReward;
+    
 
+    public override void GiveReward() => CoinsReward.GiveReward();
 
-    public bool IsCompleted(string buildingName)
+    public virtual bool IsCompleted(string buildingName)
     {
         return this.buildingName == buildingName;
-    }
-
-
-    public override void GiveReward()
-    {
-        foreach (var reward in rewards)
-        {
-            reward.GiveReward();
-        }
     }
 }

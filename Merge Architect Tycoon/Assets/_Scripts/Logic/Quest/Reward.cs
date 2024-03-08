@@ -16,6 +16,7 @@ public class Reward
     }
 }
 
+[Serializable]
 public class CoinsReward : Reward
 {
     public CoinsReward()
