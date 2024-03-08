@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -13,15 +15,6 @@ public class QuestPopup : MonoBehaviour
     public void Construct(QuestsPresenter questsPresenter)
     {
         _questsPresenter = questsPresenter;
-    }
-
-    public void InitializePopup()
-    {
-        foreach (var questElement in questElements)
-        {
-            questElement.gameObject.SetActive(false);
-            questElement.InitializeElement();
-        }
     }
 
     public bool GetInactiveQuestElement(out QuestElement questElement)

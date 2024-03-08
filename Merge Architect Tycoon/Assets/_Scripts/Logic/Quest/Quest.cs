@@ -7,13 +7,16 @@ public abstract class Quest : ScriptableObject
 {
     [HideInInspector] public string questId;
     [HideInInspector] public QuestType questType;
-    
-    public string questName;
-    public GiveQuestCondition giveQuestCondition;
-    public abstract void GiveReward();
+    [HideInInspector] public GiveQuestCondition giveQuestCondition;
 
-    // public List<MergeItem> itemsToMerge;
-    // public List<int> itemsCount;
+    public string questName;
+    public abstract void GiveReward();
+    public abstract List<Reward> GetRewardList();
+    public abstract List<QuestItem> GetQuestItemsToCreate();
+    public abstract bool IsCompleted<T>(T value);
+
+// public List<MergeItem> itemsToMerge;
+// public List<int> itemsCount;
 
     protected Quest()
     {
@@ -23,6 +26,7 @@ public abstract class Quest : ScriptableObject
 
 public enum GiveQuestCondition
 {
+    Tutorial,
     Start,
     Building,
 }

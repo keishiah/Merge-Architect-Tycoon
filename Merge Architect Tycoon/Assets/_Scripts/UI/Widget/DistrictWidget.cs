@@ -8,9 +8,9 @@ public class DistrictWidget : Widget
     {
         _districtUi = GetComponentInChildren<DistrictUi>();
     }
-    public override void OnEnable()
+    public override void OnOpen()
     {
-        base.OnEnable();
+        base.OnOpen();
         _districtUi.OpenDistrict();
     }
 }

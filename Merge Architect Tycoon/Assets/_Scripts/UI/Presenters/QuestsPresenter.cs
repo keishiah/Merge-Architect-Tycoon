@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 public class QuestsPresenter
@@ -7,7 +5,6 @@ public class QuestsPresenter
     private IPlayerProgressService _playerProgressService;
 
     private QuestPopup _questPopup;
-    private Dictionary<Quest, QuestElement> _questElements = new();
 
     private QuestsProvider _questsProvider;
 
@@ -22,35 +19,37 @@ public class QuestsPresenter
 
     public void InitializePresenter()
     {
-        _questPopup.InitializePopup();
     }
 
-    public void ActivateQuest(Quest quest)
+    public void OpenQuestPopup()
     {
-        // if (_questPopup.GetInactiveQuestElement(out var questElement))
-        // {
-        //     questElement.gameObject.SetActive(true);
-        //     questElement.SetQuestText(quest.questName);
-        //     _questElements.Add(quest, questElement);
-        //
-        //     switch (quest.questType)
-        //     {
-        //         case QuestType.BuildingQuest:
-        //             questElement.ActivateBuildingQuest(quest.rewards, quest);
-        //             break;
-        //         case QuestType.CreateItemQuest:
-        //             questElement.ActivateMergeQuest(quest.rewards, quest);
-        //             break;
-        //     }
-        // }
+        _questPopup.gameObject.SetActive(true);
+        CloseQuestElements();
+        foreach (Quest quest in _questsProvider.GetActiveQuestsList())
+        {
+            ShowQuestInPopup(quest);
+        }
+    }
+
+    private void ShowQuestInPopup(Quest quest)
+    {
+        if (_questPopup.GetInactiveQuestElement(out var questElement))
+        {
+            questElement.gameObject.SetActive(true);
+            questElement.SetQuestText(quest.questName);
+            questElement.RenderQuest(quest.GetRewardList(), quest);
+        }
+    }
+
+    private void CloseQuestElements()
+    {
+        foreach (QuestElement questElement in _questPopup.questElements)
+        {
+            questElement.gameObject.SetActive(false);
+        }
     }
 
     public void CompleteBuildingQuest(Quest quest)
     {
-        _questElements.TryGetValue(quest, out var questElement);
-        questElement.SetQuestAsCompleted();
     }
-    
-    
-    
 }

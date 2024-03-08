@@ -22,9 +22,9 @@ public class Buldings : ISerializationCallbackReceiver
         _buildingAddedSubject.OnNext(buildingName);
     }
 
-    public void SubscribeToBuildingsChanges(Action<string> onBuildingCreated)
+    public IDisposable SubscribeToBuildingsChanges(Action<string> onBuildingCreated)
     {
-        BuildingAddedObservable.Subscribe(onBuildingCreated);
+        return BuildingAddedObservable.Subscribe(onBuildingCreated);
     }
 
     public void OnBeforeSerialize()

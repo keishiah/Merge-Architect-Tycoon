@@ -3,6 +3,7 @@
     public Coins Coins = new();
     public Coins Diamonds = new();
     public Buldings Buldings = new();
+    public Quests Quests = new Quests();
 
     public void AddCoins(int coins)
     {
@@ -19,6 +20,12 @@
     public void AddBuilding(string buildingName)
     {
         Buldings.AddCreatedBuildingToList(buildingName);
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
+
+    public void AddCompletedQuest(string questId)
+    {
+        Quests.AddQuestToList(questId);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 }

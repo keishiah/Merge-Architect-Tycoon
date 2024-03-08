@@ -18,19 +18,13 @@ namespace _Scripts.UI
             checkMarkImage.gameObject.SetActive(false);
         }
 
-        public void RenderBuildingQuestPerformance(string buildingToBuild, Sprite buildingImage)
+        public void RenderItemPerformance(string itemName, Sprite itemImage, int itemsCount)
         {
-            itemText.text = buildingToBuild;
-            performanceItemImage.sprite = buildingImage;
-            performanceItemText.text = $"{buildingToBuild} 0/1";
+            itemText.text = itemName;
+            performanceItemImage.sprite = itemImage;
+            performanceItemText.text = $"{itemName} 0/{itemsCount}";
         }
 
-        public void RenderCreateItemQuestPerformance(MergeItem itemToCreate, int itemsCount)
-        {
-            itemText.text = itemToCreate.itemName;
-            performanceItemImage.sprite = itemToCreate.itemSprite;
-            performanceItemText.text = $"{itemToCreate.itemName} 0/{itemsCount}";
-        }
 
         public void ItemCompleted()
         {

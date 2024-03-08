@@ -35,7 +35,7 @@ public class SceneButtons : MonoBehaviour
         if (_selectedButtonIndex == -1)
             return;
 
-        _widgets[_selectedButtonIndex].OnDisable();
+        _widgets[_selectedButtonIndex].OnClose();
         _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
         _selectedButtonIndex = -1;
     }
@@ -48,7 +48,7 @@ public class SceneButtons : MonoBehaviour
         if (!needToSelect)
             return;
         _selectedButtonIndex = i;
-        _widgets[_selectedButtonIndex].OnEnable();
+        _widgets[_selectedButtonIndex].OnOpen();
         _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerSelected);
     }
 }
