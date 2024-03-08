@@ -11,19 +11,11 @@ public class CreateBuildingQuest : Quest
 
 
     public override void GiveReward() => CoinsReward.GiveReward();
-
     public override List<Reward> GetRewardList() => new() { CoinsReward };
-
     public override List<QuestItem> GetQuestItemsToCreate() => QuestItemsToCreate;
-
-    // public override Dictionary<object, int> GetQuestItemsToCreateDictionary() => new() { { buildingName, 1 } };
 
     public override bool IsCompleted<T>(T value)
     {
-        if (IsCompleted(value as string)) return true;
-        return false;
+        return value.ToString() == buildingName;
     }
-
-
-    public virtual bool IsCompleted(string buildingName) => this.buildingName == buildingName;
 }

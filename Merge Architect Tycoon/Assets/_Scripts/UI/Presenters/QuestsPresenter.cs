@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Zenject;
 
 public class QuestsPresenter
@@ -7,6 +8,7 @@ public class QuestsPresenter
     private QuestPopup _questPopup;
 
     private QuestsProvider _questsProvider;
+    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService, QuestPopup questPopup,
@@ -25,6 +27,7 @@ public class QuestsPresenter
     {
         _questPopup.gameObject.SetActive(true);
         CloseQuestElements();
+        
         foreach (Quest quest in _questsProvider.GetActiveQuestsList())
         {
             ShowQuestInPopup(quest);
@@ -38,8 +41,15 @@ public class QuestsPresenter
             questElement.gameObject.SetActive(true);
             questElement.SetQuestText(quest.questName);
             questElement.RenderQuest(quest.GetRewardList(), quest);
+
+            if (_questsProvider.GetQuestsWaitingForClaim().Contains(quest))
+            {
+                _completedQuestsByElements.Add(questElement, quest);
+                questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
+            }
         }
     }
+
 
     private void CloseQuestElements()
     {
@@ -49,7 +59,9 @@ public class QuestsPresenter
         }
     }
 
-    public void CompleteBuildingQuest(Quest quest)
+    private void CompleteBuildingQuest(QuestElement questElement)
     {
+        _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
+        _completedQuestsByElements.Remove(questElement);
     }
 }

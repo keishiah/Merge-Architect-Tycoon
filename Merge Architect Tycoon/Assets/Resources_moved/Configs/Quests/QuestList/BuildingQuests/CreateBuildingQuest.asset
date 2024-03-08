@@ -16,13 +16,13 @@ MonoBehaviour:
   questType: 1
   giveQuestCondition: 0
   questName: CreateFirstBuilding
-  buildingName: Name
+  buildingName: 4
   buildingImage: {fileID: 21300000, guid: cf21ce4c8fde24e478460b51dc88917d, type: 3}
   CoinsReward:
     rewardName: Coins
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
     rewardAmount: 100
   QuestItemsToCreate:
-  - itemName: Name
+  - itemName: 4
     itemImage: {fileID: -924662691, guid: 23362535338d14f4c8f442060e69ea09, type: 3}
     itemCount: 1

@@ -28,4 +28,10 @@
         Quests.AddQuestToList(questId);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
+
+    public void AddQuestWaitingForClaim(string questId)
+    {
+        Quests.AddQuestWaitingForClaim(questId);
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
 }

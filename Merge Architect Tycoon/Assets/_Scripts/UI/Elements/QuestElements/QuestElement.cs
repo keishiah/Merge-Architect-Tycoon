@@ -23,7 +23,9 @@ public class QuestElement : MonoBehaviour
 
     public void RenderQuest(List<Reward> rewards, Quest quest)
     {
+        claimButton.onClick.RemoveAllListeners();
         HideRewardsAndItems();
+
         for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
         {
             ActivateReward(rewards, rewardsCount);
@@ -32,10 +34,12 @@ public class QuestElement : MonoBehaviour
         ActivatePerformanceItems(quest);
     }
 
-    public void SetQuestAsCompleted()
+    public void MarkQuestAsCompleted(Action<QuestElement> claimButtonClicked)
     {
         claimButton.gameObject.SetActive(true);
         questPerformanceItems[0].ItemCompleted();
+
+        claimButton.onClick.AddListener(() => claimButtonClicked(this));
     }
 
     private void ActivatePerformanceItems(Quest quest)

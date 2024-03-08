@@ -56,6 +56,5 @@
         createBuildingPopupPresenter.InitializePresenter();
         _sceneContextProvider.Resolve<BuildingProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
-        _sceneContextProvider.Resolve<QuestsProvider>().OnSceneLoaded();
     }
 }

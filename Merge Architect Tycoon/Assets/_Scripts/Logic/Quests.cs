@@ -8,12 +8,19 @@ using UnityEngine;
 public class Quests : ISerializationCallbackReceiver
 {
     [SerializeField] private List<string> completedQuests = new();
+    [SerializeField] private List<string> questsWaitingForClaim = new();
 
     public List<string> CompletedQuests => completedQuests;
+    public List<string> QuestsWaitingForClaim => questsWaitingForClaim ;
 
     public void AddQuestToList(string questId)
     {
         completedQuests.Add(questId);
+    }
+
+    public void AddQuestWaitingForClaim(string questId)
+    {
+        questsWaitingForClaim.Add(questId);
     }
 
 

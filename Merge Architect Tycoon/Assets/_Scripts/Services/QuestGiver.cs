@@ -36,6 +36,9 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
                 _questsByCondition[questCondition].Add(quest.Value);
             }
+
+            if (questProgress.QuestsWaitingForClaim.Contains(quest.Key))
+                _questsProvider.AddQuestWaitingForClaim(quest.Value);
         }
 
         _questsProvider.OnQuestRemoved.Subscribe(OnQuestCompleted);

@@ -8,9 +8,4 @@ public class CreateFirstBuildingQuest : CreateBuildingQuest
         questType = QuestType.Building;
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
-
-    public override bool IsCompleted(string buildingName)
-    {
-        return buildingName == "House";
-    }
 }
