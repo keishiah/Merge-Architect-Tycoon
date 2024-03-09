@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CreateBuildingQuest : Quest
@@ -34,7 +35,7 @@ public class CreateBuildingQuest : Quest
         Rewards.Add(CoinsReward1);
     }
 
-    public override bool IsCompleted<T>(T value)
+    public override bool IsCompleted(object value)
     {
         return value.ToString() == buildingName;
     }

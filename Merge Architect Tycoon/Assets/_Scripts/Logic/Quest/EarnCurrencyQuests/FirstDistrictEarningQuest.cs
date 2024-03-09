@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EarnCurrencyQuest", menuName = "StaticData/Quests/EarnCurrencyQuest")]
-public class EarnCurrencyQuest : Quest
+[CreateAssetMenu(fileName = "FirstDistrictEarningQuest", menuName = "StaticData/Quests/FirstDistrictEarningQuest")]
+public class FirstDistrictEarningQuest : Quest
 {
-    public int currencyAmount;
-
     [HideInInspector] public List<Reward> Rewards = new();
+
     public CoinsReward CoinsReward;
 
     public override List<Reward> GetRewardList() => Rewards;
@@ -27,8 +26,15 @@ public class EarnCurrencyQuest : Quest
         Rewards.Add(CoinsReward);
     }
 
+    public FirstDistrictEarningQuest()
+    {
+        questName = "FirstDistrictEarn";
+        questType = QuestType.EarnCurrency;
+        giveQuestCondition = GiveQuestCondition.Tutorial;
+    }
+
     public override bool IsCompleted(object value)
     {
-        return (int)value >= currencyAmount;
+        return true;
     }
 }

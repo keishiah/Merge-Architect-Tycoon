@@ -14,7 +14,7 @@ public abstract class Quest : ScriptableObject
     public abstract List<Reward> GetRewardList();
     public abstract List<QuestItem> GetQuestItemsToCreate();
     public abstract void InitializeRewardsAndItems();
-    public abstract bool IsCompleted<T>(T value);
+    public abstract bool IsCompleted(object value);
 
     protected Quest()
     {
@@ -33,4 +33,5 @@ public enum QuestType
 {
     Merge,
     Building,
+    EarnCurrency,
 }
