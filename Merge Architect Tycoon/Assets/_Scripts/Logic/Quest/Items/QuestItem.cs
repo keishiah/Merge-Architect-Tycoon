@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class QuestItem
 {
     public string itemText;
-    public string buildingName;
     public Sprite itemImage;
     public int itemCount;
 

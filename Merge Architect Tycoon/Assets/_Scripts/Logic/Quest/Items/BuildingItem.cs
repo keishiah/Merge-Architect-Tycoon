@@ -4,6 +4,8 @@ using UnityEngine;
 [Serializable]
 public class BuildingItem : QuestItem
 {
+    public string buildingName;
+
     public BuildingItem()
     {
         itemCount = 1;

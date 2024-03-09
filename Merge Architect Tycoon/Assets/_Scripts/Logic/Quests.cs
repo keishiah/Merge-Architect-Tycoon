@@ -11,11 +11,13 @@ public class Quests : ISerializationCallbackReceiver
     [SerializeField] private List<string> questsWaitingForClaim = new();
 
     public List<string> CompletedQuests => completedQuests;
-    public List<string> QuestsWaitingForClaim => questsWaitingForClaim ;
+    public List<string> QuestsWaitingForClaim => questsWaitingForClaim;
 
     public void AddQuestToList(string questId)
     {
         completedQuests.Add(questId);
+        if (questsWaitingForClaim.Contains(questId))
+            questsWaitingForClaim.Remove(questId);
     }
 
     public void AddQuestWaitingForClaim(string questId)

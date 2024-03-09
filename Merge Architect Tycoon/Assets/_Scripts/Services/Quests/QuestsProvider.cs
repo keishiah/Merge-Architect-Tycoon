@@ -78,6 +78,7 @@ public class QuestsProvider
             if (quest.IsCompleted(buildingName))
             {
                 _questsWaitingForClaim.Add(quest);
+                _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
             }
         }
     }

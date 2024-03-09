@@ -6,14 +6,14 @@ using UnityEngine;
 using Zenject;
 
 [Serializable]
-public class Buldings : ISerializationCallbackReceiver
+public class Buldings : ISerializationCallbackReceiver, IDisposable
 {
     [SerializeField] private List<string> savedCreatedBuildings = new List<string>();
 
     private ReactiveCollection<string> _createdBuildingsReactiveCollection = new ReactiveCollection<string>();
     public ReactiveCollection<string> CreatedBuildings => _createdBuildingsReactiveCollection;
 
-    private Subject<string> _buildingAddedSubject = new Subject<string>();
+    private Subject<string> _buildingAddedSubject = new();
     public IObservable<string> BuildingAddedObservable => _buildingAddedSubject;
 
     public void AddCreatedBuildingToList(string buildingName)
@@ -40,5 +40,11 @@ public class Buldings : ISerializationCallbackReceiver
     public int GetBuildingCount(string buildingName)
     {
         return _createdBuildingsReactiveCollection.Count(x => x == buildingName);
+    }
+
+    public void Dispose()
+    {
+        _createdBuildingsReactiveCollection?.Dispose();
+        _buildingAddedSubject?.Dispose();
     }
 }

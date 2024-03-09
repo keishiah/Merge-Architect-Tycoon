@@ -16,6 +16,8 @@ public class CreateFirstBuildingQuest : Quest
 
 
     public override List<Reward> GetRewardList() => Rewards;
+    public override List<QuestItem> GetQuestItemsToCreate() => QuestItemsToCreate;
+
 
     public override void GiveReward(Progress progress)
     {
@@ -31,11 +33,11 @@ public class CreateFirstBuildingQuest : Quest
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
-    public override List<QuestItem> GetQuestItemsToCreate() => new() {  };
-
     public override void InitializeRewardsAndItems()
     {
         Rewards.Clear();
+        QuestItemsToCreate.Clear();
+
         QuestItemsToCreate.Add(BuildingItem);
         Rewards.Add(CoinsReward);
         Rewards.Add(CoinsReward1);
