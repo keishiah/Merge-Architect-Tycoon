@@ -42,7 +42,6 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 // #if UNITY_EDITOR
         if (Application.version.StartsWith("d"))
         {
-            Debug.Log("add button clicked");
             _uiPresenter.PlayerProgressService.Progress.AddCoins(100500);
             _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);
         }

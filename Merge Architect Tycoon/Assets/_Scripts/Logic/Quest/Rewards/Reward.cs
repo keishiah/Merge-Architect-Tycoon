@@ -3,14 +3,12 @@ using UnityEngine;
 using Zenject;
 
 [Serializable]
-public class Reward
+public abstract class Reward
 {
     public string rewardName;
     public Sprite rewardSprite;
     public int rewardAmount;
 
 
-    public virtual void GiveReward(Progress progress)
-    {
-    }
+    public abstract void GiveReward(Progress progress);
 }

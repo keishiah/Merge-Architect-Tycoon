@@ -6,15 +6,21 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class QuestElement : MonoBehaviour
 {
     public TextMeshProUGUI questText;
     public List<RewardElement> rewardElements;
-
     public List<QuestPerformanceItem> questPerformanceItems;
-
     public Button claimButton;
+    private QuestsPresenter _questsPresenter;
+
+    [Inject]
+    void Construct(QuestsPresenter questsPresenter)
+    {
+        _questsPresenter = questsPresenter;
+    }
 
     public void SetQuestText(string text)
     {
@@ -23,7 +29,6 @@ public class QuestElement : MonoBehaviour
 
     public void RenderQuest(Quest quest)
     {
-        claimButton.onClick.RemoveAllListeners();
         HideRewardsAndItems();
 
         List<Reward> rewards = quest.GetRewardList();
@@ -32,30 +37,32 @@ public class QuestElement : MonoBehaviour
             ActivateReward(rewards, rewardsCount);
         }
 
-        ActivatePerformanceItems(quest);
+        ShowItemsPerformance(quest);
     }
 
     public void MarkQuestAsCompleted(Action<QuestElement> claimButtonClicked)
     {
+        claimButton.onClick.RemoveAllListeners();
         claimButton.gameObject.SetActive(true);
         questPerformanceItems[0].ItemCompleted();
 
         claimButton.onClick.AddListener(() => claimButtonClicked(this));
     }
 
-    private void ActivatePerformanceItems(Quest quest)
+    private void ShowItemsPerformance(Quest quest)
     {
         for (int i = 0; i < quest.GetQuestItemsToCreate().Count; i++)
         {
-            RenderBuildingPerformanceItem(quest.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
+            ShowBuildingItemPerformance(quest.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
         }
     }
 
 
-    private void RenderBuildingPerformanceItem(QuestItem item, QuestPerformanceItem questPerformanceItem)
+    private void ShowBuildingItemPerformance(QuestItem item, QuestPerformanceItem questPerformanceItem)
     {
         questPerformanceItem.gameObject.SetActive(true);
-        questPerformanceItem.RenderItemPerformance(item.itemName, item.itemImage, item.itemCount);
+        int currentItemCount = item.GetCurrentItemCount(_questsPresenter._playerProgressService.Progress);
+        questPerformanceItem.RenderItemPerformance(item.itemText, item.itemImage, currentItemCount, item.itemCount);
     }
 
     private void ActivateReward(List<Reward> rewards, int rewardsCount)

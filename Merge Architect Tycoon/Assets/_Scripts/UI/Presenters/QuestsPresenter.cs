@@ -1,12 +1,11 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class QuestsPresenter
 {
-    private IPlayerProgressService _playerProgressService;
-
+    public IPlayerProgressService _playerProgressService;
     private QuestPopup _questPopup;
-
     private QuestsProvider _questsProvider;
     private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
 
@@ -42,7 +41,12 @@ public class QuestsPresenter
             questElement.SetQuestText(quest.questName);
             questElement.RenderQuest(quest);
 
-            if (_questsProvider.GetQuestsWaitingForClaim().Contains(quest))
+            if (_completedQuestsByElements.ContainsKey(questElement))
+            {
+                questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
+            }
+
+            else if (_questsProvider.GetQuestsWaitingForClaim().Contains(quest))
             {
                 _completedQuestsByElements.Add(questElement, quest);
                 questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
@@ -61,6 +65,7 @@ public class QuestsPresenter
 
     private void CompleteBuildingQuest(QuestElement questElement)
     {
+        Debug.Log("quest completed");
         _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
         _completedQuestsByElements.Remove(questElement);
     }

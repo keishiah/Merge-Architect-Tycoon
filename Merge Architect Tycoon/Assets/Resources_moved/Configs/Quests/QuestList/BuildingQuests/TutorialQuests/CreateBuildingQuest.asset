@@ -15,25 +15,19 @@ MonoBehaviour:
   questId: cbb900b3-9a4a-499c-951a-550ddc678ae6
   questType: 1
   giveQuestCondition: 0
-  questName: q
-  buildingName: q
+  questName: Create 4
+  buildingName: 4
   buildingImage: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
-  Rewards:
-  - rewardName: 1
-    rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
-    rewardAmount: 1111
-  - rewardName: 1
-    rewardSprite: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
-    rewardAmount: 11111
   CoinsReward:
-    rewardName: 1
+    rewardName: Coins
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
-    rewardAmount: 1111
+    rewardAmount: 1000
   CoinsReward1:
-    rewardName: 1
+    rewardName: Coins
     rewardSprite: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
-    rewardAmount: 11111
+    rewardAmount: 1123
   BuildingItem:
-    itemName: qwew
+    itemText: Created buildings
+    buildingName: 4
     itemImage: {fileID: 21300000, guid: a7eeb71231ae7034a81686a7930680bd, type: 3}
-    itemCount: 11111
+    itemCount: 1

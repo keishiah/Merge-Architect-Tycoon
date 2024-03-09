@@ -18,11 +18,11 @@ namespace _Scripts.UI
             checkMarkImage.gameObject.SetActive(false);
         }
 
-        public void RenderItemPerformance(string itemName, Sprite itemImage, int itemsCount)
+        public void RenderItemPerformance(string itemName, Sprite itemImage, int currentItemCount, int itemsCount)
         {
             itemText.text = itemName;
             performanceItemImage.sprite = itemImage;
-            performanceItemText.text = $"{itemName} 0/{itemsCount}";
+            performanceItemText.text = $"{itemName} {currentItemCount}/{itemsCount}";
         }
 
 

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateBuildingQuest : Quest
+[CreateAssetMenu(fileName = "EarnCurrencyQuest", menuName = "StaticData/EarnCurrencyQuest")]
+public class EarnCurrencyQuest : Quest
 {
     public string buildingName;
     public Sprite buildingImage;
