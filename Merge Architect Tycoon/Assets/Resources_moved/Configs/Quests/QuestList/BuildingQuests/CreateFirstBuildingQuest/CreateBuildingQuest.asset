@@ -19,11 +19,21 @@ MonoBehaviour:
   buildingName: q
   buildingImage: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
   Rewards:
-  - {fileID: 11400000, guid: 74a79ee58086e8c4480ebe2f8734bf0e, type: 2}
-  - {fileID: 11400000, guid: e420f35041500e14bbb6e39f09bbae21, type: 2}
-  QuestItemsToCreate: []
+  - rewardName: 1
+    rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
+    rewardAmount: 1111
+  - rewardName: 1
+    rewardSprite: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
+    rewardAmount: 11111
+  CoinsReward:
+    rewardName: 1
+    rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
+    rewardAmount: 1111
+  CoinsReward1:
+    rewardName: 1
+    rewardSprite: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
+    rewardAmount: 11111
   BuildingItem:
     itemName: qwew
     itemImage: {fileID: 21300000, guid: a7eeb71231ae7034a81686a7930680bd, type: 3}
-    itemCount: 111
-    buildingName: qewqe
+    itemCount: 11111

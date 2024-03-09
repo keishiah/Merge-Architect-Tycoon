@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class Reward : ScriptableObject
+[Serializable]
+public class Reward
 {
     public string rewardName;
     public Sprite rewardSprite;

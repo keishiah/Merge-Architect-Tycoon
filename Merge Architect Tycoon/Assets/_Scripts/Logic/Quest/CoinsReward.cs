@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CoinsReward", menuName = "StaticData/Rewards/CoinsReward")]
+[Serializable]
 public class CoinsReward : Reward
 {
     public override void GiveReward(Progress progress)
