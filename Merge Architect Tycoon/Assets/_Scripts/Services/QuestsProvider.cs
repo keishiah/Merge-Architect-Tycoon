@@ -37,7 +37,7 @@ public class QuestsProvider
 
     public void ClaimQuestReward(Quest quest)
     {
-        quest.GiveReward();
+        quest.GiveReward(_playerProgressService.Progress);
         _activeQuestsByCondition.Remove(quest.giveQuestCondition);
         _playerProgressService.Progress.AddCompletedQuest(quest.questId);
 

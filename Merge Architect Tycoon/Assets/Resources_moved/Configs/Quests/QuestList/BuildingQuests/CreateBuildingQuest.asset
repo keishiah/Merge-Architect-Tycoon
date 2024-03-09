@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b5ab94bf234e3e8ccba4fe8224f131, type: 3}
   m_Name: CreateBuildingQuest
   m_EditorClassIdentifier: 
-  questId: 851c39b0-8b0b-4a2a-92b3-97cec0bfc5f6
+  questId: 41edc19c-5211-42b9-bf2e-55845199068f
   questType: 1
   giveQuestCondition: 0
-  questName: CreateFirstBuilding
-  buildingName: 4
-  buildingImage: {fileID: 21300000, guid: cf21ce4c8fde24e478460b51dc88917d, type: 3}
+  questName: 1
+  buildingName: 1
+  buildingImage: {fileID: -924662691, guid: 23362535338d14f4c8f442060e69ea09, type: 3}
   CoinsReward:
     rewardName: Coins
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
     rewardAmount: 100
+  QuestItemsToCreate: []

@@ -21,11 +21,12 @@ public class QuestElement : MonoBehaviour
         questText.text = text;
     }
 
-    public void RenderQuest(List<Reward> rewards, Quest quest)
+    public void RenderQuest(Quest quest)
     {
         claimButton.onClick.RemoveAllListeners();
         HideRewardsAndItems();
 
+        List<Reward> rewards = quest.GetRewardList();
         for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
         {
             ActivateReward(rewards, rewardsCount);

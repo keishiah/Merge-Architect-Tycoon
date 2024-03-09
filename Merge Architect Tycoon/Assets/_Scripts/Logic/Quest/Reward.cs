@@ -9,9 +9,8 @@ public class Reward
     public Sprite rewardSprite;
     public int rewardAmount;
 
-    [Inject] protected IPlayerProgressService PlayerProgressService;
 
-    public virtual void GiveReward()
+    public virtual void GiveReward(Progress progress)
     {
     }
 }
@@ -19,14 +18,8 @@ public class Reward
 [Serializable]
 public class CoinsReward : Reward
 {
-    public CoinsReward()
+    public override void GiveReward(Progress progress)
     {
-        rewardName = "Coins";
-        rewardAmount = 100;
-    }
-
-    public override void GiveReward()
-    {
-        PlayerProgressService.Progress.AddCoins(rewardAmount);
+        progress.AddCoins(rewardAmount);
     }
 }

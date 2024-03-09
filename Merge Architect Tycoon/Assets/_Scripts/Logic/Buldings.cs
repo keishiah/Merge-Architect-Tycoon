@@ -36,4 +36,9 @@ public class Buldings : ISerializationCallbackReceiver
     {
         _createdBuildingsReactiveCollection = new ReactiveCollection<string>(savedCreatedBuildings);
     }
+
+    public int GetBuildingCount(string buildingName)
+    {
+        return _createdBuildingsReactiveCollection.Count(x => x == buildingName);
+    }
 }

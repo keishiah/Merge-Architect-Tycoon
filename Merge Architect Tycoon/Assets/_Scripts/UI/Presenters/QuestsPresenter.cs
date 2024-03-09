@@ -27,7 +27,7 @@ public class QuestsPresenter
     {
         _questPopup.gameObject.SetActive(true);
         CloseQuestElements();
-        
+
         foreach (Quest quest in _questsProvider.GetActiveQuestsList())
         {
             ShowQuestInPopup(quest);
@@ -40,7 +40,7 @@ public class QuestsPresenter
         {
             questElement.gameObject.SetActive(true);
             questElement.SetQuestText(quest.questName);
-            questElement.RenderQuest(quest.GetRewardList(), quest);
+            questElement.RenderQuest(quest);
 
             if (_questsProvider.GetQuestsWaitingForClaim().Contains(quest))
             {
