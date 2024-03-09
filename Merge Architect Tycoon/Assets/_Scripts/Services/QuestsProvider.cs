@@ -27,12 +27,13 @@ public class QuestsProvider
         _playerProgressService = playerProgressService;
     }
 
-    public void ActivateQuest(Quest questValue)
+    public void ActivateQuest(Quest quest)
     {
-        _activeQuestsByCondition.Add(questValue.giveQuestCondition, questValue);
+        _activeQuestsByCondition.Add(quest.giveQuestCondition, quest);
+        quest.InitializeRewardsAndItems();
 
-        IDisposable subscription = SubscribeQuestProgress(questValue);
-        _questSubscriptions.Add(questValue, subscription);
+        IDisposable subscription = SubscribeQuestProgress(quest);
+        _questSubscriptions.Add(quest, subscription);
     }
 
     public void ClaimQuestReward(Quest quest)

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class QuestItem
+public abstract class QuestItem
 {
     public string itemName;
     public Sprite itemImage;

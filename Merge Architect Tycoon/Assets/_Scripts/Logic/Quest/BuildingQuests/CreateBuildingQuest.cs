@@ -6,19 +6,26 @@ public class CreateBuildingQuest : Quest
 {
     public string buildingName;
     public Sprite buildingImage;
-    public CoinsReward CoinsReward;
-    public List<QuestItem> QuestItemsToCreate;
+    public List<Reward> Rewards;
 
-    [HideInInspector] public List<Reward> RewardList = new();
+    public List<QuestItem> QuestItemsToCreate = new();
+    public BuildingItem BuildingItem;
 
-    public CreateBuildingQuest()
+
+    public override void GiveReward(Progress progress)
     {
-        RewardList.Add(CoinsReward);
+        foreach (var reward in Rewards)
+        {
+            reward.GiveReward(progress);
+        }
     }
 
-    public override void GiveReward(Progress progress) => CoinsReward.GiveReward(progress);
-    public override List<Reward> GetRewardList() => RewardList;
-    public override List<QuestItem> GetQuestItemsToCreate() => QuestItemsToCreate;
+    public override List<Reward> GetRewardList() => Rewards;
+    public override List<QuestItem> GetQuestItemsToCreate() => new List<QuestItem>(){BuildingItem};
+    public override void InitializeRewardsAndItems()
+    {
+        QuestItemsToCreate.Add(BuildingItem);
+    }
 
     public override bool IsCompleted<T>(T value)
     {

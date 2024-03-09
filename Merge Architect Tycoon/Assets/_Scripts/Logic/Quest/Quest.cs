@@ -13,6 +13,7 @@ public abstract class Quest : ScriptableObject
     public abstract void GiveReward(Progress progress);
     public abstract List<Reward> GetRewardList();
     public abstract List<QuestItem> GetQuestItemsToCreate();
+    public abstract void InitializeRewardsAndItems();
     public abstract bool IsCompleted<T>(T value);
 
     protected Quest()
