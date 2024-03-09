@@ -26,19 +26,19 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
         foreach (var quest in _staticDataService.Quests)
         {
-            GiveQuestCondition questCondition = quest.Value.giveQuestCondition;
-            if (!questProgress.CompletedQuests.Contains(quest.Key))
+            GiveQuestCondition questCondition = quest.giveQuestCondition;
+            if (!questProgress.CompletedQuests.Contains(quest.questId))
             {
                 if (!_questsByCondition.ContainsKey(questCondition))
                 {
-                    _questsByCondition.Add(questCondition, new List<Quest> { quest.Value });
+                    _questsByCondition.Add(questCondition, new List<Quest> { quest });
                 }
 
-                _questsByCondition[questCondition].Add(quest.Value);
+                _questsByCondition[questCondition].Add(quest);
             }
 
-            if (questProgress.QuestsWaitingForClaim.Contains(quest.Key))
-                _questsProvider.AddQuestWaitingForClaim(quest.Value);
+            if (questProgress.QuestsWaitingForClaim.Contains(quest.questId))
+                _questsProvider.AddQuestWaitingForClaim(quest);
         }
 
         _questsProvider.OnQuestRemoved.Subscribe(OnQuestCompleted);
