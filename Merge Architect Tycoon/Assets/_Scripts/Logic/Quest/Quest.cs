@@ -31,7 +31,9 @@ public enum GiveQuestCondition
 
 public enum QuestType
 {
+    Tutorial,
     Merge,
     Building,
     EarnCurrency,
+    Action
 }

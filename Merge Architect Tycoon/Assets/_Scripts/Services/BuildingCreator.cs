@@ -6,11 +6,13 @@ using Zenject;
 public class BuildingCreator
 {
     private IStaticDataService _staticDataService;
+    private QuestsProvider _questsProvider;
 
     [Inject]
-    void Construct(IStaticDataService staticDataService)
+    void Construct(IStaticDataService staticDataService, QuestsProvider questsProvider)
     {
         _staticDataService = staticDataService;
+        _questsProvider = questsProvider;
     }
 
     public async UniTask CreateBuildingInTimeAsync(BuildingPlace buildingPlace, string buildingName,
@@ -33,6 +35,8 @@ public class BuildingCreator
 
     private void CreateBuilding(BuildingPlace buildingPlace)
     {
+        _questsProvider.CheckCompletionTutorialQuest("CreateFirstBuilding");
+        _questsProvider.CheckCompletionTutorialQuest("FirstDistrictEarn");
         buildingPlace.SetBuildingState(BuildingStateEnum.BuildingFinished);
     }
 }

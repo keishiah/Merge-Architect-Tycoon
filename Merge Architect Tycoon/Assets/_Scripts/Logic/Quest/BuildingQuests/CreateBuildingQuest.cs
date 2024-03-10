@@ -25,11 +25,13 @@ public class CreateBuildingQuest : Quest
         }
     }
 
-    public override List<QuestItem> GetQuestItemsToCreate() => new List<QuestItem>() { BuildingItem };
+    public override List<QuestItem> GetQuestItemsToCreate() => QuestItemsToCreate;
 
     public override void InitializeRewardsAndItems()
     {
         Rewards.Clear();
+        QuestItemsToCreate.Clear();
+
         QuestItemsToCreate.Add(BuildingItem);
         Rewards.Add(CoinsReward);
         Rewards.Add(CoinsReward1);

@@ -19,7 +19,7 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<CurrencyCreator>().AsSingle();
         Container.Bind<QuestsProvider>().AsSingle();
         Container.Bind<QuestGiver>().AsSingle();
-        Container.Bind<TutorialQuestTracker>().AsSingle();
+        Container.Bind<BuildingCreator>().AsSingle();
 
 
         Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();

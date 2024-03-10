@@ -18,18 +18,16 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     private BuildingProvider _buildingProvider;
     private CurrencyCreator _currencyCreator;
     private IStaticDataService _staticDataService;
-    private TutorialQuestTracker _tutorialQuestTracker;
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService,
         BuildingProvider buildingProvider,
-        CurrencyCreator currencyCreator,TutorialQuestTracker tutorialQuestTracker)
+        CurrencyCreator currencyCreator )
     {
         _playerProgressService = playerProgressService;
         _buildingProvider = buildingProvider;
         _currencyCreator = currencyCreator;
         _staticDataService = staticDataService;
-        _tutorialQuestTracker = tutorialQuestTracker;
     }
 
     public void OnSceneLoaded()
@@ -48,7 +46,6 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         var coinsForDistrict = _staticDataService.GetDistrictData(districtId).currencyCount;
         var coinsToAdd = Mathf.RoundToInt(coinsForDistrict * .1f * _tempoDistrictsCount[districtId]);
         _playerProgressService.Progress.AddCoins(coinsToAdd);
-        _tutorialQuestTracker.CheckQuestCompleted("FirstDistrictEarn");
         TurnOnCurrencyEarningCountdown(districtId);
     }
 

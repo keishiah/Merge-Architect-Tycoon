@@ -20,26 +20,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
         _playerProgressService = playerProgressService;
     }
 
-    public void QuestCompleted(GiveQuestCondition questsByCondition)
-    {
-        _questsByCondition[questsByCondition].RemoveAt(0);
-        if (_questsByCondition[GiveQuestCondition.Tutorial].Count > 0)
-            ActivateQuest(_questsByCondition[GiveQuestCondition.Tutorial].First());
-    }
-
-    public bool GetCurrentQuest(GiveQuestCondition questCondition, out Quest quest)
-    {
-        if (_questsByCondition.ContainsKey(questCondition))
-        {
-            quest = _questsByCondition[questCondition].First();
-            return true;
-        }
-
-        quest = null;
-        return false;
-    }
-
-
     public void OnSceneLoaded()
     {
         var questProgress = _playerProgressService.Progress.Quests;
@@ -65,16 +45,38 @@ public class QuestGiver : IInitializableOnSceneLoaded
         ActivateNextQuest();
     }
 
-    private void ActivateNextQuest()
+    public void QuestCompleted(GiveQuestCondition questsByCondition)
     {
-        ActivateTutorialQuests();
+        _questsByCondition[questsByCondition].RemoveAt(0);
+        if (_questsByCondition[GiveQuestCondition.Tutorial].Count > 0)
+            ActivateQuest(_questsByCondition[GiveQuestCondition.Tutorial].First());
     }
 
-    private void ActivateTutorialQuests()
+    public bool GetCurrentQuest(GiveQuestCondition questCondition, out Quest quest)
     {
-        if (!_questsByCondition.Keys.Contains(GiveQuestCondition.Tutorial))
-            return;
-        ActivateQuest(_questsByCondition[GiveQuestCondition.Tutorial].First());
+        if (_questsByCondition.ContainsKey(questCondition))
+        {
+            quest = _questsByCondition[questCondition].First();
+            return true;
+        }
+
+        quest = null;
+        return false;
+    }
+
+
+    private void ActivateNextQuest()
+    {
+        // ActivateTutorialQuests();
+    }
+
+    public void ActivateTutorialQuests(string questName)
+    {
+        if (_questsByCondition.TryGetValue(GiveQuestCondition.Tutorial, out var tutorialQuests))
+            if (tutorialQuests[0].questName == questName)
+            {
+                ActivateQuest(tutorialQuests[0]);
+            }
     }
 
 

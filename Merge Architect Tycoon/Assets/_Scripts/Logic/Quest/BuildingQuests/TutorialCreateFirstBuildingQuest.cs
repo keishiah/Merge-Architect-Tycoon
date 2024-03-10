@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CreateBuildingQuest", menuName = "StaticData/Quests/CreateFirstBuildingQuest")]
-public class CreateFirstBuildingQuest : Quest
+[CreateAssetMenu(fileName = "TutorialCreateFirstBuildingQuest",
+    menuName = "StaticData/Quests/TutorialCreateFirstBuildingQuest")]
+public class TutorialCreateFirstBuildingQuest : Quest
 {
+    public string questText;
     public string buildingName;
-    public Sprite buildingImage;
-
+    
     [HideInInspector] public List<Reward> Rewards = new();
     public CoinsReward CoinsReward;
-    public CoinsReward CoinsReward1;
 
     [HideInInspector] public List<QuestItem> QuestItemsToCreate = new();
     public BuildingItem BuildingItem;
@@ -19,18 +20,18 @@ public class CreateFirstBuildingQuest : Quest
     public override List<QuestItem> GetQuestItemsToCreate() => QuestItemsToCreate;
 
 
+    public TutorialCreateFirstBuildingQuest()
+    {
+        giveQuestCondition = GiveQuestCondition.Tutorial;
+        questType = QuestType.Tutorial;
+    }
+
     public override void GiveReward(Progress progress)
     {
         foreach (var reward in Rewards)
         {
             reward.GiveReward(progress);
         }
-    }
-
-    public CreateFirstBuildingQuest()
-    {
-        questType = QuestType.Building;
-        giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
     public override void InitializeRewardsAndItems()
@@ -40,11 +41,10 @@ public class CreateFirstBuildingQuest : Quest
 
         QuestItemsToCreate.Add(BuildingItem);
         Rewards.Add(CoinsReward);
-        Rewards.Add(CoinsReward1);
     }
 
     public override bool IsCompleted(object value)
     {
-        return value.ToString() == buildingName;
+        return true;
     }
 }
