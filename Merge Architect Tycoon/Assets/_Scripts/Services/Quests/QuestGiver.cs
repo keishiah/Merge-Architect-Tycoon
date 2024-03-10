@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
@@ -25,9 +26,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
     public void OnSceneLoaded()
     {
         CreateCurrentQuestsByConditionList();
-
         _questsProvider.OnQuestRemoved.Subscribe(QuestCompleted);
-        ActivateNextQuest();
     }
 
     public void ActivateTutorialQuests(string questName)
@@ -35,7 +34,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
         if (GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
             if (tutorialQuest.questName == questName)
             {
-                ActivateQuest(tutorialQuest);
+                ActivateNextQuest(tutorialQuest);
             }
     }
 
@@ -43,10 +42,27 @@ public class QuestGiver : IInitializableOnSceneLoaded
     {
         _currentQuestByCondition.Remove(questsByCondition);
 
-        if (questsByCondition != GiveQuestCondition.Tutorial)
+        if (!_tutorialQuestsCompleted && !GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
+        {
+            _tutorialQuestsCompleted = true;
+            ActivateBaseQuests();
+        }
+        else if (_tutorialQuestsCompleted)
         {
             if (GetNextQuestByCondition(questsByCondition, out Quest quest))
-                ActivateQuest(quest);
+                ActivateNextQuest(quest);
+        }
+    }
+
+    private void ActivateBaseQuests()
+    {
+        foreach (var questByCondition in _staticDataService.Quests)
+        {
+            if (questByCondition.Key != GiveQuestCondition.Tutorial)
+            {
+                GetNextQuestByCondition(questByCondition.Key, out Quest quest);
+                ActivateNextQuest(quest);
+            }
         }
     }
 
@@ -66,17 +82,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
         return false;
     }
 
-
-    private void ActivateNextQuest()
-    {
-        if (_tutorialQuestsCompleted)
-        {
-            //Активировать необходимые квесты если туториал пройден
-        }
-    }
-
-
-    private void ActivateQuest(Quest quest)
+    private void ActivateNextQuest(Quest quest)
     {
         _questsProvider.ActivateQuest(quest);
     }
@@ -86,9 +92,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
         var questProgress = _playerProgressService.Progress.Quests;
 
         //Создаем список первых невыполненных квестов каждого типа
-
-        if (!GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
-            _tutorialQuestsCompleted = true;
 
         foreach (var questCondition in _staticDataService.Quests.Keys)
         {
