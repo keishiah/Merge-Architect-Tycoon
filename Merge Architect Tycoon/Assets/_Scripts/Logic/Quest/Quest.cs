@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using _Scripts.Logic.Quest;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public abstract class Quest : ScriptableObject
 {
     public string questId;
-    [HideInInspector] public QuestType questType;
     [HideInInspector] public GiveQuestCondition giveQuestCondition;
 
     public string questName;
@@ -23,12 +20,5 @@ public enum GiveQuestCondition
 {
     Tutorial,
     Building,
-}
-
-public enum QuestType
-{
-    Tutorial,
     Merge,
-    Building,
-    EarnCurrency,
 }

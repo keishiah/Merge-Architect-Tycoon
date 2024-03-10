@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
@@ -25,9 +27,13 @@ public class Slot : MonoBehaviour, IDropHandler
     [SerializeField] private Image _stateImage;
     private Slot[] _neighbours;
 
-    public SlotState SlotState { get => _slotState; }
+    public SlotState SlotState
+    {
+        get => _slotState;
+    }
 
     public delegate void SlotDelegate();
+
     public SlotDelegate addItemEvent;
     public SlotDelegate removeItemEvent;
     public SlotDelegate endMoveEvent;
@@ -41,13 +47,14 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         CheckState();
     }
+
     public void AddItem(MergeItem newItem, bool isNeedSave = false)
     {
         if (newItem == null)
             return;
 
         _item = newItem;
-        if(_item.itemSprite != null)
+        if (_item.itemSprite != null)
         {
             _itemImage.enabled = true;
             _itemImage.sprite = _item.itemSprite;
@@ -57,13 +64,14 @@ public class Slot : MonoBehaviour, IDropHandler
         if (isNeedSave)
             endMoveEvent?.Invoke();
     }
+
     public void RemoveItem(bool isNeedSave = false)
     {
         _item = null;
         _itemImage.enabled = false;
 
         removeItemEvent?.Invoke();
-        if(isNeedSave)
+        if (isNeedSave)
             endMoveEvent?.Invoke();
     }
 
@@ -78,22 +86,24 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         _neighbours = neighbours;
     }
+
     private void CheckNeighbour()
     {
         if (_slotState == SlotState.NonTouchable)
             ChangeState(SlotState.Draggable);
 
-        foreach(Slot neighbour in _neighbours)
+        foreach (Slot neighbour in _neighbours)
         {
             if (neighbour.SlotState == SlotState.Blocked)
                 neighbour.ChangeState(SlotState.NonTouchable);
         }
     }
 
-    public DraggableItem currentDraggableItem() 
-    { 
+    public DraggableItem currentDraggableItem()
+    {
         return GetComponentInChildren<DraggableItem>();
     }
+
     public void OnDrop(PointerEventData eventData)
     {
         if (_slotState == SlotState.Blocked)
@@ -164,6 +174,8 @@ public class Slot : MonoBehaviour, IDropHandler
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();
+
+        _playerProgressService.Progress.AddMergeItem();
     }
 
     public void OnClick()
@@ -192,6 +204,7 @@ public class Slot : MonoBehaviour, IDropHandler
         _slotState = m_slotState;
         CheckState();
     }
+
     private void CheckState()
     {
         if (!isActiveAndEnabled)

@@ -40,4 +40,16 @@
         Quests.AddQuestWaitingForClaim(questId);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
+
+    public void AddMergeItem()
+    {
+        Quests.AddMergeItem();
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
+
+    public void ClearMergeCount()
+    {
+        Quests.ClearMergeCount();
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
 }

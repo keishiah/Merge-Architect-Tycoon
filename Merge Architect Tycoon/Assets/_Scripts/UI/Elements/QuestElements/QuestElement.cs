@@ -84,5 +84,7 @@ public class QuestElement : MonoBehaviour
         {
             questPerformanceItem.gameObject.SetActive(false);
         }
+
+        claimButton.gameObject.SetActive(false);
     }
 }

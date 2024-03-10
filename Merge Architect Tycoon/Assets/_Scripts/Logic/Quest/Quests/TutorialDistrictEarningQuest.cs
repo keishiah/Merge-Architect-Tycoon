@@ -29,7 +29,6 @@ public class TutorialDistrictEarningQuest : Quest
     {
         questName = "FirstDistrictEarn";
         giveQuestCondition = GiveQuestCondition.Tutorial;
-        questType = QuestType.Tutorial;
     }
 
     public override bool IsCompleted(object value)

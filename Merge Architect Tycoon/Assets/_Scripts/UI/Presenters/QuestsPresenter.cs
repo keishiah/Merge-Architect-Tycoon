@@ -7,6 +7,7 @@ public class QuestsPresenter
     public IPlayerProgressService _playerProgressService;
     private QuestPopup _questPopup;
     private QuestsProvider _questsProvider;
+
     private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
 
     [Inject]
@@ -46,16 +47,15 @@ public class QuestsPresenter
             questElement.SetQuestText(quest.questName);
             questElement.RenderQuest(quest);
 
-            if (_completedQuestsByElements.ContainsKey(questElement))
-            {
-                questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
-            }
-
-            else
+            if (_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&
+                !_completedQuestsByElements.ContainsKey(questElement))
             {
                 _completedQuestsByElements.Add(questElement, quest);
-                questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
+                questElement.MarkQuestAsCompleted(CompleteQuest);
             }
+            else if (_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&
+                     _completedQuestsByElements.ContainsKey(questElement))
+                questElement.MarkQuestAsCompleted(CompleteQuest);
         }
     }
 
@@ -78,7 +78,7 @@ public class QuestsPresenter
         }
     }
 
-    private void CompleteBuildingQuest(QuestElement questElement)
+    private void CompleteQuest(QuestElement questElement)
     {
         _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
         _completedQuestsByElements.Remove(questElement);

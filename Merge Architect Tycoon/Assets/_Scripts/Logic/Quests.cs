@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine;
 
 [Serializable]
-public class Quests : ISerializationCallbackReceiver
+public class Quests : ISerializationCallbackReceiver, IDisposable
 {
     [SerializeField] private List<string> completedQuests = new();
     [SerializeField] private List<string> activeQuests = new();
@@ -14,6 +14,9 @@ public class Quests : ISerializationCallbackReceiver
     public List<string> CompletedQuests => completedQuests;
     public List<string> ActiveQuests => activeQuests;
     public List<string> QuestsWaitingForClaim => questsWaitingForClaim;
+
+    [SerializeField] private ReactiveProperty<int> currentMergeCount = new();
+    public int CurrentMergeCount => currentMergeCount.Value;
 
     public void AddActiveQuest(string questId)
     {
@@ -34,6 +37,14 @@ public class Quests : ISerializationCallbackReceiver
             questsWaitingForClaim.Remove(questId);
     }
 
+    public void AddMergeItem() => currentMergeCount.Value++;
+
+    public void ClearMergeCount() => currentMergeCount.Value = 0;
+
+    public IDisposable SubscribeToMerge(Action<int> onCoinsCountChanged)
+    {
+        return currentMergeCount.Subscribe(onCoinsCountChanged);
+    }
 
     public void OnBeforeSerialize()
     {
@@ -41,5 +52,10 @@ public class Quests : ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
+    }
+
+    public void Dispose()
+    {
+        currentMergeCount?.Dispose();
     }
 }
