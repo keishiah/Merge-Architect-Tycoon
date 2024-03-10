@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4448207edfe4c5eb3ba36d639f2e988, type: 3}
   m_Name: TutorialDistrictEarningQuest
   m_EditorClassIdentifier: 
-  questId: d435c7e6-a06d-44fd-b496-f9cb6a848a50
+  questId: 1
   questType: 0
   giveQuestCondition: 0
   questName: FirstDistrictEarn

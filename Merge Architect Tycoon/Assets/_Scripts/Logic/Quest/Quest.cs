@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Logic.Quest;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Quest : ScriptableObject
 {
-    [HideInInspector] public string questId;
+    public string questId;
     [HideInInspector] public QuestType questType;
     [HideInInspector] public GiveQuestCondition giveQuestCondition;
 
@@ -14,18 +15,13 @@ public abstract class Quest : ScriptableObject
     public abstract List<Reward> GetRewardList();
     public abstract List<QuestItem> GetQuestItemsToCreate();
     public abstract void InitializeRewardsAndItems();
-    public abstract bool IsCompleted(object value);
 
-    protected Quest()
-    {
-        questId = Guid.NewGuid().ToString();
-    }
+    public abstract bool IsCompleted(object value);
 }
 
 public enum GiveQuestCondition
 {
     Tutorial,
-    Start,
     Building,
 }
 
@@ -35,5 +31,4 @@ public enum QuestType
     Merge,
     Building,
     EarnCurrency,
-    Action
 }

@@ -23,9 +23,15 @@
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 
+    public void AddActiveQuest(string questId)
+    {
+        Quests.AddActiveQuest(questId);
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
+
     public void AddCompletedQuest(string questId)
     {
-        Quests.AddQuestToList(questId);
+        Quests.AddCompletedQuest(questId);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 

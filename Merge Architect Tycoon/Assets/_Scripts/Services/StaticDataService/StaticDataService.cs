@@ -22,8 +22,7 @@ public class StaticDataService : IStaticDataService
             ? _buildInProgressSprite
             : throw new Exception($"BuildInProgressSprite not initialized in StaticDataService");
 
-    private List<Quest> _quests;
-    public List<Quest> Quests => _quests;
+    public Dictionary<GiveQuestCondition, List<Quest>> Quests { get; private set; }
 
     private readonly IAssetProvider _assetProvider;
 
@@ -41,7 +40,9 @@ public class StaticDataService : IStaticDataService
         _districtsData = districtsData.districts.ToDictionary(x => x.districtId, x => x);
 
         QuestData questsData = await _assetProvider.Load<QuestData>(QuestDataPath);
-        _quests = questsData.quests;
+        Quests = questsData.quests.GroupBy(x => x.giveQuestCondition)
+            .ToDictionary(x => x.Key, x => x.ToList());
+
         _buildInProgressSprite = buildingData.buildInProgressSprite;
     }
 

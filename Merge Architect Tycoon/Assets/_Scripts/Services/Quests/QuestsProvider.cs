@@ -8,11 +8,11 @@ using Zenject;
 
 public class QuestsProvider
 {
-    private Dictionary<GiveQuestCondition, Quest> _activeQuestsByCondition = new();
-    public List<Quest> GetActiveQuestsList() => _activeQuestsByCondition.Values.ToList();
+    private readonly List<Quest> _activeQuests = new();
+    public List<Quest> GetActiveQuestsList => _activeQuests;
 
-    private List<Quest> _questsWaitingForClaim = new();
-    public List<Quest> GetQuestsWaitingForClaim() => _questsWaitingForClaim;
+    private readonly List<Quest> _questsWaitingForClaim = new();
+    public List<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
 
     private readonly Subject<GiveQuestCondition> _questRemovedSubject = new();
     public IObservable<GiveQuestCondition> OnQuestRemoved => _questRemovedSubject;
@@ -25,53 +25,55 @@ public class QuestsProvider
         _playerProgressService = playerProgressService;
     }
 
-    public void SubscribeProvider()
-    {
-        _playerProgressService.Progress.Buldings.SubscribeToBuildingsChanges(CheckQuestCompleted);
-    }
-
     public void ActivateQuest(Quest quest)
     {
-        _activeQuestsByCondition.Add(quest.giveQuestCondition, quest);
+        _activeQuests.Add(quest);
+        _playerProgressService.Progress.AddActiveQuest(quest.questId);
         quest.InitializeRewardsAndItems();
+    }
+
+    public void AddQuestWaitingForClaim(Quest quest)
+    {
+        quest.InitializeRewardsAndItems();
+        _questsWaitingForClaim.Add(quest);
+    }
+
+    public void AddActiveQuest(Quest quest)
+    {
+        _activeQuests.Add(quest);
+        quest.InitializeRewardsAndItems();
+    }
+
+    public void CheckCompletionTutorialQuest(string questName)
+    {
+        if (_activeQuests.Count(quest => quest.questName == questName) > 0)
+        {
+            var quest = _activeQuests.Find(quest => quest.questName == questName);
+            _questsWaitingForClaim.Add(quest);
+            _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
+            _activeQuests.Remove(quest);
+        }
     }
 
     public void ClaimQuestReward(Quest quest)
     {
         quest.GiveReward(_playerProgressService.Progress);
-        _activeQuestsByCondition.Remove(quest.giveQuestCondition);
         _playerProgressService.Progress.AddCompletedQuest(quest.questId);
 
+        _questsWaitingForClaim.Remove(quest);
         _questRemovedSubject.OnNext(quest.giveQuestCondition);
     }
 
 
-    public void AddQuestWaitingForClaim(Quest quest)
-    {
-        _questsWaitingForClaim.Add(quest);
-    }
-
-    public void CheckCompletionTutorialQuest(string questName)
-    {
-        foreach (Quest quest in _activeQuestsByCondition.Values.ToList())
-        {
-            if (quest.questName == questName)
-            {
-                _questsWaitingForClaim.Add(quest);
-                _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
-            }
-        }
-    }
-
-    private void CheckQuestCompleted(string buildingName)
-    {
-        foreach (Quest quest in _activeQuestsByCondition.Values.ToList())
-        {
-            if (quest.IsCompleted(buildingName))
-            {
-                _questsWaitingForClaim.Add(quest);
-                _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
-            }
-        }
-    }
+    // private void CheckQuestCompleted(string buildingName)
+    // {
+    //     foreach (Quest quest in _activeQuestsByCondition.Values.ToList())
+    //     {
+    //         if (quest.IsCompleted(buildingName))
+    //         {
+    //             _questsWaitingForClaim.Add(quest);
+    //             _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
+    //         }
+    //     }
+    // }
 }

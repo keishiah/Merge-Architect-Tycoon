@@ -5,11 +5,13 @@ using Zenject;
 
 public class QuestGiver : IInitializableOnSceneLoaded
 {
-    private Dictionary<GiveQuestCondition, List<Quest>> _questsByCondition = new();
+    private Dictionary<GiveQuestCondition, Quest> _currentQuestByCondition = new();
 
     private QuestsProvider _questsProvider;
     private IStaticDataService _staticDataService;
     private IPlayerProgressService _playerProgressService;
+
+    private bool _tutorialQuestsCompleted;
 
     [Inject]
     void Construct(QuestsProvider questsProvider, IStaticDataService staticDataService,
@@ -22,66 +24,86 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
-        var questProgress = _playerProgressService.Progress.Quests;
-
-        foreach (var quest in _staticDataService.Quests)
-        {
-            GiveQuestCondition questCondition = quest.giveQuestCondition;
-            if (!questProgress.CompletedQuests.Contains(quest.questId))
-            {
-                if (!_questsByCondition.ContainsKey(questCondition))
-                {
-                    _questsByCondition.Add(questCondition, new List<Quest> { });
-                }
-
-                _questsByCondition[questCondition].Add(quest);
-            }
-
-            if (questProgress.QuestsWaitingForClaim.Contains(quest.questId))
-                _questsProvider.AddQuestWaitingForClaim(quest);
-        }
+        CreateCurrentQuestsByConditionList();
 
         _questsProvider.OnQuestRemoved.Subscribe(QuestCompleted);
         ActivateNextQuest();
     }
 
-    public void QuestCompleted(GiveQuestCondition questsByCondition)
+    public void ActivateTutorialQuests(string questName)
     {
-        _questsByCondition[questsByCondition].RemoveAt(0);
-        if (_questsByCondition[GiveQuestCondition.Tutorial].Count > 0)
-            ActivateQuest(_questsByCondition[GiveQuestCondition.Tutorial].First());
+        if (GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
+            if (tutorialQuest.questName == questName)
+            {
+                ActivateQuest(tutorialQuest);
+            }
     }
 
-    public bool GetCurrentQuest(GiveQuestCondition questCondition, out Quest quest)
+    private void QuestCompleted(GiveQuestCondition questsByCondition)
     {
-        if (_questsByCondition.ContainsKey(questCondition))
+        _currentQuestByCondition.Remove(questsByCondition);
+
+        if (questsByCondition != GiveQuestCondition.Tutorial)
         {
-            quest = _questsByCondition[questCondition].First();
-            return true;
+            if (GetNextQuestByCondition(questsByCondition, out Quest quest))
+                ActivateQuest(quest);
+        }
+    }
+
+    private bool GetNextQuestByCondition(GiveQuestCondition questsByCondition, out Quest quest)
+    {
+        var questProgress = _playerProgressService.Progress.Quests;
+        foreach (Quest nextQuest in _staticDataService.Quests[questsByCondition])
+        {
+            if (!questProgress.CompletedQuests.Contains(nextQuest.questId))
+            {
+                quest = nextQuest;
+                return true;
+            }
         }
 
-        quest = null;
+        quest = default;
         return false;
     }
 
 
     private void ActivateNextQuest()
     {
-        // ActivateTutorialQuests();
-    }
-
-    public void ActivateTutorialQuests(string questName)
-    {
-        if (_questsByCondition.TryGetValue(GiveQuestCondition.Tutorial, out var tutorialQuests))
-            if (tutorialQuests[0].questName == questName)
-            {
-                ActivateQuest(tutorialQuests[0]);
-            }
+        if (_tutorialQuestsCompleted)
+        {
+            //Активировать необходимые квесты если туториал пройден
+        }
     }
 
 
     private void ActivateQuest(Quest quest)
     {
         _questsProvider.ActivateQuest(quest);
+    }
+
+    private void CreateCurrentQuestsByConditionList()
+    {
+        var questProgress = _playerProgressService.Progress.Quests;
+
+        //Создаем список первых невыполненных квестов каждого типа
+
+        if (!GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
+            _tutorialQuestsCompleted = true;
+
+        foreach (var questCondition in _staticDataService.Quests.Keys)
+        {
+            if (GetNextQuestByCondition(questCondition, out Quest currentQuest))
+            {
+                _currentQuestByCondition[questCondition] = currentQuest;
+                if (questProgress.ActiveQuests.Contains(currentQuest.questId))
+                {
+                    _questsProvider.AddActiveQuest(currentQuest);
+                }
+                else if (questProgress.QuestsWaitingForClaim.Contains(currentQuest.questId))
+                {
+                    _questsProvider.AddQuestWaitingForClaim(currentQuest);
+                }
+            }
+        }
     }
 }

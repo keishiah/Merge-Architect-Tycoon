@@ -27,13 +27,18 @@ public class QuestsPresenter
         _questPopup.gameObject.SetActive(true);
         CloseQuestElements();
 
-        foreach (Quest quest in _questsProvider.GetActiveQuestsList())
+        foreach (Quest quest in _questsProvider.GetActiveQuestsList)
         {
-            ShowQuestInPopup(quest);
+            ShowActiveQuestInPopup(quest);
+        }
+
+        foreach (Quest quest in _questsProvider.GetQuestsWaitingForClaim)
+        {
+            ShowQuestsWaitingForClaim(quest);
         }
     }
 
-    private void ShowQuestInPopup(Quest quest)
+    private void ShowQuestsWaitingForClaim(Quest quest)
     {
         if (_questPopup.GetInactiveQuestElement(out var questElement))
         {
@@ -46,11 +51,21 @@ public class QuestsPresenter
                 questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
             }
 
-            else if (_questsProvider.GetQuestsWaitingForClaim().Contains(quest))
+            else
             {
                 _completedQuestsByElements.Add(questElement, quest);
                 questElement.MarkQuestAsCompleted(CompleteBuildingQuest);
             }
+        }
+    }
+
+    private void ShowActiveQuestInPopup(Quest quest)
+    {
+        if (_questPopup.GetInactiveQuestElement(out var questElement))
+        {
+            questElement.gameObject.SetActive(true);
+            questElement.SetQuestText(quest.questName);
+            questElement.RenderQuest(quest);
         }
     }
 
@@ -65,7 +80,6 @@ public class QuestsPresenter
 
     private void CompleteBuildingQuest(QuestElement questElement)
     {
-        Debug.Log("quest completed");
         _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
         _completedQuestsByElements.Remove(questElement);
     }
