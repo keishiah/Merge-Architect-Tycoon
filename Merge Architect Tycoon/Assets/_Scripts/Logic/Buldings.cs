@@ -6,14 +6,14 @@ using UnityEngine;
 using Zenject;
 
 [Serializable]
-public class Buldings : ISerializationCallbackReceiver
+public class Buldings : ISerializationCallbackReceiver, IDisposable
 {
     [SerializeField] private List<string> savedCreatedBuildings = new List<string>();
 
     private ReactiveCollection<string> _createdBuildingsReactiveCollection = new ReactiveCollection<string>();
     public ReactiveCollection<string> CreatedBuildings => _createdBuildingsReactiveCollection;
 
-    private Subject<string> _buildingAddedSubject = new Subject<string>();
+    private Subject<string> _buildingAddedSubject = new();
     public IObservable<string> BuildingAddedObservable => _buildingAddedSubject;
 
     public void AddCreatedBuildingToList(string buildingName)
@@ -22,9 +22,9 @@ public class Buldings : ISerializationCallbackReceiver
         _buildingAddedSubject.OnNext(buildingName);
     }
 
-    public void SubscribeToBuildingsChanges(Action<string> onBuildingCreated)
+    public IDisposable SubscribeToBuildingsChanges(Action<string> onBuildingCreated)
     {
-        BuildingAddedObservable.Subscribe(onBuildingCreated);
+        return BuildingAddedObservable.Subscribe(onBuildingCreated);
     }
 
     public void OnBeforeSerialize()
@@ -36,44 +36,15 @@ public class Buldings : ISerializationCallbackReceiver
     {
         _createdBuildingsReactiveCollection = new ReactiveCollection<string>(savedCreatedBuildings);
     }
-    // [SerializeField] private List<string> savedCreatedBuildings = new();
-    //
-    // private ReactiveCollection<string> _createdBuildingsReactiveCollection = new();
-    // public ReactiveCollection<string> CreatedBuildings => _createdBuildingsReactiveCollection;
-    //
-    // private IObservable<string> BuildingCreatedObservable()
-    // {
-    //     return _createdBuildingsReactiveCollection.ObserveAdd()
-    //         .Select(evt => evt.Value);
-    // }
-    //
-    // public void AddCreatedBuildingToList(string buildingName)
-    // {
-    //     _createdBuildingsReactiveCollection.Add(buildingName);
-    // }
-    //
-    // public void SubscribeToBuildingsChanges(Action<string> onBuildingCreated)
-    // {
-    //     BuildingCreatedObservable().Subscribe(onBuildingCreated);
-    // }
-    //
-    // public void OnBeforeSerialize()
-    // {
-    //     savedCreatedBuildings.Clear();
-    //     foreach (var item in _createdBuildingsReactiveCollection)
-    //     {
-    //         savedCreatedBuildings.Add(item);
-    //     }
-    //
-    //     BuildingCreatedObservable().Subscribe(savedCreatedBuildings.Add);
-    // }
-    //
-    // public void OnAfterDeserialize()
-    // {
-    //     _createdBuildingsReactiveCollection.Clear();
-    //     foreach (var item in savedCreatedBuildings)
-    //     {
-    //         _createdBuildingsReactiveCollection.Add(item);
-    //     }
-    // }
+
+    public int GetBuildingCount(string buildingName)
+    {
+        return _createdBuildingsReactiveCollection.Count(x => x == buildingName);
+    }
+
+    public void Dispose()
+    {
+        _createdBuildingsReactiveCollection?.Dispose();
+        _buildingAddedSubject?.Dispose();
+    }
 }

@@ -29,6 +29,7 @@ public class Slot : MonoBehaviour, IDropHandler
     public SlotState SlotState { get => _slotState; }
 
     public delegate void SlotDelegate();
+
     public SlotDelegate addItemEvent;
     public SlotDelegate removeItemEvent;
     public SlotDelegate endMoveEvent;
@@ -42,6 +43,7 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         CheckState();
     }
+
     public void AddItem(MergeItem newItem, bool isNeedSave = false)
     {
         if (newItem == null)
@@ -58,6 +60,7 @@ public class Slot : MonoBehaviour, IDropHandler
         if (isNeedSave)
             endMoveEvent?.Invoke();
     }
+
     public void RemoveItem(bool isNeedSave = false)
     {
         _item = null;
@@ -171,6 +174,8 @@ public class Slot : MonoBehaviour, IDropHandler
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();
+
+        _playerProgressService.Progress.AddMergeItem();
     }
 
     public void OnClick()
@@ -199,6 +204,7 @@ public class Slot : MonoBehaviour, IDropHandler
         _slotState = m_slotState;
         CheckState();
     }
+
     private void CheckState()
     {
         if (!isActiveAndEnabled)

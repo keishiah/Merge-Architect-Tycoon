@@ -26,7 +26,6 @@ public class GameInstaller : MonoInstaller
 
     private void BindBuilder()
     {
-        Container.Bind<BuildingCreator>().AsSingle();
     }
 
     private void BindUiPresenter()

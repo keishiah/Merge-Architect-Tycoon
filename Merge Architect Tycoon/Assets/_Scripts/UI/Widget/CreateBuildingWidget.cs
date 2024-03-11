@@ -1,13 +1,13 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
 
 public class CreateBuildingWidget : Widget
 {
-    [Inject]
-    private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+    [Inject] private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
-    public override void OnEnable()
+    public override void OnOpen()
     {
-        base.OnEnable();
+        base.OnOpen();
         _createBuildingPopupPresenter.OpenScroller();
     }
 }
