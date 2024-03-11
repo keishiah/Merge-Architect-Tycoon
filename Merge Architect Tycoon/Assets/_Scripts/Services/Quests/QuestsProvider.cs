@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 
@@ -49,7 +48,7 @@ public class QuestsProvider : IInitializableOnSceneLoaded
         quest.InitializeRewardsAndItems();
     }
 
-    public void CheckCompletionTutorialQuest(string questName)
+    public void CheckCompletionOfTutorialQuest(string questName)
     {
         if (_activeQuests.Count(quest => quest.questName == questName) > 0)
         {
