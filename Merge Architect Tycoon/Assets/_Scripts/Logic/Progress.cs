@@ -23,29 +23,6 @@
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 
-    // public void AddActiveQuest(string questId)
-    // {
-    //     Quests.AddActiveQuest(questId);
-    //     SaveLoadService.Save(SaveKey.Progress, this);
-    // }
-
-    // public void AddCompletedQuest(string questId)
-    // {
-    //     Quests.AddCompletedQuest(questId);
-    //     SaveLoadService.Save(SaveKey.Progress, this);
-    // }
-
-    // public void AddQuestWaitingForClaim(string questId)
-    // {
-    //     Quests.AddQuestWaitingForClaim(questId);
-    //     SaveLoadService.Save(SaveKey.Progress, this);
-    // }
-
-    // public void AddMergeItem()
-    // {
-    //     Quests.AddMergeItem();
-    //     SaveLoadService.Save(SaveKey.Progress, this);
-    // }
 
     public void ClearMergeCount()
     {

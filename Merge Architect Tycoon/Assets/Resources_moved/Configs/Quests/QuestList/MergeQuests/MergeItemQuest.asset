@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: MergeItemQuest
   m_EditorClassIdentifier: 
   questId: 3
-  giveQuestCondition: 2
   questName: MergeFirst
+  requiredForActivationQuestId: 2
+  giveQuestCondition: 2
   questText: Merge iems
   coinsReward:
-    rewardName: Coins
+    rewardText: 
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
     rewardAmount: 1234
   mergeQuestItem:

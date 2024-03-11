@@ -28,8 +28,7 @@ namespace _Scripts.Debug
 
         private void AddQuest()
         {
-            _questGiver.ActivateTutorialQuest("CreateFirstBuilding");
-            _questGiver.ActivateTutorialQuest("FirstDistrictEarn");
+            _questGiver.CheckAllQuestsForActivation();
         }
 
         private void CompleteQuest()

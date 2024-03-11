@@ -9,13 +9,8 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 {
     private readonly List<Quest> _activeQuests = new();
     public List<Quest> GetActiveQuestsList => _activeQuests;
-
-    private readonly List<Quest> _questsWaitingForClaim = new();
-    public List<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
-
-    private readonly Subject<GiveQuestCondition> _questRemovedSubject = new();
-    public IObservable<GiveQuestCondition> OnQuestRemoved => _questRemovedSubject;
-
+    private readonly ReactiveCollection<Quest> _questsWaitingForClaim = new();
+    public ReactiveCollection<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
     private IPlayerProgressService _playerProgressService;
 
     [Inject]
@@ -69,7 +64,6 @@ public class QuestsProvider : IInitializableOnSceneLoaded
         _playerProgressService.Progress.Quests.AddCompletedQuest(quest.questId);
 
         _questsWaitingForClaim.Remove(quest);
-        _questRemovedSubject.OnNext(quest.giveQuestCondition);
     }
 
 

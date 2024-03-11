@@ -7,24 +7,24 @@ using UnityEngine;
 [Serializable]
 public class Quests : ISerializationCallbackReceiver, IDisposable
 {
-    [SerializeField] private List<string> completedQuests = new();
-    [SerializeField] private List<string> activeQuests = new();
-    [SerializeField] private List<string> questsWaitingForClaim = new();
+    [SerializeField] private List<int> completedQuests = new();
+    [SerializeField] private List<int> activeQuests = new();
+    [SerializeField] private List<int> questsWaitingForClaim = new();
 
-    public List<string> ActiveQuests => activeQuests;
-    public List<string> QuestsWaitingForClaim => questsWaitingForClaim;
-    public List<string> CompletedQuests => completedQuests;
+    public List<int> ActiveQuests => activeQuests;
+    public List<int> QuestsWaitingForClaim => questsWaitingForClaim;
+    public List<int> CompletedQuests => completedQuests;
 
     [SerializeField] private ReactiveProperty<int> currentMergeCount = new();
     public int CurrentMergeCount => currentMergeCount.Value;
 
-    public void AddActiveQuest(string questId)
+    public void AddActiveQuest(int questId)
     {
         activeQuests.Add(questId);
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public void AddQuestWaitingForClaim(string questId)
+    public void AddQuestWaitingForClaim(int questId)
     {
         questsWaitingForClaim.Add(questId);
         if (activeQuests.Contains(questId))
@@ -32,7 +32,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public void AddCompletedQuest(string questId)
+    public void AddCompletedQuest(int questId)
     {
         completedQuests.Add(questId);
         if (questsWaitingForClaim.Contains(questId))
