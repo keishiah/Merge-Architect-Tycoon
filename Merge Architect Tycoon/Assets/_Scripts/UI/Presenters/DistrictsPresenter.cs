@@ -22,7 +22,7 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     [Inject]
     void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService,
         BuildingProvider buildingProvider,
-        CurrencyCreator currencyCreator)
+        CurrencyCreator currencyCreator )
     {
         _playerProgressService = playerProgressService;
         _buildingProvider = buildingProvider;
@@ -46,7 +46,6 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         var coinsForDistrict = _staticDataService.GetDistrictData(districtId).currencyCount;
         var coinsToAdd = Mathf.RoundToInt(coinsForDistrict * .1f * _tempoDistrictsCount[districtId]);
         _playerProgressService.Progress.AddCoins(coinsToAdd);
-
         TurnOnCurrencyEarningCountdown(districtId);
     }
 
