@@ -12,13 +12,11 @@ public class DistrictUi : MonoBehaviour
     public CancellationTokenSource ActivityToken { get; set; }
 
     private DistrictsPresenter _districtsPresenter;
-    private SceneButtons _sceneButtons;
 
     [Inject]
-    void Construct(DistrictsPresenter districtsPresenter, SceneButtons sceneButtons)
+    void Construct(DistrictsPresenter districtsPresenter)
     {
         _districtsPresenter = districtsPresenter;
-        _sceneButtons = sceneButtons;
 
         Initialize();
     }
@@ -46,8 +44,8 @@ public class DistrictUi : MonoBehaviour
 
     public void OpenDistrict()
     {
-        _districtsPresenter.SetCurrentDistrict(1);
-        _sceneButtons.CloseCurrentWidget();
+        _districtsPresenter.CitiesMapPopup.SetActive(true);
+        _districtsPresenter.SetCurrentDistrict(0);
     }
 
     public void TurnOnEarnButton()
