@@ -6,7 +6,7 @@ using UnityEngine;
 using Zenject;
 
 
-public class QuestsProvider
+public class QuestsProvider : IInitializableOnSceneLoaded
 {
     private readonly List<Quest> _activeQuests = new();
     public List<Quest> GetActiveQuestsList => _activeQuests;
@@ -25,14 +25,16 @@ public class QuestsProvider
         _playerProgressService = playerProgressService;
     }
 
+    public void OnSceneLoaded()
+    {
+        _playerProgressService.Progress.Quests.SubscribeToMerge(CheckMergeQuestCompleted);
+    }
+
     public void ActivateQuest(Quest quest)
     {
         _activeQuests.Add(quest);
         _playerProgressService.Progress.AddActiveQuest(quest.questId);
         quest.InitializeRewardsAndItems();
-
-        if (quest.giveQuestCondition == GiveQuestCondition.Merge)
-            _playerProgressService.Progress.Quests.SubscribeToMerge(CheckMergeQuestCompleted);
     }
 
     public void AddQuestWaitingForClaim(Quest quest)
@@ -71,7 +73,6 @@ public class QuestsProvider
     private void CheckMergeQuestCompleted(int mergeCount)
     {
         var progressQuests = _playerProgressService.Progress;
-
         if (_activeQuests.Count(quest => quest.giveQuestCondition == GiveQuestCondition.Merge) > 0)
         {
             var quest = _activeQuests.Find(quest => quest.giveQuestCondition == GiveQuestCondition.Merge);

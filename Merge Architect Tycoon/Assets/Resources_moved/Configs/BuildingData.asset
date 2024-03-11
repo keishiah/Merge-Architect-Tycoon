@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildings:
   - buildingName: House
-    buildingSprite: {fileID: 21300000, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
+    buildingSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
     timeToCreate: 10
     coinsCountToCreate: 50
     itemsToCreate:

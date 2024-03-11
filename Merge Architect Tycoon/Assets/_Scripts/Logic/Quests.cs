@@ -41,10 +41,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     public void ClearMergeCount() => currentMergeCount.Value = 0;
 
-    public IDisposable SubscribeToMerge(Action<int> onCoinsCountChanged)
-    {
-        return currentMergeCount.Subscribe(onCoinsCountChanged);
-    }
+    public IDisposable SubscribeToMerge(Action<int> onCoinsCountChanged) => currentMergeCount.Subscribe(onCoinsCountChanged);
 
     public void OnBeforeSerialize()
     {
