@@ -41,8 +41,8 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 
     public void AddCoins()
     {
-        _questGiver.ActivateTutorialQuests("CreateFirstBuilding");
-        _questGiver.ActivateTutorialQuests("FirstDistrictEarn");
+        _questGiver.ActivateTutorialQuest("CreateFirstBuilding");
+        _questGiver.ActivateTutorialQuest("FirstDistrictEarn");
 // #if UNITY_EDITOR
         if (Application.version.StartsWith("d"))
         {

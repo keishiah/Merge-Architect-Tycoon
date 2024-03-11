@@ -6,7 +6,7 @@ using Zenject;
 
 public class QuestGiver : IInitializableOnSceneLoaded
 {
-    private Dictionary<GiveQuestCondition, Quest> _currentQuestByCondition = new();
+    // private Dictionary<GiveQuestCondition, Quest> _currentQuestByCondition = new();
 
     private QuestsProvider _questsProvider;
     private IStaticDataService _staticDataService;
@@ -29,7 +29,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
         _questsProvider.OnQuestRemoved.Subscribe(QuestCompleted);
     }
 
-    public void ActivateTutorialQuests(string questName)
+    public void ActivateTutorialQuest(string questName)
     {
         if (GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
             if (tutorialQuest.questName == questName)
@@ -40,7 +40,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     private void QuestCompleted(GiveQuestCondition questsByCondition)
     {
-        _currentQuestByCondition.Remove(questsByCondition);
+        // _currentQuestByCondition.Remove(questsByCondition);
 
         if (!_tutorialQuestsCompleted && !GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
         {
@@ -97,7 +97,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
         {
             if (GetNextQuestByCondition(questCondition, out Quest currentQuest))
             {
-                _currentQuestByCondition[questCondition] = currentQuest;
+                // _currentQuestByCondition[questCondition] = currentQuest;
                 if (questProgress.ActiveQuests.Contains(currentQuest.questId))
                 {
                     _questsProvider.AddActiveQuest(currentQuest);

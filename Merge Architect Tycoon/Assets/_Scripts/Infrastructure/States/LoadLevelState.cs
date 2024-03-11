@@ -46,7 +46,6 @@
         _uiPresenter.InitializeElementsOnSceneLoaded();
 
         InitializePopupPresenters();
-        _sceneContextProvider.Resolve<QuestsPresenter>().InitializePresenter();
         _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
     }
 

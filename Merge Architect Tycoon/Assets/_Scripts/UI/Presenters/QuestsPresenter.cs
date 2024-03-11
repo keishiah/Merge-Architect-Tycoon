@@ -19,10 +19,6 @@ public class QuestsPresenter
         _questsProvider = questsProvider;
     }
 
-    public void InitializePresenter()
-    {
-    }
-
     public void OpenQuestPopup()
     {
         _questPopup.gameObject.SetActive(true);
