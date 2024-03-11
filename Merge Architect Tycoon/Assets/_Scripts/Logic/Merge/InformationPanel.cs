@@ -45,6 +45,7 @@ public class InformationPanel : MonoBehaviour
         itemCostText.text = $"+{mergeItem.itemCost}";
         sellButton.SetActive(false);
         deleteButton.SetActive(false);
+        selectedItem.SelectSlot(slotCurrent);
         if (slot.SlotState == SlotState.Draggable 
             || slot.SlotState == SlotState.Unloading)
         {
@@ -76,7 +77,7 @@ public class InformationPanel : MonoBehaviour
 
     public void ActivateInfromPanel(bool state)
     {
-        //selectedItem.gameObject.SetActive(state);
+        selectedItem.gameObject.SetActive(state);
         informPanel.SetActive(state);
 
         if (!(state == false && slotCurrent != null))

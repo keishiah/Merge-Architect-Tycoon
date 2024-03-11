@@ -6,7 +6,7 @@ using Zenject;
 
 public class DistrictsPresenter : IInitializableOnSceneLoaded
 {
-    public GameObject CitiesMapPopup;
+    public GameObject CitiesMapPopup { get; set; }
     private int _currentDistrictId;
     public int CurrentDistrictId => _currentDistrictId;
 
