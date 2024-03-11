@@ -35,6 +35,16 @@ public class QuestsPresenter
         }
     }
 
+    private void ShowActiveQuestInPopup(Quest quest)
+    {
+        if (_questPopup.GetInactiveQuestElement(out var questElement))
+        {
+            questElement.gameObject.SetActive(true);
+            questElement.SetQuestText(quest.questName);
+            questElement.RenderQuest(quest);
+        }
+    }
+
     private void ShowQuestsWaitingForClaim(Quest quest)
     {
         if (_questPopup.GetInactiveQuestElement(out var questElement))
@@ -55,16 +65,12 @@ public class QuestsPresenter
         }
     }
 
-    private void ShowActiveQuestInPopup(Quest quest)
-    {
-        if (_questPopup.GetInactiveQuestElement(out var questElement))
-        {
-            questElement.gameObject.SetActive(true);
-            questElement.SetQuestText(quest.questName);
-            questElement.RenderQuest(quest);
-        }
-    }
 
+    private void CompleteQuest(QuestElement questElement)
+    {
+        _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
+        _completedQuestsByElements.Remove(questElement);
+    }
 
     private void CloseQuestElements()
     {
@@ -72,11 +78,5 @@ public class QuestsPresenter
         {
             questElement.gameObject.SetActive(false);
         }
-    }
-
-    private void CompleteQuest(QuestElement questElement)
-    {
-        _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
-        _completedQuestsByElements.Remove(questElement);
     }
 }

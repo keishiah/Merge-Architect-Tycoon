@@ -61,8 +61,8 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 
     public void AddDiamonds()
     {
-        _questsProvider.CheckCompletionTutorialQuest("CreateFirstBuilding");
-        _questsProvider.CheckCompletionTutorialQuest("FirstDistrictEarn");
+        _questsProvider.CheckCompletionOfTutorialQuest("CreateFirstBuilding");
+        _questsProvider.CheckCompletionOfTutorialQuest("FirstDistrictEarn");
         if (Application.version.StartsWith("d"))
         {
             _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);

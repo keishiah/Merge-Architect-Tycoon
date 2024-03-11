@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UniRx;
 using Zenject;
 
 public class QuestGiver : IInitializableOnSceneLoaded
 {
-    // private Dictionary<GiveQuestCondition, Quest> _currentQuestByCondition = new();
-
     private QuestsProvider _questsProvider;
     private IStaticDataService _staticDataService;
     private IPlayerProgressService _playerProgressService;
@@ -40,7 +35,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     private void QuestCompleted(GiveQuestCondition questsByCondition)
     {
-        // _currentQuestByCondition.Remove(questsByCondition);
 
         if (!_tutorialQuestsCompleted && !GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
         {
@@ -97,7 +91,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
         {
             if (GetNextQuestByCondition(questCondition, out Quest currentQuest))
             {
-                // _currentQuestByCondition[questCondition] = currentQuest;
                 if (questProgress.ActiveQuests.Contains(currentQuest.questId))
                 {
                     _questsProvider.AddActiveQuest(currentQuest);
