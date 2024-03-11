@@ -13,6 +13,7 @@ public abstract class Quest : ScriptableObject
     public abstract void InitializeRewardsAndItems();
     public abstract void GiveReward(Progress progress);
     public abstract bool IsCompleted(object value);
+    
 }
 
 public enum GiveQuestCondition
