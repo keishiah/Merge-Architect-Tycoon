@@ -496,12 +496,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7003670103506048181, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7003670103506048181, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
+      objectReference: {fileID: -1239331003, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
     - target: {fileID: 8560551839134577660, guid: 327821d7a87a0154aa2ec14d5090aa78, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16264,7 +16264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -17.62, y: -340.71}
+  m_AnchoredPosition: {x: -17.619995, y: -340.70996}
   m_SizeDelta: {x: -35.24, y: -640.3}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &8262805332055049571

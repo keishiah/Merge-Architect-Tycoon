@@ -19,16 +19,25 @@ public class BuildingCreator
         var timeToCreate = _staticDataService.GetBuildingData(buildingName).timeToCreate;
         buildingPlace.UpdateTimerText(timeToCreate);
 
-        while (timeToCreate > 0)
+        try
         {
-            var delayTimeSpan = TimeSpan.FromSeconds(1f);
+            while (timeToCreate > 0)
+            {
+                var delayTimeSpan = TimeSpan.FromSeconds(1f);
 
-            await UniTask.Delay(delayTimeSpan, cancellationToken: cancellationTokenSource.Token);
-            timeToCreate--;
-            buildingPlace.UpdateTimerText(timeToCreate);
+                await UniTask.Delay(delayTimeSpan, cancellationToken: cancellationTokenSource.Token);
+                timeToCreate--;
+                buildingPlace.UpdateTimerText(timeToCreate);
+            }
+
+            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+
+            CreateBuilding(buildingPlace);
         }
-
-        CreateBuilding(buildingPlace);
+        catch (OperationCanceledException)
+        {
+            buildingPlace.SetBuildingState(BuildingStateEnum.Inactive);
+        }
     }
 
     private void CreateBuilding(BuildingPlace buildingPlace)

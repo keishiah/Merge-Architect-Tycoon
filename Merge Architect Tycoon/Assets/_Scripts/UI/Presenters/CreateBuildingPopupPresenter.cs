@@ -59,7 +59,6 @@ public class CreateBuildingPopupPresenter
 
     public void OpenScroller()
     {
-        _createBuildingPopupScroller.gameObject.SetActive(true);
         SortBuildingElements();
         _createBuildingPopupScroller.SortBuildingElements();
     }

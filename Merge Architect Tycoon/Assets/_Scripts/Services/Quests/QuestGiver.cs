@@ -26,11 +26,12 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     public void ActivateTutorialQuest(string questName)
     {
-        if (GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest))
-            if (tutorialQuest.questName == questName)
-            {
-                ActivateNextQuest(tutorialQuest);
-            }
+        if (!GetNextQuestByCondition(GiveQuestCondition.Tutorial, out Quest tutorialQuest)) 
+            return;
+        if (tutorialQuest.questName == questName)
+        {
+            ActivateNextQuest(tutorialQuest);
+        }
     }
 
     private void QuestCompleted(GiveQuestCondition questsByCondition)

@@ -20,6 +20,7 @@ public class MergeItemQuest : Quest
 
     public MergeItemQuest()
     {
+        questName = "MergeItemQuest";
         giveQuestCondition = GiveQuestCondition.Merge;
     }
 

@@ -39,19 +39,18 @@ public class DistrictUi : MonoBehaviour
     {
         _districtsPresenter.EarnCurrency(districtId);
         earnCurrencyButton.gameObject.SetActive(false);
-
     }
 
     public void OpenDistrict()
     {
-        _districtsPresenter.CitiesMapPopup.SetActive(true);
-        _districtsPresenter.SetCurrentDistrict(0);
+        _districtsPresenter.SetCurrentDistrict(districtId);
     }
 
     public void TurnOnEarnButton()
     {
         earnCurrencyButton.gameObject.SetActive(true);
     }
+
     public void OnDestroy()
     {
         ActivityToken?.Cancel();

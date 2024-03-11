@@ -6,7 +6,6 @@ using UnityEngine;
 public class TutorialCreateFirstBuildingQuest : Quest
 {
     public string questText;
-    public string buildingName;
 
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
@@ -18,9 +17,9 @@ public class TutorialCreateFirstBuildingQuest : Quest
     public override List<Reward> GetRewardList() => _rewards;
     public override List<QuestItem> GetQuestItemsToCreate() => _questItemsToCreate;
 
-
     public TutorialCreateFirstBuildingQuest()
     {
+        questName = "CreateFirstBuilding";
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
