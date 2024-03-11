@@ -31,9 +31,12 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void ActivateQuest(Quest quest)
     {
-        _activeQuests.Add(quest);
-        _playerProgressService.Progress.AddActiveQuest(quest.questId);
-        quest.InitializeRewardsAndItems();
+        if (!_activeQuests.Contains(quest))
+        {
+            _activeQuests.Add(quest);
+            _playerProgressService.Progress.Quests.AddActiveQuest(quest.questId);
+            quest.InitializeRewardsAndItems();
+        }
     }
 
     public void AddQuestWaitingForClaim(Quest quest)
@@ -50,19 +53,20 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void CheckCompletionOfTutorialQuest(string questName)
     {
-        if (_activeQuests.Count(quest => quest.questName == questName) > 0)
+        if (_activeQuests.Count(quest => quest.questName == questName) <= 0)
+            return;
         {
             var quest = _activeQuests.Find(quest => quest.questName == questName);
             _questsWaitingForClaim.Add(quest);
             _activeQuests.Remove(quest);
-            _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
+            _playerProgressService.Progress.Quests.AddQuestWaitingForClaim(quest.questId);
         }
     }
 
     public void ClaimQuestReward(Quest quest)
     {
         quest.GiveReward(_playerProgressService.Progress);
-        _playerProgressService.Progress.AddCompletedQuest(quest.questId);
+        _playerProgressService.Progress.Quests.AddCompletedQuest(quest.questId);
 
         _questsWaitingForClaim.Remove(quest);
         _questRemovedSubject.OnNext(quest.giveQuestCondition);
@@ -78,7 +82,7 @@ public class QuestsProvider : IInitializableOnSceneLoaded
             if (quest.IsCompleted(progressQuests.Quests.CurrentMergeCount))
             {
                 _questsWaitingForClaim.Add(quest);
-                _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
+                progressQuests.Quests.AddQuestWaitingForClaim(quest.questId);
                 _activeQuests.Remove(quest);
                 _playerProgressService.Progress.ClearMergeCount();
             }

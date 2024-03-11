@@ -15,11 +15,19 @@ public class ItemsCatalogue : MonoBehaviour
     public bool CheckHasItem(MergeItem item)
     {
         return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count >
-                0;
+               0;
     }
 
     public bool CheckHasItems(List<MergeItem> items)
     {
+        foreach (var item in items)
+        {
+            if (items.Select(x => x.itemName == item.itemName).Count() >
+                slotsManager.Slots.Select(s =>
+                        s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable)
+                    .Count()) return false;
+        }
+
         return items.All(item =>
             slotsManager.Slots.Exists(s =>
                 s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable));
@@ -33,8 +41,8 @@ public class ItemsCatalogue : MonoBehaviour
         foreach (MergeItem item in items)
         {
             slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
-                                                                s.CurrentItem.itemName == item.itemName &&
-                                                                s.SlotState == SlotState.Draggable));
+                                                             s.CurrentItem.itemName == item.itemName &&
+                                                             s.SlotState == SlotState.Draggable));
         }
 
         if (slots.Count >= items.Count)

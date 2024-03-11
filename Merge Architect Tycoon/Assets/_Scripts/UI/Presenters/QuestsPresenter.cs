@@ -4,24 +4,26 @@ using Zenject;
 
 public class QuestsPresenter
 {
+    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
+    
     public IPlayerProgressService _playerProgressService;
     private QuestPopup _questPopup;
     private QuestsProvider _questsProvider;
+    private SceneButtons _sceneButtons;
 
-    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService, QuestPopup questPopup,
-        QuestsProvider questsProvider)
+        QuestsProvider questsProvider,SceneButtons sceneButtons)
     {
         _playerProgressService = playerProgressService;
         _questPopup = questPopup;
         _questsProvider = questsProvider;
+        _sceneButtons = sceneButtons;
     }
 
     public void OpenQuestPopup()
     {
-        _questPopup.gameObject.SetActive(true);
         CloseQuestElements();
 
         foreach (Quest quest in _questsProvider.GetActiveQuestsList)

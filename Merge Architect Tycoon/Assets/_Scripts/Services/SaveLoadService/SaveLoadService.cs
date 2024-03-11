@@ -3,7 +3,8 @@
 public enum SaveKey
 {
     Progress,
-    Inventory
+    Inventory,
+    Quests,
 }
 
 public static class SaveLoadService

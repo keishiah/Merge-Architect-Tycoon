@@ -11,9 +11,9 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     [SerializeField] private List<string> activeQuests = new();
     [SerializeField] private List<string> questsWaitingForClaim = new();
 
-    public List<string> CompletedQuests => completedQuests;
     public List<string> ActiveQuests => activeQuests;
     public List<string> QuestsWaitingForClaim => questsWaitingForClaim;
+    public List<string> CompletedQuests => completedQuests;
 
     [SerializeField] private ReactiveProperty<int> currentMergeCount = new();
     public int CurrentMergeCount => currentMergeCount.Value;
@@ -21,6 +21,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     public void AddActiveQuest(string questId)
     {
         activeQuests.Add(questId);
+        SaveLoadService.Save(SaveKey.Quests, this);
     }
 
     public void AddQuestWaitingForClaim(string questId)
@@ -28,6 +29,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         questsWaitingForClaim.Add(questId);
         if (activeQuests.Contains(questId))
             activeQuests.Remove(questId);
+        SaveLoadService.Save(SaveKey.Quests, this);
     }
 
     public void AddCompletedQuest(string questId)
@@ -35,13 +37,23 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         completedQuests.Add(questId);
         if (questsWaitingForClaim.Contains(questId))
             questsWaitingForClaim.Remove(questId);
+        SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public void AddMergeItem() => currentMergeCount.Value++;
+    public void AddMergeItem()
+    {
+        currentMergeCount.Value++;
+        SaveLoadService.Save(SaveKey.Quests, this);
+    }
 
-    public void ClearMergeCount() => currentMergeCount.Value = 0;
+    public void ClearMergeCount()
+    {
+        currentMergeCount.Value = 0;
+        SaveLoadService.Save(SaveKey.Quests, this);
+    }
 
-    public IDisposable SubscribeToMerge(Action<int> onCoinsCountChanged) => currentMergeCount.Subscribe(onCoinsCountChanged);
+    public IDisposable SubscribeToMerge(Action<int> onCoinsCountChanged) =>
+        currentMergeCount.Subscribe(onCoinsCountChanged);
 
     public void OnBeforeSerialize()
     {
