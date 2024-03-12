@@ -175,7 +175,7 @@ public class Slot : MonoBehaviour, IDropHandler
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();
 
-        _playerProgressService.Progress.Quests.AddMergeItem();
+        _playerProgressService.Quests.AddMergeItem();
     }
 
     public void OnClick()

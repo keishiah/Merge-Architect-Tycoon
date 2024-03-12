@@ -15,7 +15,7 @@ public abstract class Quest : ScriptableObject
     public abstract void GiveReward(Progress progress);
     public abstract bool IsCompleted(object value);
 
-    public bool IsReadyToStart(Progress progress)
+    public bool IsReadyToStart(IPlayerProgressService progress)
     {
         return requiredForActivationQuestId == 0 ||
                progress.Quests.CompletedQuests.Contains(requiredForActivationQuestId);

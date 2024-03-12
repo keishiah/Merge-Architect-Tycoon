@@ -61,7 +61,7 @@ public class QuestElement : MonoBehaviour
     private void ShowBuildingItemPerformance(QuestItem item, QuestPerformanceItem questPerformanceItem)
     {
         questPerformanceItem.gameObject.SetActive(true);
-        int currentItemCount = item.GetCurrentItemCount(_questsPresenter._playerProgressService.Progress);
+        int currentItemCount = item.GetCurrentItemCount(_questsPresenter._playerProgressService);
         questPerformanceItem.RenderItemPerformance(item.itemText, item.itemImage, currentItemCount, item.itemCount);
     }
 

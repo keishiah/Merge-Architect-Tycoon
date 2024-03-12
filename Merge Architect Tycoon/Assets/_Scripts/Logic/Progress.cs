@@ -2,8 +2,9 @@
 {
     public Coins Coins = new();
     public Coins Diamonds = new();
+
     public Buldings Buldings = new();
-    public Quests Quests = new();
+    // public Quests Quests = new();
 
     public void AddCoins(int coins)
     {
@@ -20,13 +21,6 @@
     public void AddBuilding(string buildingName)
     {
         Buldings.AddCreatedBuildingToList(buildingName);
-        SaveLoadService.Save(SaveKey.Progress, this);
-    }
-
-
-    public void ClearMergeCount()
-    {
-        Quests.ClearMergeCount();
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 }

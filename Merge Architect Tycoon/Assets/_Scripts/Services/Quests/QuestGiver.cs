@@ -22,9 +22,9 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
-        _questsProvider.GetQuestsWaitingForClaim.ObserveRemove().Subscribe(_ => { CheckAllQuestsForActivation(); });
+        // _questsProvider.GetQuestsWaitingForClaim.ObserveRemove().Subscribe(_ => { CheckAllQuestsForActivation(); });
+        // CheckAllQuestsForActivation();
         ActivateQuestsOnStart();
-        CheckAllQuestsForActivation();
     }
 
     public void CheckAllQuestsForActivation()
@@ -35,9 +35,9 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
             if (!_questsProvider.GetActiveQuestsList.Contains(quest) &&
                 !_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&
-                !progress.Quests.CompletedQuests.Contains(quest.questId))
+                !_playerProgressService.Quests.CompletedQuests.Contains(quest.questId))
             {
-                if (quest.IsReadyToStart(progress))
+                if (quest.IsReadyToStart(_playerProgressService))
                 {
                     _questsProvider.ActivateQuest(quest);
                 }
@@ -48,8 +48,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     private void ActivateQuestsOnStart()
     {
-        var questProgress = _playerProgressService.Progress.Quests;
-
+        var questProgress = _playerProgressService.Quests;
 
         foreach (var quest in _staticDataService.Quests)
         {

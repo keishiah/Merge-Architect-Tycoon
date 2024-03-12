@@ -42,6 +42,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     public void AddMergeItem()
     {
+        Debug.Log("merge");
         currentMergeCount.Value++;
         SaveLoadService.Save(SaveKey.Quests, this);
     }
