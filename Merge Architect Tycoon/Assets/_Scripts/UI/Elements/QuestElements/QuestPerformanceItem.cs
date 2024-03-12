@@ -15,7 +15,7 @@ namespace _Scripts.UI
 
         private void Start()
         {
-            checkMarkImage.gameObject.SetActive(false);
+            HideCompletedMark();
         }
 
         public void RenderItemPerformance(string itemName, Sprite itemImage, int currentItemCount, int itemsCount)
@@ -25,10 +25,19 @@ namespace _Scripts.UI
             performanceItemText.text = $"{itemName} {currentItemCount}/{itemsCount}";
         }
 
+        public void RenderCompletedItemPerformance(string itemName, Sprite itemImage, int itemsCount)
+        {
+            itemText.text = itemName;
+            performanceItemImage.sprite = itemImage;
+            performanceItemText.text = $"{itemName} {itemsCount}/{itemsCount}";
+        }
+
 
         public void ItemCompleted()
         {
             checkMarkImage.gameObject.SetActive(true);
         }
+
+        public void HideCompletedMark() => checkMarkImage.gameObject.SetActive(false);
     }
 }

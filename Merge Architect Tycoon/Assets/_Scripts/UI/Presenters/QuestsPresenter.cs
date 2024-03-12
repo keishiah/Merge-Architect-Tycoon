@@ -24,12 +24,13 @@ public class QuestsPresenter
     {
         CloseQuestElements();
 
-        foreach (Quest quest in _questsProvider.GetActiveQuestsList)
-        {
-            ShowQuest(quest);
-        }
+        ShowQuests(_questsProvider.GetActiveQuestsList);
+        ShowQuests(_questsProvider.GetQuestsWaitingForClaim);
+    }
 
-        foreach (Quest quest in _questsProvider.GetQuestsWaitingForClaim)
+    private void ShowQuests(IEnumerable<Quest> quests)
+    {
+        foreach (Quest quest in quests)
         {
             ShowQuest(quest);
         }
@@ -39,9 +40,7 @@ public class QuestsPresenter
     {
         if (!_questPopup.GetInactiveQuestElement(out var questElement))
             return;
-        questElement.gameObject.SetActive(true);
-        questElement.SetQuestText(quest.questName);
-        questElement.RenderQuest(quest);
+        questElement.RenderQuestHeader(quest);
 
         if (!_questsProvider.GetQuestsWaitingForClaim.Contains(quest))
             return;
@@ -49,19 +48,19 @@ public class QuestsPresenter
         if (!_completedQuestsByElements.ContainsKey(questElement))
         {
             _completedQuestsByElements.Add(questElement, quest);
-            questElement.MarkQuestAsCompleted(CompleteQuest);
+            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
         }
         else
         {
-            questElement.MarkQuestAsCompleted(CompleteQuest);
+            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
         }
     }
-
 
     private void CompleteQuest(QuestElement questElement)
     {
         _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
         _completedQuestsByElements.Remove(questElement);
+        questElement.gameObject.SetActive(false);
     }
 
     private void CloseQuestElements()

@@ -5,7 +5,9 @@ using UnityEngine;
 public abstract class Quest : ScriptableObject
 {
     public int questId;
-    public string questName;
+    public string questText;
+    public Sprite questSprite;
+    
     public int requiredForActivationQuestId;
     [HideInInspector] public GiveQuestCondition giveQuestCondition;
 

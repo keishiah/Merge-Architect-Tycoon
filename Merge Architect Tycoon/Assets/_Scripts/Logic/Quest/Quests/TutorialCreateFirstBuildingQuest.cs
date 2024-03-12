@@ -5,8 +5,6 @@ using UnityEngine;
     menuName = "StaticData/Quests/TutorialCreateFirstBuildingQuest")]
 public class TutorialCreateFirstBuildingQuest : Quest
 {
-    public string questText;
-
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
@@ -19,7 +17,6 @@ public class TutorialCreateFirstBuildingQuest : Quest
 
     public TutorialCreateFirstBuildingQuest()
     {
-        questName = "CreateFirstBuilding";
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 

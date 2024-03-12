@@ -27,7 +27,6 @@ public class TutorialDistrictEarningQuest : Quest
 
     public TutorialDistrictEarningQuest()
     {
-        questName = "FirstDistrictEarn";
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 

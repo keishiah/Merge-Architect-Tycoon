@@ -5,8 +5,6 @@ using UnityEngine;
     menuName = "StaticData/Quests/MergeItemQuest")]
 public class MergeItemQuest : Quest
 {
-    public string questText;
-
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
@@ -20,7 +18,6 @@ public class MergeItemQuest : Quest
 
     public MergeItemQuest()
     {
-        questName = "MergeItemQuest";
         giveQuestCondition = GiveQuestCondition.Merge;
     }
 
