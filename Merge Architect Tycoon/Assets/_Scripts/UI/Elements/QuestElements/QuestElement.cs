@@ -22,10 +22,7 @@ public class QuestElement : MonoBehaviour
         _questsPresenter = questsPresenter;
     }
 
-    public void SetQuestText(string text)
-    {
-        questText.text = text;
-    }
+    public void SetQuestText(string text) => questText.text = text;
 
     public void RenderQuest(Quest quest)
     {

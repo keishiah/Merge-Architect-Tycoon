@@ -31,8 +31,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
     {
         foreach (Quest quest in _staticDataService.Quests)
         {
-            Progress progress = _playerProgressService.Progress;
-
             if (!_questsProvider.GetActiveQuestsList.Contains(quest) &&
                 !_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&
                 !_playerProgressService.Quests.CompletedQuests.Contains(quest.questId))
