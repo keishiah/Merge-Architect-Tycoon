@@ -27,10 +27,9 @@ public class QuestElement : MonoBehaviour
         gameObject.SetActive(true);
         questText.text = quest.questText;
         questiImage.sprite = quest.questSprite;
-        RenderQuestRewardsAndItems(quest);
     }
 
-    private void RenderQuestRewardsAndItems(Quest quest)
+    public void RenderQuestRewardsAndItems(Quest quest)
     {
         HideRewardsAndItems();
 

@@ -40,10 +40,14 @@ public class QuestsPresenter
     {
         if (!_questPopup.GetInactiveQuestElement(out var questElement))
             return;
+
         questElement.RenderQuestHeader(quest);
 
         if (!_questsProvider.GetQuestsWaitingForClaim.Contains(quest))
+        {
+            questElement.RenderQuestRewardsAndItems(quest);
             return;
+        }
 
         if (!_completedQuestsByElements.ContainsKey(questElement))
         {
