@@ -125,7 +125,7 @@ public class CreateBuildingPopupPresenter
     {
         for (int x = 0; x < _buildingInfo.Count; x++)
         {
-            _elements[x].SetBuildingImage(_buildingInfo[x].buildingSprite);
+            _elements[x].SetBuildingImage(_buildingInfo[x].popupSprite);
             _elements[x].SetResourceImage(_buildingInfo[x].itemsToCreate[0].itemSprite);
 
             _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());

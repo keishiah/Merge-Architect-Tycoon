@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -39,6 +40,16 @@ public class CreateBuildingPopupScroller : UiViewBase
             createBuildingElements.FirstOrDefault(element => element.buildingName == buildingName);
         if (removingElement)
             removingElement.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        ScrollToTheLeftBorder();
+
+    }
+
+    public void ScrollToTheLeftBorder()
+    {
     }
 
     public void SetContentWidth()
