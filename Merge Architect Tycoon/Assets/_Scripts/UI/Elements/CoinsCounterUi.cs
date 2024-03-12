@@ -8,11 +8,15 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
     public TextMeshProUGUI diamandCountText;
 
     private UiPresenter _uiPresenter;
+    private QuestGiver _questGiver;
+    private QuestsProvider _questsProvider;
 
     [Inject]
-    void Construct(UiPresenter uiPresenter)
+    void Construct(UiPresenter uiPresenter, QuestGiver questGiver, QuestsProvider questsProvider)
     {
         _uiPresenter = uiPresenter;
+        _questGiver = questGiver;
+        _questsProvider = questsProvider;
     }
 
     private void Awake()
@@ -47,11 +51,12 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
         // else
         // {
 // #endif
-            //Shop.TryToBuy();
+        //Shop.TryToBuy();
 // #if UNITY_EDITOR
 //             }
 // #endif
     }
+
     public void AddDiamonds()
     {
         if (Application.version.StartsWith("d"))

@@ -1,39 +1,77 @@
+using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class QuestsPresenter
 {
-    private IPlayerProgressService _playerProgressService;
+    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
 
+    public IPlayerProgressService _playerProgressService;
     private QuestPopup _questPopup;
-    private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
-    private LoadLevelState _loadLevelState;
+    private QuestsProvider _questsProvider;
+
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService,
-        CreateBuildingPopupPresenter createBuildingPopupPresenter, LoadLevelState loadLevelState)
+    void Construct(IPlayerProgressService playerProgressService, QuestPopup questPopup,
+        QuestsProvider questsProvider)
     {
         _playerProgressService = playerProgressService;
-        _createBuildingPopupPresenter = createBuildingPopupPresenter;
-        _loadLevelState = loadLevelState;
-    }
-
-    public void InitializeWidget()
-    {
-        _playerProgressService.Progress.Coins.SubscribeToCoinsCountChanges(SetWidgetValues);
-    }
-
-
-    public void SetQuestWidget(QuestPopup questPopup)
-    {
         _questPopup = questPopup;
+        _questsProvider = questsProvider;
     }
 
-    private void SetWidgetValues(int coins)
+    public void OpenQuestPopup()
     {
-        // _createBuildingPopupPresenter.InitializeBuildingInfo();
-        // _createBuildingPopupPresenter.SortBuildingElements();
-        // var buildingInfo = _createBuildingPopupPresenter._buildings[0];
-        // _questWidget.RenderElement1(buildingInfo.buildingName, buildingInfo.coinsCountToCreate, 1,
-        //     buildingInfo.itemToCreate);
+        CloseQuestElements();
+
+        ShowQuests(_questsProvider.GetActiveQuestsList);
+        ShowQuests(_questsProvider.GetQuestsWaitingForClaim);
+    }
+
+    private void ShowQuests(IEnumerable<Quest> quests)
+    {
+        foreach (Quest quest in quests)
+        {
+            ShowQuest(quest);
+        }
+    }
+
+    private void ShowQuest(Quest quest)
+    {
+        if (!_questPopup.GetInactiveQuestElement(out var questElement))
+            return;
+
+        questElement.RenderQuestHeader(quest);
+
+        if (!_questsProvider.GetQuestsWaitingForClaim.Contains(quest))
+        {
+            questElement.RenderQuestRewardsAndItems(quest);
+            return;
+        }
+
+        if (!_completedQuestsByElements.ContainsKey(questElement))
+        {
+            _completedQuestsByElements.Add(questElement, quest);
+            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
+        }
+        else
+        {
+            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
+        }
+    }
+
+    private void CompleteQuest(QuestElement questElement)
+    {
+        _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
+        _completedQuestsByElements.Remove(questElement);
+        questElement.gameObject.SetActive(false);
+    }
+
+    private void CloseQuestElements()
+    {
+        foreach (QuestElement questElement in _questPopup.questElements)
+        {
+            questElement.gameObject.SetActive(false);
+        }
     }
 }
