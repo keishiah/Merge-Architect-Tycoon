@@ -61,6 +61,7 @@ public class CreateBuildingPopupPresenter
     {
         SortBuildingElements();
         _createBuildingPopupScroller.SortBuildingElements();
+        _createBuildingPopup.HideButtons();
     }
 
     public void RenderSortedList()
@@ -143,6 +144,7 @@ public class CreateBuildingPopupPresenter
             _buildingProvider.CreateBuildingInTimeAsync(buildingName);
             _createBuildingPopupScroller.RemoveBuildingElementFromPopup(buildingName);
             _createBuildingPopupScroller.SetContentWidth();
+            _createBuildingPopup.HideButtons();
         }
     }
 
