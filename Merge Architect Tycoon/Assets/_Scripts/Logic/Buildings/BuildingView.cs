@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BuildingView : MonoBehaviour
 {
     public Image buildingStateImage;
+    public Image buildInProcessImage;
     public TextMeshProUGUI timerText;
 
     public void SetViewInactive()
@@ -13,7 +14,7 @@ public class BuildingView : MonoBehaviour
         timerText.gameObject.SetActive(false);
         buildingStateImage.gameObject.SetActive(false);
     }
-        
+
     public void SetViewBuildInProgress()
     {
         buildingStateImage.raycastTarget = false;
@@ -33,7 +34,14 @@ public class BuildingView : MonoBehaviour
 
     public void ShowBuildSprite(Sprite spriteToShow)
     {
+        buildInProcessImage.transform.parent.gameObject.SetActive(false);
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
+    }
+
+    public void ShowBuildInProgressSprite(Sprite spriteToShow)
+    {
+        buildInProcessImage.transform.parent.gameObject.SetActive(true);
+        buildInProcessImage.sprite = spriteToShow;
     }
 }

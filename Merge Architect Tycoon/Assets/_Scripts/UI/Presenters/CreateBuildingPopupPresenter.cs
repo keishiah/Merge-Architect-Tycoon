@@ -51,8 +51,6 @@ public class CreateBuildingPopupPresenter
         {
             _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
         }
-
-        _createBuildingPopupScroller.SetContentWidth();
     }
 
     public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
@@ -60,7 +58,8 @@ public class CreateBuildingPopupPresenter
     public void OpenScroller()
     {
         SortBuildingElements();
-        _createBuildingPopupScroller.SortBuildingElements();
+        _createBuildingPopupScroller.OpenScroller();
+        _createBuildingPopup.HideButtons();
     }
 
     public void RenderSortedList()
@@ -124,7 +123,7 @@ public class CreateBuildingPopupPresenter
     {
         for (int x = 0; x < _buildingInfo.Count; x++)
         {
-            _elements[x].SetBuildingImage(_buildingInfo[x].buildingSprite);
+            _elements[x].SetBuildingImage(_buildingInfo[x].popupSprite);
             _elements[x].SetResourceImage(_buildingInfo[x].itemsToCreate[0].itemSprite);
 
             _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
@@ -142,7 +141,7 @@ public class CreateBuildingPopupPresenter
             _itemsCatalogue.TakeItems(items);
             _buildingProvider.CreateBuildingInTimeAsync(buildingName);
             _createBuildingPopupScroller.RemoveBuildingElementFromPopup(buildingName);
-            _createBuildingPopupScroller.SetContentWidth();
+            _createBuildingPopup.HideButtons();
         }
     }
 

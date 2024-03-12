@@ -16,10 +16,10 @@ public class MergeGrid : MonoBehaviour
     [Inject] private MergeLevel level;
     [Inject] private MergeItemsManager mergeItemsGeneralOpened;
 
-    private void Start()
-    {
-        InitializeGrid();
-    }
+    // private void Start()
+    // {
+    //     InitializeGrid();
+    // }
 
     public void InitializeGrid()
     {
