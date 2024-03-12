@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MergeLevel", menuName = "ScriptableObjects/MergeLevel")]
+[CreateAssetMenu(fileName = "MergeLevel", menuName = "StaticData/MergeLevel")]
 public class MergeLevel : ScriptableObject
 {
     [SerializeField]

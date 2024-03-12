@@ -3,7 +3,8 @@
     public Coins Coins = new();
     public Coins Diamonds = new();
     public Buldings Buldings = new();
-    public Quests Quests = new Quests();
+    public Quests Quests = new();
+    public TutorialData Tutorial = new();
 
     public void AddCoins(int coins)
     {

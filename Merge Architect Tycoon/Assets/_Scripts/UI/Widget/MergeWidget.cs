@@ -5,9 +5,9 @@ public class MergeWidget : Widget
     [SerializeField] GameObject _trucks;
     [SerializeField] GameObject _infoPanel;
 
-    public override void OnEnable()
+    public override void OnOpen()
     {
-        base.OnEnable();
+        base.OnOpen();
         _trucks.SetActive(false);
         _infoPanel.SetActive(true);
     }
