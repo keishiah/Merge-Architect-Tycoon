@@ -1,22 +1,14 @@
 ﻿using Zenject;
+
 public class PlayerProgressService : IPlayerProgressService
 {
-    [Inject]
-    private Progress _progress;
+    [Inject] private Progress _progress;
+
     public Progress Progress
     {
-        get
-        { 
-            return _progress;
-            // if (_progress != null)
-            //     return _progress;
-            //
-            // Debug.LogError("There is null Progress!");
-            // return new();
-        }
-        set
-        {
-            _progress = value;
-        }
+        get { return _progress; }
+        set { _progress = value; }
     }
+
+    public Quests Quests { get; set; }
 }

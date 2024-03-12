@@ -4,11 +4,12 @@ using Zenject;
 
 public class QuestsPresenter
 {
+    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
+
     public IPlayerProgressService _playerProgressService;
     private QuestPopup _questPopup;
     private QuestsProvider _questsProvider;
 
-    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService, QuestPopup questPopup,
@@ -21,55 +22,49 @@ public class QuestsPresenter
 
     public void OpenQuestPopup()
     {
-        _questPopup.gameObject.SetActive(true);
         CloseQuestElements();
 
-        foreach (Quest quest in _questsProvider.GetActiveQuestsList)
-        {
-            ShowActiveQuestInPopup(quest);
-        }
-
-        foreach (Quest quest in _questsProvider.GetQuestsWaitingForClaim)
-        {
-            ShowQuestsWaitingForClaim(quest);
-        }
+        ShowQuests(_questsProvider.GetActiveQuestsList);
+        ShowQuests(_questsProvider.GetQuestsWaitingForClaim);
     }
 
-    private void ShowActiveQuestInPopup(Quest quest)
+    private void ShowQuests(IEnumerable<Quest> quests)
     {
-        if (_questPopup.GetInactiveQuestElement(out var questElement))
+        foreach (Quest quest in quests)
         {
-            questElement.gameObject.SetActive(true);
-            questElement.SetQuestText(quest.questName);
-            questElement.RenderQuest(quest);
+            ShowQuest(quest);
         }
     }
 
-    private void ShowQuestsWaitingForClaim(Quest quest)
+    private void ShowQuest(Quest quest)
     {
-        if (_questPopup.GetInactiveQuestElement(out var questElement))
-        {
-            questElement.gameObject.SetActive(true);
-            questElement.SetQuestText(quest.questName);
-            questElement.RenderQuest(quest);
+        if (!_questPopup.GetInactiveQuestElement(out var questElement))
+            return;
 
-            if (_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&
-                !_completedQuestsByElements.ContainsKey(questElement))
-            {
-                _completedQuestsByElements.Add(questElement, quest);
-                questElement.MarkQuestAsCompleted(CompleteQuest);
-            }
-            else if (_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&
-                     _completedQuestsByElements.ContainsKey(questElement))
-                questElement.MarkQuestAsCompleted(CompleteQuest);
+        questElement.RenderQuestHeader(quest);
+
+        if (!_questsProvider.GetQuestsWaitingForClaim.Contains(quest))
+        {
+            questElement.RenderQuestRewardsAndItems(quest);
+            return;
+        }
+
+        if (!_completedQuestsByElements.ContainsKey(questElement))
+        {
+            _completedQuestsByElements.Add(questElement, quest);
+            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
+        }
+        else
+        {
+            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
         }
     }
-
 
     private void CompleteQuest(QuestElement questElement)
     {
         _questsProvider.ClaimQuestReward(_completedQuestsByElements[questElement]);
         _completedQuestsByElements.Remove(questElement);
+        questElement.gameObject.SetActive(false);
     }
 
     private void CloseQuestElements()

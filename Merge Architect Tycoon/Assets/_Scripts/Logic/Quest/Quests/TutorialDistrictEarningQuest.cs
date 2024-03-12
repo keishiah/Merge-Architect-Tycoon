@@ -27,11 +27,10 @@ public class TutorialDistrictEarningQuest : Quest
 
     public TutorialDistrictEarningQuest()
     {
-        questName = "FirstDistrictEarn";
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
-    public override bool IsCompleted(object value)
+    public override bool IsCompleted(IPlayerProgressService progress)
     {
         return true;
     }

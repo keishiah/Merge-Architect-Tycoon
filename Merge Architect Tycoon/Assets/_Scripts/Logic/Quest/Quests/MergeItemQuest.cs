@@ -5,8 +5,6 @@ using UnityEngine;
     menuName = "StaticData/Quests/MergeItemQuest")]
 public class MergeItemQuest : Quest
 {
-    public string questText;
-
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
@@ -40,8 +38,8 @@ public class MergeItemQuest : Quest
         _rewards.Add(coinsReward);
     }
 
-    public override bool IsCompleted(object value)
+    public override bool IsCompleted(IPlayerProgressService progress)
     {
-        return (int)value >= mergeQuestItem.itemCount;
+        return progress.Quests.CurrentMergeCount >= mergeQuestItem.itemCount;
     }
 }

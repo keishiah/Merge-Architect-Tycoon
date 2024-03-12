@@ -8,5 +8,5 @@ public abstract class QuestItem
     public Sprite itemImage;
     public int itemCount;
 
-    public abstract int GetCurrentItemCount(Progress progress);
+    public abstract int GetCurrentItemCount(IPlayerProgressService progress);
 }
