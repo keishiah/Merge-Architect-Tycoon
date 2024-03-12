@@ -31,7 +31,7 @@ public class TutorialDistrictEarningQuest : Quest
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
-    public override bool IsCompleted(object value)
+    public override bool IsCompleted(IPlayerProgressService progress)
     {
         return true;
     }

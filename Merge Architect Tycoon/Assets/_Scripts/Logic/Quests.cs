@@ -15,8 +15,10 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     public List<int> QuestsWaitingForClaim => questsWaitingForClaim;
     public List<int> CompletedQuests => completedQuests;
 
-    [SerializeField] private ReactiveProperty<int> currentMergeCount = new();
-    public int CurrentMergeCount => currentMergeCount.Value;
+    [SerializeField] private int currentMergeCount;
+    public int CurrentMergeCount => currentMergeCount;
+
+    private ReactiveCommand _onQuestValuesChanged = new();
 
     public void AddActiveQuest(int questId)
     {
@@ -42,19 +44,19 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     public void AddMergeItem()
     {
-        Debug.Log("merge");
-        currentMergeCount.Value++;
+        currentMergeCount++;
         SaveLoadService.Save(SaveKey.Quests, this);
+        _onQuestValuesChanged.Execute();
     }
 
     public void ClearMergeCount()
     {
-        currentMergeCount.Value = 0;
+        currentMergeCount = 0;
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public IDisposable SubscribeToMerge(Action<int> onCoinsCountChanged) =>
-        currentMergeCount.Subscribe(onCoinsCountChanged);
+    public IDisposable SubscribeToMerge(Action onQuestValueChanged) =>
+        _onQuestValuesChanged.Subscribe(_ => onQuestValueChanged());
 
     public void OnBeforeSerialize()
     {
@@ -66,6 +68,6 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     public void Dispose()
     {
-        currentMergeCount?.Dispose();
+        _onQuestValuesChanged.Dispose();
     }
 }

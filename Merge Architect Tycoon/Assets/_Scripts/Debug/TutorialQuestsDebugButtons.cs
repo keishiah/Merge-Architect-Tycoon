@@ -33,8 +33,7 @@ namespace _Scripts.Debug
 
         private void CompleteQuest()
         {
-            _questsProvider.CheckCompletionOfTutorialQuest("CreateFirstBuilding");
-            _questsProvider.CheckCompletionOfTutorialQuest("FirstDistrictEarn");
+            _questsProvider.CheckAllQuestsCompleted();
         }
     }
 }

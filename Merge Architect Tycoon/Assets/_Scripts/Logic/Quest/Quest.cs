@@ -13,7 +13,7 @@ public abstract class Quest : ScriptableObject
     public abstract List<QuestItem> GetQuestItemsToCreate();
     public abstract void InitializeRewardsAndItems();
     public abstract void GiveReward(Progress progress);
-    public abstract bool IsCompleted(object value);
+    public abstract bool IsCompleted(IPlayerProgressService progress);
 
     public bool IsReadyToStart(IPlayerProgressService progress)
     {
