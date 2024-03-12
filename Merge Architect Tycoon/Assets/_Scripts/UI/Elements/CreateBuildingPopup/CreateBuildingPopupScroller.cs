@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class CreateBuildingPopupScroller : UiViewBase
 {
     public List<CreateBuildingUiElement> createBuildingElements;
-    public RectTransform scrollerRectTransform;
+    public ScrollRect scrollRect;
     private float _elementWidth;
 
     private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
@@ -29,9 +30,11 @@ public class CreateBuildingPopupScroller : UiViewBase
         _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
     }
 
-    public void SortBuildingElements()
+    public void OpenScroller()
     {
-        _createBuildingPopupPresenter.RenderSortedList();
+        SortBuildingElements();
+        SetContentWidth();
+        ScrollToTheLeftBorder();
     }
 
     public void RemoveBuildingElementFromPopup(string buildingName)
@@ -42,19 +45,20 @@ public class CreateBuildingPopupScroller : UiViewBase
             removingElement.gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    private void SortBuildingElements()
     {
-        ScrollToTheLeftBorder();
-
+        _createBuildingPopupPresenter.RenderSortedList();
     }
 
-    public void ScrollToTheLeftBorder()
+    private void ScrollToTheLeftBorder()
     {
+        scrollRect.horizontalNormalizedPosition = 0f;
     }
 
-    public void SetContentWidth()
+    private void SetContentWidth()
     {
-        scrollerRectTransform.sizeDelta = new Vector2(_elementWidth * createBuildingElements.Count,
-            scrollerRectTransform.sizeDelta.y);
+        var activeElementsCount = createBuildingElements.Count(element => element.gameObject.activeSelf);
+        scrollRect.content.sizeDelta =
+            new Vector2(_elementWidth * activeElementsCount, scrollRect.content.sizeDelta.y);
     }
 }

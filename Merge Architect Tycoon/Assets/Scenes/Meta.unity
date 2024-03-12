@@ -7614,7 +7614,7 @@ MonoBehaviour:
   - {fileID: 2125373298}
   - {fileID: 2095478642}
   - {fileID: 308332747}
-  scrollerRectTransform: {fileID: 854627489}
+  scrollRect: {fileID: 1119180570}
 --- !u!114 &1619757257
 MonoBehaviour:
   m_ObjectHideFlags: 0
