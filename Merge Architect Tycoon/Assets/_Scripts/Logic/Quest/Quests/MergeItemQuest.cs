@@ -38,6 +38,7 @@ public class MergeItemQuest : Quest
         _rewards.Add(coinsReward);
     }
 
+
     public override bool IsCompleted(IPlayerProgressService progress)
     {
         return progress.Quests.CurrentMergeCount >= mergeQuestItem.itemCount;

@@ -7,13 +7,13 @@ using UnityEngine;
 [Serializable]
 public class Quests : ISerializationCallbackReceiver, IDisposable
 {
-    [SerializeField] private List<int> completedQuests = new();
+    [SerializeField] private ReactiveCollection<int> completedQuests = new();
     [SerializeField] private List<int> activeQuests = new();
     [SerializeField] private List<int> questsWaitingForClaim = new();
 
     public List<int> ActiveQuests => activeQuests;
     public List<int> QuestsWaitingForClaim => questsWaitingForClaim;
-    public List<int> CompletedQuests => completedQuests;
+    public IReadOnlyCollection<int> CompletedQuests => completedQuests;
 
     [SerializeField] private int currentMergeCount;
     public int CurrentMergeCount => currentMergeCount;
@@ -54,6 +54,9 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         currentMergeCount = 0;
         SaveLoadService.Save(SaveKey.Quests, this);
     }
+
+    public IDisposable SubscribeToQuestCompletion(Action onQuestCompletion) =>
+        completedQuests.ObserveAdd().Subscribe(_ => onQuestCompletion());
 
     public IDisposable SubscribeToMerge(Action onQuestValueChanged) =>
         _onQuestValuesChanged.Subscribe(_ => onQuestValueChanged());

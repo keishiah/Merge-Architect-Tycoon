@@ -9,9 +9,11 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 {
     private readonly List<Quest> _activeQuests = new();
     public List<Quest> GetActiveQuestsList => _activeQuests;
-    private readonly ReactiveCollection<Quest> _questsWaitingForClaim = new();
-    public ReactiveCollection<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
-    private IPlayerProgressService _playerProgressService;
+    
+    private readonly List<Quest> _questsWaitingForClaim = new();
+    public List<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
+    
+    IPlayerProgressService _playerProgressService;
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService)

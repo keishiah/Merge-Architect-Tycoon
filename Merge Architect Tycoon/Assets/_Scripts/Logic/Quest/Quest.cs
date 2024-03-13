@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -17,7 +18,7 @@ public abstract class Quest : ScriptableObject
     public abstract void GiveReward(Progress progress);
     public abstract bool IsCompleted(IPlayerProgressService progress);
 
-    public bool IsReadyToStart(IPlayerProgressService progress)
+    public virtual bool IsReadyToStart(IPlayerProgressService progress)
     {
         return requiredForActivationQuestId == 0 ||
                progress.Quests.CompletedQuests.Contains(requiredForActivationQuestId);
