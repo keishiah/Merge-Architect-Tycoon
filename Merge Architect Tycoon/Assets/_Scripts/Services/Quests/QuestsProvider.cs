@@ -23,8 +23,7 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
-        _playerProgressService.Quests.SubscribeToMerge(CheckAllQuestsCompleted);
-        _playerProgressService.Quests.SubscribeToTruckValueChanged(CheckAllQuestsCompleted);
+        _playerProgressService.Quests.SubscribeToQuestValueChanged(CheckAllQuestsCompleted);
     }
 
     public void ActivateQuest(Quest quest)

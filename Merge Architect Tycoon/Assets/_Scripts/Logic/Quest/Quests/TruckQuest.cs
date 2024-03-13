@@ -43,8 +43,6 @@ public class TruckQuest : Quest
 
     public override bool IsCompleted(IPlayerProgressService progress)
     {
-        Debug.Log(progress.Quests.CurrentTruckCount);
-        Debug.Log(truckQuestItem.itemCount);
         return progress.Quests.CurrentTruckCount >= truckQuestItem.itemCount;
     }
 }

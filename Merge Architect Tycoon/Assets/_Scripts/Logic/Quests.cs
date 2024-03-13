@@ -20,10 +20,12 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     [SerializeField] private int currentTruckCount;
     public int CurrentTruckCount => currentTruckCount;
+    [SerializeField] private int currentQuestCoinsCount;
+    public int CurrentQuestCoinsCount => currentQuestCoinsCount;
 
-    private ReactiveCommand _onQuestValuesChanged = new();
-    private ReactiveCommand _onTruckValuesChanged = new();
     private ReactiveCommand _onQuestCompleted = new();
+    private ReactiveCommand _onQuestValuesChanged = new();
+
 
     public void AddActiveQuest(int questId)
     {
@@ -50,6 +52,8 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     public void AddMergeItem()
     {
+        if (activeQuests.Count <= 1)
+            return;
         currentMergeCount++;
         SaveLoadService.Save(SaveKey.Quests, this);
         _onQuestValuesChanged.Execute();
@@ -63,9 +67,11 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
 
     public void AddTruckItem()
     {
+        if (activeQuests.Count <= 1)
+            return;
         currentTruckCount++;
         SaveLoadService.Save(SaveKey.Quests, this);
-        _onTruckValuesChanged.Execute();
+        _onQuestValuesChanged.Execute();
     }
 
     public void ClearTruckCount()
@@ -74,14 +80,27 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public IDisposable SubscribeToMerge(Action onQuestValueChanged) =>
+    public void AddQuestCoins(int coins)
+    {
+        if (activeQuests.Count <= 1)
+            return;
+        currentQuestCoinsCount += coins;
+        SaveLoadService.Save(SaveKey.Quests, this);
+        _onQuestValuesChanged.Execute();
+    }
+
+    public void ClearQuestCoinsCount()
+    {
+        currentQuestCoinsCount = 0;
+        SaveLoadService.Save(SaveKey.Quests, this);
+    }
+
+    public IDisposable SubscribeToQuestValueChanged(Action onQuestValueChanged) =>
         _onQuestValuesChanged.Subscribe(_ => onQuestValueChanged());
 
     public IDisposable SubscribeToQuestCompleted(Action onQuestCompleted) =>
         _onQuestCompleted.Subscribe(_ => onQuestCompleted());
 
-    public IDisposable SubscribeToTruckValueChanged(Action onTruckValueChanged) =>
-        _onTruckValuesChanged.Subscribe(_ => onTruckValueChanged());
 
     public void OnBeforeSerialize()
     {
@@ -95,6 +114,5 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     {
         _onQuestValuesChanged.Dispose();
         _onQuestCompleted.Dispose();
-        _onTruckValuesChanged.Dispose();        
     }
 }
