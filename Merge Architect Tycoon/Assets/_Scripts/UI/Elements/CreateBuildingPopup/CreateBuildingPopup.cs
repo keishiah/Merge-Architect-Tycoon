@@ -24,11 +24,6 @@ public class CreateBuildingPopup : MonoBehaviour
         createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
     }
 
-    private void GoToMergePanel()
-    {
-        _sceneButtons.OnMenuButtonClick(SceneButtonsEnum.Merge);
-    }
-
     public void OpenMergeButton()
     {
         goToMergePanelButton.gameObject.SetActive(true);
@@ -39,5 +34,16 @@ public class CreateBuildingPopup : MonoBehaviour
     {
         createBuildingButton.gameObject.SetActive(true);
         goToMergePanelButton.gameObject.SetActive(false);
+    }
+
+    public void HideButtons()
+    {
+        createBuildingButton.gameObject.SetActive(false);
+        goToMergePanelButton.gameObject.SetActive(false);
+    }
+
+    private void GoToMergePanel()
+    {
+        _sceneButtons.OnMenuButtonClick(SceneButtonsEnum.Merge);
     }
 }

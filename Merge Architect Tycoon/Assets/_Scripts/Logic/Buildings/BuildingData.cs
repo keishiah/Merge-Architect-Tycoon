@@ -13,7 +13,8 @@ public class BuildingData : ScriptableObject
 public struct BuildingInfo
 {
     public string buildingName;
-    public Sprite buildingSprite;
+    public Sprite districtSprite;
+    public Sprite popupSprite;
     public int timeToCreate;
     public int coinsCountToCreate;
     public List<MergeItem> itemsToCreate;

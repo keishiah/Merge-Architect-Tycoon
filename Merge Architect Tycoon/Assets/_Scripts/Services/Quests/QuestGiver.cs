@@ -1,15 +1,15 @@
+using System.Linq;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 public class QuestGiver : IInitializableOnSceneLoaded
 {
+    private int _tutorialQuestsCount;
+
     private QuestsProvider _questsProvider;
-
     private IStaticDataService _staticDataService;
-
     private IPlayerProgressService _playerProgressService;
-
-    private bool _tutorialQuestsCompleted;
 
     [Inject]
     void Construct(QuestsProvider questsProvider, IStaticDataService staticDataService,
@@ -22,9 +22,15 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
-        // _questsProvider.GetQuestsWaitingForClaim.ObserveRemove().Subscribe(_ => { CheckAllQuestsForActivation(); });
-        // CheckAllQuestsForActivation();
         ActivateQuestsOnStart();
+
+        _tutorialQuestsCount =
+            _staticDataService.Quests.Count(quest => quest.giveQuestCondition == GiveQuestCondition.Tutorial);
+
+        _playerProgressService.Quests.SubscribeToQuestCompleted(CheckBaseQuestsActivation);
+        
+        // CheckAllQuestsForActivation();
+        // _questsProvider.GetQuestsWaitingForClaim.ObserveRemove().Subscribe(_ => { CheckBaseQuestsActivation(); });
     }
 
     public void CheckAllQuestsForActivation()
@@ -43,6 +49,12 @@ public class QuestGiver : IInitializableOnSceneLoaded
         }
     }
 
+    private void CheckBaseQuestsActivation()
+    {
+        if (_tutorialQuestsCount > _playerProgressService.Quests.CompletedQuests.Count)
+            return;
+        CheckAllQuestsForActivation();
+    }
 
     private void ActivateQuestsOnStart()
     {

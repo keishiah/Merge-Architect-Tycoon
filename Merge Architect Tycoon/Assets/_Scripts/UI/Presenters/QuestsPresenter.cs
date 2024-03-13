@@ -52,6 +52,7 @@ public class QuestsPresenter
         if (!_completedQuestsByElements.ContainsKey(questElement))
         {
             _completedQuestsByElements.Add(questElement, quest);
+            questElement.RenderQuestRewardsAndItems(quest);
             questElement.MarkQuestAsCompleted(quest, CompleteQuest);
         }
         else
