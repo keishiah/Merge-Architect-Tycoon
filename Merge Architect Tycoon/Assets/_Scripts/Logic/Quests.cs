@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using UniRx;
 using UnityEngine;
 
@@ -23,6 +21,8 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     public int CurrentTruckCount => currentTruckCount;
     [SerializeField] private int currentQuestCoinsCount;
     public int CurrentQuestCoinsCount => currentQuestCoinsCount;
+
+    public MergeTierQuests mergeTierQuests = new();
 
     private ReactiveCommand _onQuestCompleted = new();
     private ReactiveCommand _onQuestValuesChanged = new();
@@ -99,6 +99,15 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     {
         currentQuestCoinsCount = 0;
         SaveLoadService.Save(SaveKey.Quests, this);
+    }
+
+    public void AddMergeTierItem(int tier)
+    {
+        if (activeQuests.Count <= 1)
+            return;
+        mergeTierQuests.AddTierMergeCount(tier);
+        SaveLoadService.Save(SaveKey.Quests, this);
+        _onQuestValuesChanged.Execute();
     }
 
     public IDisposable SubscribeToQuestValueChanged(Action onQuestValueChanged) =>

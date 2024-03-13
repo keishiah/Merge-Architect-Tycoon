@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using UniRx;
 using Zenject;
 
 
@@ -28,12 +25,11 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void ActivateQuest(Quest quest)
     {
-        if (!_activeQuests.Contains(quest))
-        {
-            _activeQuests.Add(quest);
-            _playerProgressService.Quests.AddActiveQuest(quest.questId);
-            quest.InitializeRewardsAndItems();
-        }
+        if (_activeQuests.Contains(quest))
+            return;
+        _activeQuests.Add(quest);
+        _playerProgressService.Quests.AddActiveQuest(quest.questId);
+        quest.InitializeRewardsAndItems();
     }
 
     public void AddQuestWaitingForClaim(Quest quest)
