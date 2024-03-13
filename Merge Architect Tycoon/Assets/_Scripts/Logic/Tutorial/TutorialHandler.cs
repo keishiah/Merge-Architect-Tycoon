@@ -36,12 +36,14 @@ public class TutorialHandler : MonoBehaviour
     private void Awake()
     {
         DisableAll();
+        TutorialSteps[_currentStep].Enter(this);
     }
 
     private void DisableAll()
     {
         _dialog.SetActive(false);
         _handPointer.SetActive(false);
+        _handPointer.transform.SetParent(this.transform);
         _blockerators.SetActive(false);
     }
 
@@ -53,13 +55,14 @@ public class TutorialHandler : MonoBehaviour
         TutorialData tutorialData = new TutorialData();
         tutorialData.StepIndex = _currentStep;
 
-        TutorialSteps[_currentStep].Enter(this);
 
         if (_currentStep >= TutorialSteps.Count)
         {
             tutorialData.IsComplite = true;
             Destroy(gameObject);
         }
+        else
+            TutorialSteps[_currentStep].Enter(this);
 
         SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
     }
@@ -77,7 +80,7 @@ public class TutorialHandler : MonoBehaviour
             _tempButton = buttonToNext;
             _allScreenButton.SetActive(false);
             //invoke only onse!
-            Debug.Log(buttonToNext.name + ": AddListener!");
+            //Debug.Log(buttonToNext.name + ": AddListener!");
             buttonToNext.onClick.AddListener(ClearListener);
             buttonToNext.onClick.AddListener(NextStep);
         }
@@ -90,14 +93,18 @@ public class TutorialHandler : MonoBehaviour
 
     private void ClearListener()
     {
-        Debug.Log(_tempButton.name + ": RemoveListener!");
+        //Debug.Log(_tempButton.name + ": RemoveListener!");
         _tempButton?.onClick.RemoveListener(NextStep);
         _tempButton?.onClick.RemoveListener(ClearListener);
     }
 
-    public void ShowHand(AnimationClip clip)
+    public void ShowHand(AnimationClip clip, Transform transform = null)
     {
         _handPointer.SetActive(true);
         _handAnimation.clip = clip;
+        _handAnimation.Play();
+
+        if (transform != null)
+            _handPointer.transform.SetParent(transform);
     }
 }

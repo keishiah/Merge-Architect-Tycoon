@@ -230,10 +230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4b7d61c7c6b3e42bf55ae4feb0849c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playButton: {fileID: 0}
-  _loadingSlider: {fileID: 0}
-  _gameRunner: {fileID: 0}
-  _tutorialToggle: {fileID: 0}
+  _playButton: {fileID: 1024377521}
+  _loadingSlider: {fileID: 1552402052}
+  _gameRunner: {fileID: 1723122716}
 --- !u!4 &702524237
 Transform:
   m_ObjectHideFlags: 0

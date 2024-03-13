@@ -600,7 +600,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8994153782366035935}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8994153782530967369}
+        m_TargetAssemblyTypeName: TutorialHandler, Assembly-CSharp
+        m_MethodName: NextStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8994153782530967383
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialog: {fileID: 8994153781646524485}
   _dialogText: {fileID: 8994153781911135688}
-  _allScreenButton: {fileID: 0}
+  _allScreenButton: {fileID: 8994153782366035930}
   _blockerators: {fileID: 8994153783239066942}
   _upBlock: {fileID: 8994153782189798865}
   _downBlock: {fileID: 8994153783267600136}
@@ -668,6 +680,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c7dc7b9afa83646408981c04fe430800, type: 2}
   - {fileID: 11400000, guid: 0c77572e6abd27d4b90aa36a25338998, type: 2}
   - {fileID: 11400000, guid: d697c26755d54d444aa55b2427b990ac, type: 2}
+  - {fileID: 11400000, guid: fe04d5a118d291241af7c10129a55bc6, type: 2}
+  - {fileID: 11400000, guid: d94e481597f77484eb4af31d53af2cab, type: 2}
 --- !u!1 &8994153782837768763
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +844,7 @@ Animation:
   m_GameObject: {fileID: 8994153783122377734}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 5d650f9126e1c4942992a4a36d860e2c, type: 2}
+  m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
   - {fileID: 7400000, guid: 5d650f9126e1c4942992a4a36d860e2c, type: 2}

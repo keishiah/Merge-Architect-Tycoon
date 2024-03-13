@@ -9,5 +9,6 @@ public class DialogTutorialStep : TutorialStep
     public override void Enter(TutorialHandler tutorialHandler)
     {
         tutorialHandler.ShowDialog(text);
+        tutorialHandler.NextButtonReset();
     }
 }

@@ -14,6 +14,6 @@ public class ClickTutorialStep : TutorialStep
         Button button = buttonGameObject.GetComponent<Button>();
 
         tutorialHandler.NextButtonReset(button);
-        tutorialHandler.ShowHand(clip);
+        tutorialHandler.ShowHand(clip, buttonGameObject.transform);
     }
 }
