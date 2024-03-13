@@ -17010,6 +17010,7 @@ MonoBehaviour:
   districtId: 0
   coinsSlider: {fileID: 7380616605615607389}
   earnCurrencyButton: {fileID: 7380616604205394882}
+  closeMapButton: {fileID: 7380616605000757936}
 --- !u!224 &7380616605213231282
 RectTransform:
   m_ObjectHideFlags: 0

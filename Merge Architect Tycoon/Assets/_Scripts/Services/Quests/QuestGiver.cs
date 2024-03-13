@@ -42,8 +42,6 @@ public class QuestGiver : IInitializableOnSceneLoaded
             }
         }
     }
-
-
     private void ActivateQuestsOnStart()
     {
         var questProgress = _playerProgressService.Quests;
