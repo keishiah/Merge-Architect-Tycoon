@@ -8,9 +8,9 @@ using Zenject;
 [Serializable]
 public class Buldings : ISerializationCallbackReceiver, IDisposable
 {
-    [SerializeField] private List<string> savedCreatedBuildings = new List<string>();
+    [SerializeField] private List<string> savedCreatedBuildings = new();
 
-    private ReactiveCollection<string> _createdBuildingsReactiveCollection = new ReactiveCollection<string>();
+    private ReactiveCollection<string> _createdBuildingsReactiveCollection = new();
     public ReactiveCollection<string> CreatedBuildings => _createdBuildingsReactiveCollection;
 
     private Subject<string> _buildingAddedSubject = new();

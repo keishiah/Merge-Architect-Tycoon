@@ -7,18 +7,19 @@ using UnityEngine;
 [Serializable]
 public class Quests : ISerializationCallbackReceiver, IDisposable
 {
-    [SerializeField] private ReactiveCollection<int> completedQuests = new();
+    [SerializeField] private List<int> completedQuests = new();
     [SerializeField] private List<int> activeQuests = new();
     [SerializeField] private List<int> questsWaitingForClaim = new();
 
     public List<int> ActiveQuests => activeQuests;
     public List<int> QuestsWaitingForClaim => questsWaitingForClaim;
-    public IReadOnlyCollection<int> CompletedQuests => completedQuests;
+    public List<int> CompletedQuests => completedQuests;
 
     [SerializeField] private int currentMergeCount;
     public int CurrentMergeCount => currentMergeCount;
 
     private ReactiveCommand _onQuestValuesChanged = new();
+    private ReactiveCommand _onQuestCompleted = new();
 
     public void AddActiveQuest(int questId)
     {
@@ -39,6 +40,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         completedQuests.Add(questId);
         if (questsWaitingForClaim.Contains(questId))
             questsWaitingForClaim.Remove(questId);
+        _onQuestCompleted.Execute();
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
@@ -55,11 +57,11 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public IDisposable SubscribeToQuestCompletion(Action onQuestCompletion) =>
-        completedQuests.ObserveAdd().Subscribe(_ => onQuestCompletion());
-
     public IDisposable SubscribeToMerge(Action onQuestValueChanged) =>
         _onQuestValuesChanged.Subscribe(_ => onQuestValueChanged());
+
+    public IDisposable SubscribeToQuestCompleted(Action onQuestCompleted) =>
+        _onQuestCompleted.Subscribe(_ => onQuestCompleted());
 
     public void OnBeforeSerialize()
     {
@@ -72,5 +74,6 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     public void Dispose()
     {
         _onQuestValuesChanged.Dispose();
+        _onQuestCompleted.Dispose();
     }
 }

@@ -9,6 +9,7 @@ namespace _Scripts.Debug
     {
         public Button addQuestButton;
         public Button completeQuestButton;
+        public Button clearSavesButton;
 
         private QuestsProvider _questsProvider;
         private QuestGiver _questGiver;
@@ -24,6 +25,12 @@ namespace _Scripts.Debug
         {
             addQuestButton.onClick.AddListener(AddQuest);
             completeQuestButton.onClick.AddListener(CompleteQuest);
+            clearSavesButton.onClick.AddListener(ClearSaves);
+        }
+
+        private void ClearSaves()
+        {
+            SaveLoadService.ClearAll();
         }
 
         private void AddQuest()
