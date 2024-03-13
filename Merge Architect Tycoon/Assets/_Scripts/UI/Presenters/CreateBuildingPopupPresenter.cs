@@ -123,12 +123,11 @@ public class CreateBuildingPopupPresenter
     {
         for (int x = 0; x < _buildingInfo.Count; x++)
         {
-            _elements[x].SetBuildingImage(_buildingInfo[x].popupSprite);
-            _elements[x].SetResourceImage(_buildingInfo[x].itemsToCreate[0].itemSprite);
-
-            _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
-            _elements[x].SetResourcesPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
             _elements[x].SetBuildingName(_buildingInfo[x].buildingName);
+            _elements[x].SetBuildingImage(_buildingInfo[x].popupSprite);
+            _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
+
+            _elements[x].SetResourcesImages(_buildingInfo[x].itemsToCreate);
 
             _elements[x].SetPresenter(this);
         }
