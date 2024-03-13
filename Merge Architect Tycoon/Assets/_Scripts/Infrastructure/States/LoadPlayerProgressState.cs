@@ -17,7 +17,7 @@
     public void Enter()
     {
         LoadProgressOrInitNew();
-        
+
         _gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
     }
 
@@ -35,5 +35,6 @@
         _progressService.Quests = SaveLoadService.Load<Quests>(SaveKey.Quests);
         if (_progressService.Quests == null)
             _progressService.Quests = new Quests();
+        _progressService.Quests.SetProgress(_progressService.Progress);
     }
 }

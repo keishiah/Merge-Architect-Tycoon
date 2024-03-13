@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UniRx;
 using UnityEngine;
 
@@ -26,6 +27,10 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     private ReactiveCommand _onQuestCompleted = new();
     private ReactiveCommand _onQuestValuesChanged = new();
 
+    public void SetProgress(Progress progress)
+    {
+        progress.Coins.SubscribeToCoinsAdded(AddQuestCoins);
+    }
 
     public void AddActiveQuest(int questId)
     {
@@ -84,6 +89,7 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     {
         if (activeQuests.Count <= 1)
             return;
+
         currentQuestCoinsCount += coins;
         SaveLoadService.Save(SaveKey.Quests, this);
         _onQuestValuesChanged.Execute();
