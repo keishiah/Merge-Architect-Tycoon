@@ -18,15 +18,17 @@ public class MergeItemQuest : Quest
 
     public MergeItemQuest()
     {
-        giveQuestCondition = GiveQuestCondition.Merge;
+        giveQuestCondition = GiveQuestCondition.Base;
     }
 
-    public override void GiveReward(Progress progress)
+    public override void GiveReward(IPlayerProgressService progress)
     {
         foreach (var reward in _rewards)
         {
-            reward.GiveReward(progress);
+            reward.GiveReward(progress.Progress);
         }
+
+        progress.Quests.ClearMergeCount();
     }
 
     public override void InitializeRewardsAndItems()

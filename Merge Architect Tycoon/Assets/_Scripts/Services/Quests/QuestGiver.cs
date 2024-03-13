@@ -28,7 +28,8 @@ public class QuestGiver : IInitializableOnSceneLoaded
             _staticDataService.Quests.Count(quest => quest.giveQuestCondition == GiveQuestCondition.Tutorial);
 
         _playerProgressService.Quests.SubscribeToQuestCompleted(CheckBaseQuestsActivation);
-        
+        _playerProgressService.Quests.SubscribeToTruckValueChanged(CheckBaseQuestsActivation);
+
         // CheckAllQuestsForActivation();
         // _questsProvider.GetQuestsWaitingForClaim.ObserveRemove().Subscribe(_ => { CheckBaseQuestsActivation(); });
     }

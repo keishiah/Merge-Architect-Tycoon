@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20d69bd8e8b5440eb919ea29bfc190e5, type: 3}
-  m_Name: MergeItemQuest
+  m_Name: MergeItemQuest1
   m_EditorClassIdentifier: 
   questId: 3
   questText: Merge iems

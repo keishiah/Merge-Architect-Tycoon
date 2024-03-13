@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 
@@ -15,7 +14,7 @@ public abstract class Quest : ScriptableObject
     public abstract List<Reward> GetRewardList();
     public abstract List<QuestItem> GetQuestItemsToCreate();
     public abstract void InitializeRewardsAndItems();
-    public abstract void GiveReward(Progress progress);
+    public abstract void GiveReward(IPlayerProgressService progress);
     public abstract bool IsCompleted(IPlayerProgressService progress);
 
     public virtual bool IsReadyToStart(IPlayerProgressService progress)
@@ -28,6 +27,5 @@ public abstract class Quest : ScriptableObject
 public enum GiveQuestCondition
 {
     Tutorial,
-    Building,
-    Merge,
+    Base
 }

@@ -11,11 +11,11 @@ public class TutorialDistrictEarningQuest : Quest
     public override List<Reward> GetRewardList() => Rewards;
     public override List<QuestItem> GetQuestItemsToCreate() => new();
 
-    public override void GiveReward(Progress progress)
+    public override void GiveReward(IPlayerProgressService progress)
     {
         foreach (var reward in Rewards)
         {
-            reward.GiveReward(progress);
+            reward.GiveReward(progress.Progress);
         }
     }
 

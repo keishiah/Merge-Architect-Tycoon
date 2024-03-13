@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TutorialCreateFirstBuildingQuest",
-    menuName = "StaticData/Quests/TutorialCreateFirstBuildingQuest")]
-public class TutorialCreateFirstBuildingQuest : Quest
+[CreateAssetMenu(fileName = "TruckQuest",
+    menuName = "StaticData/Quests/TruckQuest")]
+public class TruckQuest : Quest
 {
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
     private readonly List<QuestItem> _questItemsToCreate = new();
-    public BuildingItem buildingItem;
+    public TruckQuestItem truckQuestItem;
 
 
     public override List<Reward> GetRewardList() => _rewards;
     public override List<QuestItem> GetQuestItemsToCreate() => _questItemsToCreate;
 
-    public TutorialCreateFirstBuildingQuest()
+
+    public TruckQuest()
     {
-        giveQuestCondition = GiveQuestCondition.Tutorial;
+        giveQuestCondition = GiveQuestCondition.Base;
     }
 
     public override void GiveReward(IPlayerProgressService progress)
@@ -26,6 +27,8 @@ public class TutorialCreateFirstBuildingQuest : Quest
         {
             reward.GiveReward(progress.Progress);
         }
+
+        progress.Quests.ClearTruckCount();
     }
 
     public override void InitializeRewardsAndItems()
@@ -33,12 +36,15 @@ public class TutorialCreateFirstBuildingQuest : Quest
         _rewards.Clear();
         _questItemsToCreate.Clear();
 
-        _questItemsToCreate.Add(buildingItem);
+        _questItemsToCreate.Add(truckQuestItem);
         _rewards.Add(coinsReward);
     }
 
+
     public override bool IsCompleted(IPlayerProgressService progress)
     {
-        return true;
+        Debug.Log(progress.Quests.CurrentTruckCount);
+        Debug.Log(truckQuestItem.itemCount);
+        return progress.Quests.CurrentTruckCount >= truckQuestItem.itemCount;
     }
 }

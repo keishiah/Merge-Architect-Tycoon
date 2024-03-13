@@ -18,7 +18,11 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     [SerializeField] private int currentMergeCount;
     public int CurrentMergeCount => currentMergeCount;
 
+    [SerializeField] private int currentTruckCount;
+    public int CurrentTruckCount => currentTruckCount;
+
     private ReactiveCommand _onQuestValuesChanged = new();
+    private ReactiveCommand _onTruckValuesChanged = new();
     private ReactiveCommand _onQuestCompleted = new();
 
     public void AddActiveQuest(int questId)
@@ -57,11 +61,27 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
+    public void AddTruckItem()
+    {
+        currentTruckCount++;
+        SaveLoadService.Save(SaveKey.Quests, this);
+        _onTruckValuesChanged.Execute();
+    }
+
+    public void ClearTruckCount()
+    {
+        currentTruckCount = 0;
+        SaveLoadService.Save(SaveKey.Quests, this);
+    }
+
     public IDisposable SubscribeToMerge(Action onQuestValueChanged) =>
         _onQuestValuesChanged.Subscribe(_ => onQuestValueChanged());
 
     public IDisposable SubscribeToQuestCompleted(Action onQuestCompleted) =>
         _onQuestCompleted.Subscribe(_ => onQuestCompleted());
+
+    public IDisposable SubscribeToTruckValueChanged(Action onTruckValueChanged) =>
+        _onTruckValuesChanged.Subscribe(_ => onTruckValueChanged());
 
     public void OnBeforeSerialize()
     {
@@ -75,5 +95,6 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     {
         _onQuestValuesChanged.Dispose();
         _onQuestCompleted.Dispose();
+        _onTruckValuesChanged.Dispose();        
     }
 }

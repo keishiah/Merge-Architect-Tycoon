@@ -9,10 +9,10 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 {
     private readonly List<Quest> _activeQuests = new();
     public List<Quest> GetActiveQuestsList => _activeQuests;
-    
+
     private readonly List<Quest> _questsWaitingForClaim = new();
     public List<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
-    
+
     IPlayerProgressService _playerProgressService;
 
     [Inject]
@@ -24,6 +24,7 @@ public class QuestsProvider : IInitializableOnSceneLoaded
     public void OnSceneLoaded()
     {
         _playerProgressService.Quests.SubscribeToMerge(CheckAllQuestsCompleted);
+        _playerProgressService.Quests.SubscribeToTruckValueChanged(CheckAllQuestsCompleted);
     }
 
     public void ActivateQuest(Quest quest)
@@ -61,7 +62,7 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void ClaimQuestReward(Quest quest)
     {
-        quest.GiveReward(_playerProgressService.Progress);
+        quest.GiveReward(_playerProgressService);
         _playerProgressService.Quests.AddCompletedQuest(quest.questId);
 
         _questsWaitingForClaim.Remove(quest);
