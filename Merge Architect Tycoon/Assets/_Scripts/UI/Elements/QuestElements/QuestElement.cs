@@ -22,31 +22,31 @@ public class QuestElement : MonoBehaviour
         _questsPresenter = questsPresenter;
     }
 
-    public void RenderQuestHeader(Quest quest)
+    public void RenderQuestHeader(QuestBase questBase)
     {
         gameObject.SetActive(true);
-        questText.text = quest.questText;
-        questiImage.sprite = quest.questSprite;
+        questText.text = questBase.questText;
+        questiImage.sprite = questBase.questSprite;
     }
 
-    public void RenderQuestRewardsAndItems(Quest quest)
+    public void RenderQuestRewardsAndItems(QuestBase questBase)
     {
         HideRewardsAndItems();
 
-        List<Reward> rewards = quest.GetRewardList();
+        List<Reward> rewards = questBase.GetRewardList();
         for (int rewardsCount = 0; rewardsCount < rewards.Count; rewardsCount++)
         {
             ActivateReward(rewards, rewardsCount);
         }
 
-        ShowItemsPerformance(quest);
+        ShowItemsPerformance(questBase);
     }
 
-    public void MarkQuestAsCompleted(Quest quest, Action<QuestElement> claimButtonClicked)
+    public void MarkQuestAsCompleted(QuestBase questBase, Action<QuestElement> claimButtonClicked)
     {
         claimButton.onClick.RemoveAllListeners();
         claimButton.gameObject.SetActive(true);
-        ShowCompletedItemPerformance(quest);
+        ShowCompletedItemPerformance(questBase);
 
         claimButton.onClick.AddListener(() => claimButtonClicked(this));
     }
@@ -58,11 +58,11 @@ public class QuestElement : MonoBehaviour
             rewards[rewardsCount].rewardSprite);
     }
 
-    private void ShowItemsPerformance(Quest quest)
+    private void ShowItemsPerformance(QuestBase questBase)
     {
-        for (int i = 0; i < quest.GetQuestItemsToCreate().Count; i++)
+        for (int i = 0; i < questBase.GetQuestItemsToCreate().Count; i++)
         {
-            ShowItemPerformance(quest.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
+            ShowItemPerformance(questBase.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
         }
     }
 
@@ -73,11 +73,11 @@ public class QuestElement : MonoBehaviour
         questPerformanceItem.RenderItemPerformance(item.itemText, item.itemImage, currentItemCount, item.itemCount);
     }
 
-    private void ShowCompletedItemPerformance(Quest quest)
+    private void ShowCompletedItemPerformance(QuestBase questBase)
     {
-        for (int i = 0; i < quest.GetQuestItemsToCreate().Count; i++)
+        for (int i = 0; i < questBase.GetQuestItemsToCreate().Count; i++)
         {
-            ShowCompletedItemPerformance(quest.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
+            ShowCompletedItemPerformance(questBase.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
             questPerformanceItems[i].ItemCompleted();
         }
     }

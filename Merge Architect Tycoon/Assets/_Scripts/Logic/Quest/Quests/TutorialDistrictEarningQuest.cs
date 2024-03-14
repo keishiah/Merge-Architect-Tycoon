@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TutorialDistrictEarningQuest",
     menuName = "StaticData/Quests/TutorialDistrictEarningQuest")]
-public class TutorialDistrictEarningQuest : Quest
+public class TutorialDistrictEarningQuest : QuestBase
 {
     [HideInInspector] public List<Reward> Rewards = new();
     public CoinsReward CoinsReward;

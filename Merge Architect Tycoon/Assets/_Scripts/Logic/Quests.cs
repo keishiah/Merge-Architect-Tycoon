@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 
 [Serializable]
-public class Quests : ISerializationCallbackReceiver, IDisposable
+public class Quests : IDisposable
 {
     [SerializeField] private List<int> completedQuests = new();
     [SerializeField] private List<int> activeQuests = new();
@@ -116,14 +116,6 @@ public class Quests : ISerializationCallbackReceiver, IDisposable
     public IDisposable SubscribeToQuestCompleted(Action onQuestCompleted) =>
         _onQuestCompleted.Subscribe(_ => onQuestCompleted());
 
-
-    public void OnBeforeSerialize()
-    {
-    }
-
-    public void OnAfterDeserialize()
-    {
-    }
 
     public void Dispose()
     {

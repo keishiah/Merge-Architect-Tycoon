@@ -34,7 +34,7 @@ public class QuestGiver : IInitializableOnSceneLoaded
 
     public void CheckAllQuestsForActivation()
     {
-        foreach (Quest quest in _staticDataService.Quests)
+        foreach (QuestBase quest in _staticDataService.Quests)
         {
             if (!_questsProvider.GetActiveQuestsList.Contains(quest) &&
                 !_questsProvider.GetQuestsWaitingForClaim.Contains(quest) &&

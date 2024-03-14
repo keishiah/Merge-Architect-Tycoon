@@ -8,7 +8,8 @@ public class StaticDataService : IStaticDataService
 {
     private const string BuildingsDataPath = "BuildingData";
     private const string DistrictsDataPath = "DistrictsData";
-    private const string QuestDataPath = "QuestData";
+
+    private const string QuestDataPath = "Quests";
 
     private Dictionary<string, BuildingInfo> _buildingData;
     public Dictionary<string, BuildingInfo> BuildingData => _buildingData;
@@ -22,7 +23,7 @@ public class StaticDataService : IStaticDataService
             ? _buildInProgressSprite
             : throw new Exception($"BuildInProgressSprite not initialized in StaticDataService");
 
-    public List<Quest> Quests { get; private set; }
+    public List<QuestBase> Quests { get; private set; }
 
     private readonly IAssetProvider _assetProvider;
 
@@ -39,9 +40,9 @@ public class StaticDataService : IStaticDataService
         DistrictsData districtsData = await _assetProvider.Load<DistrictsData>(DistrictsDataPath);
         _districtsData = districtsData.districts.ToDictionary(x => x.districtId, x => x);
 
-        QuestData questsData = await _assetProvider.Load<QuestData>(QuestDataPath);
-        Quests = questsData.quests;
-        
+        var questsData = await _assetProvider.LoadStaticDataByLabel<QuestBase>(QuestDataPath);
+        Quests = questsData.ToList();
+
         _buildInProgressSprite = buildingData.buildInProgressSprite;
     }
 

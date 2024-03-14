@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "MergeItemQuest",
     menuName = "StaticData/Quests/MergeItemQuest")]
-public class MergeItemQuest : Quest
+public class MergeItemQuest : QuestBase
 {
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;

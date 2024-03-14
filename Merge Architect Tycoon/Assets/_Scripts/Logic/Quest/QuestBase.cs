@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class Quest : ScriptableObject
+public abstract class QuestBase : ScriptableObject
 {
     public int questId;
     public string questText;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TutorialCreateFirstBuildingQuest",
     menuName = "StaticData/Quests/TutorialCreateFirstBuildingQuest")]
-public class TutorialCreateFirstBuildingQuest : Quest
+public class TutorialCreateFirstBuildingQuest : QuestBase
 {
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;

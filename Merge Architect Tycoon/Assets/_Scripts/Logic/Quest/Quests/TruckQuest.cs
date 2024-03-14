@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TruckQuest",
     menuName = "StaticData/Quests/TruckQuest")]
-public class TruckQuest : Quest
+public class TruckQuest : QuestBase
 {
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
