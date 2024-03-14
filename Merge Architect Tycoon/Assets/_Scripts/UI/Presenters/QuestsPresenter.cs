@@ -4,7 +4,7 @@ using Zenject;
 
 public class QuestsPresenter
 {
-    private Dictionary<QuestElement, Quest> _completedQuestsByElements = new();
+    private Dictionary<QuestElement, QuestBase> _completedQuestsByElements = new();
 
     public IPlayerProgressService _playerProgressService;
     private QuestPopup _questPopup;
@@ -28,35 +28,36 @@ public class QuestsPresenter
         ShowQuests(_questsProvider.GetQuestsWaitingForClaim);
     }
 
-    private void ShowQuests(IEnumerable<Quest> quests)
+    private void ShowQuests(IEnumerable<QuestBase> quests)
     {
-        foreach (Quest quest in quests)
+        foreach (QuestBase quest in quests)
         {
             ShowQuest(quest);
         }
     }
 
-    private void ShowQuest(Quest quest)
+    private void ShowQuest(QuestBase questBase)
     {
         if (!_questPopup.GetInactiveQuestElement(out var questElement))
             return;
 
-        questElement.RenderQuestHeader(quest);
+        questElement.RenderQuestHeader(questBase);
 
-        if (!_questsProvider.GetQuestsWaitingForClaim.Contains(quest))
+        if (!_questsProvider.GetQuestsWaitingForClaim.Contains(questBase))
         {
-            questElement.RenderQuestRewardsAndItems(quest);
+            questElement.RenderQuestRewardsAndItems(questBase);
             return;
         }
 
         if (!_completedQuestsByElements.ContainsKey(questElement))
         {
-            _completedQuestsByElements.Add(questElement, quest);
-            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
+            _completedQuestsByElements.Add(questElement, questBase);
+            questElement.RenderQuestRewardsAndItems(questBase);
+            questElement.MarkQuestAsCompleted(questBase, CompleteQuest);
         }
         else
         {
-            questElement.MarkQuestAsCompleted(quest, CompleteQuest);
+            questElement.MarkQuestAsCompleted(questBase, CompleteQuest);
         }
     }
 

@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MergeItemQuest",
-    menuName = "StaticData/Quests/MergeItemQuest")]
-public class MergeItemQuest : QuestBase
+[CreateAssetMenu(fileName = "MergeTierQuest",
+    menuName = "StaticData/Quests/MergeTierQuest")]
+public class MergeTierQuest : QuestBase
 {
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
     private readonly List<QuestItem> _questItemsToCreate = new();
-    public MergeQuestItem mergeQuestItem;
+    public MergeTierQuestItem mergeTierQuestItem;
 
 
     public override List<Reward> GetRewardList() => _rewards;
     public override List<QuestItem> GetQuestItemsToCreate() => _questItemsToCreate;
 
 
-    public MergeItemQuest()
+    public MergeTierQuest()
     {
         giveQuestCondition = GiveQuestCondition.Base;
     }
@@ -36,13 +36,14 @@ public class MergeItemQuest : QuestBase
         _rewards.Clear();
         _questItemsToCreate.Clear();
 
-        _questItemsToCreate.Add(mergeQuestItem);
+        _questItemsToCreate.Add(mergeTierQuestItem);
         _rewards.Add(coinsReward);
     }
 
 
     public override bool IsCompleted(IPlayerProgressService progress)
     {
-        return progress.Quests.CurrentMergeCount >= mergeQuestItem.itemCount;
+        return progress.Quests.mergeTierQuests.GetCurrentItemCount(mergeTierQuestItem.ItemLevel) >=
+               mergeTierQuestItem.itemCount;
     }
 }

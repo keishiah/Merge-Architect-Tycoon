@@ -22,4 +22,9 @@ public static class SaveLoadService
 
         return PlayerPrefs.GetString(stringKey).ToDeserialized<T>();
     }
+
+    public static void ClearAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "QuestData", menuName = "StaticData/QuestData", order = 0)]
 public class QuestData : ScriptableObject
 {
-    public List<Quest> quests;
+    public List<QuestBase> quests;
 }
 
 

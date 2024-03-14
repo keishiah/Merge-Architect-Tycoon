@@ -14,7 +14,10 @@ public class ItemsCatalogue : MonoBehaviour
 
     private int GetItemsCount(MergeItem item)
     {
-        return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count;
+        return slotsManager.Slots
+            .FindAll(
+                s => s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable)
+            .Count;
     }
 
     public bool CheckHasItems(List<MergeItem> items)

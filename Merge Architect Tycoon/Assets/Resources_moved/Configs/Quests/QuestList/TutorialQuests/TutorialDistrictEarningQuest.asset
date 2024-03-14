@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4448207edfe4c5eb3ba36d639f2e988, type: 3}
   m_Name: TutorialDistrictEarningQuest
   m_EditorClassIdentifier: 
-  questId: 1
+  questId: TutorialDistrict
   questText: Create First District
   questSprite: {fileID: 21300000, guid: f1a0449f81091764b83efd9913c5898a, type: 3}
-  requiredForActivationQuestId: 0
+  requiredForActivationQuestId: Start
   giveQuestCondition: 0
   CoinsReward:
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}

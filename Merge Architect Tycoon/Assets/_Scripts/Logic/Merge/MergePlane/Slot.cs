@@ -26,7 +26,10 @@ public class Slot : MonoBehaviour, IDropHandler
     [SerializeField] private Image _stateImage;
     private Slot[] _neighbours;
 
-    public SlotState SlotState { get => _slotState; }
+    public SlotState SlotState
+    {
+        get => _slotState;
+    }
 
     public delegate void SlotDelegate();
 
@@ -50,7 +53,7 @@ public class Slot : MonoBehaviour, IDropHandler
             return;
 
         _item = newItem;
-        if(_item.itemSprite != null)
+        if (_item.itemSprite != null)
         {
             _itemImage.enabled = true;
             _itemImage.sprite = _item.itemSprite;
@@ -67,7 +70,7 @@ public class Slot : MonoBehaviour, IDropHandler
         _itemImage.enabled = false;
 
         removeItemEvent?.Invoke();
-        if(isNeedSave)
+        if (isNeedSave)
             endMoveEvent?.Invoke();
     }
 
@@ -82,6 +85,7 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         _neighbours = neighbours;
     }
+
     private void CheckNeighbour()
     {
         if (_slotState == SlotState.Unloading)
@@ -93,17 +97,18 @@ public class Slot : MonoBehaviour, IDropHandler
         if (_neighbours == null || _neighbours.Length == 0)
             return;
 
-        foreach(Slot neighbour in _neighbours)
+        foreach (Slot neighbour in _neighbours)
         {
             if (neighbour.SlotState == SlotState.Blocked)
                 neighbour.ChangeState(SlotState.NonTouchable);
         }
     }
 
-    public DraggableItem currentDraggableItem() 
-    { 
+    public DraggableItem currentDraggableItem()
+    {
         return GetComponentInChildren<DraggableItem>();
     }
+
     public void OnDrop(PointerEventData eventData)
     {
         if (_slotState == SlotState.Blocked)
@@ -171,6 +176,7 @@ public class Slot : MonoBehaviour, IDropHandler
             return;
 
         _playerProgressService.Progress.AddCoins(10);
+        _playerProgressService.Quests.AddMergeTierItem(slotTo.CurrentItem.itemLevel);
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();

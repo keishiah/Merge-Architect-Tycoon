@@ -2,24 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class Quest : ScriptableObject
+public abstract class QuestBase : ScriptableObject
 {
-    public int questId;
+    public string questId;
     public string questText;
     public Sprite questSprite;
     
-    public int requiredForActivationQuestId;
+    public string requiredForActivationQuestId;
     [HideInInspector] public GiveQuestCondition giveQuestCondition;
 
     public abstract List<Reward> GetRewardList();
     public abstract List<QuestItem> GetQuestItemsToCreate();
     public abstract void InitializeRewardsAndItems();
-    public abstract void GiveReward(Progress progress);
+    public abstract void GiveReward(IPlayerProgressService progress);
     public abstract bool IsCompleted(IPlayerProgressService progress);
 
-    public bool IsReadyToStart(IPlayerProgressService progress)
+    public  bool IsReadyToStart(IPlayerProgressService progress)
     {
-        return requiredForActivationQuestId == 0 ||
+        return requiredForActivationQuestId == "Start" ||
                progress.Quests.CompletedQuests.Contains(requiredForActivationQuestId);
     }
 }
@@ -27,6 +27,5 @@ public abstract class Quest : ScriptableObject
 public enum GiveQuestCondition
 {
     Tutorial,
-    Building,
-    Merge,
+    Base
 }

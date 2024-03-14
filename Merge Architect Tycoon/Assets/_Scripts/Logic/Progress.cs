@@ -2,9 +2,7 @@
 {
     public Coins Coins = new();
     public Coins Diamonds = new();
-
     public Buldings Buldings = new();
-    // public Quests Quests = new();
 
     public void AddCoins(int coins)
     {
