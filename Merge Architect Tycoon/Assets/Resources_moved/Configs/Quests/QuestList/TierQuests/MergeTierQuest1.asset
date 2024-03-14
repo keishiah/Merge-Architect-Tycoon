@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed0812c4af49fe84f0711e5d3ca394, type: 3}
   m_Name: MergeTierQuest1
   m_EditorClassIdentifier: 
-  questId: 6
+  questId: Tier1
   questText: Merge Tier 2
   questSprite: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
-  requiredForActivationQuestId: 2
+  requiredForActivationQuestId: TutorialBuilding
   giveQuestCondition: 1
   coinsReward:
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}

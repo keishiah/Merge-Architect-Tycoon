@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d69bd8e8b5440eb919ea29bfc190e5, type: 3}
   m_Name: MergeItemQuest1
   m_EditorClassIdentifier: 
-  questId: 3
+  questId: Merge1
   questText: Merge iems
   questSprite: {fileID: 21300000, guid: ebfc2c8cdc901144184c18acf2b876a9, type: 3}
-  requiredForActivationQuestId: 2
+  requiredForActivationQuestId: TutorialBuilding
   giveQuestCondition: 2
   coinsReward:
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}

@@ -6,13 +6,13 @@ using UnityEngine;
 [Serializable]
 public class Quests : IDisposable
 {
-    [SerializeField] private List<int> completedQuests = new();
-    [SerializeField] private List<int> activeQuests = new();
-    [SerializeField] private List<int> questsWaitingForClaim = new();
+    [SerializeField] private List<string> completedQuests = new();
+    [SerializeField] private List<string> activeQuests = new();
+    [SerializeField] private List<string> questsWaitingForClaim = new();
 
-    public List<int> ActiveQuests => activeQuests;
-    public List<int> QuestsWaitingForClaim => questsWaitingForClaim;
-    public List<int> CompletedQuests => completedQuests;
+    public List<string> ActiveQuests => activeQuests;
+    public List<string> QuestsWaitingForClaim => questsWaitingForClaim;
+    public List<string> CompletedQuests => completedQuests;
 
     [SerializeField] private int currentMergeCount;
     public int CurrentMergeCount => currentMergeCount;
@@ -32,13 +32,13 @@ public class Quests : IDisposable
         progress.Coins.SubscribeToCoinsAdded(AddQuestCoins);
     }
 
-    public void AddActiveQuest(int questId)
+    public void AddActiveQuest(string questId)
     {
         activeQuests.Add(questId);
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public void AddQuestWaitingForClaim(int questId)
+    public void AddQuestWaitingForClaim(string questId)
     {
         questsWaitingForClaim.Add(questId);
         if (activeQuests.Contains(questId))
@@ -46,7 +46,7 @@ public class Quests : IDisposable
         SaveLoadService.Save(SaveKey.Quests, this);
     }
 
-    public void AddCompletedQuest(int questId)
+    public void AddCompletedQuest(string questId)
     {
         completedQuests.Add(questId);
         if (questsWaitingForClaim.Contains(questId))
