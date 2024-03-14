@@ -17,8 +17,7 @@ public class CreateBuildingPopupPresenter
     private BuildingProvider _buildingProvider;
     private IPlayerProgressService _playerProgressService;
 
-
-    private List<BuildingInfo> _buildings = new();
+    private List<BuildingInfo> _sortedBuildings = new();
     private List<BuildingInfo> _readyToBuild = new();
     private List<BuildingInfo> _otherBuildings = new();
 
@@ -65,7 +64,7 @@ public class CreateBuildingPopupPresenter
         foreach (CreateBuildingUiElement element in _elements)
         {
             element.transform.SetSiblingIndex(
-                _buildings.IndexOf(_buildings.FirstOrDefault(x => x.buildingName == element.buildingName)));
+                _sortedBuildings.IndexOf(_sortedBuildings.FirstOrDefault(x => x.buildingName == element.buildingName)));
         }
     }
 
@@ -92,7 +91,7 @@ public class CreateBuildingPopupPresenter
 
     private void SortBuildingElements()
     {
-        _buildings.Clear();
+        _sortedBuildings.Clear();
         _readyToBuild.Clear();
         _otherBuildings.Clear();
 
@@ -113,8 +112,8 @@ public class CreateBuildingPopupPresenter
         _otherBuildings.Sort((a, b) => a.coinsCountToCreate.CompareTo(b.coinsCountToCreate));
 
 
-        _buildings.AddRange(_readyToBuild);
-        _buildings.AddRange(_otherBuildings);
+        _sortedBuildings.AddRange(_readyToBuild);
+        _sortedBuildings.AddRange(_otherBuildings);
     }
 
     private void SetBuildingElements()
