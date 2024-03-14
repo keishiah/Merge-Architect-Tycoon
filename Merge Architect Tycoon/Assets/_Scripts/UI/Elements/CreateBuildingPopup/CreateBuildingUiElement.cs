@@ -24,7 +24,6 @@ public class CreateBuildingUiElement : MonoBehaviour
 
     public void SetBuildingImage(Sprite buildingSprite) => buildingImage.sprite = buildingSprite;
     public void SetCoinsPriceText(string text) => coinsPriceTex.text = text;
-
     public void SetResourcesImages(List<MergeItem> items)
     {
         HideAllResources();

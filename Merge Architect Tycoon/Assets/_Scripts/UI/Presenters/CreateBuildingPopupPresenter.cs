@@ -6,19 +6,17 @@ using Zenject;
 
 public class CreateBuildingPopupPresenter
 {
-    private string _currentBuildingName;
-    private CreateBuildingUiElement _currentSelectedBuildingUiElement;
+    private CreateBuildingPopupScroller _createBuildingPopupScroller;
+    private CreateBuildingPopup _createBuildingPopup;
+    private CreateBuildingUiElement _selectedBuildingElement;
+    private List<CreateBuildingUiElement> _elements = new();
+    private List<BuildingInfo> _buildingInfo = new();
 
     private ItemsCatalogue _itemsCatalogue;
     private IStaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
     private IPlayerProgressService _playerProgressService;
 
-    private CreateBuildingPopupScroller _createBuildingPopupScroller;
-    private CreateBuildingPopup _createBuildingPopup;
-    private CreateBuildingUiElement _selectedBuildingElement;
-    private List<BuildingInfo> _buildingInfo = new();
-    private List<CreateBuildingUiElement> _elements = new();
 
     private List<BuildingInfo> _buildings = new();
     private List<BuildingInfo> _readyToBuild = new();
@@ -126,9 +124,7 @@ public class CreateBuildingPopupPresenter
             _elements[x].SetBuildingName(_buildingInfo[x].buildingName);
             _elements[x].SetBuildingImage(_buildingInfo[x].popupSprite);
             _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
-
             _elements[x].SetResourcesImages(_buildingInfo[x].itemsToCreate);
-
             _elements[x].SetPresenter(this);
         }
     }
@@ -152,9 +148,9 @@ public class CreateBuildingPopupPresenter
 
     private void TurnOfPreviousOutline(CreateBuildingUiElement selectedBuilding)
     {
-        if (_currentSelectedBuildingUiElement)
-            _currentSelectedBuildingUiElement.buildingImageOutline.enabled = false;
-        _currentSelectedBuildingUiElement = selectedBuilding;
+        if (_selectedBuildingElement)
+            _selectedBuildingElement.buildingImageOutline.enabled = false;
+        _selectedBuildingElement = selectedBuilding;
         selectedBuilding.buildingImageOutline.enabled = true;
     }
 }

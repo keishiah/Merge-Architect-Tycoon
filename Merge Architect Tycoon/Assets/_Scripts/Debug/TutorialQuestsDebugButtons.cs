@@ -31,6 +31,7 @@ namespace _Scripts.Debug
         private void ClearSaves()
         {
             SaveLoadService.ClearAll();
+            Application.Quit();
         }
 
         private void AddQuest()
@@ -42,5 +43,6 @@ namespace _Scripts.Debug
         {
             _questsProvider.CheckAllQuestsCompleted();
         }
+        
     }
 }
