@@ -28,7 +28,7 @@ public class Truck
         if(TruckCargo == null || TruckCargo.Count == 0)
             return null;
 
-        MergeItem item = TruckCargo[0];
+        MergeItem item = TruckCargo[TruckCargo.Count - 1];
         TruckCargo.Remove(item);
         return item;
     }

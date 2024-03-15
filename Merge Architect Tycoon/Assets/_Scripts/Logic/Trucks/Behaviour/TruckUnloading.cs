@@ -25,14 +25,7 @@ public class TruckUnloading : TruckBehaviour
         }
 
         MergeItem mergeItem = _truck.DequeueItem();
-        foreach (var resource in _resources)
-        {
-            if (resource.enabled && mergeItem.itemSprite == resource.sprite)
-            {
-                resource.enabled = false;
-                break;
-            }
-        }
+        _truckPresenter.DequeueItem(_truck.TruckCargo.Count);
         _slotsManager.AddItemToEmptySlot(mergeItem, isToUnloadSlot: true);
     }
 }

@@ -30,7 +30,7 @@ namespace _Scripts.Debug
 
         private void ClearSaves()
         {
-            SaveLoadService.ClearAll();
+            PlayerPrefs.DeleteAll();
             Application.Quit();
         }
 
