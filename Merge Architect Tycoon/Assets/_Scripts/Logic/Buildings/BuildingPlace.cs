@@ -12,7 +12,6 @@ public class BuildingPlace : MonoBehaviour
     public CancellationTokenSource ActivityToken { get; private set; }
 
     private IStaticDataService _staticDataService;
-    private BuildingCreator _buildingCreator;
     private BuildingProvider _buildingProvider;
 
     [Inject]
@@ -20,7 +19,6 @@ public class BuildingPlace : MonoBehaviour
         BuildingProvider buildingProvider)
     {
         _staticDataService = staticDataService;
-        _buildingCreator = buildingCreator;
         _buildingProvider = buildingProvider;
     }
 
@@ -50,10 +48,9 @@ public class BuildingPlace : MonoBehaviour
         }
     }
 
-    public UniTask StartCreatingBuilding()
+    public void StartCreatingBuilding()
     {
         SetBuildingState(BuildingStateEnum.BuildInProgress);
-        return _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, ActivityToken);
     }
 
     public void UpdateTimerText(int totalSeconds)
@@ -64,5 +61,6 @@ public class BuildingPlace : MonoBehaviour
     public void OnDestroy()
     {
         ActivityToken?.Cancel();
+        ActivityToken?.Dispose();
     }
 }

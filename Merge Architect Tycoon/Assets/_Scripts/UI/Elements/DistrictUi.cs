@@ -65,6 +65,5 @@ public class DistrictUi : MonoBehaviour
     {
         ActivityToken?.Cancel();
         ActivityToken?.Dispose();
-        ActivityToken = null;
     }
 }

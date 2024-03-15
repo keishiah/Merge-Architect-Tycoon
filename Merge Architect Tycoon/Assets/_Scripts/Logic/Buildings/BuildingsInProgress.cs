@@ -8,22 +8,22 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
     [SerializeField] private List<string> buildingName = new();
     [SerializeField] private List<int> creationRest = new();
 
-    private Dictionary<string, int> _buildingCreationProgress = new();
+    public Dictionary<string, int> BuildingsInProgressDict = new();
 
     public int GetBuildingCreationProgress(string tier)
     {
-        return _buildingCreationProgress.ContainsKey(tier) ? _buildingCreationProgress[tier] : 0;
+        return BuildingsInProgressDict.ContainsKey(tier) ? BuildingsInProgressDict[tier] : 0;
     }
 
     public void AddBuildingProgress(string name, int timeRest)
     {
-        if (_buildingCreationProgress.ContainsKey(name))
+        if (BuildingsInProgressDict.ContainsKey(name))
         {
-            _buildingCreationProgress[name] = timeRest;
+            BuildingsInProgressDict[name] = timeRest;
         }
         else
         {
-            _buildingCreationProgress.Add(name, timeRest);
+            BuildingsInProgressDict.Add(name, timeRest);
         }
     }
 
@@ -31,7 +31,7 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
     {
         buildingName.Clear();
         creationRest.Clear();
-        foreach (var kvp in _buildingCreationProgress)
+        foreach (var kvp in BuildingsInProgressDict)
         {
             buildingName.Add(kvp.Key);
             creationRest.Add(kvp.Value);
@@ -40,11 +40,11 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-        _buildingCreationProgress.Clear();
+        BuildingsInProgressDict.Clear();
 
         for (int i = 0; i < buildingName.Count; i++)
         {
-            _buildingCreationProgress[buildingName[i]] = creationRest[i];
+            BuildingsInProgressDict[buildingName[i]] = creationRest[i];
         }
     }
 }

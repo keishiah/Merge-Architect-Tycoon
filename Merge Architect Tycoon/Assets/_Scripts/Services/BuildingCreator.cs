@@ -37,16 +37,14 @@ public class BuildingCreator
             catch (OperationCanceledException)
             {
                 _playerProgressService.Progress.AddBuildingCreationRest(buildingNameTempo, timeToCreate);
-                cancellationTokenSource.Dispose();
                 break;
             }
         }
 
-        cancellationTokenSource.Dispose();
-
         if (!cancellationTokenSource.IsCancellationRequested)
         {
             CreateBuilding(buildingPlace);
+            cancellationTokenSource.Cancel();
         }
     }
 

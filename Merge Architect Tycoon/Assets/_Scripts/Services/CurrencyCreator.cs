@@ -31,11 +31,13 @@ public class CurrencyCreator
             }
         }
 
-        catch (OperationCanceledException e)
+        catch (OperationCanceledException)
         {
-            district.ActivityToken.Dispose();
         }
 
-        district.TurnOnEarnButton();
+        if (!district.ActivityToken.IsCancellationRequested)
+        {
+            district.TurnOnEarnButton();
+        }
     }
 }

@@ -7,14 +7,16 @@ public class BuildingProvider : IInitializableOnSceneLoaded
 {
     public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
 
+    private BuildingCreator _buildingCreator;
     private IPlayerProgressService _playerProgressService;
     private District _district;
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService, District district)
+    void Construct(BuildingCreator buildingCreator, IPlayerProgressService playerProgressService, District district)
     {
         _playerProgressService = playerProgressService;
         _district = district;
+        _buildingCreator = buildingCreator;
     }
 
     public void OnSceneLoaded()
@@ -27,9 +29,16 @@ public class BuildingProvider : IInitializableOnSceneLoaded
         LoadCreatedBuildings();
     }
 
+    public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
+    {
+        SceneBuildingsDictionary.Add(buildingName, buildingPlace);
+    }
+
     private void LoadCreatedBuildings()
     {
         Buldings buildings = _playerProgressService.Progress.Buldings;
+        var buildingsInProgressDict =
+            _playerProgressService.Progress.Buldings.buildingsInProgress.BuildingsInProgressDict;
 
         foreach (var buildingName in SceneBuildingsDictionary.Keys)
         {
@@ -37,19 +46,34 @@ public class BuildingProvider : IInitializableOnSceneLoaded
             {
                 CreateBuildingOnStart(buildingName);
             }
+            else if (buildingsInProgressDict.ContainsKey(buildingName))
+            {
+                ContinueBuildingCreation(buildingName, buildingsInProgressDict[buildingName]);
+            }
         }
     }
 
-    public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
+//todo merge building creation methods. Clean building progress cash after building creation
+    private async void ContinueBuildingCreation(string buildingName, int timeRest)
     {
-        SceneBuildingsDictionary.Add(buildingName, buildingPlace);
+        if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            return;
+        buildingPlace.StartCreatingBuilding();
+        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken,
+            timeRest);
+        if (!buildingPlace.ActivityToken.IsCancellationRequested)
+        {
+            _playerProgressService.Progress.AddBuilding(buildingName);
+        }
     }
+
 
     public async void CreateBuildingInTimeAsync(string buildingName)
     {
         if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             return;
-        await buildingPlace.StartCreatingBuilding();
+        buildingPlace.StartCreatingBuilding();
+        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken);
         if (!buildingPlace.ActivityToken.IsCancellationRequested)
         {
             _playerProgressService.Progress.AddBuilding(buildingName);
