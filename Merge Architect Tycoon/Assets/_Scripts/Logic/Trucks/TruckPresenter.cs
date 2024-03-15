@@ -21,7 +21,7 @@ public class TruckPresenter : MonoBehaviour
 
     private void Awake()
     {
-        _slotsManager.OnNewEmptySlotAppears += () => { enabled = true; };
+        _slotsManager.OnNewEmptySlotAppears += UpdateOn;
     }
 
     private void OnEnable()
@@ -107,13 +107,20 @@ public class TruckPresenter : MonoBehaviour
         }
 
         _truckBehaviour.Update();
-        _isNeedToUnload = false;
+        Refresh();
+
         if (_truckBehaviour.IsComplete)
             NextStage();
+    }
+
+    private void Refresh()
+    {
+        _isNeedToUnload = false;
     }
     public void ReadyToUnload() => _isNeedToUnload = true;
     public void UpdateOn()
     {
+        _isNeedToUnload = false;
         enabled = true;
     }
     public void UpdateOff()

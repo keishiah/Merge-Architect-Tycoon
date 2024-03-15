@@ -44,6 +44,11 @@ public class LoadPlayerProgressState : IState
         if (_progressService.Progress == null)
             _progressService.Progress = new Progress();
 
+        _progressService.Progress.Tutorial =
+            SaveLoadService.Load<TutorialData>(SaveKey.Tutorial);
+        if (_progressService.Progress.Tutorial == null)
+            _progressService.Progress.Tutorial = new TutorialData();
+
         return _progressService.Progress;
     }
 }
