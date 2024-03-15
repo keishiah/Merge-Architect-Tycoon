@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TutorialDistrictEarningQuest",
     menuName = "StaticData/Quests/TutorialDistrictEarningQuest")]
-public class TutorialDistrictEarningQuest : Quest
+public class TutorialDistrictEarningQuest : QuestBase
 {
     [HideInInspector] public List<Reward> Rewards = new();
     public CoinsReward CoinsReward;
@@ -11,11 +11,11 @@ public class TutorialDistrictEarningQuest : Quest
     public override List<Reward> GetRewardList() => Rewards;
     public override List<QuestItem> GetQuestItemsToCreate() => new();
 
-    public override void GiveReward(Progress progress)
+    public override void GiveReward(IPlayerProgressService progress)
     {
         foreach (var reward in Rewards)
         {
-            reward.GiveReward(progress);
+            reward.GiveReward(progress.Progress);
         }
     }
 
@@ -27,11 +27,10 @@ public class TutorialDistrictEarningQuest : Quest
 
     public TutorialDistrictEarningQuest()
     {
-        questName = "FirstDistrictEarn";
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
-    public override bool IsCompleted(object value)
+    public override bool IsCompleted(IPlayerProgressService progress)
     {
         return true;
     }

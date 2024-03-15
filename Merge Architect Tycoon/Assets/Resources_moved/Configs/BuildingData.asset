@@ -14,40 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildings:
   - buildingName: House
-    buildingSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
+    districtSprite: {fileID: -1239331003, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
+    popupSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
     timeToCreate: 10
     coinsCountToCreate: 50
     itemsToCreate:
     - {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
-    - {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
+    - {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
   - buildingName: pension
-    buildingSprite: {fileID: 21300000, guid: f907c1d3ee755264886bc71f8ec94030, type: 3}
+    districtSprite: {fileID: 486792297, guid: f907c1d3ee755264886bc71f8ec94030, type: 3}
+    popupSprite: {fileID: -1014280895, guid: f907c1d3ee755264886bc71f8ec94030, type: 3}
     timeToCreate: 20
     coinsCountToCreate: 150
     itemsToCreate:
-    - {fileID: 11400000, guid: ffc3caa3e8b1ce24fa6f9acc2e9c42cf, type: 2}
-    - {fileID: 11400000, guid: 520597cdc59e93343a226a2a6fcf3d1a, type: 2}
+    - {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
   - buildingName: School
-    buildingSprite: {fileID: 21300000, guid: d489953bd832fcc43828bc695d65935b, type: 3}
+    districtSprite: {fileID: 1252654585, guid: d489953bd832fcc43828bc695d65935b, type: 3}
+    popupSprite: {fileID: 209959192, guid: d489953bd832fcc43828bc695d65935b, type: 3}
     timeToCreate: 25
     coinsCountToCreate: 200
     itemsToCreate:
-    - {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
-    - {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
+    - {fileID: 11400000, guid: 987066c3293dae5449d6db8b1382d6eb, type: 2}
   - buildingName: Skyscrapper
-    buildingSprite: {fileID: 21300000, guid: 0ecd298a3748b93408993eca7fac8e76, type: 3}
+    districtSprite: {fileID: 202474552, guid: 0ecd298a3748b93408993eca7fac8e76, type: 3}
+    popupSprite: {fileID: 1507925170, guid: 0ecd298a3748b93408993eca7fac8e76, type: 3}
     timeToCreate: 35
     coinsCountToCreate: 300
     itemsToCreate:
-    - {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
+    - {fileID: 11400000, guid: 987066c3293dae5449d6db8b1382d6eb, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
     - {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
   - buildingName: LightTower
-    buildingSprite: {fileID: 21300000, guid: e24306b2b1da80546ad236f23334f1a6, type: 3}
+    districtSprite: {fileID: -800432619, guid: e24306b2b1da80546ad236f23334f1a6, type: 3}
+    popupSprite: {fileID: 1373755802, guid: e24306b2b1da80546ad236f23334f1a6, type: 3}
     timeToCreate: 45
     coinsCountToCreate: 450
     itemsToCreate:
-    - {fileID: 11400000, guid: 520597cdc59e93343a226a2a6fcf3d1a, type: 2}
+    - {fileID: 11400000, guid: 987066c3293dae5449d6db8b1382d6eb, type: 2}
     - {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
   buildInProgressSprite: {fileID: 21300000, guid: 4a76d864c1e35634582a131cd8196730, type: 3}

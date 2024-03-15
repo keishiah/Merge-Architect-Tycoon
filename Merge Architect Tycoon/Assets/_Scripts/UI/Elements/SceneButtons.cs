@@ -39,7 +39,8 @@ public class SceneButtons : MonoBehaviour
         _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
         _selectedButtonIndex = -1;
     }
-    public void OnMenuButtonClick(int i)
+
+    private void OnMenuButtonClick(int i)
     {
         bool needToSelect = _selectedButtonIndex != i;
 

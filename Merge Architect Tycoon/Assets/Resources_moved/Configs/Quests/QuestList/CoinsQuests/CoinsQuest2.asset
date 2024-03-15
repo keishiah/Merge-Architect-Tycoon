@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f59fa3d0a264dbe93e29c11207c353b, type: 3}
+  m_Name: CoinsQuest2
+  m_EditorClassIdentifier: 
+  questId: Coins2
+  questText: Get 1000000 coins
+  questSprite: {fileID: 21300000, guid: 02dac9216e3551e4781a030e1dfdd18f, type: 3}
+  requiredForActivationQuestId: Coins1
+  giveQuestCondition: 1
+  coinsReward:
+    rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
+    rewardAmount: 23554
+  coinsQuestItem:
+    itemText: Get 1000000 coins
+    itemImage: {fileID: 21300000, guid: 02dac9216e3551e4781a030e1dfdd18f, type: 3}
+    itemCount: 1000000

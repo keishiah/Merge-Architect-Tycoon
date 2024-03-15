@@ -45,9 +45,11 @@ MonoBehaviour:
     m_Address: DistrictsData
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: ce1eef1ba14be0c4ba51ff7e50374543
-    m_Address: QuestData
+  - m_GUID: 3fd0f84aeedafbb488b2a1d76c1b8b6a
+    m_Address: Quests
     m_ReadOnly: 0
+    m_SerializedLabels:
+    - Quests
     m_SerializedLabels: []
   - m_GUID: 3e6df2d148313d747a398a5af4c67a98
     m_Address: Tutorial

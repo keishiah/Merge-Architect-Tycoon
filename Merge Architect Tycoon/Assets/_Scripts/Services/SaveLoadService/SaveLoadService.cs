@@ -4,7 +4,8 @@ public enum SaveKey
 {
     Progress,
     Inventory,
-    Tutorial
+    Tutorial,
+    Quests,
 }
 
 public static class SaveLoadService

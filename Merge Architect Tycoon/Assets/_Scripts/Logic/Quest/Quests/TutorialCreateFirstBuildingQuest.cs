@@ -3,11 +3,8 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TutorialCreateFirstBuildingQuest",
     menuName = "StaticData/Quests/TutorialCreateFirstBuildingQuest")]
-public class TutorialCreateFirstBuildingQuest : Quest
+public class TutorialCreateFirstBuildingQuest : QuestBase
 {
-    public string questText;
-    public string buildingName;
-
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
@@ -18,17 +15,16 @@ public class TutorialCreateFirstBuildingQuest : Quest
     public override List<Reward> GetRewardList() => _rewards;
     public override List<QuestItem> GetQuestItemsToCreate() => _questItemsToCreate;
 
-
     public TutorialCreateFirstBuildingQuest()
     {
         giveQuestCondition = GiveQuestCondition.Tutorial;
     }
 
-    public override void GiveReward(Progress progress)
+    public override void GiveReward(IPlayerProgressService progress)
     {
         foreach (var reward in _rewards)
         {
-            reward.GiveReward(progress);
+            reward.GiveReward(progress.Progress);
         }
     }
 
@@ -41,7 +37,7 @@ public class TutorialCreateFirstBuildingQuest : Quest
         _rewards.Add(coinsReward);
     }
 
-    public override bool IsCompleted(object value)
+    public override bool IsCompleted(IPlayerProgressService progress)
     {
         return true;
     }

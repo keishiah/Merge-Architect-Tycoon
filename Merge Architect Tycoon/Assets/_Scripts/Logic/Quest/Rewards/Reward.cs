@@ -5,7 +5,6 @@ using Zenject;
 [Serializable]
 public abstract class Reward
 {
-    public string rewardName;
     public Sprite rewardSprite;
     public int rewardAmount;
 

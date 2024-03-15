@@ -21,19 +21,13 @@ public class TruckPurchaseOffer : MonoBehaviour
     [SerializeField]
     private int _cost;
 
-    [SerializeField]
-    private TextMeshProUGUI _titleText;
-    [SerializeField]
-    private Button _buyButton;
-    [SerializeField]
-    private TextMeshProUGUI _costText;
-    [SerializeField]
-    private Button _viewBuyButton;
+    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private Button _buyButton;
+    [SerializeField] private TextMeshProUGUI _costText;
+    [SerializeField] private Button _viewBuyButton;
 
-    [SerializeField]
-    private Image _truckImage;
-    [SerializeField]
-    private Image _resourceImage;
+    [SerializeField] private Image _truckImage;
+    [SerializeField] private Image _resourceImage;
 
     void Start()
     {
@@ -69,8 +63,12 @@ public class TruckPurchaseOffer : MonoBehaviour
 
     private void AddNewTruck()
     {
-        if(_playerProgressService.Progress.Coins.SpendCoins(_cost))
+        if (_playerProgressService.Progress.Coins.SpendCoins(_cost))
+        {
             _truckPresenter.AddNewTruck(_truck.Clone());
+            _playerProgressService.Quests.AddTruckItem();
+        }
+
         _truckMenu.SetActive(false);
         _informationPanel.gameObject.SetActive(true);
     }

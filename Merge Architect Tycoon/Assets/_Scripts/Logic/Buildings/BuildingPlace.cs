@@ -39,12 +39,12 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.BuildInProgress:
                 buildingView.SetViewBuildInProgress();
-                buildingView.ShowBuildSprite(_staticDataService.BuildInProgressSprite);
+                buildingView.ShowBuildInProgressSprite(_staticDataService.BuildInProgressSprite);
                 break;
             case BuildingStateEnum.BuildingFinished:
                 buildingView.SetViewBuildCreated();
                 buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
-                    .buildingSprite);
+                    .districtSprite);
                 break;
         }
     }

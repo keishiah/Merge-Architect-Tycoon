@@ -10,24 +10,26 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     private int _currentDistrictId;
     public int CurrentDistrictId => _currentDistrictId;
 
-    private Dictionary<int, int> _districtsCreatedBuildings = new();
     private readonly Dictionary<int, DistrictUi> _districts = new();
+    private readonly Dictionary<int, int> _districtsCreatedBuildings = new();
     private readonly Dictionary<int, int> _tempoDistrictsCount = new();
 
     private IPlayerProgressService _playerProgressService;
     private BuildingProvider _buildingProvider;
     private CurrencyCreator _currencyCreator;
     private IStaticDataService _staticDataService;
+    private SceneButtons _sceneButtons;
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService,
         BuildingProvider buildingProvider,
-        CurrencyCreator currencyCreator )
+        CurrencyCreator currencyCreator, SceneButtons sceneButtons)
     {
         _playerProgressService = playerProgressService;
         _buildingProvider = buildingProvider;
         _currencyCreator = currencyCreator;
         _staticDataService = staticDataService;
+        _sceneButtons = sceneButtons;
     }
 
     public void OnSceneLoaded()
@@ -36,10 +38,7 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         StartEarningCurrencyOnInitialization();
     }
 
-
     public void AddDistrict(DistrictUi districtUi) => _districts.Add(districtUi.districtId, districtUi);
-
-    public void SetCurrentDistrict(int currentDistrictId) => _currentDistrictId = currentDistrictId;
 
     public void EarnCurrency(int districtId)
     {
@@ -48,6 +47,13 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         _playerProgressService.Progress.AddCoins(coinsToAdd);
         TurnOnCurrencyEarningCountdown(districtId);
     }
+
+    public void CloseMap()
+    {
+        _sceneButtons.CloseCurrentWidget();
+    }
+
+    public void SetCurrentDistrict(int currentDistrictId) => _currentDistrictId = currentDistrictId;
 
     private void AddCreatedBuildingToDistrictsDict(string createdBuilding)
     {

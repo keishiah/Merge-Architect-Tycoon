@@ -11,8 +11,8 @@ public class BuildingItem : QuestItem
         itemCount = 1;
     }
 
-    public override int GetCurrentItemCount(Progress progress)
+    public override int GetCurrentItemCount(IPlayerProgressService progress)
     {
-        return progress.Buldings.GetBuildingCount(buildingName);
+        return progress.Progress.Buldings.GetBuildingCount(buildingName);
     }
 }

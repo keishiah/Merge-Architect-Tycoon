@@ -1,22 +1,16 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using UniRx;
 using Zenject;
 
 
 public class QuestsProvider : IInitializableOnSceneLoaded
 {
-    private readonly List<Quest> _activeQuests = new();
-    public List<Quest> GetActiveQuestsList => _activeQuests;
+    private readonly List<QuestBase> _activeQuests = new();
+    public List<QuestBase> GetActiveQuestsList => _activeQuests;
 
-    private readonly List<Quest> _questsWaitingForClaim = new();
-    public List<Quest> GetQuestsWaitingForClaim => _questsWaitingForClaim;
+    private readonly List<QuestBase> _questsWaitingForClaim = new();
+    public List<QuestBase> GetQuestsWaitingForClaim => _questsWaitingForClaim;
 
-    private readonly Subject<GiveQuestCondition> _questRemovedSubject = new();
-    public IObservable<GiveQuestCondition> OnQuestRemoved => _questRemovedSubject;
-
-    private IPlayerProgressService _playerProgressService;
+    IPlayerProgressService _playerProgressService;
 
     [Inject]
     void Construct(IPlayerProgressService playerProgressService)
@@ -26,62 +20,46 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
-        _playerProgressService.Progress.Quests.SubscribeToMerge(CheckMergeQuestCompleted);
+        _playerProgressService.Quests.SubscribeToQuestValueChanged(CheckAllQuestsCompleted);
     }
 
-    public void ActivateQuest(Quest quest)
+    public void ActivateQuest(QuestBase questBase)
     {
-        _activeQuests.Add(quest);
-        _playerProgressService.Progress.AddActiveQuest(quest.questId);
-        quest.InitializeRewardsAndItems();
+        // if (_activeQuests.Contains(questBase))
+        //     return;
+        _activeQuests.Add(questBase);
+        _playerProgressService.Quests.AddActiveQuest(questBase.questId);
+        questBase.InitializeRewardsAndItems();
     }
 
-    public void AddQuestWaitingForClaim(Quest quest)
+    public void AddQuestWaitingForClaim(QuestBase questBase)
     {
-        quest.InitializeRewardsAndItems();
-        _questsWaitingForClaim.Add(quest);
+        questBase.InitializeRewardsAndItems();
+        _questsWaitingForClaim.Add(questBase);
     }
 
-    public void AddActiveQuest(Quest quest)
+    public void AddActiveQuest(QuestBase questBase)
     {
-        _activeQuests.Add(quest);
-        quest.InitializeRewardsAndItems();
+        _activeQuests.Add(questBase);
+        questBase.InitializeRewardsAndItems();
     }
 
-    public void CheckCompletionOfTutorialQuest(string questName)
+    public void CheckAllQuestsCompleted()
     {
-        if (_activeQuests.Count(quest => quest.questName == questName) > 0)
+        List<QuestBase> completedQuests = _activeQuests.FindAll(quest => quest.IsCompleted(_playerProgressService));
+        foreach (QuestBase completedQuest in completedQuests)
         {
-            var quest = _activeQuests.Find(quest => quest.questName == questName);
-            _questsWaitingForClaim.Add(quest);
-            _activeQuests.Remove(quest);
-            _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
+            _questsWaitingForClaim.Add(completedQuest);
+            _activeQuests.Remove(completedQuest);
+            _playerProgressService.Quests.AddQuestWaitingForClaim(completedQuest.questId);
         }
     }
 
-    public void ClaimQuestReward(Quest quest)
+    public void ClaimQuestReward(QuestBase questBase)
     {
-        quest.GiveReward(_playerProgressService.Progress);
-        _playerProgressService.Progress.AddCompletedQuest(quest.questId);
+        questBase.GiveReward(_playerProgressService);
+        _playerProgressService.Quests.AddCompletedQuest(questBase.questId);
 
-        _questsWaitingForClaim.Remove(quest);
-        _questRemovedSubject.OnNext(quest.giveQuestCondition);
-    }
-
-
-    private void CheckMergeQuestCompleted(int mergeCount)
-    {
-        var progressQuests = _playerProgressService.Progress;
-        if (_activeQuests.Count(quest => quest.giveQuestCondition == GiveQuestCondition.Merge) > 0)
-        {
-            var quest = _activeQuests.Find(quest => quest.giveQuestCondition == GiveQuestCondition.Merge);
-            if (quest.IsCompleted(progressQuests.Quests.CurrentMergeCount))
-            {
-                _questsWaitingForClaim.Add(quest);
-                _playerProgressService.Progress.AddQuestWaitingForClaim(quest.questId);
-                _activeQuests.Remove(quest);
-                _playerProgressService.Progress.ClearMergeCount();
-            }
-        }
+        _questsWaitingForClaim.Remove(questBase);
     }
 }

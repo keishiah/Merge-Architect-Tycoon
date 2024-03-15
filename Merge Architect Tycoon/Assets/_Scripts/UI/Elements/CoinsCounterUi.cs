@@ -12,7 +12,7 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
     private QuestsProvider _questsProvider;
 
     [Inject]
-    void Construct(UiPresenter uiPresenter, QuestGiver questGiver,QuestsProvider questsProvider)
+    void Construct(UiPresenter uiPresenter, QuestGiver questGiver, QuestsProvider questsProvider)
     {
         _uiPresenter = uiPresenter;
         _questGiver = questGiver;
@@ -43,8 +43,6 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 
     public void AddCoins()
     {
-        _questGiver.ActivateTutorialQuest("CreateFirstBuilding");
-        _questGiver.ActivateTutorialQuest("FirstDistrictEarn");
 // #if UNITY_EDITOR
         if (Application.version.StartsWith("d"))
         {
@@ -61,8 +59,6 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
 
     public void AddDiamonds()
     {
-        _questsProvider.CheckCompletionOfTutorialQuest("CreateFirstBuilding");
-        _questsProvider.CheckCompletionOfTutorialQuest("FirstDistrictEarn");
         if (Application.version.StartsWith("d"))
         {
             _uiPresenter.PlayerProgressService.Progress.AddDiamonds(100500);

@@ -12,47 +12,67 @@ public class ItemsCatalogue : MonoBehaviour
     [Inject] InformationPanel informationPanel;
     [Inject] MergeItemsManager mergeItemsGeneralOpenedManager;
 
-    public bool CheckHasItem(MergeItem item)
+    private int GetItemsCount(MergeItem item)
     {
-        return slotsManager.Slots.FindAll(s => s.CurrentItem == item && s.SlotState == SlotState.Draggable).Count >
-                0;
+        return slotsManager.Slots
+            .FindAll(
+                s => s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable)
+            .Count;
     }
 
     public bool CheckHasItems(List<MergeItem> items)
     {
-        return items.All(item =>
-            slotsManager.Slots.Exists(s =>
-                s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable));
+        foreach (var item in items.Distinct())
+        {
+            if (items.Select(x => x.itemName == item.itemName).Count() > GetItemsCount(item))
+                return false;
+        }
+
+        return true;
     }
 
     public void TakeItems(List<MergeItem> items)
     {
-        List<Slot> slots = new List<Slot>();
-        List<Slot> managersSlots = slotsManager.Slots;
-
-        foreach (MergeItem item in items)
+        foreach (var item in items)
         {
-            slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
-                                                                s.CurrentItem.itemName == item.itemName &&
-                                                                s.SlotState == SlotState.Draggable));
-        }
-
-        if (slots.Count >= items.Count)
-        {
-            foreach (var slot in slots)
+            var slotItem = slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
+                                                                  s.CurrentItem.itemName == item.itemName &&
+                                                                  s.SlotState == SlotState.Draggable);
+            if (slotItem != null)
             {
-                if (informationPanel.slotCurrent == slot)
+                if (informationPanel.slotCurrent == slotItem)
                 {
                     informationPanel.ActivateInfromPanel(false);
                 }
 
-                slot.RemoveItem();
+                slotItem.RemoveItem();
             }
         }
-        else
-        {
-            Debug.Log("Non Items");
-        }
+        // List<Slot> slots = new List<Slot>();
+        //
+        // foreach (MergeItem item in items)
+        // {
+        //     slots.Add(slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
+        //                                                      s.CurrentItem.itemName == item.itemName &&
+        //                                                      s.SlotState == SlotState.Draggable));
+        // }
+        //
+        // if (slots.Count >= items.Count)
+        // {
+        //     foreach (var slot in slots)
+        //     {
+        //         if (informationPanel.slotCurrent == slot)
+        //         {
+        //             informationPanel.ActivateInfromPanel(false);
+        //         }
+        //
+        //         slot.RemoveItem();
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log("Non Items");
+        // }
     }
 
     public void AddItem(MergeItem m_item, Slot m_slot)

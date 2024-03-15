@@ -20,35 +20,30 @@ public class LoadPlayerProgressState : IState
 
     public void Enter()
     {
-        Progress progress = LoadProgressOrInitNew();
-
-        NotifyProgressReaderServices(progress);
+        LoadProgressOrInitNew();
 
         _gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
-    }
-
-    private void NotifyProgressReaderServices(Progress progress)
-    {
-        foreach (IProgressReader reader in _progressReaderServices)
-            reader.LoadProgress(progress);
     }
 
     public void Exit()
     {
     }
 
-    private Progress LoadProgressOrInitNew()
+    private void LoadProgressOrInitNew()
     {
         _progressService.Progress =
             SaveLoadService.Load<Progress>(SaveKey.Progress);
         if (_progressService.Progress == null)
             _progressService.Progress = new Progress();
 
+        _progressService.Quests = SaveLoadService.Load<Quests>(SaveKey.Quests);
+        if (_progressService.Quests == null)
+            _progressService.Quests = new Quests();
+        _progressService.Quests.SetProgress(_progressService.Progress);
+
         _progressService.Progress.Tutorial =
             SaveLoadService.Load<TutorialData>(SaveKey.Tutorial);
         if (_progressService.Progress.Tutorial == null)
             _progressService.Progress.Tutorial = new TutorialData();
-
-        return _progressService.Progress;
     }
 }

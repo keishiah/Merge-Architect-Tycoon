@@ -3,10 +3,8 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "MergeItemQuest",
     menuName = "StaticData/Quests/MergeItemQuest")]
-public class MergeItemQuest : Quest
+public class MergeItemQuest : QuestBase
 {
-    public string questText;
-
     private readonly List<Reward> _rewards = new();
     public CoinsReward coinsReward;
 
@@ -20,15 +18,17 @@ public class MergeItemQuest : Quest
 
     public MergeItemQuest()
     {
-        giveQuestCondition = GiveQuestCondition.Merge;
+        giveQuestCondition = GiveQuestCondition.Base;
     }
 
-    public override void GiveReward(Progress progress)
+    public override void GiveReward(IPlayerProgressService progress)
     {
         foreach (var reward in _rewards)
         {
-            reward.GiveReward(progress);
+            reward.GiveReward(progress.Progress);
         }
+
+        progress.Quests.ClearMergeCount();
     }
 
     public override void InitializeRewardsAndItems()
@@ -40,8 +40,9 @@ public class MergeItemQuest : Quest
         _rewards.Add(coinsReward);
     }
 
-    public override bool IsCompleted(object value)
+
+    public override bool IsCompleted(IPlayerProgressService progress)
     {
-        return (int)value >= mergeQuestItem.itemCount;
+        return progress.Quests.CurrentMergeCount >= mergeQuestItem.itemCount;
     }
 }
