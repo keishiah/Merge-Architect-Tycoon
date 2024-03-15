@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Address: BlockedSlot
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 63ddfff927bb62744ab72f4a1744e5f2
+  - m_GUID: 385b0af8215d76e4e931c907ff92b212
     m_Address: SlotIcon
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Quests
+    m_SerializedLabels: []
+  - m_GUID: 3e6df2d148313d747a398a5af4c67a98
+    m_Address: Tutorial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: aa8a7b4b1f9e5b04ea9fb98c6b137a01, type: 2}
   m_SchemaSet:

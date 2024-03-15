@@ -6,12 +6,20 @@ using Zenject;
 
 public class TruckPurchaseOffer : MonoBehaviour
 {
-    [Inject] private TruckPresenter _truckPresenter;
-    [Inject] private IPlayerProgressService _playerProgressService;
-    [SerializeField] private GameObject _truckMenu;
-    [SerializeField] private string _title;
-    [SerializeField] private Truck _truck;
-    [SerializeField] private int _cost;
+    [Inject]
+    private TruckPresenter _truckPresenter;
+    [Inject]
+    private IPlayerProgressService _playerProgressService;
+    [Inject]
+    private InformationPanel _informationPanel;
+    [SerializeField]
+    private GameObject _truckMenu;
+    [SerializeField]
+    private string _title;
+    [SerializeField]
+    private Truck _truck;
+    [SerializeField]
+    private int _cost;
 
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private Button _buyButton;
@@ -20,7 +28,6 @@ public class TruckPurchaseOffer : MonoBehaviour
 
     [SerializeField] private Image _truckImage;
     [SerializeField] private Image _resourceImage;
-
 
     void Start()
     {
@@ -63,5 +70,6 @@ public class TruckPurchaseOffer : MonoBehaviour
         }
 
         _truckMenu.SetActive(false);
+        _informationPanel.gameObject.SetActive(true);
     }
 }

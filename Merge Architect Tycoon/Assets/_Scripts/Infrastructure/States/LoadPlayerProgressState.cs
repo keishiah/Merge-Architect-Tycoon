@@ -1,12 +1,16 @@
-﻿public class LoadPlayerProgressState : IState
+﻿using System.Collections.Generic;
+
+public class LoadPlayerProgressState : IState
 {
     private IGameStateMachine _gameStateMachine;
-
+    private readonly IEnumerable<IProgressReader> _progressReaderServices;
     private readonly IPlayerProgressService _progressService;
 
-    public LoadPlayerProgressState(IPlayerProgressService progressService)
+    public LoadPlayerProgressState(IPlayerProgressService progressService,
+        IEnumerable<IProgressReader> progressReaderServices)
     {
         _progressService = progressService;
+        _progressReaderServices = progressReaderServices;
     }
 
     public void SetGameStateMachine(IGameStateMachine gameStateMachine)
@@ -36,5 +40,10 @@
         if (_progressService.Quests == null)
             _progressService.Quests = new Quests();
         _progressService.Quests.SetProgress(_progressService.Progress);
+
+        _progressService.Progress.Tutorial =
+            SaveLoadService.Load<TutorialData>(SaveKey.Tutorial);
+        if (_progressService.Progress.Tutorial == null)
+            _progressService.Progress.Tutorial = new TutorialData();
     }
 }

@@ -4,6 +4,7 @@ public enum SaveKey
 {
     Progress,
     Inventory,
+    Tutorial,
     Quests,
 }
 
@@ -21,10 +22,5 @@ public static class SaveLoadService
             return default(T);
 
         return PlayerPrefs.GetString(stringKey).ToDeserialized<T>();
-    }
-
-    public static void ClearAll()
-    {
-        PlayerPrefs.DeleteAll();
     }
 }

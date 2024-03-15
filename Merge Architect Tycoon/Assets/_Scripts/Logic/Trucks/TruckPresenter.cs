@@ -7,7 +7,6 @@ using Zenject;
 [RequireComponent(typeof(Image))]
 public class TruckPresenter : MonoBehaviour
 {
-    [SerializeField] private Image[] _resources;
 
     [SerializeField] public float _startXPosition;
     [SerializeField] public float _stopXPosition;
@@ -15,13 +14,15 @@ public class TruckPresenter : MonoBehaviour
     [SerializeField] public float _speed;
 
     [Inject] private SlotsManager _slotsManager;
+    [SerializeField] private GameObject _resourcePrefab;
+    [SerializeField] private Transform _resourceHolder;
     private Queue<Truck> _trucks = new();
     private TruckBehaviour _truckBehaviour;
     public bool _isNeedToUnload { get; private set; }
 
     private void Awake()
     {
-        _slotsManager.OnNewEmptySlotAppears += () => { enabled = true; };
+        _slotsManager.OnNewEmptySlotAppears += UpdateOn;
     }
 
     private void OnEnable()
@@ -76,7 +77,6 @@ public class TruckPresenter : MonoBehaviour
         {
             _slotsManager = _slotsManager,
             _truck = _trucks.Peek(),
-            _resources = _resources,
             _truckPresenter = this,
         };
         _truckBehaviour.Enter();
@@ -107,13 +107,20 @@ public class TruckPresenter : MonoBehaviour
         }
 
         _truckBehaviour.Update();
-        _isNeedToUnload = false;
+        Refresh();
+
         if (_truckBehaviour.IsComplete)
             NextStage();
+    }
+
+    private void Refresh()
+    {
+        _isNeedToUnload = false;
     }
     public void ReadyToUnload() => _isNeedToUnload = true;
     public void UpdateOn()
     {
+        _isNeedToUnload = false;
         enabled = true;
     }
     public void UpdateOff()
@@ -124,15 +131,27 @@ public class TruckPresenter : MonoBehaviour
     {
         Truck truck = _trucks.Peek();
         GetComponent<Image>().sprite = truck.SpriteImage;
-        for (int i = 0; i < _resources.Length; i++)
+        List<MergeItem> mergeItems = truck.TruckCargo;
+        int spritesCount = _resourceHolder.childCount;
+        for (int i = 0; i < mergeItems.Count; i++)
         {
-            if (i < truck.TruckCargo.Count)
+            if(i < spritesCount)
             {
-                _resources[i].enabled = true;
-                _resources[i].sprite = truck.TruckCargo[i].itemSprite;
+                Transform resourceTransform = _resourceHolder.GetChild(i);
+                resourceTransform.gameObject.SetActive(true);
+                Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
+                resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
             }
             else
-                _resources[i].enabled = false;
+            {
+                GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
+                newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
+            }
         }
+    }
+
+    public void DequeueItem(int index)
+    {
+        _resourceHolder.GetChild(index).gameObject.SetActive(false);
     }
 }

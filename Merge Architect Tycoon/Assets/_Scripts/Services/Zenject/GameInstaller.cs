@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class GameInstaller : MonoInstaller
@@ -12,6 +14,8 @@ public class GameInstaller : MonoInstaller
 
         BindPlayerProgressService();
 
+        BindGameTutorial();
+
         BindGameStates();
 
         BindStateFactory();
@@ -22,6 +26,16 @@ public class GameInstaller : MonoInstaller
 
         BindBuilder();
         Container.Bind<SceneContextProvider>().AsSingle();
+    }
+
+    private void BindGameTutorial()
+    {
+        IEnumerable<IProgressReader> readers = new IProgressReader[]
+        {
+            new TutorialReader()
+        };
+
+        Container.BindInstance(readers).AsSingle();
     }
 
     private void BindBuilder()
