@@ -1,44 +1,55 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 public class BuildingCreator
 {
     private IStaticDataService _staticDataService;
+    private IPlayerProgressService _playerProgressService;
 
     [Inject]
-    void Construct(IStaticDataService staticDataService)
+    void Construct(IStaticDataService staticDataService, IPlayerProgressService playerProgressService)
     {
         _staticDataService = staticDataService;
+        _playerProgressService = playerProgressService;
     }
 
     public async UniTask CreateBuildingInTimeAsync(BuildingPlace buildingPlace, string buildingName,
-        CancellationTokenSource cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource, int creationTime = default)
     {
-        var timeToCreate = _staticDataService.GetBuildingData(buildingName).timeToCreate;
+        string buildingNameTempo = buildingName;
+        int timeToCreate = creationTime == default
+            ? _staticDataService.GetBuildingData(buildingName).timeToCreate
+            : creationTime;
         buildingPlace.UpdateTimerText(timeToCreate);
 
-        try
+        while (timeToCreate > 0 && !cancellationTokenSource.IsCancellationRequested)
         {
-            while (timeToCreate > 0)
+            var delayTimeSpan = TimeSpan.FromSeconds(1f);
+            try
             {
-                var delayTimeSpan = TimeSpan.FromSeconds(1f);
-
                 await UniTask.Delay(delayTimeSpan, cancellationToken: cancellationTokenSource.Token);
                 timeToCreate--;
                 buildingPlace.UpdateTimerText(timeToCreate);
             }
+            catch (OperationCanceledException)
+            {
+                _playerProgressService.Progress.AddBuildingCreationRest(buildingNameTempo, timeToCreate);
+                cancellationTokenSource.Dispose();
+                break;
+            }
+        }
 
-            cancellationTokenSource.Token.ThrowIfCancellationRequested();
+        cancellationTokenSource.Dispose();
 
+        if (!cancellationTokenSource.IsCancellationRequested)
+        {
             CreateBuilding(buildingPlace);
         }
-        catch (OperationCanceledException)
-        {
-            buildingPlace.SetBuildingState(BuildingStateEnum.Inactive);
-        }
     }
+
 
     private void CreateBuilding(BuildingPlace buildingPlace)
     {

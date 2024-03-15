@@ -1,4 +1,6 @@
-﻿public class Progress
+﻿using UnityEngine;
+
+public class Progress
 {
     public Coins Coins = new();
     public Coins Diamonds = new();
@@ -19,6 +21,12 @@
     public void AddBuilding(string buildingName)
     {
         Buldings.AddCreatedBuildingToList(buildingName);
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
+
+    public void AddBuildingCreationRest(string buildingName, int creationRest)
+    {
+        Buldings.buildingsInProgress.AddBuildingProgress(buildingName, creationRest);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 }

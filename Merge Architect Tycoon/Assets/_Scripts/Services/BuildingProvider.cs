@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class BuildingProvider : IInitializableOnSceneLoaded
@@ -45,9 +47,11 @@ public class BuildingProvider : IInitializableOnSceneLoaded
 
     public async void CreateBuildingInTimeAsync(string buildingName)
     {
-        if (SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+        if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            return;
+        await buildingPlace.StartCreatingBuilding();
+        if (!buildingPlace.ActivityToken.IsCancellationRequested)
         {
-            await buildingPlace.StartCreatingBuilding();
             _playerProgressService.Progress.AddBuilding(buildingName);
         }
     }
