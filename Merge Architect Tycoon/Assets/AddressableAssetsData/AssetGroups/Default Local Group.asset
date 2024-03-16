@@ -50,7 +50,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Quests
-    m_SerializedLabels: []
   - m_GUID: 3e6df2d148313d747a398a5af4c67a98
     m_Address: Tutorial
     m_ReadOnly: 0

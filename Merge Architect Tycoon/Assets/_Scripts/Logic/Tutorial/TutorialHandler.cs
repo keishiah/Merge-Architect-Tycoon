@@ -13,15 +13,9 @@ public class TutorialHandler : MonoBehaviour
     private GameObject _allScreenButton;
 
     [SerializeField]
-    private GameObject _blockerators;
+    private GameObject _blockerator;
     [SerializeField]
-    private GameObject _upBlock;
-    [SerializeField]
-    private GameObject _downBlock;
-    [SerializeField]
-    private GameObject _leftBlock;
-    [SerializeField]
-    private GameObject _rightBlock;
+    private Button _buttonToClick;
 
     [SerializeField]
     private GameObject _handPointer;
@@ -43,11 +37,11 @@ public class TutorialHandler : MonoBehaviour
     {
         _dialog.SetActive(false);
         _handPointer.SetActive(false);
-        _handPointer.transform.SetParent(this.transform);
-        _blockerators.SetActive(false);
+        //_handPointer.transform.SetParent(this.transform);
+        _blockerator.SetActive(false);
     }
 
-    public void NextStep()
+    private void NextStep()
     {
         DisableAll();
 
@@ -64,7 +58,7 @@ public class TutorialHandler : MonoBehaviour
         else
             TutorialSteps[_currentStep].Enter(this);
 
-        SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
+        //SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
     }
 
     public void ShowDialog(string text)
@@ -77,25 +71,38 @@ public class TutorialHandler : MonoBehaviour
     {
         if (buttonToNext != null)
         {
+            _blockerator.SetActive(true);
+            _buttonToClick.GetComponent<Image>().sprite = buttonToNext.GetComponent<Image>().sprite;
+
+            RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
+            RectTransform buttonToNextRect = buttonToNext.GetComponent<RectTransform>();
+
+            buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
+            buttonToClickRectTransform.position = buttonToNextRect.position;
+            buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
+
             _tempButton = buttonToNext;
             _allScreenButton.SetActive(false);
-            //invoke only onse!
-            //Debug.Log(buttonToNext.name + ": AddListener!");
-            buttonToNext.onClick.AddListener(ClearListener);
-            buttonToNext.onClick.AddListener(NextStep);
         }
         else
         {
+            _blockerator.SetActive(false);
             _tempButton = null;
             _allScreenButton.SetActive(true);
         }
     }
 
-    private void ClearListener()
+    public void ClickOnButton()
     {
-        //Debug.Log(_tempButton.name + ": RemoveListener!");
-        _tempButton?.onClick.RemoveListener(NextStep);
-        _tempButton?.onClick.RemoveListener(ClearListener);
+        if (_tempButton == null)
+        {
+            Debug.LogError("_tempButton is null!!!");
+            return;
+        }
+
+        _tempButton.onClick.Invoke();
+
+        NextStep();
     }
 
     public void ShowHand(AnimationClip clip, Transform transform = null)
@@ -104,7 +111,7 @@ public class TutorialHandler : MonoBehaviour
         _handAnimation.clip = clip;
         _handAnimation.Play();
 
-        if (transform != null)
-            _handPointer.transform.SetParent(transform);
+        //if (transform != null)
+        //    _handPointer.transform.SetParent(transform);
     }
 }
