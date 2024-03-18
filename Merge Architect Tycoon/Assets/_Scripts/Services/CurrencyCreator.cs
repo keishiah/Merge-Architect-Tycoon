@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using UnityEngine;
 using Zenject;
 
 public class CurrencyCreator
@@ -14,19 +15,29 @@ public class CurrencyCreator
 
     public async UniTask CreateCurrencyInTimeAsync(DistrictUi district)
     {
-        float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
-        district.SetSliderMaxValue(timeToCreate);
-        district.coinsSlider.gameObject.SetActive(true);
-
-        while (timeToCreate > 0)
+        try
         {
-            var delayTimeSpan = TimeSpan.FromSeconds(1f);
+            float timeToCreate = _staticDataService.GetDistrictData(district.districtId).timeToEarn;
+            district.SetSliderMaxValue(timeToCreate);
+            district.coinsSlider.gameObject.SetActive(true);
 
-            await UniTask.Delay(delayTimeSpan, cancellationToken: district.ActivityToken.Token);
-            timeToCreate--;
-            district.SetSliderValue(timeToCreate);
+            while (timeToCreate > 0)
+            {
+                var delayTimeSpan = TimeSpan.FromSeconds(1f);
+
+                await UniTask.Delay(delayTimeSpan, cancellationToken: district.ActivityToken.Token);
+                timeToCreate--;
+                district.SetSliderValue(timeToCreate);
+            }
         }
-            
-        district.TurnOnEarnButton();
+
+        catch (OperationCanceledException)
+        {
+        }
+
+        if (!district.ActivityToken.IsCancellationRequested)
+        {
+            district.TurnOnEarnButton();
+        }
     }
 }

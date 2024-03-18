@@ -9,24 +9,23 @@ public class BuildingPlace : MonoBehaviour
     public string buildingName;
     [HideInInspector] public int districtId;
 
+    public CancellationTokenSource ActivityToken { get; private set; }
+
     private IStaticDataService _staticDataService;
-    private BuildingCreator _buildingCreator;
     private BuildingProvider _buildingProvider;
-    private CancellationTokenSource _activityToken;
 
     [Inject]
     void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
         BuildingProvider buildingProvider)
     {
         _staticDataService = staticDataService;
-        _buildingCreator = buildingCreator;
         _buildingProvider = buildingProvider;
     }
 
     public void InitializeBuilding(int district)
     {
         districtId = district;
-        _activityToken = new CancellationTokenSource();
+        ActivityToken = new CancellationTokenSource();
         _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
     }
 
@@ -49,11 +48,9 @@ public class BuildingPlace : MonoBehaviour
         }
     }
 
-    public UniTask StartCreatingBuilding()
+    public void StartCreatingBuilding()
     {
         SetBuildingState(BuildingStateEnum.BuildInProgress);
-
-        return _buildingCreator.CreateBuildingInTimeAsync(this, buildingName, _activityToken);
     }
 
     public void UpdateTimerText(int totalSeconds)
@@ -63,8 +60,7 @@ public class BuildingPlace : MonoBehaviour
 
     public void OnDestroy()
     {
-        _activityToken?.Cancel();
-        _activityToken?.Dispose();
-        _activityToken = null;
+        ActivityToken?.Cancel();
+        ActivityToken?.Dispose();
     }
 }
