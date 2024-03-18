@@ -6737,8 +6737,8 @@ MonoBehaviour:
   _stopXPosition: 600
   _endXPosition: 1450
   _speed: 500
-  _resourcePrefab: {fileID: 6208967515590916747, guid: 5fed4b038e158974785134b3aa3236b2, type: 3}
-  _resourceHolder: {fileID: 1701833546}
+  _resourcePrefab: {fileID: 0}
+  _resourceHolder: {fileID: 0}
 --- !u!114 &605758878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12577,7 +12577,7 @@ MonoBehaviour:
   createBuildingPopup: {fileID: 301110683}
   createBuildingPopupScroller: {fileID: 1619757256}
   district: {fileID: 553906267}
-  questPopup: {fileID: 0}
+  questPopup: {fileID: 8262805332055049569}
 --- !u!114 &1153209361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24225,7 +24225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.50002, y: 30}
+  m_AnchoredPosition: {x: -247.5, y: 30}
   m_SizeDelta: {x: -495, y: 160}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1657809054256815395
@@ -28715,7 +28715,7 @@ MonoBehaviour:
   - {fileID: 406285482}
   - {fileID: 1022528738}
   _widgets:
-  - {fileID: 0}
+  - {fileID: 8262805332055049572}
   - {fileID: 1657809055713711211}
   - {fileID: 301110684}
   - {fileID: 1773601025}
