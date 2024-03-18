@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using Zenject;
 
 public class BuildingProvider : IInitializableOnSceneLoaded
@@ -43,28 +41,22 @@ public class BuildingProvider : IInitializableOnSceneLoaded
         foreach (var buildingName in SceneBuildingsDictionary.Keys)
         {
             if (buildings.CreatedBuildings.Contains(buildingName))
-            {
                 CreateBuildingOnStart(buildingName);
-            }
             else if (buildingsInProgressDict.ContainsKey(buildingName))
-            {
                 ContinueBuildingCreation(buildingName, buildingsInProgressDict[buildingName]);
-            }
         }
     }
 
-//todo merge building creation methods. Clean building progress cash after building creation
     private async void ContinueBuildingCreation(string buildingName, int timeRest)
     {
         if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             return;
+
         buildingPlace.StartCreatingBuilding();
         await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken,
             timeRest);
         if (!buildingPlace.ActivityToken.IsCancellationRequested)
-        {
             _playerProgressService.Progress.AddBuilding(buildingName);
-        }
     }
 
 
@@ -72,12 +64,11 @@ public class BuildingProvider : IInitializableOnSceneLoaded
     {
         if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             return;
+
         buildingPlace.StartCreatingBuilding();
         await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken);
         if (!buildingPlace.ActivityToken.IsCancellationRequested)
-        {
             _playerProgressService.Progress.AddBuilding(buildingName);
-        }
     }
 
     private void CreateBuildingOnStart(string buildingName)

@@ -27,6 +27,8 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
         }
     }
 
+    public void RemoveBuildingProgress(string name) => BuildingsInProgressDict.Remove(name);
+
     public void OnBeforeSerialize()
     {
         buildingName.Clear();

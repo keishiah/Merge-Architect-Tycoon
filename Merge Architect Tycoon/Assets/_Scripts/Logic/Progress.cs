@@ -24,9 +24,15 @@ public class Progress
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 
-    public void AddBuildingCreationRest(string buildingName, int creationRest)
+    public void AddBuildingCreationTimeRest(string buildingName, int creationRest)
     {
         Buldings.buildingsInProgress.AddBuildingProgress(buildingName, creationRest);
+        SaveLoadService.Save(SaveKey.Progress, this);
+    }
+
+    public void RemoveBuildingInProgress(string buildingName)
+    {
+        Buldings.buildingsInProgress.RemoveBuildingProgress(buildingName);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 }

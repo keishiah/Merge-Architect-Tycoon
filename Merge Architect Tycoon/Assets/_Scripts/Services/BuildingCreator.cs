@@ -36,7 +36,7 @@ public class BuildingCreator
             }
             catch (OperationCanceledException)
             {
-                _playerProgressService.Progress.AddBuildingCreationRest(buildingNameTempo, timeToCreate);
+                _playerProgressService.Progress.AddBuildingCreationTimeRest(buildingNameTempo, timeToCreate);
                 break;
             }
         }
@@ -44,7 +44,6 @@ public class BuildingCreator
         if (!cancellationTokenSource.IsCancellationRequested)
         {
             CreateBuilding(buildingPlace);
-            cancellationTokenSource.Cancel();
         }
     }
 
@@ -52,5 +51,6 @@ public class BuildingCreator
     private void CreateBuilding(BuildingPlace buildingPlace)
     {
         buildingPlace.SetBuildingState(BuildingStateEnum.BuildingFinished);
+        _playerProgressService.Progress.RemoveBuildingInProgress(buildingPlace.buildingName);
     }
 }
