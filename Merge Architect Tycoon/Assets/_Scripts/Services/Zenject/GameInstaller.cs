@@ -19,12 +19,25 @@ public class GameInstaller : MonoInstaller
         BindGameStates();
 
         BindStateFactory();
-            
+
         BindAssetProvider();
 
         BindUiPresenter();
 
         BindBuilder();
+
+        BindSceneContextProvider();
+
+        BindFirebaseLogger();
+    }
+
+    private void BindFirebaseLogger()
+    {
+        Container.Bind<FirebaseLogger>().AsSingle();
+    }
+
+    private void BindSceneContextProvider()
+    {
         Container.Bind<SceneContextProvider>().AsSingle();
     }
 

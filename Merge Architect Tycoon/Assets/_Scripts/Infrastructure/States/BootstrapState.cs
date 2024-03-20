@@ -4,10 +4,12 @@ public class BootstrapState : IState
 {
     private IGameStateMachine _gameStateMachine;
     private readonly IStaticDataService _staticDataService;
+    private FirebaseLogger _firebaseLogger;
 
-    public BootstrapState(IStaticDataService staticDataService)
+    public BootstrapState(IStaticDataService staticDataService, FirebaseLogger firebaseLogger)
     {
         _staticDataService = staticDataService;
+        _firebaseLogger = firebaseLogger;
     }
 
     public void SetGameStateMachine(IGameStateMachine gameStateMachine)
@@ -19,12 +21,12 @@ public class BootstrapState : IState
     {
         await InitServices();
         _gameStateMachine.Enter<LoadPlayerProgressState>();
-            
     }
 
     private async UniTask InitServices()
     {
         await _staticDataService.Initialize();
+        await _firebaseLogger.InitializeFirebase();
     }
 
     public void Exit()
