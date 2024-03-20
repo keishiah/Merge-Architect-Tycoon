@@ -13,12 +13,14 @@ namespace _Scripts.Debug
 
         private QuestsProvider _questsProvider;
         private QuestGiver _questGiver;
+        private FirebaseLogger _firebaseLogger;
 
         [Inject]
-        void Construct(QuestsProvider questsProvider, QuestGiver questGiver)
+        void Construct(QuestsProvider questsProvider, QuestGiver questGiver,FirebaseLogger firebaseLogger)
         {
             _questsProvider = questsProvider;
             _questGiver = questGiver;
+            _firebaseLogger = firebaseLogger;
         }
 
         private void Start()
@@ -37,6 +39,7 @@ namespace _Scripts.Debug
         private void AddQuest()
         {
             _questGiver.CheckAllQuestsForActivation();
+            _firebaseLogger.LogEvent("tutorial_get_quest_quests_popup");
         }
 
         private void CompleteQuest()

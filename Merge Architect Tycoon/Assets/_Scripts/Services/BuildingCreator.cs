@@ -33,10 +33,10 @@ public class BuildingCreator
                 await UniTask.Delay(delayTimeSpan, cancellationToken: cancellationTokenSource.Token);
                 timeToCreate--;
                 buildingPlace.UpdateTimerText(timeToCreate);
+                _playerProgressService.Progress.AddBuildingCreationTimeRest(buildingNameTempo, timeToCreate);
             }
             catch (OperationCanceledException)
             {
-                _playerProgressService.Progress.AddBuildingCreationTimeRest(buildingNameTempo, timeToCreate);
                 break;
             }
         }

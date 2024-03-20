@@ -33,6 +33,7 @@ public class CurrencyCreator
 
         catch (OperationCanceledException)
         {
+            return;
         }
 
         if (!district.ActivityToken.IsCancellationRequested)
