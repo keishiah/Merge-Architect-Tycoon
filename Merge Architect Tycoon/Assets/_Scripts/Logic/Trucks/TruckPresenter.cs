@@ -139,13 +139,13 @@ public class TruckPresenter : MonoBehaviour
             {
                 Transform resourceTransform = _resourceHolder.GetChild(i);
                 resourceTransform.gameObject.SetActive(true);
-                Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
-                resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
+                //Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
+                //resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
             }
             else
             {
                 GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
-                newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
+                //newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
             }
         }
     }

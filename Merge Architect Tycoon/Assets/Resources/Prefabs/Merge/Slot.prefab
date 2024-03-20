@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 1932164859375614934}
   - component: {fileID: 990610827706250935}
   - component: {fileID: 6905159053333324801}
+  - component: {fileID: 853874410841467568}
   m_Layer: 5
   m_Name: Mask
   m_TagString: Untagged
@@ -319,6 +320,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &853874410841467568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860862058962314446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c9046dc53dedd48a77c52754f8baca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 6905159053333324801}
+  slot: {fileID: 4075098824852774151}
+  isClicked: 0
 --- !u!1 &8143434764847241205
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +346,6 @@ GameObject:
   - component: {fileID: 4682275467235935393}
   - component: {fileID: 2747735242973902699}
   - component: {fileID: 2372928616299734129}
-  - component: {fileID: 2876378563467721001}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -380,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -396,18 +411,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2876378563467721001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8143434764847241205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9c9046dc53dedd48a77c52754f8baca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 2372928616299734129}
-  slot: {fileID: 4075098824852774151}
-  isClicked: 0

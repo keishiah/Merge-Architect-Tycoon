@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd057f6116f28847b2db4b9ad8c87bf, type: 3}
   m_Name: Level 1april
   m_EditorClassIdentifier: 
-  isNeedResetLevel: 0
+  isNeedResetLevel: 1
   columns: 5
   rows: 4
   allDropSlots:
