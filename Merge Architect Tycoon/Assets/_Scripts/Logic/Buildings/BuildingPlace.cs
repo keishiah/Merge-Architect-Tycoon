@@ -13,13 +13,15 @@ public class BuildingPlace : MonoBehaviour
 
     private IStaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
+    private IPlayerProgressService _playerProgressService;
 
     [Inject]
     void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
-        BuildingProvider buildingProvider)
+        BuildingProvider buildingProvider, IPlayerProgressService playerProgressService)
     {
         _staticDataService = staticDataService;
         _buildingProvider = buildingProvider;
+        _playerProgressService = playerProgressService;
     }
 
     public void InitializeBuilding(int district)
@@ -58,7 +60,7 @@ public class BuildingPlace : MonoBehaviour
         buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
     }
 
-    public void OnDestroy()
+    public void OnApplicationQuit()
     {
         ActivityToken?.Cancel();
         ActivityToken?.Dispose();
