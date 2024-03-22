@@ -186,6 +186,9 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void OnClick()
     {
+        DraggableItem item = currentDraggableItem();
+        if (item == null) return;
+        
         if (!IsEmpty)
         {
             if (SlotState == SlotState.Blocked)
@@ -193,15 +196,15 @@ public class Slot : MonoBehaviour, IDropHandler
 
             _informationPanel.ConfigPanel(this);
 
-            if (currentDraggableItem().isClicked)
+            if (item.isClicked)
                 UseItemInside();
             else
-                currentDraggableItem().isClicked = true;
+                item.isClicked = true;
         }
         else
         {
             _informationPanel.ActivateInfromPanel(false);
-            currentDraggableItem().isClicked = false;
+            item.isClicked = false;
         }
     }
 

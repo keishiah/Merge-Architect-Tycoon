@@ -9,6 +9,6 @@ public class MergeWidget : Widget
     {
         base.OnOpen();
         _trucks.SetActive(false);
-        _infoPanel.SetActive(true);
+        _infoPanel.SetActive(false);
     }
 }

@@ -6,6 +6,9 @@ public class TutorialReader : IProgressReader
 {
     public void LoadProgress(Progress progress)
     {
+        if (PlayerPrefs.GetString(SaveKey.NeedSkipTutorial.ToString()) == "true")
+            return;
+
         if (progress.Tutorial.IsComplite)
             return;
 

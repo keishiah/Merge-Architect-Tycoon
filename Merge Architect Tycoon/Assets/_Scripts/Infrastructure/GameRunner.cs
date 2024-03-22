@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using Unity.VisualScripting;
+﻿using System.Text.RegularExpressions;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +6,7 @@ public class GameRunner : MonoBehaviour
 {
     private const string gameVersionKey = "Version";
     private IStateFactory _stateFactory;
+    [SerializeField] private bool _skipTutorial;
 
     [Inject]
     void Construct(IStateFactory stateFactory)
@@ -17,8 +16,17 @@ public class GameRunner : MonoBehaviour
 
     private void Start()
     {
+        CheckTutorial();
         CheckVersion();
         CreateGameBootstrapper();
+    }
+
+    private void CheckTutorial()
+    {
+        if (!_skipTutorial)
+            PlayerPrefs.SetString(SaveKey.NeedSkipTutorial.ToString(), "false");
+        else
+            PlayerPrefs.SetString(SaveKey.NeedSkipTutorial.ToString(), "true");
     }
 
     //If new version => delete all saves

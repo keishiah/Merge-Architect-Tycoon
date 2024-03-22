@@ -6,6 +6,7 @@ public enum SaveKey
     Inventory,
     Tutorial,
     Quests,
+    NeedSkipTutorial,
 }
 
 public static class SaveLoadService
