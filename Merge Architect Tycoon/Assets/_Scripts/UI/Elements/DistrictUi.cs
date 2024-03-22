@@ -10,7 +10,7 @@ public class DistrictUi : MonoBehaviour
     public Button earnCurrencyButton;
     public Button closeMapButton;
 
-    public CancellationTokenSource ActivityToken { get; set; }
+    public CancellationTokenSource ActivityToken { get; private set; }
 
     private DistrictsPresenter _districtsPresenter;
 
@@ -64,6 +64,5 @@ public class DistrictUi : MonoBehaviour
     {
         ActivityToken?.Cancel();
         ActivityToken?.Dispose();
-        ActivityToken = null;
     }
 }

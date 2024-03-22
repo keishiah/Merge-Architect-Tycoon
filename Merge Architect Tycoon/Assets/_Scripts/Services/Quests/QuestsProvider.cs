@@ -25,8 +25,6 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void ActivateQuest(QuestBase questBase)
     {
-        // if (_activeQuests.Contains(questBase))
-        //     return;
         _activeQuests.Add(questBase);
         _playerProgressService.Quests.AddActiveQuest(questBase.questId);
         questBase.InitializeRewardsAndItems();

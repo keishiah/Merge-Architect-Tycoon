@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class BuildingProvider : IInitializableOnSceneLoaded
 {
     public readonly Dictionary<string, BuildingPlace> SceneBuildingsDictionary = new();
 
+    private BuildingCreator _buildingCreator;
     private IPlayerProgressService _playerProgressService;
     private District _district;
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService, District district)
+    void Construct(BuildingCreator buildingCreator, IPlayerProgressService playerProgressService, District district)
     {
         _playerProgressService = playerProgressService;
         _district = district;
+        _buildingCreator = buildingCreator;
     }
 
     public void OnSceneLoaded()
@@ -25,31 +28,48 @@ public class BuildingProvider : IInitializableOnSceneLoaded
         LoadCreatedBuildings();
     }
 
-    private void LoadCreatedBuildings()
-    {
-        Buldings buildings = _playerProgressService.Progress.Buldings;
-
-        foreach (var buildingName in SceneBuildingsDictionary.Keys)
-        {
-            if (buildings.CreatedBuildings.Contains(buildingName))
-            {
-                CreateBuildingOnStart(buildingName);
-            }
-        }
-    }
-
     public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
     {
         SceneBuildingsDictionary.Add(buildingName, buildingPlace);
     }
 
+    private void LoadCreatedBuildings()
+    {
+        Buldings buildings = _playerProgressService.Progress.Buldings;
+        var buildingsInProgressDict =
+            _playerProgressService.Progress.Buldings.buildingsInProgress.BuildingsInProgressDict;
+
+        foreach (var buildingName in SceneBuildingsDictionary.Keys)
+        {
+            if (buildings.CreatedBuildings.Contains(buildingName))
+                CreateBuildingOnStart(buildingName);
+            else if (buildingsInProgressDict.ContainsKey(buildingName))
+                ContinueBuildingCreation(buildingName, buildingsInProgressDict[buildingName]);
+        }
+    }
+
+    private async void ContinueBuildingCreation(string buildingName, int timeRest)
+    {
+        if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            return;
+
+        buildingPlace.StartCreatingBuilding();
+        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken,
+            timeRest);
+        if (!buildingPlace.ActivityToken.IsCancellationRequested)
+            _playerProgressService.Progress.AddBuilding(buildingName);
+    }
+
+
     public async void CreateBuildingInTimeAsync(string buildingName)
     {
-        if (SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
-        {
-            await buildingPlace.StartCreatingBuilding();
+        if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            return;
+
+        buildingPlace.StartCreatingBuilding();
+        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken);
+        if (!buildingPlace.ActivityToken.IsCancellationRequested)
             _playerProgressService.Progress.AddBuilding(buildingName);
-        }
     }
 
     private void CreateBuildingOnStart(string buildingName)

@@ -1,9 +1,10 @@
-﻿public class Progress
+﻿using UnityEngine;
+
+public class Progress
 {
     public Coins Coins = new();
     public Coins Diamonds = new();
     public Buldings Buldings = new();
-    public Quests Quests = new();
     public TutorialData Tutorial = new();
 
     public void AddCoins(int coins)
@@ -24,33 +25,15 @@
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 
-    public void AddActiveQuest(string questId)
+    public void AddBuildingCreationTimeRest(string buildingName, int creationRest)
     {
-        Quests.AddActiveQuest(questId);
+        Buldings.buildingsInProgress.AddBuildingProgress(buildingName, creationRest);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 
-    public void AddCompletedQuest(string questId)
+    public void RemoveBuildingInProgress(string buildingName)
     {
-        Quests.AddCompletedQuest(questId);
-        SaveLoadService.Save(SaveKey.Progress, this);
-    }
-
-    public void AddQuestWaitingForClaim(string questId)
-    {
-        Quests.AddQuestWaitingForClaim(questId);
-        SaveLoadService.Save(SaveKey.Progress, this);
-    }
-
-    public void AddMergeItem()
-    {
-        Quests.AddMergeItem();
-        SaveLoadService.Save(SaveKey.Progress, this);
-    }
-
-    public void ClearMergeCount()
-    {
-        Quests.ClearMergeCount();
+        Buldings.buildingsInProgress.RemoveBuildingProgress(buildingName);
         SaveLoadService.Save(SaveKey.Progress, this);
     }
 }

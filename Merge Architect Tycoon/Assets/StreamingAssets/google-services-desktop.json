@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "480827233639",
+    "project_id": "merge-architect-tycoon-aca26",
+    "storage_bucket": "merge-architect-tycoon-aca26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480827233639:android:ff4af342a9185c93598bc2",
+        "android_client_info": {
+          "package_name": "com.GameMonsters.BuildTycoon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdQw9uJHa9Lu_48fQnCewazcE4kUvlOj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
