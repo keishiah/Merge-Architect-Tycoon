@@ -6737,8 +6737,8 @@ MonoBehaviour:
   _stopXPosition: 600
   _endXPosition: 1450
   _speed: 500
-  _resourcePrefab: {fileID: 0}
-  _resourceHolder: {fileID: 0}
+  _resourcePrefab: {fileID: 6208967515590916747, guid: 5fed4b038e158974785134b3aa3236b2, type: 3}
+  _resourceHolder: {fileID: 1701833546}
 --- !u!114 &605758878
 MonoBehaviour:
   m_ObjectHideFlags: 0

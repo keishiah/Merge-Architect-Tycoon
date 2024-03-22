@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd057f6116f28847b2db4b9ad8c87bf, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  isNeedResetLevel: 0
+  isNeedResetLevel: 1
   columns: 6
   rows: 7
   allDropSlots:
@@ -42,9 +42,9 @@ MonoBehaviour:
     slotState: 1
   - mergeItem: {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 8d2425381c3b4014fa78476e2da54502, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
-  - mergeItem: {fileID: 11400000, guid: 8d2425381c3b4014fa78476e2da54502, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 0
@@ -54,9 +54,9 @@ MonoBehaviour:
     slotState: 1
   - mergeItem: {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 5009c927fea82a142bb722818e4e333e, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 5009c927fea82a142bb722818e4e333e, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
   - mergeItem: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
     slotState: 2
@@ -68,9 +68,9 @@ MonoBehaviour:
     slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 0
-  - mergeItem: {fileID: 11400000, guid: 987066c3293dae5449d6db8b1382d6eb, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
-  - mergeItem: {fileID: 11400000, guid: 987066c3293dae5449d6db8b1382d6eb, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
   - mergeItem: {fileID: 11400000, guid: 572d87ffd5e3c6947a384d93efb2c02d, type: 2}
     slotState: 2
