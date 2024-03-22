@@ -42,7 +42,7 @@ public class TruckPurchaseOffer : MonoBehaviour
         if (_truck.TruckCargo.Count == 0)
             throw new Exception("The truck cargo is not filled in!");
 
-        //InitializeImages();
+        InitializeImages();
         InitializeText();
         _buyButton.onClick.AddListener(AddNewTruck);
     }
@@ -53,11 +53,11 @@ public class TruckPurchaseOffer : MonoBehaviour
         _costText.text = _cost.ToString();
     }
 
-    //private void InitializeImages()
-    //{
-    //    _truckImage.sprite = _truck.SpriteImage;
-    //    _resourceImage.sprite = _truck.TruckCargo[0].itemSprite;
-    //}
+    private void InitializeImages()
+    {
+        _truckImage.sprite = _truck.SpriteImage;
+        _resourceImage.sprite = _truck.TruckCargo[0].itemSprite;
+    }
 
     private void AddNewTruck()
     {

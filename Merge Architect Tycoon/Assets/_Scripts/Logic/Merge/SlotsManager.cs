@@ -97,7 +97,7 @@ public class SlotsManager
             m_slot = m_slotsList[Random.Range(0, m_slotsList.Count)];
 
         if (m_slot.IsEmpty)
-            m_slot.AddItem(mergeItem);
+            m_slot.AddItem(mergeItem, isNeedSave: isToUnloadSlot);
     }
 
     public void RemoveItem(MergeItem item)

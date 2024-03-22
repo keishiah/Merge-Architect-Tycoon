@@ -20,7 +20,7 @@ public class InformationPanel : MonoBehaviour
     public GameObject informPanel;
     public Button deleteButton;
     public Button infoButton;
-    //public GameObject sellButton;
+    public GameObject sellButton;
 
     public SelectedItem selectedItem;
 
@@ -45,7 +45,7 @@ public class InformationPanel : MonoBehaviour
         itemDescriptionText.text = mergeItem.itemDescrpition;
         itemLvlText.text = $"(Lvl {mergeItem.itemLevel})";
         itemCostText.text = $"+{mergeItem.itemCost}";
-        //sellButton.SetActive(false);
+        sellButton.SetActive(false);
         deleteButton.interactable = false;
         infoButton.interactable = false;
         selectedItem.SelectSlot(slotCurrent);
@@ -55,15 +55,15 @@ public class InformationPanel : MonoBehaviour
             switch (mergeItem.itemType)
             {
                 case ItemType.sellable:
-                    //if (mergeItem.itemCost > 0)
-                    //{
-                    //    sellButton.SetActive(true);
-                    //}
-                    //else
-                    //{
+                    if (mergeItem.itemCost > 0)
+                    {
+                        sellButton.SetActive(true);
+                    }
+                    else
+                    {
                         deleteButton.interactable = true;
                         infoButton.interactable = true;
-                    //}
+                    }
                     break;
                 case ItemType.spawner:
                     break;

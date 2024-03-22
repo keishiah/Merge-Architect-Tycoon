@@ -133,29 +133,27 @@ public class TruckPresenter : MonoBehaviour
     {
         Truck truck = _trucks.Peek();
         GetComponent<Image>().sprite = truck.SpriteImage;
-        //List<MergeItem> mergeItems = truck.TruckCargo;
-        //int spritesCount = _resourceHolder.childCount;
-        _resourceHolder.GetComponent<TextMeshPro>().text = truck.TruckCargo.Count.ToString();
-        //for (int i = 0; i < mergeItems.Count; i++)
-        //{
-        //    if(i < spritesCount)
-        //    {
-        //        Transform resourceTransform = _resourceHolder.GetChild(i);
-        //        resourceTransform.gameObject.SetActive(true);
-        //        //Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
-        //        //resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
-        //    }
-        //    else
-        //    {
-        //        GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
-        //        //newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
-        //    }
-        //}
+        List<MergeItem> mergeItems = truck.TruckCargo;
+        int spritesCount = _resourceHolder.childCount;
+        for (int i = 0; i < mergeItems.Count; i++)
+        {
+            if (i < spritesCount)
+            {
+                Transform resourceTransform = _resourceHolder.GetChild(i);
+                resourceTransform.gameObject.SetActive(true);
+                Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
+                resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
+            }
+            else
+            {
+                GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
+                newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
+            }
+        }
     }
 
     public void DequeueItem(int index)
     {
-        _resourceHolder.GetComponent<TextMeshPro>().text = index.ToString();
-        //_resourceHolder.GetChild(index).gameObject.SetActive(false);
+        _resourceHolder.GetChild(index).gameObject.SetActive(false);
     }
 }
