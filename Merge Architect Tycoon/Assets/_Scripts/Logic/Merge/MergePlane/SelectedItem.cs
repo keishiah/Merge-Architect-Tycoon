@@ -32,6 +32,7 @@ public class SelectedItem : MonoBehaviour
     {
         selectedSlot = slot;
         transform.transform.position = (slot.transform.position);
+        gameObject.SetActive(true);
     }
 
     private IEnumerator _PulseAnimation()

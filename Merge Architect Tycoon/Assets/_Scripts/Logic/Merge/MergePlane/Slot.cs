@@ -23,8 +23,10 @@ public class Slot : MonoBehaviour, IDropHandler
     [SerializeField] private Image _itemImage;
     [SerializeField] private SlotState _slotState;
     [SerializeField] private MergeItem _item;
-    [SerializeField] private Image _stateImage;
+    [SerializeField] private GameObject _slotStatePrefab;
     private Slot[] _neighbours;
+
+    private const string SLOT_STATE_NAME = "SlotState(Clone)";
 
     public SlotState SlotState
     {
@@ -191,7 +193,8 @@ public class Slot : MonoBehaviour, IDropHandler
         
         if (!IsEmpty)
         {
-            if (SlotState == SlotState.Blocked)
+            if (SlotState == SlotState.Blocked
+                || SlotState == SlotState.NonTouchable)
                 return;
 
             _informationPanel.ConfigPanel(this);
@@ -219,22 +222,31 @@ public class Slot : MonoBehaviour, IDropHandler
         if (!isActiveAndEnabled)
             return;
 
-        _stateImage.enabled = false;
+        Transform slotState = transform.Find(SLOT_STATE_NAME);
+        Image slotStateImage = null;
+        if (slotState != null)
+            slotStateImage = slotState.GetComponent<Image>();
+
+
         switch (_slotState)
         {
             case SlotState.Blocked:
-                _stateImage.enabled = true;
-                StartCoroutine(LoadImage(AssetName.BlockedSlot, _stateImage));
+                if (slotStateImage == null)
+                    slotStateImage = Instantiate(_slotStatePrefab, transform).GetComponent<Image>();
+                StartCoroutine(LoadImage(AssetName.BlockedSlot, slotStateImage));
                 break;
             case SlotState.Draggable:
+                if (slotStateImage != null)
+                    Destroy(slotStateImage.gameObject);
                 break;
             case SlotState.Unloading:
                 Image backgroundImage = GetComponent<Image>();
                 StartCoroutine(LoadImage(AssetName.DeliveryZone, backgroundImage));
                 break;
             case SlotState.NonTouchable:
-                _stateImage.enabled = true;
-                StartCoroutine(LoadImage(AssetName.NonTouchableSlot, _stateImage));
+                if (slotStateImage == null)
+                    slotStateImage = Instantiate(_slotStatePrefab, transform).GetComponent<Image>();
+                StartCoroutine(LoadImage(AssetName.NonTouchableSlot, slotStateImage));
                 break;
         }
     }

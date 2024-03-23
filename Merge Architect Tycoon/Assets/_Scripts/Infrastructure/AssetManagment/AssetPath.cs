@@ -2,7 +2,7 @@
 {
     public const string StartGameScene = "Meta";
     public const string GameBootsTrapper = "Prefabs/Game Bootstraper";
-    public const string Items = "ScriptableObjects/Merge/Items/1april/";
+    public const string Items = "ScriptableObjects/Merge/Items/";
 }
 
 public static class AssetName

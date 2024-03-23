@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class InformationPanel : MonoBehaviour
@@ -18,8 +17,7 @@ public class InformationPanel : MonoBehaviour
 
     [Space, Header("Panels")]
     public GameObject informPanel;
-    public Button deleteButton;
-    public Button infoButton;
+    public GameObject deleteButton;
     public GameObject sellButton;
 
     public SelectedItem selectedItem;
@@ -46,8 +44,7 @@ public class InformationPanel : MonoBehaviour
         itemLvlText.text = $"(Lvl {mergeItem.itemLevel})";
         itemCostText.text = $"+{mergeItem.itemCost}";
         sellButton.SetActive(false);
-        deleteButton.interactable = false;
-        infoButton.interactable = false;
+        deleteButton.SetActive(false);
         selectedItem.SelectSlot(slotCurrent);
         if (slot.SlotState == SlotState.Draggable 
             || slot.SlotState == SlotState.Unloading)
@@ -61,8 +58,7 @@ public class InformationPanel : MonoBehaviour
                     }
                     else
                     {
-                        deleteButton.interactable = true;
-                        infoButton.interactable = true;
+                        deleteButton.SetActive(true);
                     }
                     break;
                 case ItemType.spawner:
@@ -92,9 +88,6 @@ public class InformationPanel : MonoBehaviour
             return;
 
         draggableItem.isClicked = false;
-        deleteButton.interactable = state;
-        infoButton.interactable = state;
-
     }
 
     public void SellItem()
