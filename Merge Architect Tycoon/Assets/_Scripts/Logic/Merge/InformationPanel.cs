@@ -45,7 +45,7 @@ public class InformationPanel : MonoBehaviour
         itemCostText.text = $"+{mergeItem.itemCost}";
         sellButton.SetActive(false);
         deleteButton.SetActive(false);
-        selectedItem.SelectSlot(slotCurrent);
+        selectedItem.SelectSlot(slotCurrent.transform);
         if (slot.SlotState == SlotState.Draggable 
             || slot.SlotState == SlotState.Unloading)
         {

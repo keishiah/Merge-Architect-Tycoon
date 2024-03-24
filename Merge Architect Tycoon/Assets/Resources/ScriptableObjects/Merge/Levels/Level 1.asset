@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   isNeedResetLevel: 0
-  columns: 6
-  rows: 7
+  columns: 5
+  rows: 6
   allDropSlots:
   - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
     slotState: 3
@@ -23,55 +23,55 @@ MonoBehaviour:
   - mergeItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
-    slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
-    slotState: 3
+    slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 1
+  - mergeItem: {fileID: 0}
+    slotState: 3
   - mergeItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
     slotState: 2
   - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
-    slotState: 2
-  - mergeItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
-    slotState: 2
+    slotState: 0
+  - mergeItem: {fileID: 0}
+    slotState: 1
   - mergeItem: {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
     slotState: 3
   - mergeItem: {fileID: 0}
-    slotState: 1
+    slotState: 3
   - mergeItem: {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
     slotState: 2
   - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
     slotState: 0
   - mergeItem: {fileID: 0}
-    slotState: 0
+    slotState: 1
   - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
-    slotState: 0
+    slotState: 3
   - mergeItem: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
-    slotState: 2
+    slotState: 3
   - mergeItem: {fileID: 0}
-    slotState: 1
+    slotState: 2
   - mergeItem: {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
-    slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
-    slotState: 2
-  - mergeItem: {fileID: 0}
     slotState: 0
-  - mergeItem: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
-    slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
-    slotState: 3
   - mergeItem: {fileID: 0}
     slotState: 1
-  - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
+  - mergeItem: {fileID: 0}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
+  - mergeItem: {fileID: 0}
+    slotState: 1
   - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
-    slotState: 0
+    slotState: 3
   - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
-    slotState: 0
+    slotState: 3
+  - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
+    slotState: 2
   - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
     slotState: 2
   - mergeItem: {fileID: 0}

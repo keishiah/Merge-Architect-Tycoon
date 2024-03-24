@@ -6,6 +6,7 @@ public class Progress
     public Coins Diamonds = new();
     public Buldings Buldings = new();
     public TutorialData Tutorial = new();
+    public TruckData Truck = new();
 
     public void AddCoins(int coins)
     {

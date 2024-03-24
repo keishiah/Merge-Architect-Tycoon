@@ -5,6 +5,7 @@ using Zenject;
 public class SceneContextInstaller : MonoInstaller
 {
     [SerializeField] private MergeLevel _mergeLevel;
+    [SerializeField] private TruckConfig _truckConfig;
     [SerializeField] private CreateBuildingPopup createBuildingPopup;
     [SerializeField] private CreateBuildingPopupScroller createBuildingPopupScroller;
     [SerializeField] private District district;
@@ -21,13 +22,14 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<QuestGiver>().AsSingle();
         Container.Bind<BuildingCreator>().AsSingle();
 
-
         Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();
         Container.Bind<CreateBuildingPopupScroller>().FromInstance(createBuildingPopupScroller).AsSingle();
         Container.Bind<District>().FromInstance(district).AsSingle();
         Container.Bind<QuestPopup>().FromInstance(questPopup).AsSingle();
 
         Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
+        Container.BindInstance<TruckConfig>(_truckConfig).AsSingle();
+
         Container.Bind<SlotsManager>().AsSingle();
         Container.Bind<MergeItemsManager>().AsSingle();
         Container.Bind<DraggableItem>().AsSingle();
