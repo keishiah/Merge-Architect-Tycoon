@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,7 @@ public class BuildingPlace : MonoBehaviour
 {
     public BuildingView buildingView;
     public string buildingName;
+    public Transform buildingImagePosition;
     [HideInInspector] public int districtId;
 
     public CancellationTokenSource ActivityToken { get; private set; }
@@ -42,9 +44,14 @@ public class BuildingPlace : MonoBehaviour
                 buildingView.SetViewBuildInProgress();
                 buildingView.ShowBuildInProgressSprite(_staticDataService.BuildInProgressSprite);
                 break;
-            case BuildingStateEnum.BuildingFinished:
+            case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
+                buildingView.ShowBuildSpriteOnCreate(_staticDataService.GetBuildingData(buildingName)
+                    .districtSprite);
+                break;
+            case BuildingStateEnum.ShowBuilding:
+                buildingView.SetViewBuildCreated();
+                buildingView.ShowBuildingSprite(_staticDataService.GetBuildingData(buildingName)
                     .districtSprite);
                 break;
         }
@@ -59,6 +66,7 @@ public class BuildingPlace : MonoBehaviour
     {
         buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
     }
+
 
     public void OnApplicationQuit()
     {

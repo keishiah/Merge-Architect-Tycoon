@@ -74,6 +74,6 @@ public class BuildingProvider : IInitializableOnSceneLoaded
 
     private void CreateBuildingOnStart(string buildingName)
     {
-        SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
+        SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.ShowBuilding);
     }
 }

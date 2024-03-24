@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildings:
   - buildingName: House
-    districtSprite: {fileID: -1239331003, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
+    districtSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
     popupSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
     timeToCreate: 10
     coinsCountToCreate: 50

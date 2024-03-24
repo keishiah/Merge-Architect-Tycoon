@@ -10,7 +10,8 @@ public class BuildingCreator
     private IPlayerProgressService _playerProgressService;
 
     [Inject]
-    void Construct(IStaticDataService staticDataService, IPlayerProgressService playerProgressService)
+    void Construct(IStaticDataService staticDataService, IPlayerProgressService playerProgressService,
+        EffectsProvider effectsProvider)
     {
         _staticDataService = staticDataService;
         _playerProgressService = playerProgressService;
@@ -50,7 +51,8 @@ public class BuildingCreator
 
     private void CreateBuilding(BuildingPlace buildingPlace)
     {
-        buildingPlace.SetBuildingState(BuildingStateEnum.BuildingFinished);
         _playerProgressService.Progress.RemoveBuildingInProgress(buildingPlace.buildingName);
+        // buildingPlace.SetBuildingState(BuildingStateEnum.Inactive);
+        buildingPlace.SetBuildingState(BuildingStateEnum.CreateBuilding);
     }
 }

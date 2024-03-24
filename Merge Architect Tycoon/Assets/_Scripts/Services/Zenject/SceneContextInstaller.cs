@@ -9,6 +9,7 @@ public class SceneContextInstaller : MonoInstaller
     [SerializeField] private CreateBuildingPopupScroller createBuildingPopupScroller;
     [SerializeField] private District district;
     [SerializeField] private QuestPopup questPopup;
+    [SerializeField] private EffectsProvider effectsProvider;
 
     public override void InstallBindings()
     {
@@ -24,6 +25,7 @@ public class SceneContextInstaller : MonoInstaller
 
         Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();
         Container.Bind<CreateBuildingPopupScroller>().FromInstance(createBuildingPopupScroller).AsSingle();
+        Container.Bind<EffectsProvider>().FromInstance(effectsProvider).AsSingle();
         Container.Bind<District>().FromInstance(district).AsSingle();
         Container.Bind<QuestPopup>().FromInstance(questPopup).AsSingle();
 
