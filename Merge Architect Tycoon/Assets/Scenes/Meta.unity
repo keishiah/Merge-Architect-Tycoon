@@ -13306,8 +13306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smokeEffect: {fileID: 7992247750888796071}
---- !u!4 &1278126376
-Transform:
+--- !u!224 &1278126376
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -13318,10 +13318,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 116727914805072727}
+  - {fileID: 7992247750888796072}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1279608448
 GameObject:
   m_ObjectHideFlags: 0
@@ -21897,24 +21902,6 @@ MonoBehaviour:
   - {fileID: 48274693}
   - {fileID: 477608826}
   claimButton: {fileID: 1300381671}
---- !u!4 &116727914805072727
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5499952694656985616}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.91, y: -8.2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8552010709426831080}
-  - {fileID: 6554223138997879898}
-  - {fileID: 146857759627855275}
-  m_Father: {fileID: 1278126376}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &146857759627855272
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -22002,7 +21989,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -26609,7 +26596,7 @@ GameObject:
   - component: {fileID: 146857759627855275}
   - component: {fileID: 146857759627855273}
   - component: {fileID: 146857759627855272}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26628,7 +26615,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 116727914805072727}
+  m_Father: {fileID: 7992247750888796072}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &216534803675691783
@@ -26646,7 +26633,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -31253,7 +31240,7 @@ GameObject:
   - component: {fileID: 8552010709426831080}
   - component: {fileID: 216534803675691783}
   - component: {fileID: 271891835512151165}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35083,7 +35070,7 @@ GameObject:
   - component: {fileID: 6554223138997879898}
   - component: {fileID: 7926975597502399480}
   - component: {fileID: 6764203713756708473}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35189,7 +35176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingView: {fileID: 4600403393987089460}
   buildingName: House
-  buildingImagePosition: {fileID: 6490510198800493153}
+  buildingImagePosition: {fileID: 0}
   districtId: 0
 --- !u!114 &2627047868486237954
 MonoBehaviour:
@@ -35261,7 +35248,7 @@ RectTransform:
   - {fileID: 7428006089603525350}
   - {fileID: 1690553156}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -36560,11 +36547,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 116727914805072727}
+  - component: {fileID: 7992247750888796072}
   - component: {fileID: 7992247750888796071}
   - component: {fileID: 6153288794755525026}
   - component: {fileID: 2447732580726608931}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CFXR2 Cartoon Fight (Loop)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36844,8 +36831,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -194.94, y: 486.82}
-  m_SizeDelta: {x: 260.27, y: 204.18}
+  m_AnchoredPosition: {x: -192.02, y: 590}
+  m_SizeDelta: {x: 384.04, y: 204.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &6490510199469160534
 RectTransform:
@@ -36880,7 +36867,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 116727914805072727}
+  m_Father: {fileID: 7992247750888796072}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
 --- !u!114 &6711627448336421304
@@ -37764,8 +37751,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -194.94, y: 486.82}
-  m_SizeDelta: {x: -922.85, y: -1715.8}
+  m_AnchoredPosition: {x: -198.63, y: 461.02}
+  m_SizeDelta: {x: -930.22, y: -1723.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7380616604205394880
 CanvasRenderer:
@@ -38861,14 +38848,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ebfc2c8cdc901144184c18acf2b876a9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -39070,7 +39057,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -43609,7 +43596,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -48133,6 +48120,29 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!224 &7992247750888796072
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499952694656985616}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8552010709426831080}
+  - {fileID: 6554223138997879898}
+  - {fileID: 146857759627855275}
+  m_Father: {fileID: 1278126376}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5.709057, y: 10.948841}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.51100475, y: 0.5957442}
 --- !u!114 &8108895895533161885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48486,7 +48496,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 116727914805072727}
+  m_Father: {fileID: 7992247750888796072}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
 --- !u!224 &8560551838290121656

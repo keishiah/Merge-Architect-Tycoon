@@ -28,6 +28,7 @@ public class BuildingView : MonoBehaviour
     public void SetViewBuildInProgress()
     {
         buildingStateImage.raycastTarget = false;
+        _effectsProvider.PlaySmokeEffect(buildingStateImage.transform.position);
         timerText.gameObject.SetActive(true);
     }
 
@@ -42,14 +43,14 @@ public class BuildingView : MonoBehaviour
         timerText.text = formattedTime;
     }
 
-    public async void ShowBuildSpriteOnCreate(Sprite spriteToShow)
+    public void ShowBuildSpriteOnCreate(Sprite spriteToShow)
     {
         buildInProcessImage.transform.parent.gameObject.SetActive(false);
-        await _effectsProvider.PlaySmokeEffect(buildInProcessImage.transform.position);
         buildingStateImage.transform.localScale = Vector3.zero;
+        _effectsProvider.StopSmokeEffect();
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
-        await ScaleSpriteWithEffect(buildingStateImage.transform);
+        ScaleSpriteWithEffect(buildingStateImage.transform);
     }
 
     public void ShowBuildingSprite(Sprite spriteToShow)
@@ -59,15 +60,14 @@ public class BuildingView : MonoBehaviour
         buildingStateImage.sprite = spriteToShow;
     }
 
-    private UniTask ScaleSpriteWithEffect(Transform imageTransform)
+    private void ScaleSpriteWithEffect(Transform imageTransform)
     {
-        return imageTransform.DOScale(1, 1)
+        imageTransform.DOScale(1, 1)
             .SetEase(Ease.OutBounce).AsyncWaitForCompletion().AsUniTask();
     }
 
     public void ShowBuildInProgressSprite(Sprite spriteToShow)
     {
         buildInProcessImage.transform.parent.gameObject.SetActive(true);
-        buildInProcessImage.sprite = spriteToShow;
     }
 }
