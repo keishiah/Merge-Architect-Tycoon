@@ -9,14 +9,16 @@
     private IGameStateMachine _gameStateMachine;
     private readonly ISceneLoader _sceneLoader;
     private readonly IPlayerProgressService _playerProgressService;
+    private readonly AudioPlayer _audioPlayer;
 
     public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
-        SceneContextProvider sceneContextProvider, UiPresenter uiPresenter)
+        SceneContextProvider sceneContextProvider, UiPresenter uiPresenter,AudioPlayer audioPlayer)
     {
         _sceneLoader = sceneLoader;
         _playerProgressService = playerProgressService;
         _sceneContextProvider = sceneContextProvider;
         _uiPresenter = uiPresenter;
+        _audioPlayer = audioPlayer;
     }
 
     public void Enter(string sceneName)
@@ -49,6 +51,8 @@
         _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
         _sceneContextProvider.Resolve<QuestsProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().InitializeGrid();
+        _audioPlayer.InitializeAudioPlayer();
+        _audioPlayer.PlayBackgroundMusic();
     }
 
     private void InitializePopupPresenters()

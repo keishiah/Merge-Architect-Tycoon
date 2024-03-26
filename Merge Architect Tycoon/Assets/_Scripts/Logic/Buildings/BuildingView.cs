@@ -1,12 +1,21 @@
-﻿using TMPro;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class BuildingView : MonoBehaviour
 {
     public Image buildingStateImage;
-    public Image buildInProcessImage;
     public TextMeshProUGUI timerText;
+    private EffectsPresenter _effectsPresenter;
+
+    [Inject]
+    void Construct(EffectsPresenter effectsPresenter)
+    {
+        _effectsPresenter = effectsPresenter;
+    }
 
     public void SetViewInactive()
     {
@@ -18,6 +27,7 @@ public class BuildingView : MonoBehaviour
     public void SetViewBuildInProgress()
     {
         buildingStateImage.raycastTarget = false;
+        _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
         timerText.gameObject.SetActive(true);
     }
 
@@ -32,16 +42,24 @@ public class BuildingView : MonoBehaviour
         timerText.text = formattedTime;
     }
 
-    public void ShowBuildSprite(Sprite spriteToShow)
+    public void ShowBuildSpriteOnCreate(Sprite spriteToShow)
     {
-        buildInProcessImage.transform.parent.gameObject.SetActive(false);
+        buildingStateImage.transform.localScale = Vector3.zero;
+        _effectsPresenter.StopSmokeEffect();
+        buildingStateImage.gameObject.SetActive(true);
+        buildingStateImage.sprite = spriteToShow;
+        ScaleSpriteWithEffect(buildingStateImage.transform);
+    }
+
+    public void ShowBuildingSprite(Sprite spriteToShow)
+    {
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
     }
 
-    public void ShowBuildInProgressSprite(Sprite spriteToShow)
+    private void ScaleSpriteWithEffect(Transform imageTransform)
     {
-        buildInProcessImage.transform.parent.gameObject.SetActive(true);
-        buildInProcessImage.sprite = spriteToShow;
+        imageTransform.DOScale(1, 1)
+            .SetEase(Ease.OutBounce).AsyncWaitForCompletion().AsUniTask();
     }
 }
