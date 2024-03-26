@@ -30,6 +30,11 @@ public class GameInstaller : MonoInstaller
 
         BindFirebaseLogger();
 
+        BindAudioPlayer();
+    }
+
+    private void BindAudioPlayer()
+    {
         Container.Bind<AudioPlayer>().FromComponentInNewPrefabResource("Prefabs/AudioPlayer").AsSingle();
     }
 
