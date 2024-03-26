@@ -19,7 +19,7 @@ public class CoinsCounterUi : UiViewBase, IInitializableOnSceneLoaded
         _questsProvider = questsProvider;
     }
 
-    private void Awake()
+    private void Start()
     {
         InitUiElement(_uiPresenter);
     }

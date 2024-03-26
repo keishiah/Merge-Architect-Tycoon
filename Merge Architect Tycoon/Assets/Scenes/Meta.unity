@@ -12617,6 +12617,7 @@ MonoBehaviour:
   district: {fileID: 553906267}
   questPopup: {fileID: 8262805332055049569}
   effectsProvider: {fileID: 1278126375}
+  musicPlayer: {fileID: 0}
 --- !u!114 &1153209361
 MonoBehaviour:
   m_ObjectHideFlags: 0

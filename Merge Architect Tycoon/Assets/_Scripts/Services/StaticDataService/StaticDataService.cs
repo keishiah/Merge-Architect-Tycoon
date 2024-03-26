@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Services.Audio;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class StaticDataService : IStaticDataService
 {
     private const string BuildingsDataPath = "BuildingData";
     private const string DistrictsDataPath = "DistrictsData";
+    private const string AudioDataPath = "AudioData";
 
     private const string QuestDataPath = "Quests";
 
@@ -27,6 +29,8 @@ public class StaticDataService : IStaticDataService
 
     private readonly IAssetProvider _assetProvider;
 
+    public AudioData AudioData { get; private set; }
+
     public StaticDataService(IAssetProvider assetProvider)
     {
         _assetProvider = assetProvider;
@@ -43,6 +47,7 @@ public class StaticDataService : IStaticDataService
         var questsData = await _assetProvider.LoadStaticDataByLabel<QuestBase>(QuestDataPath);
         Quests = questsData.ToList();
 
+        AudioData = await _assetProvider.Load<AudioData>(AudioDataPath);
         _buildInProgressSprite = buildingData.buildInProgressSprite;
     }
 
