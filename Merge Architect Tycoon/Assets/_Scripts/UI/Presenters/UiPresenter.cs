@@ -40,9 +40,4 @@ public class UiPresenter
                 element.GetComponent<IInitializableOnSceneLoaded>().OnSceneLoaded();
         }
     }
-
-    private T GetUiElementFromElementsList<T>() where T : UiViewBase
-    {
-        return (T)_uiElements.FirstOrDefault(element => element.GetType() == typeof(T));
-    }
 }

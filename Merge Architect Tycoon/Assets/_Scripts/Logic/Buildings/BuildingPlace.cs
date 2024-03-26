@@ -42,7 +42,6 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.BuildInProgress:
                 buildingView.SetViewBuildInProgress();
-                buildingView.ShowBuildInProgressSprite(_staticDataService.BuildInProgressSprite);
                 break;
             case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();

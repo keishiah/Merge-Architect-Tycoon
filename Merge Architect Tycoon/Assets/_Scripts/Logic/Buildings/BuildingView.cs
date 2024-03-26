@@ -8,14 +8,13 @@ using Zenject;
 public class BuildingView : MonoBehaviour
 {
     public Image buildingStateImage;
-    public Image buildInProcessImage;
     public TextMeshProUGUI timerText;
-    private EffectsProvider _effectsProvider;
+    private EffectsPresenter _effectsPresenter;
 
     [Inject]
-    void Construct(EffectsProvider effectsProvider)
+    void Construct(EffectsPresenter effectsPresenter)
     {
-        _effectsProvider = effectsProvider;
+        _effectsPresenter = effectsPresenter;
     }
 
     public void SetViewInactive()
@@ -28,7 +27,7 @@ public class BuildingView : MonoBehaviour
     public void SetViewBuildInProgress()
     {
         buildingStateImage.raycastTarget = false;
-        _effectsProvider.PlaySmokeEffect(buildingStateImage.transform.position);
+        _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
         timerText.gameObject.SetActive(true);
     }
 
@@ -45,9 +44,8 @@ public class BuildingView : MonoBehaviour
 
     public void ShowBuildSpriteOnCreate(Sprite spriteToShow)
     {
-        buildInProcessImage.transform.parent.gameObject.SetActive(false);
         buildingStateImage.transform.localScale = Vector3.zero;
-        _effectsProvider.StopSmokeEffect();
+        _effectsPresenter.StopSmokeEffect();
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
         ScaleSpriteWithEffect(buildingStateImage.transform);
@@ -55,7 +53,6 @@ public class BuildingView : MonoBehaviour
 
     public void ShowBuildingSprite(Sprite spriteToShow)
     {
-        buildInProcessImage.transform.parent.gameObject.SetActive(false);
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
     }
@@ -64,10 +61,5 @@ public class BuildingView : MonoBehaviour
     {
         imageTransform.DOScale(1, 1)
             .SetEase(Ease.OutBounce).AsyncWaitForCompletion().AsUniTask();
-    }
-
-    public void ShowBuildInProgressSprite(Sprite spriteToShow)
-    {
-        buildInProcessImage.transform.parent.gameObject.SetActive(true);
     }
 }

@@ -11,7 +11,7 @@ public class BuildingCreator
 
     [Inject]
     void Construct(IStaticDataService staticDataService, IPlayerProgressService playerProgressService,
-        EffectsProvider effectsProvider)
+        EffectsPresenter effectsPresenter)
     {
         _staticDataService = staticDataService;
         _playerProgressService = playerProgressService;
