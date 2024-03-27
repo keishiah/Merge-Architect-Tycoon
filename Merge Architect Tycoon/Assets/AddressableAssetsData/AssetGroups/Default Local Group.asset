@@ -54,6 +54,10 @@ MonoBehaviour:
     m_Address: TruckInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 27d98c0f03958a74db4e5e1a5f78d6a1
+    m_Address: AudioData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: aa8a7b4b1f9e5b04ea9fb98c6b137a01, type: 2}
   m_SchemaSet:

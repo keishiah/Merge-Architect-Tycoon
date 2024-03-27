@@ -12,6 +12,7 @@ public class BuildingPlace : MonoBehaviour
 
     private StaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
+    private BuildingCreator _buildingCreator;
     private PlayerProgress _playerProgressService;
 
     [Inject]
@@ -19,8 +20,8 @@ public class BuildingPlace : MonoBehaviour
         BuildingProvider buildingProvider, PlayerProgress playerProgressService)
     {
         _staticDataService = staticDataService;
+        _buildingCreator = buildingCreator;
         _buildingProvider = buildingProvider;
-        _playerProgressService = playerProgressService;
     }
 
     public void InitializeBuilding(int district)
@@ -39,11 +40,15 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.BuildInProgress:
                 buildingView.SetViewBuildInProgress();
-                //buildingView.ShowBuildInProgressSprite(_staticDataService.BuildInProgressSprite);
+                buildingView.createBuildingInMomentButton.onClick.AddListener(CreateInMoment);
                 break;
-            case BuildingStateEnum.BuildingFinished:
+            case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildSprite(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
+                buildingView.ShowBuildSpriteOnCreate(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
+                break;
+            case BuildingStateEnum.ShowBuilding:
+                buildingView.SetViewBuildCreated();
+                buildingView.ShowBuildingSprite(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
                 break;
         }
     }
@@ -58,9 +63,21 @@ public class BuildingPlace : MonoBehaviour
         buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
     }
 
+
     public void OnApplicationQuit()
     {
-        ActivityToken?.Cancel();
+        CanselToken();
         ActivityToken?.Dispose();
+    }
+
+    public void CanselToken()
+    {
+        ActivityToken?.Cancel();
+    }
+
+    private void CreateInMoment()
+    {
+        _buildingCreator.CreateInMoment(this,
+            _staticDataService.BuildingInfoDictionary[buildingName].diamondsCountToSkip);
     }
 }

@@ -17,5 +17,6 @@ public struct BuildingInfo
     public Sprite buildPopupSprite;
     public int timeToCreate;
     public int coinsCountToCreate;
+    public int diamondsCountToSkip;
     public List<MergeItem> itemsToCreate;
 }

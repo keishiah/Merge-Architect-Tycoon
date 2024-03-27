@@ -15,12 +15,12 @@ public class BuildingCreator
         _playerProgressService = playerProgressService;
     }
 
-    public async UniTask CreateBuildingInTimeAsync(BuildingPlace buildingPlace, string buildingName,
+    public async UniTask CreateBuildingInTimeAsync(BuildingPlace buildingPlace,
         CancellationTokenSource cancellationTokenSource, int creationTime = default)
     {
-        string buildingNameTempo = buildingName;
+        string buildingNameTempo = buildingPlace.buildingName;
         int timeToCreate = creationTime == default
-            ? _staticDataService.BuildingInfoDictionary[buildingName].timeToCreate
+            ? _staticDataService.BuildingInfoDictionary[buildingNameTempo].timeToCreate
             : creationTime;
         buildingPlace.UpdateTimerText(timeToCreate);
 
@@ -46,10 +46,20 @@ public class BuildingCreator
         }
     }
 
+    public void CreateInMoment(BuildingPlace buildingPlace, int diamondsCountToSkip)
+    {
+        if (!_playerProgressService.SpendCoins(diamondsCountToSkip))
+            return;
+        buildingPlace.CanselToken();
+        CreateBuilding(buildingPlace);
+    }
 
     private void CreateBuilding(BuildingPlace buildingPlace)
     {
-        buildingPlace.SetBuildingState(BuildingStateEnum.BuildingFinished);
+        buildingPlace.SetBuildingState(BuildingStateEnum.ShowBuilding);
         _playerProgressService.RemoveBuildingInProgress(buildingPlace.buildingName);
+        _playerProgressService.RemoveBuildingInProgress(buildingPlace.buildingName);
+        _playerProgressService.AddBuilding(buildingPlace.buildingName);
+        buildingPlace.SetBuildingState(BuildingStateEnum.CreateBuilding);
     }
 }

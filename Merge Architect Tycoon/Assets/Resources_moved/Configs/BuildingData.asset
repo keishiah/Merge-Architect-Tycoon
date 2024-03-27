@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildings:
   - buildingName: House
-    districtSprite: {fileID: -1239331003, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
-    popupSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
+    districtSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
+    popupSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
     timeToCreate: 10
     coinsCountToCreate: 50
+    diamondsCountToSkip: 111
     itemsToCreate:
     - {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
     - {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
@@ -26,6 +27,7 @@ MonoBehaviour:
     popupSprite: {fileID: -1014280895, guid: f907c1d3ee755264886bc71f8ec94030, type: 3}
     timeToCreate: 20
     coinsCountToCreate: 150
+    diamondsCountToSkip: 0
     itemsToCreate:
     - {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
   - buildingName: School
@@ -33,6 +35,7 @@ MonoBehaviour:
     popupSprite: {fileID: 209959192, guid: d489953bd832fcc43828bc695d65935b, type: 3}
     timeToCreate: 25
     coinsCountToCreate: 200
+    diamondsCountToSkip: 0
     itemsToCreate:
     - {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
   - buildingName: Skyscrapper
@@ -40,6 +43,7 @@ MonoBehaviour:
     popupSprite: {fileID: 1507925170, guid: 0ecd298a3748b93408993eca7fac8e76, type: 3}
     timeToCreate: 35
     coinsCountToCreate: 300
+    diamondsCountToSkip: 0
     itemsToCreate:
     - {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
@@ -49,6 +53,7 @@ MonoBehaviour:
     popupSprite: {fileID: 1373755802, guid: e24306b2b1da80546ad236f23334f1a6, type: 3}
     timeToCreate: 45
     coinsCountToCreate: 450
+    diamondsCountToSkip: 0
     itemsToCreate:
     - {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     - {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}

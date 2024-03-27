@@ -56,10 +56,8 @@ public class BuildingProvider : IInitializableOnSceneLoaded
             return;
 
         buildingPlace.StartCreatingBuilding();
-        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken,
+        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken,
             timeRest);
-        if (!buildingPlace.ActivityToken.IsCancellationRequested)
-            _playerProgressService.AddBuilding(buildingName);
     }
 
 
@@ -69,13 +67,11 @@ public class BuildingProvider : IInitializableOnSceneLoaded
             return;
 
         buildingPlace.StartCreatingBuilding();
-        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingName, buildingPlace.ActivityToken);
-        if (!buildingPlace.ActivityToken.IsCancellationRequested)
-            _playerProgressService.AddBuilding(buildingName);
+        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken);
     }
 
     private void CreateBuildingOnStart(string buildingName)
     {
-        SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.BuildingFinished);
+        SceneBuildingsDictionary[buildingName].SetBuildingState(BuildingStateEnum.ShowBuilding);
     }
 }

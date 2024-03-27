@@ -1,27 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public enum MenuButtonsEnum
 {
-    Quest, Merge, Build, District, Shop
+    Quest,
+    Merge,
+    Build,
+    District,
+    Shop
 }
 public class MenuButtonsWidgetController : MonoBehaviour
 {
     private int _selectedButtonIndex = -1;
 
-    [SerializeField]
-    private Button[] _menuButtons;
-    [SerializeField]
-    private WidgetView[] _widgets;
+    [SerializeField] private Button[] _menuButtons;
+    [SerializeField] private WidgetView[] _widgets;
+    [Inject] private AudioPlayer _audioPlayer;
 
     private const string AnimatorTriggerNormal = "Normal";
     private const string AnimatorTriggerSelected = "Selected";
 
     private void Awake()
     {
-        for(int i = 0; i < _menuButtons.Length; i++)
+        for (int i = 0; i < _menuButtons.Length; i++)
         {
-            int index = i;//allocate new "instance" EACH Step of loop
+            int index = i; //allocate new "instance" EACH Step of loop
             _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
         }
     }
@@ -41,6 +45,8 @@ public class MenuButtonsWidgetController : MonoBehaviour
 
     private void OnMenuButtonClick(int i)
     {
+        _audioPlayer.PlayUiSound(UiSoundTypes.ButtonClick);
+
         bool needToSelect = _selectedButtonIndex != i;
 
         CloseCurrentWidget();

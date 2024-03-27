@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Services.Audio;
 using Cysharp.Threading.Tasks;
 
 public class StaticDataService
@@ -8,6 +9,7 @@ public class StaticDataService
     private const string DistrictsInfoPath = "DistrictsInfo";
     private const string QuestLabel = "Quests";
     private const string TrucksInfoPath = "TrucksInfo";
+    private const string AudioDataPath = "AudioData";
 
     public Dictionary<string, BuildingInfo> BuildingInfoDictionary { get; private set; } = new();
     public Dictionary<int, DistrictInfo> DistrictsInfoDictionary { get; private set; } = new();
@@ -16,6 +18,8 @@ public class StaticDataService
     public List<BaseQuestInfo> Quests { get; private set; }
 
     private readonly IAssetProvider _assetProvider;
+
+    public AudioData AudioData { get; private set; }
 
     public StaticDataService(IAssetProvider assetProvider)
     {
@@ -34,5 +38,7 @@ public class StaticDataService
         Quests = questsData.ToList();
 
         //TruckInfo = await _assetProvider.Load<TruckInfo>(TrucksInfoPath);
+
+        AudioData = await _assetProvider.Load<AudioData>(AudioDataPath);
     }
 }

@@ -2,5 +2,6 @@
 {
     Inactive,
     BuildInProgress,
-    BuildingFinished
+    CreateBuilding,
+    ShowBuilding
 }

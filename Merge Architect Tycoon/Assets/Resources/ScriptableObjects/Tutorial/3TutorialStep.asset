@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 3TutorialStep
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
-  buttonName: MergeMenuButton
+  buttonName: QuestMenuButton
   text: Picky Ricky Tiny Pix!
