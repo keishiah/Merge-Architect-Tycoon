@@ -1,6 +1,4 @@
 ﻿using System.Threading;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -8,22 +6,21 @@ public class BuildingPlace : MonoBehaviour
 {
     public BuildingView buildingView;
     public string buildingName;
-    public Transform buildingImagePosition;
     [HideInInspector] public int districtId;
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
     private IStaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
-    private IPlayerProgressService _playerProgressService;
+    private BuildingCreator _buildingCreator;
 
     [Inject]
     void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
-        BuildingProvider buildingProvider, IPlayerProgressService playerProgressService)
+        BuildingProvider buildingProvider)
     {
         _staticDataService = staticDataService;
+        _buildingCreator = buildingCreator;
         _buildingProvider = buildingProvider;
-        _playerProgressService = playerProgressService;
     }
 
     public void InitializeBuilding(int district)
@@ -42,6 +39,7 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.BuildInProgress:
                 buildingView.SetViewBuildInProgress();
+                buildingView.createBuildingInMomentButton.onClick.AddListener(CreateInMoment);
                 break;
             case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();
@@ -69,7 +67,18 @@ public class BuildingPlace : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        ActivityToken?.Cancel();
+        CanselToken();
         ActivityToken?.Dispose();
+    }
+
+    public void CanselToken()
+    {
+        ActivityToken?.Cancel();
+    }
+
+    private void CreateInMoment()
+    {
+        _buildingCreator.CreateInMoment(this,
+            _staticDataService.GetBuildingData(buildingName).diamondsCountToSkip);
     }
 }

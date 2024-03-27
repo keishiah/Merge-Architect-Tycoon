@@ -9,6 +9,8 @@ public class BuildingView : MonoBehaviour
 {
     public Image buildingStateImage;
     public TextMeshProUGUI timerText;
+    public Button createBuildingInMomentButton;
+
     private EffectsPresenter _effectsPresenter;
 
     [Inject]
@@ -28,6 +30,7 @@ public class BuildingView : MonoBehaviour
     {
         buildingStateImage.raycastTarget = false;
         _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
+        createBuildingInMomentButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
     }
 
@@ -49,6 +52,8 @@ public class BuildingView : MonoBehaviour
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
         ScaleSpriteWithEffect(buildingStateImage.transform);
+        createBuildingInMomentButton.gameObject.SetActive(false);
+
     }
 
     public void ShowBuildingSprite(Sprite spriteToShow)

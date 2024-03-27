@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: 4TutorialToTruck
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 5d650f9126e1c4942992a4a36d860e2c, type: 2}
-  buttonName: BuyTrackButton
+  buttonName: Claim Reward Button1
