@@ -10,21 +10,23 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     private int _currentDistrictId;
     public int CurrentDistrictId => _currentDistrictId;
 
-    private readonly Dictionary<int, DistrictUi> _districts = new();
+    private readonly Dictionary<int, DistrictPopup> _districts = new();
     private readonly Dictionary<int, int> _districtsCreatedBuildings = new();
     private readonly Dictionary<int, int> _tempoDistrictsCount = new();
 
-    private IPlayerProgressService _playerProgressService;
+    private PlayerProgress _playerProgress;
+    private PlayerProgressService _playerProgressService;
     private BuildingProvider _buildingProvider;
     private CurrencyCreator _currencyCreator;
-    private IStaticDataService _staticDataService;
-    private SceneButtons _sceneButtons;
+    private StaticDataService _staticDataService;
+    private MenuButtonsWidgetController _sceneButtons;
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService, IStaticDataService staticDataService,
-        BuildingProvider buildingProvider,
-        CurrencyCreator currencyCreator, SceneButtons sceneButtons)
+    void Construct(PlayerProgress playerProgress, PlayerProgressService playerProgressService,
+        StaticDataService staticDataService, BuildingProvider buildingProvider,
+        CurrencyCreator currencyCreator, MenuButtonsWidgetController sceneButtons)
     {
+        _playerProgress = playerProgress;
         _playerProgressService = playerProgressService;
         _buildingProvider = buildingProvider;
         _currencyCreator = currencyCreator;
@@ -34,17 +36,17 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
-        _playerProgressService.Progress.Buldings.SubscribeToBuildingsChanges(AddCreatedBuildingToDistrictsDict);
+        _playerProgress.Buldings.SubscribeToBuildingsChanges(AddCreatedBuildingToDistrictsDict);
         StartEarningCurrencyOnInitialization();
     }
 
-    public void AddDistrict(DistrictUi districtUi) => _districts.Add(districtUi.districtId, districtUi);
+    public void AddDistrict(DistrictPopup districtUi) => _districts.Add(districtUi.districtId, districtUi);
 
     public void EarnCurrency(int districtId)
     {
-        var coinsForDistrict = _staticDataService.GetDistrictData(districtId).currencyCount;
+        var coinsForDistrict = _staticDataService.DistrictsInfoDictionary[districtId].currencyCount;
         var coinsToAdd = Mathf.RoundToInt(coinsForDistrict * .1f * _tempoDistrictsCount[districtId]);
-        _playerProgressService.Progress.AddCoins(coinsToAdd);
+        _playerProgressService.AddCoins(coinsToAdd);
         TurnOnCurrencyEarningCountdown(districtId);
     }
 
@@ -83,7 +85,7 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
 
     private void StartEarningCurrencyOnInitialization()
     {
-        var createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
+        var createdBuildings = _playerProgress.Buldings.CreatedBuildings;
 
         foreach (var building in createdBuildings)
         {

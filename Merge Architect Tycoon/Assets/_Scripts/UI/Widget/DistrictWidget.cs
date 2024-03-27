@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-public class DistrictWidget : Widget
+﻿public class DistrictWidget : WidgetView
 {
-    private DistrictUi _districtUi;
+    private DistrictPopup _districtUi;
 
     private void Awake()
     {
-        _districtUi = GetComponentInChildren<DistrictUi>();
+        _districtUi = GetComponentInChildren<DistrictPopup>();
     }
     public override void OnOpen()
     {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class ProgressItemInfo : MonoBehaviour
@@ -18,19 +19,20 @@ public class ProgressItemInfo : MonoBehaviour
 
     public void OpenProgressItemInfo(MergeItem m_mergeItem)
     {
-        string[] name = m_mergeItem.name.Split('_');
+        GetComponent<Image>().sprite = m_mergeItem.itemSprite;
+        //string[] name = m_mergeItem.name.Split('_');
 
-        mainText.text = name[0];
+        //mainText.text = name[0];
 
-        List<MergeItem> list = new List<MergeItem>();
-        list.AddRange(generalOopenedManager.mergeItems.FindAll(x => x.name.Split('_')[0] == name[0]));
+        //List<MergeItem> list = new List<MergeItem>();
+        //list.AddRange(generalOopenedManager.mergeItems.FindAll(x => x.name.Split('_')[0] == name[0]));
 
-        for (int i = 0; i < list.Count; i++)
-        {
-            ItemInfoSlot iis = Instantiate(infoSlotPrefab, gridPanel);
-            iis.SetItem(list[i], generalOopenedManager.GetItemOpenedInfo(list[i]));
-            itemDropSlotsList.Add(iis);
-        }
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    ItemInfoSlot iis = Instantiate(infoSlotPrefab, gridPanel);
+        //    iis.SetItem(list[i], generalOopenedManager.GetItemOpenedInfo(list[i]));
+        //    itemDropSlotsList.Add(iis);
+        //}
 
         gameObject.SetActive(true);
     }

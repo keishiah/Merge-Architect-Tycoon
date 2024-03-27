@@ -5,8 +5,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class SelectedItem : MonoBehaviour
 {
-    public Slot selectedSlot;
-
     public float approachSpeed = 0.02f;
     public float growthBound = 2f;
     public float shrinkBound = 0.5f;
@@ -28,10 +26,10 @@ public class SelectedItem : MonoBehaviour
         StopCoroutine(_PulseAnimation());
     }
 
-    public void SelectSlot(Slot slot)
+    public void SelectSlot(Transform slotTransform)
     {
-        selectedSlot = slot;
-        transform.transform.position = (slot.transform.position);
+        transform.position = slotTransform.position;
+        gameObject.SetActive(true);
     }
 
     private IEnumerator _PulseAnimation()

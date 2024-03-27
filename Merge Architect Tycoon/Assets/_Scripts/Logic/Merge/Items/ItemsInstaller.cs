@@ -14,12 +14,12 @@ public class ItemsInstaller : ScriptableObjectInstaller<ItemsInstaller>
     {
         // Bind the classes that are needed in the ScriptableObjects to this container
         // (I used a class TestToInject to test that injection worked)
-        // Container.Bind<SlotsManager>().AsSingle();      
+        // Container.Bind<SlotsManager>().AsSingle();
 
         foreach (var scriptableObject in testSOList)
         {
             // Use QueueForInject to inject all the dependences that ScriptableObjects require
-            Container.QueueForInject(scriptableObject);     
+            Container.QueueForInject(scriptableObject);
         }
 
     }

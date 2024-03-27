@@ -2,10 +2,13 @@
 
 public enum SaveKey
 {
-    Progress,
-    Inventory,
-    Tutorial,
+    Riches,
     Quests,
+    Buldings,
+    Inventory,
+    Truck,
+    NeedSkipTutorial,
+    Tutorial,
 }
 
 public static class SaveLoadService

@@ -75,7 +75,7 @@ public class ItemsCatalogue : MonoBehaviour
         // }
     }
 
-    public void AddItem(MergeItem m_item, Slot m_slot)
+    public void AddItem(MergeItem m_item, SlotRenderer m_slot)
     {
         mergeItemsCatalogue.Add(m_item);
         if (m_slot.SlotState != SlotState.Blocked)

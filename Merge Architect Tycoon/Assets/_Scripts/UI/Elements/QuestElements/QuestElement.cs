@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using _Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +9,12 @@ public class QuestElement : MonoBehaviour
 {
     public TextMeshProUGUI questText;
     public Image questiImage;
-    public List<RewardElement> rewardElements;
-    public List<QuestPerformanceItem> questPerformanceItems;
+    public List<QuestRewardRenderer> rewardElements;
+    public List<QuestObjectiveRenderer> questPerformanceItems;
     public Button claimButton;
 
     private QuestsPresenter _questsPresenter;
+    private BaseQuestInfo _questInfo;
 
     [Inject]
     void Construct(QuestsPresenter questsPresenter)
@@ -22,14 +22,14 @@ public class QuestElement : MonoBehaviour
         _questsPresenter = questsPresenter;
     }
 
-    public void RenderQuestHeader(QuestBase questBase)
+    public void RenderQuestHeader(BaseQuestInfo questBase)
     {
         gameObject.SetActive(true);
-        questText.text = questBase.questText;
-        questiImage.sprite = questBase.questSprite;
+        questText.text = questBase.Text;
+        questiImage.sprite = questBase.Sprite;
     }
 
-    public void RenderQuestRewardsAndItems(QuestBase questBase)
+    public void RenderQuestRewardsAndItems(BaseQuestInfo questBase)
     {
         HideRewardsAndItems();
 
@@ -39,10 +39,10 @@ public class QuestElement : MonoBehaviour
             ActivateReward(rewards, rewardsCount);
         }
 
-        ShowItemsPerformance(questBase);
+        ShowobjectivesPerformance(questBase);
     }
 
-    public void MarkQuestAsCompleted(QuestBase questBase, Action<QuestElement> claimButtonClicked)
+    public void MarkQuestAsCompleted(BaseQuestInfo questBase, Action<QuestElement> claimButtonClicked)
     {
         claimButton.onClick.RemoveAllListeners();
         claimButton.gameObject.SetActive(true);
@@ -58,34 +58,31 @@ public class QuestElement : MonoBehaviour
             rewards[rewardsCount].rewardSprite);
     }
 
-    private void ShowItemsPerformance(QuestBase questBase)
+    private void ShowobjectivesPerformance(BaseQuestInfo questBase)
     {
-        for (int i = 0; i < questBase.GetQuestItemsToCreate().Count; i++)
+        List<QuestObjective> objectives = questBase.GetQuestObjectives();
+        for (int i = 0; i < objectives.Count; i++)
         {
-            ShowItemPerformance(questBase.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
+            questPerformanceItems[i].gameObject.SetActive(true);
+            questPerformanceItems[i].RenderItemPerformance(objectives[i].itemText, objectives[i].itemImage, 
+                objectives[i].GoalCount, _questInfo.GetQuestObjectives()[i].GoalCount);
         }
     }
 
-    private void ShowItemPerformance(QuestItem item, QuestPerformanceItem questPerformanceItem)
+    private void ShowCompletedItemPerformance(BaseQuestInfo questBase)
     {
-        questPerformanceItem.gameObject.SetActive(true);
-        int currentItemCount = item.GetCurrentItemCount(_questsPresenter._playerProgressService);
-        questPerformanceItem.RenderItemPerformance(item.itemText, item.itemImage, currentItemCount, item.itemCount);
-    }
-
-    private void ShowCompletedItemPerformance(QuestBase questBase)
-    {
-        for (int i = 0; i < questBase.GetQuestItemsToCreate().Count; i++)
+        List<QuestObjective> objectives = questBase.GetQuestObjectives();
+        for (int i = 0; i < objectives.Count; i++)
         {
-            ShowCompletedItemPerformance(questBase.GetQuestItemsToCreate()[i], questPerformanceItems[i]);
+            ShowCompletedItemPerformance(objectives[i], questPerformanceItems[i]);
             questPerformanceItems[i].ItemCompleted();
         }
     }
 
-    private void ShowCompletedItemPerformance(QuestItem item, QuestPerformanceItem questPerformanceItem)
+    private void ShowCompletedItemPerformance(QuestObjective item, QuestObjectiveRenderer questPerformanceItem)
     {
         questPerformanceItem.gameObject.SetActive(true);
-        questPerformanceItem.RenderCompletedItemPerformance(item.itemText, item.itemImage, item.itemCount);
+        questPerformanceItem.RenderCompletedItemPerformance(item.itemText, item.itemImage, item.GoalCount);
     }
 
 

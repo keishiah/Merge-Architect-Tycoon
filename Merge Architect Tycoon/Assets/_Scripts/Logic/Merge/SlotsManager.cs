@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class SlotsManager
 {
-    [SerializeField] private List<Slot> slots = new List<Slot>();
+    [SerializeField] private List<SlotRenderer> slots = new List<SlotRenderer>();
 
     [SerializeField] private int emptySlotsCount = 0;
 
@@ -25,7 +25,7 @@ public class SlotsManager
         }
     }
 
-    public List<Slot> Slots
+    public List<SlotRenderer> Slots
     {
         get { return slots; }
     }
@@ -51,7 +51,7 @@ public class SlotsManager
         {
             int slot_x = i % slotsColumns;
             int slot_y = i / slotsColumns;
-            List<Slot> neighbours = new();
+            List<SlotRenderer> neighbours = new();
 
             if (slot_x > 0) //left
                 neighbours.Add(slots[i - 1]);
@@ -82,7 +82,7 @@ public class SlotsManager
     {
         SlotState slotState = isToUnloadSlot ? SlotState.Unloading : SlotState.Draggable;
 
-        List<Slot> m_slotsList = Slots.FindAll(slot => slot.IsEmpty && slot.SlotState == slotState);
+        List<SlotRenderer> m_slotsList = Slots.FindAll(slot => slot.IsEmpty && slot.SlotState == slotState);
 
         if (m_slotsList.Count == 0)
         {
@@ -90,25 +90,25 @@ public class SlotsManager
             return;
         }
 
-        Slot m_slot;
+        SlotRenderer m_slot;
         if (isToUnloadSlot)
             m_slot = m_slotsList[0];//For truck no random
         else
             m_slot = m_slotsList[Random.Range(0, m_slotsList.Count)];
 
         if (m_slot.IsEmpty)
-            m_slot.AddItem(mergeItem);
+            m_slot.AddItem(mergeItem, isNeedSave: isToUnloadSlot);
     }
 
     public void RemoveItem(MergeItem item)
     {
-        Slot slot = slots.Find(x => x.CurrentItem == item);
+        SlotRenderer slot = slots.Find(x => x.CurrentItem == item);
         slot.RemoveItem();
     }
 
     public void RemoveAllItems()
     {
-        foreach (Slot slot in slots)
+        foreach (SlotRenderer slot in slots)
         {
             slot.RemoveItem();
             slot.ChangeState(SlotState.Draggable);

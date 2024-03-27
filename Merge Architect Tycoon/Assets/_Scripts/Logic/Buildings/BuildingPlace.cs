@@ -4,19 +4,20 @@ using Zenject;
 
 public class BuildingPlace : MonoBehaviour
 {
-    public BuildingView buildingView;
+    public BuildingRenderer buildingView;
     public string buildingName;
     [HideInInspector] public int districtId;
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
-    private IStaticDataService _staticDataService;
+    private StaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
     private BuildingCreator _buildingCreator;
+    private PlayerProgress _playerProgressService;
 
     [Inject]
-    void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
-        BuildingProvider buildingProvider)
+    void Construct(StaticDataService staticDataService, BuildingCreator buildingCreator,
+        BuildingProvider buildingProvider, PlayerProgress playerProgressService)
     {
         _staticDataService = staticDataService;
         _buildingCreator = buildingCreator;
@@ -43,13 +44,11 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildSpriteOnCreate(_staticDataService.GetBuildingData(buildingName)
-                    .districtSprite);
+                buildingView.ShowBuildSpriteOnCreate(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
                 break;
             case BuildingStateEnum.ShowBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildingSprite(_staticDataService.GetBuildingData(buildingName)
-                    .districtSprite);
+                buildingView.ShowBuildingSprite(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
                 break;
         }
     }
@@ -79,6 +78,6 @@ public class BuildingPlace : MonoBehaviour
     private void CreateInMoment()
     {
         _buildingCreator.CreateInMoment(this,
-            _staticDataService.GetBuildingData(buildingName).diamondsCountToSkip);
+            _staticDataService.BuildingInfoDictionary[buildingName].diamondsCountToSkip);
     }
 }

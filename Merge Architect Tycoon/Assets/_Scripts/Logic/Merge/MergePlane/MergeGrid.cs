@@ -9,7 +9,7 @@ public class MergeGrid : MonoBehaviour
 {
     private const string EMPTY_ITEM_NAME = "Empty";
 
-    [SerializeField] private Slot slotPrefab;
+    [SerializeField] private SlotRenderer slotPrefab;
 
     [Inject] public SlotsManager slotsManager;
     [Inject] private DiContainer _container;
@@ -21,7 +21,7 @@ public class MergeGrid : MonoBehaviour
     //     InitializeGrid();
     // }
 
-    public void InitializeGrid()
+    public void OnSceneLoaded()
     {
         if (level.isNeedResetLevel)
         {
@@ -46,7 +46,7 @@ public class MergeGrid : MonoBehaviour
             int slot_x = i % slotsColumns;
             int slot_y = i / slotsColumns;
 
-            Slot initSlot = _container.InstantiatePrefabForComponent<Slot>(slotPrefab);
+            SlotRenderer initSlot = _container.InstantiatePrefabForComponent<SlotRenderer>(slotPrefab);
 
             initSlot.endMoveEvent += SaveInventory;
 
@@ -68,13 +68,13 @@ public class MergeGrid : MonoBehaviour
 
     public void SaveInventory()
     {
-        List<Inventory.Slot> itemList = new();
+        List<InventoryData.Slot> itemList = new();
 
         for (int i = 0; i < slotsManager.Slots.Count; i++)
         {
-            Slot slot = slotsManager.Slots[i];
+            SlotRenderer slot = slotsManager.Slots[i];
 
-            Inventory.Slot slotToSave = new()
+            InventoryData.Slot slotToSave = new()
             {
                 SlotState = slot.SlotState,
                 ItemID = slot.CurrentItem == null ? EMPTY_ITEM_NAME : slot.CurrentItem.name,
@@ -83,7 +83,7 @@ public class MergeGrid : MonoBehaviour
             itemList.Add(slotToSave);
         }
 
-        Inventory saveData = new()
+        InventoryData saveData = new()
         {
             GridX = level.columns,
             GridY = level.rows,
@@ -95,7 +95,7 @@ public class MergeGrid : MonoBehaviour
 
     public void LoadInventory()
     {
-        Inventory loadData = SaveLoadService.Load<Inventory>(SaveKey.Inventory);
+        InventoryData loadData = SaveLoadService.Load<InventoryData>(SaveKey.Inventory);
         if (loadData == null || loadData.items == null)
         {
             CreateNewLevel();

@@ -1,31 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Services.Audio;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
-public class StaticDataService : IStaticDataService
+public class StaticDataService
 {
-    private const string BuildingsDataPath = "BuildingData";
-    private const string DistrictsDataPath = "DistrictsData";
+    private const string BuildingsInfoPath = "BuildingInfo";
+    private const string DistrictsInfoPath = "DistrictsInfo";
+    private const string QuestLabel = "Quests";
+    private const string TrucksInfoPath = "TrucksInfo";
     private const string AudioDataPath = "AudioData";
 
-    private const string QuestDataPath = "Quests";
+    public Dictionary<string, BuildingInfo> BuildingInfoDictionary { get; private set; } = new();
+    public Dictionary<int, DistrictInfo> DistrictsInfoDictionary { get; private set; } = new();
+    public TruckInfo TruckInfo { get; private set; }
 
-    private Dictionary<string, BuildingInfo> _buildingData;
-    public Dictionary<string, BuildingInfo> BuildingData => _buildingData;
-
-    private Dictionary<int, DistrictInfo> _districtsData;
-
-    private Sprite _buildInProgressSprite;
-
-    public Sprite BuildInProgressSprite =>
-        _buildInProgressSprite
-            ? _buildInProgressSprite
-            : throw new Exception($"BuildInProgressSprite not initialized in StaticDataService");
-
-    public List<QuestBase> Quests { get; private set; }
+    public List<BaseQuestInfo> Quests { get; private set; }
 
     private readonly IAssetProvider _assetProvider;
 
@@ -38,26 +28,17 @@ public class StaticDataService : IStaticDataService
 
     public async UniTask Initialize()
     {
-        BuildingData buildingData = await _assetProvider.Load<BuildingData>(BuildingsDataPath);
-        _buildingData = buildingData.buildings.ToDictionary(x => x.buildingName, x => x);
+        BuildingsInfo buildingData = await _assetProvider.Load<BuildingsInfo>(BuildingsInfoPath);
+        BuildingInfoDictionary = buildingData.buildings.ToDictionary(x => x.buildingName, x => x);
 
-        DistrictsData districtsData = await _assetProvider.Load<DistrictsData>(DistrictsDataPath);
-        _districtsData = districtsData.districts.ToDictionary(x => x.districtId, x => x);
+        DistrictsInfo districtsData = await _assetProvider.Load<DistrictsInfo>(DistrictsInfoPath);
+        DistrictsInfoDictionary = districtsData.districts.ToDictionary(x => x.districtId, x => x);
 
-        var questsData = await _assetProvider.LoadStaticDataByLabel<QuestBase>(QuestDataPath);
+        var questsData = await _assetProvider.LoadStaticDataByLabel<BaseQuestInfo>(QuestLabel);
         Quests = questsData.ToList();
 
+        //TruckInfo = await _assetProvider.Load<TruckInfo>(TrucksInfoPath);
+
         AudioData = await _assetProvider.Load<AudioData>(AudioDataPath);
-        _buildInProgressSprite = buildingData.buildInProgressSprite;
     }
-
-    public BuildingInfo GetBuildingData(string buildingName) =>
-        _buildingData.TryGetValue(buildingName, out BuildingInfo resourceData)
-            ? resourceData
-            : throw new Exception($"_buildingData dictionary doesn't have {buildingName}");
-
-    public DistrictInfo GetDistrictData(int districtId) =>
-        _districtsData.TryGetValue(districtId, out DistrictInfo districtsData)
-            ? districtsData
-            : throw new Exception($"_districtsData dictionary doesn't have {districtId}");
 }

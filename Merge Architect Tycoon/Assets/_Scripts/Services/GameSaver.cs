@@ -3,10 +3,10 @@ using Zenject;
 
 public class GameSaver : MonoBehaviour
 {
-    [Inject] private Progress _progress;
+    [Inject] private PlayerProgressService _progress;
 
     void OnApplicationQuit()
     {
-        SaveLoadService.Save(SaveKey.Progress, _progress);
+        _progress.SaveAll();
     }
 }

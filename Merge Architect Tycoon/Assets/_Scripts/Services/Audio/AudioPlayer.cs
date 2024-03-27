@@ -6,10 +6,10 @@ public class AudioPlayer : MonoBehaviour
 {
     private AudioSource _backgroundMusicAudioSource;
     private AudioSource _uiMusicAudioSource;
-    private IStaticDataService _staticDataService;
+    private StaticDataService _staticDataService;
 
     [Inject]
-    void Construct(IStaticDataService staticDataService)
+    void Construct(StaticDataService staticDataService)
     {
         _staticDataService = staticDataService;
     }

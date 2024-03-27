@@ -16,7 +16,7 @@ public class FirebaseLogger
             if (dependencyStatus == DependencyStatus.Available)
             {
                 _app = FirebaseApp.DefaultInstance;
-                Debug.Log("Firebase has initialized successfully.");
+                //Debug.Log("Firebase has initialized successfully.");
             }
             else
             {

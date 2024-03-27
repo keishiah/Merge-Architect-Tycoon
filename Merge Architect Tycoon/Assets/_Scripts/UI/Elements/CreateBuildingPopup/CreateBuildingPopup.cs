@@ -7,12 +7,12 @@ public class CreateBuildingPopup : MonoBehaviour
     public Button goToMergePanelButton;
     public Button createBuildingButton;
 
-    private SceneButtons _sceneButtons;
+    private MenuButtonsWidgetController _sceneButtons;
     private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
     [Inject]
     void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter,
-        SceneButtons _sceneButtons)
+        MenuButtonsWidgetController _sceneButtons)
     {
         this._sceneButtons = _sceneButtons;
         _createBuildingPopupPresenter = createBuildingPopupPresenter;
@@ -44,6 +44,6 @@ public class CreateBuildingPopup : MonoBehaviour
 
     private void GoToMergePanel()
     {
-        _sceneButtons.OnMenuButtonClick(SceneButtonsEnum.Merge);
+        _sceneButtons.OnMenuButtonClick(MenuButtonsEnum.Merge);
     }
 }

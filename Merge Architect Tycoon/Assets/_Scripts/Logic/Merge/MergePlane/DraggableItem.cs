@@ -4,10 +4,10 @@ using UnityEngine.UI;
 using Zenject;
 
 public class DraggableItem : MonoBehaviour,
-    IBeginDragHandler, IDragHandler, IEndDragHandler //, IPointerClickHandler, IPointerExitHandler
+    IBeginDragHandler, IDragHandler, IEndDragHandler , IPointerDownHandler//, IPointerExitHandler
 {
     public Image image;
-    public Slot slot;
+    public SlotRenderer slot;
     public bool isClicked = false;
 
     [Inject(Id = "TransformForInhandItem")]
@@ -15,7 +15,13 @@ public class DraggableItem : MonoBehaviour,
     [Inject]
     private Canvas _canvas;
     private Vector3 startMousePosition;
-    
+
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        startMousePosition = Input.mousePosition / _canvas.scaleFactor - _playerHand.localPosition;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (slot.SlotState != SlotState.Draggable
@@ -27,7 +33,7 @@ public class DraggableItem : MonoBehaviour,
 
         isClicked = false;
         if (slot == null)
-            slot = GetComponentInParent<Slot>();
+            slot = GetComponentInParent<SlotRenderer>();
 
         if (slot.IsEmpty)
             return;
@@ -37,7 +43,6 @@ public class DraggableItem : MonoBehaviour,
         transform.SetParent(_playerHand);
 
         image.raycastTarget = false;
-        startMousePosition = Input.mousePosition / _canvas.scaleFactor - transform.localPosition;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -49,7 +54,7 @@ public class DraggableItem : MonoBehaviour,
             && slot.SlotState != SlotState.Unloading)
             return;
 
-        transform.localPosition = Input.mousePosition / _canvas.scaleFactor - startMousePosition;
+        _playerHand.localPosition = Input.mousePosition / _canvas.scaleFactor - startMousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -60,7 +65,9 @@ public class DraggableItem : MonoBehaviour,
             transform.SetParent(slot.transform);
         }
 
+        _playerHand.localPosition = Vector3.zero;
         GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         image.raycastTarget = true;
     }
+
 }

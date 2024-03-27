@@ -7,9 +7,9 @@ using Zenject;
 public class TruckPurchaseOffer : MonoBehaviour
 {
     [Inject]
-    private TruckPresenter _truckPresenter;
+    private TruckRender _truckPresenter;
     [Inject]
-    private IPlayerProgressService _playerProgressService;
+    private PlayerProgressService _playerProgressService;
     [Inject]
     private InformationPanel _informationPanel;
     [SerializeField]
@@ -41,8 +41,6 @@ public class TruckPurchaseOffer : MonoBehaviour
             throw new Exception("The truck sprite is not filled in!");
         if (_truck.TruckCargo.Count == 0)
             throw new Exception("The truck cargo is not filled in!");
-        if (_truck.TruckCargo[0].itemSprite == null)
-            throw new Exception("The truck cargo sprite is not filled in!");
 
         InitializeImages();
         InitializeText();
@@ -63,10 +61,10 @@ public class TruckPurchaseOffer : MonoBehaviour
 
     private void AddNewTruck()
     {
-        if (_playerProgressService.Progress.Coins.SpendCoins(_cost))
+        if (_playerProgressService.SpendCoins(_cost))
         {
             _truckPresenter.AddNewTruck(_truck.Clone());
-            _playerProgressService.Quests.AddTruckItem();
+            //_playerProgressService.Quests.AddTruckItem();
         }
 
         _truckMenu.SetActive(false);

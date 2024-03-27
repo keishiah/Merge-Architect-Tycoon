@@ -5,7 +5,7 @@ public class TruckUnloading : TruckBehaviour
     public SlotsManager _slotsManager;
     public Truck _truck;
     public Image[] _resources;
-    public TruckPresenter _truckPresenter;
+    public TruckRender _truckPresenter;
 
     public override void Update()
     {

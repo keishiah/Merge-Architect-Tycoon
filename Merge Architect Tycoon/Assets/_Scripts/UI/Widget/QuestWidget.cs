@@ -1,7 +1,6 @@
-using UnityEngine;
 using Zenject;
 
-public class QuestWidget : Widget
+public class QuestWidget : WidgetView
 {
     [Inject] private QuestsPresenter _questsPresenter;
 

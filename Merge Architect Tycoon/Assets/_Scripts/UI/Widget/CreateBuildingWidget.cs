@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
-public class CreateBuildingWidget : Widget
+public class CreateBuildingWidget : WidgetView
 {
     [Inject] private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
