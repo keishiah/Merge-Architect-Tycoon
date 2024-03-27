@@ -37,7 +37,7 @@ public class BuildingProvider : IInitializableOnSceneLoaded
 
     private void LoadCreatedBuildings()
     {
-        BuldingsData buildings = _playerProgress.Buldings;
+        BuildingsData buildings = _playerProgress.Buldings;
         var buildingsInProgressDict =
             _playerProgress.Buldings.buildingsInProgress.BuildingsInProgressDict;
 

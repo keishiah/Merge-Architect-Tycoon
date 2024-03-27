@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using static RichPanel;
 
 public class SceneContextInstaller : MonoInstaller
 {
@@ -9,6 +9,7 @@ public class SceneContextInstaller : MonoInstaller
     [SerializeField] private CreateBuildingPopupScroller createBuildingPopupScroller;
     [SerializeField] private District district;
     [SerializeField] private QuestPopup questPopup;
+    [SerializeField] private RichPanel richPanel;
 
     public override void InstallBindings()
     {
@@ -20,11 +21,13 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<QuestsProvider>().AsSingle();
         Container.Bind<QuestGiver>().AsSingle();
         Container.Bind<BuildingCreator>().AsSingle();
+        Container.Bind<RichPresenter>().AsSingle();
 
         Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();
         Container.Bind<CreateBuildingPopupScroller>().FromInstance(createBuildingPopupScroller).AsSingle();
         Container.Bind<District>().FromInstance(district).AsSingle();
         Container.Bind<QuestPopup>().FromInstance(questPopup).AsSingle();
+        Container.Bind<RichPanel>().FromInstance(richPanel).AsSingle();
 
         Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
 

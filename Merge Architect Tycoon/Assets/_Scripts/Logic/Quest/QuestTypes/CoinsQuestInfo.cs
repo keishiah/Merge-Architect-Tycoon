@@ -35,11 +35,17 @@ public class CoinsQuestInfo : BaseQuestInfo
         _rewards.Add(coinsReward);
     }
 
-
     public override bool IsCompleted(QuestData questData)
     {
         if(questData is CoinsQuestData data)
-            return data.currentCoinsCount >= coinsQuestObjective.GoalCount;
+        {
+            bool isComplete = data.currentCoinsCount >= coinsQuestObjective.GoalCount;
+            if (isComplete)
+            {
+                data.OnComplete?.Invoke(questData);
+                return true;
+            }
+        }
 
         return false;
     }
@@ -54,6 +60,6 @@ public class CoinsQuestData : QuestData
 
     public override void Subscribe(PlayerProgress playerProgress)
     {
-        
+       
     }
 }

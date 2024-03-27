@@ -6,7 +6,7 @@ public class StaticDataService
 {
     private const string BuildingsInfoPath = "BuildingInfo";
     private const string DistrictsInfoPath = "DistrictsInfo";
-    private const string QuestInfoPath = "QuestsInfo";
+    private const string QuestLabel = "Quests";
     private const string TrucksInfoPath = "TrucksInfo";
 
     public Dictionary<string, BuildingInfo> BuildingInfoDictionary { get; private set; } = new();
@@ -30,9 +30,9 @@ public class StaticDataService
         DistrictsInfo districtsData = await _assetProvider.Load<DistrictsInfo>(DistrictsInfoPath);
         DistrictsInfoDictionary = districtsData.districts.ToDictionary(x => x.districtId, x => x);
 
-        var questsData = await _assetProvider.LoadStaticDataByLabel<BaseQuestInfo>(QuestInfoPath);
+        var questsData = await _assetProvider.LoadStaticDataByLabel<BaseQuestInfo>(QuestLabel);
         Quests = questsData.ToList();
 
-        TruckInfo = await _assetProvider.Load<TruckInfo>(TrucksInfoPath);
+        //TruckInfo = await _assetProvider.Load<TruckInfo>(TrucksInfoPath);
     }
 }

@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine;
 
 [Serializable]
-public class BuldingsData : ISerializationCallbackReceiver, IDisposable
+public class BuildingsData : ISerializationCallbackReceiver, IDisposable
 {
     [SerializeField] private List<string> savedCreatedBuildings = new();
     

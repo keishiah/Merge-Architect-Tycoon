@@ -34,6 +34,11 @@ public class LoadPlayerProgressState : IState
         if (_progressService.Riches == null)
             _progressService.Riches = new PlayerRiches();
 
+        _progressService.Buldings =
+            SaveLoadService.Load<BuildingsData>(SaveKey.Buldings);
+        if (_progressService.Buldings == null)
+            _progressService.Buldings = new BuildingsData();
+
         _progressService.Quests = 
             SaveLoadService.Load<QuestsData>(SaveKey.Quests);
         if (_progressService.Quests == null)

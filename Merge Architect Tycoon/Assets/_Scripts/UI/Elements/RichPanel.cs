@@ -1,48 +1,14 @@
 ﻿using TMPro;
 using UnityEngine;
-using UniRx;
-using Zenject;
+using UnityEngine.UI;
 
 public class RichPanel : MonoBehaviour
 {
     public TextMeshProUGUI moneyCountText;
-    public TextMeshProUGUI diamandCountText;
+    public TextMeshProUGUI diamondCountText;
 
-    [Inject] private PlayerProgressService _progressService;
-    [Inject] private PlayerProgress _progress;
-
-    private void Awake()
-    {
-        _progress.Riches.Coins.Subscribe(i => RenderMoneyCount(i));
-        _progress.Riches.Diamonds.Subscribe(i => RenderDiamandCount(i));
-        
-        RenderMoneyCount(_progress.Riches.Coins.Value);
-        RenderDiamandCount(_progress.Riches.Diamonds.Value);
-    }
-
-    public void AddCoins()
-    {
-// #if UNITY_EDITOR
-        if (Application.version.StartsWith("d"))
-        {
-            _progressService.AddCoins(100500);
-        }
-        // else
-        // {
-// #endif
-        //Shop.TryToBuy();
-// #if UNITY_EDITOR
-//             }
-// #endif
-    }
-
-    public void AddDiamonds()
-    {
-        if (Application.version.StartsWith("d"))
-        {
-            _progressService.AddDiamonds(100500);
-        }
-    }
+    public Button PlusCoinButton;
+    public Button PlusDiamondButton;
 
     public void RenderMoneyCount(int newValue)
     {
@@ -51,6 +17,6 @@ public class RichPanel : MonoBehaviour
 
     public void RenderDiamandCount(int newValue)
     {
-        diamandCountText.text = newValue.ToString();
-    }
+        diamondCountText.text = newValue.ToString();
+    } 
 }

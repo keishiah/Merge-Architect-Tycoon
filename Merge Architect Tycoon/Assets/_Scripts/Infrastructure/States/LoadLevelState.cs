@@ -51,6 +51,7 @@
     {
         var createBuildingPopupPresenter = _sceneContextProvider.Resolve<CreateBuildingPopupPresenter>();
         createBuildingPopupPresenter.InitializePresenter();
+        _sceneContextProvider.Resolve<RichPresenter>().OnSceneLoaded();
         _sceneContextProvider.Resolve<BuildingProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
         //_sceneContextProvider.Resolve<TruckPresenter>().OnSceneLoaded();
