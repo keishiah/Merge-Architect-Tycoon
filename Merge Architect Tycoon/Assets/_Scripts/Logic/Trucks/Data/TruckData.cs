@@ -1,9 +1,10 @@
 ﻿using System;
+using UniRx;
 
 [Serializable]
 public class TruckData
 {
-    public int Level;
-    public int BoostCount;
-    public int ResourcesCount;
+    public ReactiveProperty<int> Level = new();
+    public ReactiveProperty<int> BoostCount = new();
+    public ReactiveProperty<int> ResourcesCount = new();
 }

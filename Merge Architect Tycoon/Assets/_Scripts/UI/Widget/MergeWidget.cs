@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using Zenject;
 
-public class MergeWidget : Widget
+public class MergeWidget : WidgetView
 {
     [SerializeField] private GameObject _trucks;
     [SerializeField] private GameObject _infoPanel;

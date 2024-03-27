@@ -45,7 +45,7 @@ public class GameInstaller : MonoInstaller
     {
         IEnumerable<IProgressReader> readers = new IProgressReader[]
         {
-            new TutorialReader()
+            new TutorialReader(),
         };
 
         Container.BindInstance(readers).AsSingle();
@@ -57,8 +57,7 @@ public class GameInstaller : MonoInstaller
 
     private void BindUiPresenter()
     {
-        Container.BindInterfacesAndSelfTo<UiPresenter>().AsSingle();
-        // Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
+        Container.BindInterfacesAndSelfTo<CreateBuildingPopupPresenter>().AsSingle();
     }
 
     private void BindStateFactory()
@@ -83,8 +82,8 @@ public class GameInstaller : MonoInstaller
 
     private void BindPlayerProgressService()
     {
-        Container.Bind<Progress>().AsSingle();
-        Container.BindInterfacesAndSelfTo<PlayerProgressService>().AsSingle();
+        Container.Bind<PlayerProgressService>().AsSingle();
+        Container.Bind<PlayerProgress>().AsSingle();
     }
 
     private void BindSceneLoader() =>

@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 831e854846e2306438cab01bb3827e95
   m_SerializeEntries:
   - m_GUID: d434a3d39d820f04bb2e993be2b6becb
-    m_Address: BuildingData
+    m_Address: BuildingInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 327821d7a87a0154aa2ec14d5090aa78
@@ -34,20 +34,24 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 991890a890c7eab4ca64c9309dbf4b9d
-    m_Address: DistrictsData
+    m_Address: DistrictsInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 3fd0f84aeedafbb488b2a1d76c1b8b6a
-    m_Address: Quests
+    m_Address: QuestsInfo
     m_ReadOnly: 0
     m_SerializedLabels:
     - Quests
   - m_GUID: 3e6df2d148313d747a398a5af4c67a98
-    m_Address: Tutorial
+    m_Address: TutorialInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 32efdbadd3a41354fa5fae40ae9fc932
     m_Address: BlockedSlot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3d1d7a1d876351e4f88b8c344a89db59
+    m_Address: TruckInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

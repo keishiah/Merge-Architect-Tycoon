@@ -1,4 +1,4 @@
 ﻿public interface IProgressReader
 {
-    void LoadProgress(Progress progress);
+    void LoadProgress(PlayerProgress progress);
 }

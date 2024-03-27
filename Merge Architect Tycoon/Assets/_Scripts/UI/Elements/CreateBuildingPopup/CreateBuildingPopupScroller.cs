@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class CreateBuildingPopupScroller : UiViewBase
+public class CreateBuildingPopupScroller : MonoBehaviour
 {
     public List<CreateBuildingUiElement> createBuildingElements;
     public ScrollRect scrollRect;
@@ -17,11 +16,6 @@ public class CreateBuildingPopupScroller : UiViewBase
     void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter)
     {
         _createBuildingPopupPresenter = createBuildingPopupPresenter;
-    }
-
-    public override void InitUiElement(UiPresenter uiPresenter)
-    {
-        gameObject.SetActive(false);
     }
 
     public void InitializeScroller()

@@ -3,10 +3,10 @@
 public class BootstrapState : IState
 {
     private IGameStateMachine _gameStateMachine;
-    private readonly IStaticDataService _staticDataService;
+    private readonly StaticDataService _staticDataService;
     private FirebaseLogger _firebaseLogger;
 
-    public BootstrapState(IStaticDataService staticDataService, FirebaseLogger firebaseLogger)
+    public BootstrapState(StaticDataService staticDataService, FirebaseLogger firebaseLogger)
     {
         _staticDataService = staticDataService;
         _firebaseLogger = firebaseLogger;

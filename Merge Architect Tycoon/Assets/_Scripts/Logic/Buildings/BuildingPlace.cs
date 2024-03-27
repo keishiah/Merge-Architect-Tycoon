@@ -1,23 +1,22 @@
 ﻿using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 public class BuildingPlace : MonoBehaviour
 {
-    public BuildingView buildingView;
+    public BuildingRenderer buildingView;
     public string buildingName;
     [HideInInspector] public int districtId;
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
-    private IStaticDataService _staticDataService;
+    private StaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
-    private IPlayerProgressService _playerProgressService;
+    private PlayerProgress _playerProgressService;
 
     [Inject]
-    void Construct(IStaticDataService staticDataService, BuildingCreator buildingCreator,
-        BuildingProvider buildingProvider, IPlayerProgressService playerProgressService)
+    void Construct(StaticDataService staticDataService, BuildingCreator buildingCreator,
+        BuildingProvider buildingProvider, PlayerProgress playerProgressService)
     {
         _staticDataService = staticDataService;
         _buildingProvider = buildingProvider;
@@ -40,12 +39,11 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.BuildInProgress:
                 buildingView.SetViewBuildInProgress();
-                buildingView.ShowBuildInProgressSprite(_staticDataService.BuildInProgressSprite);
+                //buildingView.ShowBuildInProgressSprite(_staticDataService.BuildInProgressSprite);
                 break;
             case BuildingStateEnum.BuildingFinished:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildSprite(_staticDataService.GetBuildingData(buildingName)
-                    .districtSprite);
+                buildingView.ShowBuildSprite(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
                 break;
         }
     }

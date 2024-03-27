@@ -769,10 +769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 969752160}
-  performanceItemImage: {fileID: 415296071}
-  checkMarkImage: {fileID: 1643138733}
-  performanceItemText: {fileID: 162146101}
 --- !u!114 &48274694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,10 +1323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 1444730229}
-  performanceItemImage: {fileID: 1363260561}
-  checkMarkImage: {fileID: 1539661981}
-  performanceItemText: {fileID: 1531928617}
 --- !u!114 &113484844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1994,7 +1986,7 @@ RectTransform:
   - {fileID: 239077653}
   - {fileID: 1029248137}
   - {fileID: 273732128}
-  m_Father: {fileID: 221844647}
+  m_Father: {fileID: 717760978}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2116,71 +2108,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193406066}
   m_CullTransparentMesh: 1
---- !u!1 &221844646
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 221844647}
-  - component: {fileID: 221844648}
-  m_Layer: 0
-  m_Name: Currency
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &221844647
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221844646}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 184556557}
-  - {fileID: 333752942}
-  m_Father: {fileID: 717760978}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: -300, y: -150}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &221844648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221844646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 200
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &235228439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2120,7 @@ GameObject:
   - component: {fileID: 235228442}
   - component: {fileID: 235228441}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: BoostBuyButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3492,7 +3419,7 @@ RectTransform:
   - {fileID: 1765603924}
   - {fileID: 566373430}
   - {fileID: 1699583246}
-  m_Father: {fileID: 221844647}
+  m_Father: {fileID: 717760978}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3804,9 +3731,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540, y: -785}
   m_SizeDelta: {x: 1080, y: 335.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &373893016
@@ -3860,8 +3787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 1064787746}
-  rewardImage1: {fileID: 94896963}
 --- !u!1 &378246216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,9 +3935,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 920, y: -220}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &406285482
@@ -4573,10 +4498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 1994183055}
-  performanceItemImage: {fileID: 627984468}
-  checkMarkImage: {fileID: 531991913}
-  performanceItemText: {fileID: 749606342}
 --- !u!114 &435001798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4676,8 +4597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 461562929}
-  rewardImage1: {fileID: 1473950797}
 --- !u!1 &458503729
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,10 +5023,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 500, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468374838
 MonoBehaviour:
@@ -5246,10 +5165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 575233907}
-  performanceItemImage: {fileID: 970490963}
-  checkMarkImage: {fileID: 1318037164}
-  performanceItemText: {fileID: 1973359794}
 --- !u!114 &477608827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5651,7 +5566,7 @@ GameObject:
   - component: {fileID: 508781231}
   - component: {fileID: 508781232}
   m_Layer: 5
-  m_Name: BoostTrucksCount
+  m_Name: BoostMergeCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5993,8 +5908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 1750842863}
-  rewardImage1: {fileID: 293452449}
 --- !u!1 &531991911
 GameObject:
   m_ObjectHideFlags: 0
@@ -7128,7 +7041,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.53333336, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7484,9 +7397,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -220}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!95 &640249790
@@ -8183,8 +8096,9 @@ GameObject:
   m_Component:
   - component: {fileID: 717760978}
   - component: {fileID: 717760979}
+  - component: {fileID: 717760980}
   m_Layer: 0
-  m_Name: CoinsUi
+  m_Name: RichPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8202,7 +8116,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 221844647}
+  - {fileID: 184556557}
+  - {fileID: 333752942}
   m_Father: {fileID: 2804922808577282225}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8225,6 +8140,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyCountText: {fileID: 566373431}
   diamandCountText: {fileID: 1029248138}
+--- !u!114 &717760980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717760977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 100
+    m_Right: 100
+    m_Top: 100
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 200
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &726462688
 GameObject:
   m_ObjectHideFlags: 0
@@ -8607,7 +8548,7 @@ GameObject:
   - component: {fileID: 757624900}
   - component: {fileID: 757624899}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: BoostInMergeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8765,10 +8706,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &765332312
 MonoBehaviour:
@@ -9411,8 +9352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 1025100814}
-  rewardImage1: {fileID: 825680926}
 --- !u!1 &878206493
 GameObject:
   m_ObjectHideFlags: 0
@@ -10862,8 +10801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 1786608837}
-  rewardImage1: {fileID: 565134883}
 --- !u!1 &984197243
 GameObject:
   m_ObjectHideFlags: 0
@@ -10900,9 +10837,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540, y: -418.23}
   m_SizeDelta: {x: 950, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &984197245
@@ -11127,9 +11064,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 160, y: -220}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1022528738
@@ -11671,7 +11608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1044626591}
   m_Layer: 5
-  m_Name: TruckZone
+  m_Name: TruckPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11736,7 +11673,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.53333336, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12475,10 +12412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 0}
-  performanceItemImage: {fileID: 834429541}
-  checkMarkImage: {fileID: 1213845421}
-  performanceItemText: {fileID: 1580769084}
 --- !u!1 &1082013222
 GameObject:
   m_ObjectHideFlags: 0
@@ -12717,10 +12650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 2082273462}
-  performanceItemImage: {fileID: 28218039}
-  checkMarkImage: {fileID: 307912718}
-  performanceItemText: {fileID: 975751341}
 --- !u!1 &1097764333
 GameObject:
   m_ObjectHideFlags: 0
@@ -13158,7 +13087,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mergeLevel: {fileID: 11400000, guid: 3d5557e8dc965db48b1ab92f59e87f23, type: 2}
-  _truckConfig: {fileID: 11400000, guid: 55a660181261ab1489566457cea78e37, type: 2}
   createBuildingPopup: {fileID: 301110683}
   createBuildingPopupScroller: {fileID: 1619757256}
   district: {fileID: 553906267}
@@ -13569,10 +13497,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 900, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190561979
 MonoBehaviour:
@@ -15795,8 +15723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 406366897}
-  rewardImage1: {fileID: 489912537}
 --- !u!1 &1499778494
 GameObject:
   m_ObjectHideFlags: 0
@@ -16280,8 +16206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 712125282}
-  rewardImage1: {fileID: 1406858831}
 --- !u!1 &1521145746
 GameObject:
   m_ObjectHideFlags: 0
@@ -16317,9 +16241,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540, y: -1121.77}
   m_SizeDelta: {x: 749.3, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521145748
@@ -16894,8 +16818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 798673276}
-  rewardImage1: {fileID: 804575193}
 --- !u!1 &1554893440
 GameObject:
   m_ObjectHideFlags: 0
@@ -17693,10 +17615,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608508246
 MonoBehaviour:
@@ -18262,8 +18184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 1282843966}
-  rewardImage1: {fileID: 1057366649}
 --- !u!1 &1666355926
 GameObject:
   m_ObjectHideFlags: 0
@@ -19961,7 +19881,7 @@ GameObject:
   - component: {fileID: 1803201233}
   - component: {fileID: 1803201234}
   m_Layer: 5
-  m_Name: BoostTrucksCount
+  m_Name: BoostTrucksSettingsCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20599,9 +20519,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540, y: -1375.59}
   m_SizeDelta: {x: 1080, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1890234795
@@ -20615,10 +20535,9 @@ GameObject:
   - component: {fileID: 1890234796}
   - component: {fileID: 1890234798}
   - component: {fileID: 1890234799}
-  - component: {fileID: 1890234801}
   - component: {fileID: 1890234800}
   m_Layer: 5
-  m_Name: TrucksMenu
+  m_Name: TrucksPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20713,26 +20632,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1890234801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1890234795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 432fc10e60ec15f499e91195eb24acb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _updateButton: {fileID: 2129406165}
-  _boostButton: {fileID: 984197245}
-  _resourceButtons:
-  - {fileID: 765332312}
-  - {fileID: 1608508246}
-  - {fileID: 468374838}
-  - {fileID: 2077770415}
-  - {fileID: 1190561979}
 --- !u!1 &1902725211
 GameObject:
   m_ObjectHideFlags: 0
@@ -21470,10 +21369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 1675437277}
-  performanceItemImage: {fileID: 378246218}
-  checkMarkImage: {fileID: 1318481526}
-  performanceItemText: {fileID: 1591119508}
 --- !u!114 &1955441745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21847,10 +21742,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 1065992576}
-  performanceItemImage: {fileID: 193406068}
-  checkMarkImage: {fileID: 409037922}
-  performanceItemText: {fileID: 1747334154}
 --- !u!114 &1976000367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21912,7 +21803,7 @@ GameObject:
   - component: {fileID: 1976713029}
   - component: {fileID: 1976713028}
   m_Layer: 5
-  m_Name: BuyTrackButton
+  m_Name: SettingsTrackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22433,7 +22324,7 @@ GameObject:
   - component: {fileID: 2038513800}
   - component: {fileID: 2038513799}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: BoostInSettingsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22894,10 +22785,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 700, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2077770415
 MonoBehaviour:
@@ -23171,10 +23062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 274991331}
-  performanceItemImage: {fileID: 1595347026}
-  checkMarkImage: {fileID: 1196507412}
-  performanceItemText: {fileID: 908262073}
 --- !u!114 &2091265128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23467,9 +23354,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540, y: -139.41003}
   m_SizeDelta: {x: 950, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2129406165
@@ -23904,10 +23791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf7c137417148f1bd378b9cb55f3119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 1566959672018029154}
-  performanceItemImage: {fileID: 1566959672666195903}
-  checkMarkImage: {fileID: 1566959672846384643}
-  performanceItemText: {fileID: 1566959673582271727}
 --- !u!114 &1566959672473919097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24542,8 +24425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ded1653fbc4be3b3735572ac8fd7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText: {fileID: 1566959674044400959}
-  rewardImage1: {fileID: 1566959673817135736}
 --- !u!224 &1566959673582271724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26882,13 +26763,14 @@ GameObject:
   - component: {fileID: 1657809055713711208}
   - component: {fileID: 1657809055713711210}
   - component: {fileID: 1657809055713711211}
+  - component: {fileID: 1657809055713711212}
   m_Layer: 5
   m_Name: MergePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1657809055713711210
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26912,6 +26794,37 @@ MonoBehaviour:
   _trucks: {fileID: 1890234795}
   _infoPanel: {fileID: 4488734218993416882}
   _menuPanel: {fileID: 7428006089603525345}
+--- !u!114 &1657809055713711212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657809055713711209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432fc10e60ec15f499e91195eb24acb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuTruckButton: {fileID: 1976713028}
+  _rebuyTruckSprites:
+  - {fileID: -1239293845, guid: 18013fbac8bed1f43a628d87c5622055, type: 3}
+  - {fileID: 21300000, guid: 8231a674363da4c42a49d84ef9ae9ceb, type: 3}
+  _rebuyTruckImage: {fileID: 360436310}
+  _updateTruckButton: {fileID: 2129406165}
+  _boostTruckButton: {fileID: 984197245}
+  _boostText:
+  - {fileID: 757624899}
+  - {fileID: 2038513799}
+  _boostSlider:
+  - {fileID: 508781232}
+  - {fileID: 1803201234}
+  _resourceButtons:
+  - {fileID: 765332312}
+  - {fileID: 1608508246}
+  - {fileID: 468374838}
+  - {fileID: 2077770415}
+  - {fileID: 1190561979}
 --- !u!114 &2062693396323919516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29735,10 +29648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6ab0f44b9e428483b54a493472af21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  districtId: 0
-  coinsSlider: {fileID: 7380616605615607389}
-  earnCurrencyButton: {fileID: 7380616604205394882}
-  closeMapButton: {fileID: 7380616605000757936}
 --- !u!224 &7380616605213231282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30071,9 +29980,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 730, y: -220}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!95 &7428006088836866486
@@ -30111,12 +30020,12 @@ GameObject:
   - component: {fileID: 7428006089603525352}
   - component: {fileID: 7428006089603525354}
   m_Layer: 0
-  m_Name: SceneMenuButtons
+  m_Name: SceneMenuPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &7428006089603525348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30301,9 +30210,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -220}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &7428006089892922709

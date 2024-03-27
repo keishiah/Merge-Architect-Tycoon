@@ -2,62 +2,67 @@ using System.Collections.Generic;
 using Zenject;
 
 
-public class QuestsProvider : IInitializableOnSceneLoaded
+public class QuestsProvider
 {
-    private readonly List<QuestBase> _activeQuests = new();
-    public List<QuestBase> GetActiveQuestsList => _activeQuests;
-
-    private readonly List<QuestBase> _questsWaitingForClaim = new();
-    public List<QuestBase> GetQuestsWaitingForClaim => _questsWaitingForClaim;
-
-    IPlayerProgressService _playerProgressService;
+    private PlayerProgress _playerProgress;
+    private PlayerProgressService _playerProgressService;
 
     [Inject]
-    void Construct(IPlayerProgressService playerProgressService)
+    void Construct(PlayerProgress playerProgress, PlayerProgressService playerProgressService)
     {
+        _playerProgress = playerProgress;
         _playerProgressService = playerProgressService;
     }
 
-    public void OnSceneLoaded()
+    public void ActivateQuest(QuestData questBase)
     {
-        _playerProgressService.Quests.SubscribeToQuestValueChanged(CheckAllQuestsCompleted);
-    }
-
-    public void ActivateQuest(QuestBase questBase)
-    {
-        _activeQuests.Add(questBase);
-        _playerProgressService.Quests.AddActiveQuest(questBase.questId);
-        questBase.InitializeRewardsAndItems();
-    }
-
-    public void AddQuestWaitingForClaim(QuestBase questBase)
-    {
-        questBase.InitializeRewardsAndItems();
-        _questsWaitingForClaim.Add(questBase);
-    }
-
-    public void AddActiveQuest(QuestBase questBase)
-    {
-        _activeQuests.Add(questBase);
-        questBase.InitializeRewardsAndItems();
+        questBase.Subscribe(_playerProgress);
+        questBase.OnComplete += CheckQuestsCompleted;
     }
 
     public void CheckAllQuestsCompleted()
     {
-        List<QuestBase> completedQuests = _activeQuests.FindAll(quest => quest.IsCompleted(_playerProgressService));
-        foreach (QuestBase completedQuest in completedQuests)
+        List<QuestData> completedQuests = _playerProgress.Quests.ActiveQuests.FindAll(quest => quest.QuestInfo.IsCompleted(quest));
+        foreach (QuestData completedQuest in completedQuests)
         {
-            _questsWaitingForClaim.Add(completedQuest);
-            _activeQuests.Remove(completedQuest);
-            _playerProgressService.Quests.AddQuestWaitingForClaim(completedQuest.questId);
+            CheckQuestsCompleted(completedQuest);
         }
     }
 
-    public void ClaimQuestReward(QuestBase questBase)
+    public void CheckQuestsCompleted(QuestData completedQuest)
+    {
+        _playerProgress.Quests.ActiveQuests.Remove(completedQuest);
+        _playerProgress.Quests.QuestsWaitingForClaim.Add(completedQuest.QuestInfo.ID);
+    }
+
+    public void ClaimQuestReward(BaseQuestInfo questBase)
     {
         questBase.GiveReward(_playerProgressService);
-        _playerProgressService.Quests.AddCompletedQuest(questBase.questId);
+        _playerProgress.Quests.CompletedQuests.Add(questBase.ID);
+        _playerProgress.Quests.QuestsWaitingForClaim.Remove(questBase.ID);
+    }
 
-        _questsWaitingForClaim.Remove(questBase);
+    public void AddActiveQuest(QuestData quest)
+    {
+        _playerProgress.Quests.ActiveQuests.Add(quest);
+        SaveLoadService.Save(SaveKey.Quests, _playerProgress.Quests);
+    }
+
+    public void AddQuestWaitingForClaim(QuestData quest)
+    {
+        string ID = quest.QuestInfo.ID;
+        _playerProgress.Quests.QuestsWaitingForClaim.Add(ID);
+        if (_playerProgress.Quests.ActiveQuests.Contains(quest))
+            _playerProgress.Quests.ActiveQuests.Remove(quest);
+        SaveLoadService.Save(SaveKey.Quests, _playerProgress.Quests);
+    }
+
+    public void AddCompletedQuest(QuestData quest)
+    {
+        string ID = quest.QuestInfo.ID;
+        _playerProgress.Quests.CompletedQuests.Add(ID);
+        if (_playerProgress.Quests.QuestsWaitingForClaim.Contains(ID))
+            _playerProgress.Quests.QuestsWaitingForClaim.Remove(ID);
+        SaveLoadService.Save(SaveKey.Quests, _playerProgress.Quests);
     }
 }

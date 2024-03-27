@@ -7,7 +7,7 @@ public class DraggableItem : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler , IPointerDownHandler//, IPointerExitHandler
 {
     public Image image;
-    public Slot slot;
+    public SlotRenderer slot;
     public bool isClicked = false;
 
     [Inject(Id = "TransformForInhandItem")]
@@ -33,7 +33,7 @@ public class DraggableItem : MonoBehaviour,
 
         isClicked = false;
         if (slot == null)
-            slot = GetComponentInParent<Slot>();
+            slot = GetComponentInParent<SlotRenderer>();
 
         if (slot.IsEmpty)
             return;

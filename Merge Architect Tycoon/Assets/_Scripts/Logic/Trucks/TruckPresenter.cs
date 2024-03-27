@@ -1,159 +1,74 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-[RequireComponent(typeof(Image))]
 public class TruckPresenter : MonoBehaviour
 {
+    [SerializeField]
+    private Button _menuTruckButton;
+    [SerializeField]
+    private Sprite[] _rebuyTruckSprites;
+    [SerializeField]
+    private Image _rebuyTruckImage;
+    [SerializeField]
+    private Button _updateTruckButton;
+    [SerializeField]
+    private Button _boostTruckButton;
+    [SerializeField]
+    private TextMeshProUGUI[] _boostText;
+    [SerializeField]
+    private Slider[] _boostSlider;
+    [SerializeField]
+    private Button[] _resourceButtons;
 
-    [SerializeField] public float _startXPosition;
-    [SerializeField] public float _stopXPosition;
-    [SerializeField] public float _endXPosition;
-    [SerializeField] public float _speed;
+    [Inject] private StaticDataService _staticDataService;
+    [Inject] private PlayerProgress _playerProgress;
 
-    [Inject] private SlotsManager _slotsManager;
-    [SerializeField] private GameObject _resourcePrefab;
-    [SerializeField] private Transform _resourceHolder;
-    private Queue<Truck> _trucks = new();
-    private TruckBehaviour _truckBehaviour;
-    public bool _isNeedToUnload { get; private set; }
+    private int _boostLimit;
 
-    private void Awake()
+    private void Start()
     {
-        _slotsManager.OnNewEmptySlotAppears += UpdateOn;
+        BoostInit();
     }
 
-    private void OnEnable()
+    private void BoostInit()
     {
-        if (_trucks.Count > 0 && _truckBehaviour == null)
-            ToNextTruck();
+        _boostLimit = _staticDataService.TruckInfo.BoostLimit;
     }
 
-    private void NextStage()
+    private void RefreshBoostText(int count)
     {
-        switch (_truckBehaviour)
+        foreach (var item in _boostText)
         {
-            case TruckToUnload behaviour:
-                NextStageUnloadind();
-                break;
-            case TruckUnloading behaviour:
-                NextStageGoAway();
-                break;
-            case TruckGoAway behaviour:
-                _trucks.Dequeue();
-                ToNextTruck();
-                if (_truckBehaviour == null)
-                    return;
-                break;
-            default:
-                throw new NotImplementedException("Unknown type of truck behavior!");
+            item.text = $"{count}/{_boostLimit}";
         }
     }
-    private void ToNextTruck()
+
+    private void UpdateButtonRefresh(int level)
     {
-        if (_trucks.Count == 0)
+        if(level >= _staticDataService.TruckInfo.TruckUpdates.Length)
         {
-            UpdateOff();
-            _truckBehaviour = null;
+            _updateTruckButton.GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
+            _updateTruckButton.interactable = false;
             return;
         }
 
-        PaintTheTruck();
-
-        _truckBehaviour = new TruckToUnload()
-        {
-            _rectTtransform = GetComponent<RectTransform>(),
-            _startXPosition = _startXPosition,
-            _endXPosition = _stopXPosition,
-            _speed = _speed,
-        };
-        _truckBehaviour.Enter();
-    }
-    private void NextStageUnloadind()
-    {
-        _truckBehaviour = new TruckUnloading()
-        {
-            _slotsManager = _slotsManager,
-            _truck = _trucks.Peek(),
-            _truckPresenter = this,
-        };
-        _truckBehaviour.Enter();
-    }
-    private void NextStageGoAway()
-    {
-        _truckBehaviour = new TruckGoAway()
-        {
-            _rectTtransform = GetComponent<RectTransform>(),
-            _startXPosition = _stopXPosition,
-            _endXPosition = _endXPosition,
-            _speed = _speed,
-        };
-        _truckBehaviour.Enter();
+        var nextUpdate = _staticDataService.TruckInfo.TruckUpdates[level];
+        _updateTruckButton.GetComponent<TextMeshProUGUI>().text = $"+{nextUpdate.TruskUpdate} \n {nextUpdate.SoftCost}$";
     }
 
-    public void AddNewTruck(Truck truck)
+    private void BoostButtonRefresh()
     {
-        _trucks.Enqueue(truck);
-        UpdateOn();
+        throw new NotImplementedException();
     }
-    private void Update()
+
+    private void ResourcesRefresh(int level)
     {
-        if (_truckBehaviour == null)
+        for(int i = 0; i < _resourceButtons.Length; i++)
         {
-            UpdateOff();
-            return;
+            _resourceButtons[0].gameObject.SetActive(i<level);
         }
-
-        _truckBehaviour.Update();
-        Refresh();
-
-        if (_truckBehaviour.IsComplete)
-            NextStage();
-    }
-
-    private void Refresh()
-    {
-        _isNeedToUnload = false;
-    }
-    public void ReadyToUnload() => _isNeedToUnload = true;
-    public void UpdateOn()
-    {
-        _isNeedToUnload = false;
-        enabled = true;
-    }
-    public void UpdateOff()
-    {
-        enabled = false;
-    }
-    private void PaintTheTruck()
-    {
-        Truck truck = _trucks.Peek();
-        GetComponent<Image>().sprite = truck.SpriteImage;
-        List<MergeItem> mergeItems = truck.TruckCargo;
-        int spritesCount = _resourceHolder.childCount;
-        for (int i = 0; i < mergeItems.Count; i++)
-        {
-            if (i < spritesCount)
-            {
-                Transform resourceTransform = _resourceHolder.GetChild(i);
-                resourceTransform.gameObject.SetActive(true);
-                Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
-                resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
-            }
-            else
-            {
-                GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
-                newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
-            }
-        }
-    }
-
-    public void DequeueItem(int index)
-    {
-        _resourceHolder.GetChild(index).gameObject.SetActive(false);
     }
 }

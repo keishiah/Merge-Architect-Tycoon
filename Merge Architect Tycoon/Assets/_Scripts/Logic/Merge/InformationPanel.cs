@@ -5,7 +5,7 @@ using Zenject;
 public class InformationPanel : MonoBehaviour
 {
     [Inject]
-    private IPlayerProgressService _player;
+    private PlayerProgressService _player;
 
     [Header("Texts")]
     public TMP_Text itemNameText;
@@ -13,7 +13,7 @@ public class InformationPanel : MonoBehaviour
     public TMP_Text itemLvlText;
     public TMP_Text itemCostText;
 
-    public Slot slotCurrent;
+    public SlotRenderer slotCurrent;
 
     [Space, Header("Panels")]
     public GameObject informPanel;
@@ -24,7 +24,7 @@ public class InformationPanel : MonoBehaviour
 
     public ProgressItemInfo _progressItemInfo;
 
-    public void ConfigPanel(Slot slot)
+    public void ConfigPanel(SlotRenderer slot)
     {
         if (slotCurrent
             && slotCurrent != slot
@@ -96,7 +96,7 @@ public class InformationPanel : MonoBehaviour
             return;
 
         int coins = (int)slotCurrent.CurrentItem.itemCost;
-        _player.Progress.AddCoins(coins);
+        _player.AddCoins(coins);
         Debug.Log($"Item sell to: {coins}");
 
         DeleteItem();

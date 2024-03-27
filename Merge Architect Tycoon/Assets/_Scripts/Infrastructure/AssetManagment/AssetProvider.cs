@@ -5,8 +5,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class AssetProvider: IAssetProvider
 {
-    private readonly Dictionary<string, AsyncOperationHandle> _assetRequests =
-        new();
+    private readonly Dictionary<string, AsyncOperationHandle> _assetRequests = new();
 
     public async UniTask InitializeAsync()
     {

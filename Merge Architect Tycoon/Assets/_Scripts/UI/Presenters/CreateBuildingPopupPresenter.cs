@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 public class CreateBuildingPopupPresenter
@@ -13,22 +12,25 @@ public class CreateBuildingPopupPresenter
     private List<BuildingInfo> _buildingInfo = new();
 
     private ItemsCatalogue _itemsCatalogue;
-    private IStaticDataService _staticDataService;
+    private StaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
-    private IPlayerProgressService _playerProgressService;
+    private PlayerProgress _playerProgress;
+    private PlayerProgressService _playerProgressService;
 
     private List<BuildingInfo> _sortedBuildings = new();
     private List<BuildingInfo> _readyToBuild = new();
     private List<BuildingInfo> _otherBuildings = new();
 
     [Inject]
-    void Construct(IStaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
-        BuildingProvider buildingProvider, IPlayerProgressService playerProgressService,
+    void Construct(StaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
+        BuildingProvider buildingProvider, 
+        PlayerProgress playerProgress, PlayerProgressService playerProgressService,
         CreateBuildingPopup createBuildingPopup, CreateBuildingPopupScroller createBuildingPopupScroller)
     {
         _staticDataService = staticDataService;
         _itemsCatalogue = itemsCatalogue;
         _buildingProvider = buildingProvider;
+        _playerProgress = playerProgress;
         _playerProgressService = playerProgressService;
         _createBuildingPopup = createBuildingPopup;
         _createBuildingPopupScroller = createBuildingPopupScroller;
@@ -38,12 +40,12 @@ public class CreateBuildingPopupPresenter
     {
         _createBuildingPopup.InitializePopup();
         _createBuildingPopupScroller.InitializeScroller();
-        _buildingInfo = _staticDataService.BuildingData.Values.ToList();
+        _buildingInfo = _staticDataService.BuildingInfoDictionary.Values.ToList();
 
         SetBuildingElements();
         SortBuildingElements();
 
-        ReactiveCollection<string> createdBuildings = _playerProgressService.Progress.Buldings.CreatedBuildings;
+        ReactiveCollection<string> createdBuildings = _playerProgress.Buldings.CreatedBuildings;
         foreach (string building in createdBuildings)
         {
             _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
@@ -72,7 +74,7 @@ public class CreateBuildingPopupPresenter
     {
         TurnOfPreviousOutline(selectedBuilding);
         _selectedBuildingElement = selectedBuilding;
-        if (HasEnoughResources(_staticDataService.BuildingData[selectedBuilding.buildingName]))
+        if (HasEnoughResources(_staticDataService.BuildingInfoDictionary[selectedBuilding.buildingName]))
         {
             _createBuildingPopup.OpenCreateBuildingButton();
         }
@@ -84,7 +86,7 @@ public class CreateBuildingPopupPresenter
 
     public void CreateBuildingButtonClicked()
     {
-        BuildingInfo buildingData = _staticDataService.BuildingData[_selectedBuildingElement.buildingName];
+        BuildingInfo buildingData = _staticDataService.BuildingInfoDictionary[_selectedBuildingElement.buildingName];
         CreateBuilding(buildingData.itemsToCreate,
             buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
     }
@@ -121,7 +123,7 @@ public class CreateBuildingPopupPresenter
         for (int x = 0; x < _buildingInfo.Count; x++)
         {
             _elements[x].SetBuildingName(_buildingInfo[x].buildingName);
-            _elements[x].SetBuildingImage(_buildingInfo[x].popupSprite);
+            _elements[x].SetBuildingImage(_buildingInfo[x].buildPopupSprite);
             _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
             _elements[x].SetResourcesImages(_buildingInfo[x].itemsToCreate);
             _elements[x].SetPresenter(this);
@@ -130,7 +132,7 @@ public class CreateBuildingPopupPresenter
 
     private void CreateBuilding(List<MergeItem> items, int coinsToCreate, string buildingName)
     {
-        if (_playerProgressService.Progress.Coins.SpendCoins(coinsToCreate))
+        if (_playerProgressService.SpendCoins(coinsToCreate))
         {
             _itemsCatalogue.TakeItems(items);
             _buildingProvider.CreateBuildingInTimeAsync(buildingName);
@@ -141,7 +143,7 @@ public class CreateBuildingPopupPresenter
 
     private bool HasEnoughResources(BuildingInfo building)
     {
-        return building.coinsCountToCreate <= _playerProgressService.Progress.Coins.CurrentCoinsCount &&
+        return building.coinsCountToCreate <= _playerProgress.Riches.Coins.Value &&
                _itemsCatalogue.CheckHasItems(building.itemsToCreate);
     }
 

@@ -3,6 +3,6 @@
 [Serializable]
 public class TruckResources
 {
-    public MergeItem TruskUpdate;
+    public LootBox Resource;
     public int SoftCost;
 }

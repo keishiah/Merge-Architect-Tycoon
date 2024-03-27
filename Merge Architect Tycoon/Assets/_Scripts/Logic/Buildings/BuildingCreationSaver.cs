@@ -1,8 +1,8 @@
 public class BuildingCreationSaver
 {
-    private readonly IPlayerProgressService _playerProgressService;
+    private readonly PlayerProgressService _playerProgressService;
 
-    public BuildingCreationSaver(IPlayerProgressService playerProgressService)
+    public BuildingCreationSaver(PlayerProgressService playerProgressService)
     {
         _playerProgressService = playerProgressService;
     }

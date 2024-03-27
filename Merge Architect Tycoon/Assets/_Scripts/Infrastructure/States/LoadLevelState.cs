@@ -2,21 +2,19 @@
 {
     private string _sceneName;
     private readonly QuestsPresenter _questsPresenter;
-    private readonly UiPresenter _uiPresenter;
 
     private readonly SceneContextProvider _sceneContextProvider;
 
     private IGameStateMachine _gameStateMachine;
     private readonly ISceneLoader _sceneLoader;
-    private readonly IPlayerProgressService _playerProgressService;
+    private readonly PlayerProgress _playerProgressService;
 
-    public LoadLevelState(ISceneLoader sceneLoader, PlayerProgressService playerProgressService,
-        SceneContextProvider sceneContextProvider, UiPresenter uiPresenter)
+    public LoadLevelState(ISceneLoader sceneLoader, PlayerProgress playerProgressService,
+        SceneContextProvider sceneContextProvider)
     {
         _sceneLoader = sceneLoader;
         _playerProgressService = playerProgressService;
         _sceneContextProvider = sceneContextProvider;
-        _uiPresenter = uiPresenter;
     }
 
     public void Enter(string sceneName)
@@ -43,12 +41,10 @@
 
     private void InitLevel()
     {
-        _uiPresenter.InitializeElementsOnSceneLoaded();
-
         InitializePopupPresenters();
+
         _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
-        _sceneContextProvider.Resolve<QuestsProvider>().OnSceneLoaded();
-        _sceneContextProvider.Resolve<MergeGrid>().InitializeGrid();
+        _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
     }
 
     private void InitializePopupPresenters()
@@ -57,5 +53,6 @@
         createBuildingPopupPresenter.InitializePresenter();
         _sceneContextProvider.Resolve<BuildingProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
+        //_sceneContextProvider.Resolve<TruckPresenter>().OnSceneLoaded();
     }
 }
