@@ -28,10 +28,7 @@ public class AudioPlayer : MonoBehaviour
         _backgroundMusicAudioSource.loop = true;
     }
 
-    public void PlayBackgroundMusic()
-    {
-        _backgroundMusicAudioSource.Play();
-    }
+    public void PlayBackgroundMusic() => _backgroundMusicAudioSource.Play();
 
     public void PlayUiSound(UiSoundTypes soundTypesType)
     {
