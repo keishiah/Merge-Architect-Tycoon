@@ -56,8 +56,6 @@ public class BuildingCreator
 
     private void CreateBuilding(BuildingPlace buildingPlace)
     {
-        buildingPlace.SetBuildingState(BuildingStateEnum.ShowBuilding);
-        _playerProgressService.RemoveBuildingInProgress(buildingPlace.buildingName);
         _playerProgressService.RemoveBuildingInProgress(buildingPlace.buildingName);
         _playerProgressService.AddBuilding(buildingPlace.buildingName);
         buildingPlace.SetBuildingState(BuildingStateEnum.CreateBuilding);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 public class BuildingProvider : IInitializableOnSceneLoaded
@@ -50,24 +51,24 @@ public class BuildingProvider : IInitializableOnSceneLoaded
         }
     }
 
-    private async void ContinueBuildingCreation(string buildingName, int timeRest)
+    private void ContinueBuildingCreation(string buildingName, int timeRest)
     {
         if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             return;
 
         buildingPlace.StartCreatingBuilding();
-        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken,
-            timeRest);
+        _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken,
+            timeRest).Forget();
     }
 
 
-    public async void CreateBuildingInTimeAsync(string buildingName)
+    public void CreateBuildingInTimeAsync(string buildingName)
     {
         if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
             return;
 
         buildingPlace.StartCreatingBuilding();
-        await _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken);
+        _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken).Forget();
     }
 
     private void CreateBuildingOnStart(string buildingName)
