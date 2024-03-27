@@ -4676,7 +4676,7 @@ GameObject:
   - component: {fileID: 457731708}
   - component: {fileID: 457731707}
   m_Layer: 5
-  m_Name: CreateBuildingInMomentButton
+  m_Name: CreateBuildingInMomentButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8850,13 +8850,25 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8994153782530967369, guid: 3e6df2d148313d747a398a5af4c67a98, type: 3}
-      propertyPath: TutorialSteps.Array.data[6]
+      propertyPath: TutorialSteps.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: fe04d5a118d291241af7c10129a55bc6, type: 2}
+    - target: {fileID: 8994153782530967369, guid: 3e6df2d148313d747a398a5af4c67a98, type: 3}
+      propertyPath: TutorialSteps.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: d94e481597f77484eb4af31d53af2cab, type: 2}
+    - target: {fileID: 8994153782530967369, guid: 3e6df2d148313d747a398a5af4c67a98, type: 3}
+      propertyPath: TutorialSteps.Array.data[5]
       value: 
       objectReference: {fileID: 11400000, guid: 3f53a0fe9dc9dca45a4b080a70924bd4, type: 2}
     - target: {fileID: 8994153782530967369, guid: 3e6df2d148313d747a398a5af4c67a98, type: 3}
-      propertyPath: TutorialSteps.Array.data[7]
+      propertyPath: TutorialSteps.Array.data[6]
       value: 
       objectReference: {fileID: 11400000, guid: 332d3f39ddb387049a367790f3ea2987, type: 2}
+    - target: {fileID: 8994153782530967369, guid: 3e6df2d148313d747a398a5af4c67a98, type: 3}
+      propertyPath: TutorialSteps.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 409a5a89c15d2614a8faa47aff543c87, type: 2}
     - target: {fileID: 8994153782530967382, guid: 3e6df2d148313d747a398a5af4c67a98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1787e43d606ad7f4aabb8ffbcbda3445, type: 3}
-  m_Name: 4TutorialToTruck
+  m_Script: {fileID: 11500000, guid: fc5a3bb7ba7ece3439d16c1f2f29682d, type: 3}
+  m_Name: 4SkipCreationTime
   m_EditorClassIdentifier: 
-  clip: {fileID: 7400000, guid: 5d650f9126e1c4942992a4a36d860e2c, type: 2}
-  buttonName: Claim Reward Button1
+  clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
+  buttonName: CreateBuildingInMomentButton1
+  text: skip to build
