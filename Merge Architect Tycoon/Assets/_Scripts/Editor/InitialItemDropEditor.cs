@@ -115,7 +115,7 @@ namespace _Scripts.Editor
 
                             Sprite sprite = null;
                             if (InitialItemDrop.allDropSlots[i].mergeItem != null)
-                                sprite = InitialItemDrop.allDropSlots[i].mergeItem.itemSprite;
+                                sprite = InitialItemDrop.allDropSlots[i].mergeItem.ItemSprite;
                             sprite = EditorGUILayout.ObjectField(
                                 sprite, 
                                 typeof(Sprite), 

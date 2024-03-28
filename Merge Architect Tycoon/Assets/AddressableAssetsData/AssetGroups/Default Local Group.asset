@@ -51,7 +51,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 3d1d7a1d876351e4f88b8c344a89db59
-    m_Address: TruckInfo
+    m_Address: TrucksInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 27d98c0f03958a74db4e5e1a5f78d6a1

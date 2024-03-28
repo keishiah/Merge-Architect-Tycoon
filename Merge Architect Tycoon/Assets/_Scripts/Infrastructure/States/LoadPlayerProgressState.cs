@@ -50,9 +50,9 @@ public class LoadPlayerProgressState : IState
             _progressService.Tutorial = new TutorialData();
 
         _progressService.Trucks =
-            SaveLoadService.Load<TruckData>(SaveKey.Truck);
+            SaveLoadService.Load<TrucksData>(SaveKey.Truck);
         if (_progressService.Trucks == null)
-            _progressService.Trucks = new TruckData();
+            _progressService.Trucks = new TrucksData();
     }
 
     private void NotifyProgressReaderServices()

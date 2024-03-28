@@ -15,7 +15,7 @@ public class ItemInfoSlot : MonoBehaviour
     {
         questionMarkImage.gameObject.SetActive(false);
         nextItemArrowImage.gameObject.SetActive(false);
-        itemImage.sprite = m_mergeItem.itemSprite;
+        itemImage.sprite = m_mergeItem.ItemSprite;
         mergeItem = m_mergeItem;
 
         if (!isOpened)

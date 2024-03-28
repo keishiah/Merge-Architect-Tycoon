@@ -3,7 +3,8 @@
 [CreateAssetMenu(fileName = "TruckConfig", menuName = "StaticData/TruckConfig")]
 public class TruckInfo : ScriptableObject
 {
-    public TruckUpdates[] TruckUpdates;
+    public TruckUpdates[] Upgrades;
     public int BoostLimit;
     public TruckResources[] MergeItems;
+    //public Sprite[] Sprites;
 }
