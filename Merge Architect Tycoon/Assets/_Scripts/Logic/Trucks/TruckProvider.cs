@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class TruckProvider : IInitializableOnSceneLoaded
@@ -12,18 +11,54 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
     private TruckInfo _truckInfo => _staticDataService.TruckInfo;
     private TrucksData _data => _playerProgress.Trucks;
-    private Queue<Truck> _trucks = new();
+
+    private int currentResource = 0;
 
     public void OnSceneLoaded()
     {
+        CalculateUpdateData();
+
+        _truckPanel.UpdateTruckButton.onClick.AddListener(UpdateTrucks);
+        _truckPanel.BoostTruckButton.onClick.AddListener(BoostTrucks);
+        _truckPanel.BuyTruckButton.onClick.AddListener(BuyTruck);
+
         _truckPanel.BoostInit(_truckInfo.BoostLimit);
-        _truckPanel.ResourcesRefresh(_data.Level.Value);
+        _truckPanel.RenderBoost(_data.BoostCount);
+
         RenderUpdateButton();
+
+        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
+
+        //_truckZone.
+    }
+
+    private void CalculateUpdateData()
+    {
+        int capacity = 0, luck = 0, resources = 0;
+        for(int i = 0; i < _data.UpdateLevel; i++)
+        {
+            switch (_truckInfo.Upgrades[i].TruskUpdate)
+            {
+                case TruskUpdate.Capacity:
+                    capacity++;
+                    break;
+                case TruskUpdate.Chance:
+                    luck++;
+                    break;
+                case TruskUpdate.NewResource:
+                    resources++;
+                    break;
+            }
+        }
+
+        _data.CargoCapacity = _truckInfo.CargoMinCount + capacity;
+        _data.LuckLevel = luck;
+        _data.ResourceLevel = _truckInfo.ResourcesMinCount + resources;
     }
 
     public void RenderUpdateButton()
     {
-        int level = _data.Level.Value;
+        int level = _data.ResourceLevel;
         if (level >= _truckInfo.Upgrades.Length)
         {
             _truckPanel.UpdateButtonRefresh("MAX LEVEL", false);
@@ -34,11 +69,40 @@ public class TruckProvider : IInitializableOnSceneLoaded
         string text = $"+{nextUpdate.TruskUpdate} \n {nextUpdate.SoftCost}$";
         _truckPanel.UpdateButtonRefresh(text);
     }
+    private void UpdateTrucks()
+    {
+        _progressService.UpdateTruck();
+        CalculateUpdateData();
+        RenderUpdateButton();
+        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
+    }
+    private void BoostTrucks()
+    {
+        int boostCount = _truckInfo.BoostLimit - _data.BoostCount;
+
+        if(boostCount > 0)
+            _progressService.AddBoost(boostCount);
+        _truckPanel.RenderBoost(_truckInfo.BoostLimit);
+    }
+
+    public void BuyTruck()
+    {
+        Truck truck = new();
+        truck.TruckCargo = new();
+        LootBox lootBox = _truckInfo.MergeItems[currentResource].Resource;
+
+        for(int i = 0; i < _data.CargoCapacity; i++)
+        {
+            MergeItem mergeItem = lootBox.GetRandomItem<MergeItem>(_data.LuckLevel);
+            truck.TruckCargo.Add(mergeItem);
+        }
+
+        AddNewTruck(truck);
+    }
 
     public void AddNewTruck(Truck truck)
     {
         _progressService.EnqueueTruck(Prepare(truck));
-        _trucks.Enqueue(truck);
         _truckZone.UpdateOn();
     }
 
@@ -47,7 +111,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
         string[] CargoID = new string[truckData.TruckCargo.Count];
         for(int i = 0; i < CargoID.Length; i++)
         {
-            CargoID[i] = truckData.TruckCargo[i].ItemName;
+            CargoID[i] = truckData.TruckCargo[i].name;
         }
 
         return new TruckData() { Cargo = CargoID };
@@ -57,10 +121,12 @@ public class TruckProvider : IInitializableOnSceneLoaded
     {
         TruckData truckData = _progressService.DequeueTruck();
         Truck result = new Truck();
+        result.TruckCargo = new();
 
-        for(int i = 0; i < truckData.Cargo.Length; i++)
+        for (int i = 0; i < truckData.Cargo.Length; i++)
         {
-            result.TruckCargo[i] = Resources.Load<MergeItem>(AssetPath.Items + truckData.Cargo[i]);
+            MergeItem item = Resources.Load<MergeItem>(AssetPath.Items + truckData.Cargo[i]);
+            result.TruckCargo.Add(item);
         }
         result.DequeueAction += DequeueTruckItem;
 

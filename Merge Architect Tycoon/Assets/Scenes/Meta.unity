@@ -2376,9 +2376,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -785}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 335.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &379370725
@@ -2529,9 +2529,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 920, y: -220}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &406285482
@@ -2868,10 +2868,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -100}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468374838
 MonoBehaviour:
@@ -2916,7 +2916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 468374839}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890234801}
+        m_TargetAssemblyTypeName: TruckPanel, Assembly-CSharp
+        m_MethodName: ResourceChoise
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &468374839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3861,7 +3873,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.53333336, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4141,9 +4153,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 350, y: -220}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!95 &640249790
@@ -4826,10 +4838,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -100}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &765332312
 MonoBehaviour:
@@ -4874,7 +4886,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 765332313}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890234801}
+        m_TargetAssemblyTypeName: TruckPanel, Assembly-CSharp
+        m_MethodName: ResourceChoise
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &765332313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5833,9 +5857,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -418.23}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 950, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &984197245
@@ -6060,9 +6084,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 160, y: -220}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1022528738
@@ -6242,7 +6266,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.53333336, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6973,6 +6997,7 @@ MonoBehaviour:
   createBuildingPopupScroller: {fileID: 1619757256}
   district: {fileID: 553906267}
   questPopup: {fileID: 8262805332055049569}
+  truckPanel: {fileID: 1890234801}
   richPanel: {fileID: 1666017448}
   effectsPresenter: {fileID: 0}
 --- !u!114 &1153209361
@@ -7267,10 +7292,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 900, y: -100}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190561979
 MonoBehaviour:
@@ -7315,7 +7340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1190561980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890234801}
+        m_TargetAssemblyTypeName: TruckPanel, Assembly-CSharp
+        m_MethodName: ResourceChoise
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1190561980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8547,9 +8584,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -1121.77}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 749.3, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521145748
@@ -8874,10 +8911,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -100}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608508246
 MonoBehaviour:
@@ -8922,7 +8959,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1608508247}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890234801}
+        m_TargetAssemblyTypeName: TruckPanel, Assembly-CSharp
+        m_MethodName: ResourceChoise
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1608508247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10135,11 +10184,11 @@ RectTransform:
   m_Father: {fileID: 765332311}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1786687876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10674,9 +10723,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -1375.59}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1890234795
@@ -10691,13 +10740,14 @@ GameObject:
   - component: {fileID: 1890234798}
   - component: {fileID: 1890234799}
   - component: {fileID: 1890234800}
+  - component: {fileID: 1890234801}
   m_Layer: 5
   m_Name: TrucksPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1890234796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10787,6 +10837,38 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1890234801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890234795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432fc10e60ec15f499e91195eb24acb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuTruckButton: {fileID: 1976713028}
+  RebuyTruckSprites: []
+  RebuyTruckImage: {fileID: 360436310}
+  UpdateTruckButton: {fileID: 2129406165}
+  UpdateTruckButtonText: {fileID: 1082013224}
+  BoostTruckButton: {fileID: 984197245}
+  BoostTexts:
+  - {fileID: 757624899}
+  - {fileID: 2038513799}
+  BoostSliders:
+  - {fileID: 1803201234}
+  - {fileID: 508781232}
+  ResourceButtons:
+  - {fileID: 765332312}
+  - {fileID: 1608508246}
+  - {fileID: 468374838}
+  - {fileID: 2077770415}
+  - {fileID: 1190561979}
+  BuyTruckButton: {fileID: 1499778496}
+  _resourceCursor: {fileID: 1786687875}
 --- !u!1 &1935744709
 GameObject:
   m_ObjectHideFlags: 0
@@ -11284,7 +11366,7 @@ GameObject:
   - component: {fileID: 1976713029}
   - component: {fileID: 1976713028}
   m_Layer: 5
-  m_Name: SettingsTrackButton
+  m_Name: MenuTrackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11329,7 +11411,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -11353,7 +11435,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1976713029}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890234795}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1976713029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12328,10 +12422,10 @@ RectTransform:
   m_Father: {fileID: 350939491}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 700, y: -100}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2077770415
 MonoBehaviour:
@@ -12376,7 +12470,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2077770416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890234801}
+        m_TargetAssemblyTypeName: TruckPanel, Assembly-CSharp
+        m_MethodName: ResourceChoise
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2077770416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12524,9 +12630,9 @@ RectTransform:
   m_Father: {fileID: 1890234796}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -139.41003}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 950, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2129406165
@@ -14982,7 +15088,7 @@ MonoBehaviour:
   deleteButton: {fileID: 1657809054461663517}
   sellButton: {fileID: 1657809054704256784}
   selectedItem: {fileID: 4488734218399578561}
-  _progressItemInfo: {fileID: 4488734218993416886}
+  _progressItemInfo: {fileID: 0}
 --- !u!222 &1657809054333525184
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15865,15 +15971,13 @@ GameObject:
   - component: {fileID: 1657809055713711208}
   - component: {fileID: 1657809055713711210}
   - component: {fileID: 1657809055713711211}
-  - component: {fileID: 1657809055713711212}
-  - component: {fileID: 1657809055713711213}
   m_Layer: 5
   m_Name: MergePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1657809055713711210
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15897,56 +16001,6 @@ MonoBehaviour:
   _trucks: {fileID: 1890234795}
   _infoPanel: {fileID: 4488734218993416882}
   _menuPanel: {fileID: 7428006089603525345}
---- !u!114 &1657809055713711212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657809055713711209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 432fc10e60ec15f499e91195eb24acb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _menuTruckButton: {fileID: 1976713028}
-  _rebuyTruckSprites:
-  - {fileID: -1239293845, guid: 18013fbac8bed1f43a628d87c5622055, type: 3}
-  - {fileID: 21300000, guid: 8231a674363da4c42a49d84ef9ae9ceb, type: 3}
-  _rebuyTruckImage: {fileID: 360436310}
-  _updateTruckButton: {fileID: 2129406165}
-  _updateTruckButtonText: {fileID: 1082013224}
-  _boostTruckButton: {fileID: 984197245}
-  _boostText:
-  - {fileID: 757624899}
-  - {fileID: 2038513799}
-  _boostSlider:
-  - {fileID: 508781232}
-  - {fileID: 1803201234}
-  _resourceButtons:
-  - {fileID: 765332312}
-  - {fileID: 1608508246}
-  - {fileID: 468374838}
-  - {fileID: 2077770415}
-  - {fileID: 1190561979}
---- !u!114 &1657809055713711213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657809055713711209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 1657809055713711212}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
 --- !u!114 &2062693396323919516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16844,7 +16898,6 @@ GameObject:
   - component: {fileID: 4488734218993416883}
   - component: {fileID: 4488734218993416881}
   - component: {fileID: 4488734218993416880}
-  - component: {fileID: 4488734218993416886}
   - component: {fileID: 3456886112265110620}
   m_Layer: 5
   m_Name: InfoAboutItemPanel
@@ -16874,22 +16927,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 960, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4488734218993416886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4488734218993416882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03e4b049934be9b4ab5c80e5af25fdef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoSlotPrefab: {fileID: 3889492385629468018, guid: 3dcc8f9fdd17b4b438e608836d6c7a30, type: 3}
-  mainText: {fileID: 4488734218236374980}
-  gridPanel: {fileID: 4488734218966446971}
-  itemDropSlotsList: []
 --- !u!114 &4600403393062569475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19107,9 +19144,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 730, y: -220}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!95 &7428006088836866486
@@ -19152,7 +19189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7428006089603525348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19337,9 +19374,9 @@ RectTransform:
   m_Father: {fileID: 7428006089603525350}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540, y: -220}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &7428006089892922709

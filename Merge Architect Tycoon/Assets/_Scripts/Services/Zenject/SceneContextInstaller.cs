@@ -9,6 +9,7 @@ public class SceneContextInstaller : MonoInstaller
     [SerializeField] private CreateBuildingPopupScroller createBuildingPopupScroller;
     [SerializeField] private District district;
     [SerializeField] private QuestPopup questPopup;
+    [SerializeField] private TruckPanel truckPanel;
     [SerializeField] private RichPanel richPanel;
     [SerializeField] private EffectsPresenter effectsPresenter;
 
@@ -30,6 +31,7 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<EffectsPresenter>().FromInstance(effectsPresenter).AsSingle();
         Container.Bind<District>().FromInstance(district).AsSingle();
         Container.Bind<QuestPopup>().FromInstance(questPopup).AsSingle();
+        Container.Bind<TruckPanel>().FromInstance(truckPanel).AsSingle();
         Container.Bind<RichPanel>().FromInstance(richPanel).AsSingle();
 
         Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();

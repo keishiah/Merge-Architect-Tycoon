@@ -5,48 +5,46 @@ using UnityEngine.UI;
 
 public class TruckPanel : MonoBehaviour
 {
-    [SerializeField]
-    private Button _menuTruckButton;
-    [SerializeField]
-    private Sprite[] _rebuyTruckSprites;
-    [SerializeField]
-    private Image _rebuyTruckImage;
-    [SerializeField]
-    private Button _updateTruckButton;
-    [SerializeField]
-    private TextMeshProUGUI _updateTruckButtonText;
-    [SerializeField]
-    private Button _boostTruckButton;
-    [SerializeField]
-    private TextMeshProUGUI[] _boostText;
-    [SerializeField]
-    private Slider[] _boostSlider;
-    [SerializeField]
-    private Button[] _resourceButtons;
+    public Button MenuTruckButton;
+    public Sprite[] RebuyTruckSprites;
+    public Image RebuyTruckImage;
+    public Button UpdateTruckButton;
+    public TextMeshProUGUI UpdateTruckButtonText;
+    public Button BoostTruckButton;
+    public TextMeshProUGUI[] BoostTexts;
+    public Slider[] BoostSliders;
+    public Button[] ResourceButtons;
+    public Button BuyTruckButton;
 
     private int _boostLimit;
+    [SerializeField]
+    private RectTransform _resourceCursor;
 
     public void BoostInit(int limit)
     {
         _boostLimit = limit;
-        foreach (Slider slider in _boostSlider)
+        foreach (Slider slider in BoostSliders)
         {
             slider.maxValue = _boostLimit;
         }
     }
 
-    public void RefreshBoostText(int count)
+    public void RenderBoost(int count)
     {
-        foreach (var item in _boostText)
+        foreach (Slider slider in BoostSliders)
         {
-            item.text = $"{count}/{_boostLimit}";
+            slider.value = count;
+        }
+        foreach (TextMeshProUGUI text in BoostTexts)
+        {
+            text.text = $"{count}/{_boostLimit}";
         }
     }
 
     public void UpdateButtonRefresh(string text, bool interactable = true)
     {
-        _updateTruckButtonText.text = text;
-        _updateTruckButton.interactable = interactable;
+        UpdateTruckButtonText.text = text;
+        UpdateTruckButton.interactable = interactable;
     }
 
     public void BoostButtonRefresh()
@@ -56,9 +54,14 @@ public class TruckPanel : MonoBehaviour
 
     public void ResourcesRefresh(int level)
     {
-        for(int i = 0; i < _resourceButtons.Length; i++)
+        for(int i = 0; i < ResourceButtons.Length; i++)
         {
-            _resourceButtons[0].gameObject.SetActive(i<level);
+            ResourceButtons[i].gameObject.SetActive(i<level);
         }
+    }
+
+    public void ResourceChoise(int i)
+    {
+        _resourceCursor.SetParent(ResourceButtons[i].transform, worldPositionStays: false);
     }
 }

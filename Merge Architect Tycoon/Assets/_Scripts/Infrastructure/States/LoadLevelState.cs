@@ -40,7 +40,7 @@
         _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
         _audioPlayer.InitializeAudioPlayer();
-        _audioPlayer.PlayBackgroundMusic();
+        //_audioPlayer.PlayBackgroundMusic();
     }
 
     private void InitializePopupPresenters()

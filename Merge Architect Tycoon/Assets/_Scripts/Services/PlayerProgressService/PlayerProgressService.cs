@@ -61,17 +61,17 @@ public class PlayerProgressService
     #region Trucks
     public void UpdateTruck()
     {
-        _progress.Trucks.Level.Value++;
+        _progress.Trucks.UpdateLevel++;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void AddBoost(int count)
     {
-        _progress.Trucks.BoostCount.Value = count;
+        _progress.Trucks.BoostCount = count;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void RemoveBoost()
     {
-        _progress.Trucks.BoostCount.Value--;
+        _progress.Trucks.BoostCount--;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void EnqueueTruck(TruckData newTtruck)

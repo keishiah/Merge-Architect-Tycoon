@@ -1,12 +1,15 @@
 ﻿using System;
-using UniRx;
 
 [Serializable]
 public class TrucksData
 {
-    public ReactiveProperty<int> Level = new();
-    public ReactiveProperty<int> BoostCount = new();
-    public ReactiveProperty<int> ResourcesCount = new();
+    public int UpdateLevel;
+    public int BoostCount;
+    public int ResourceLevel;
+    public int CargoCapacity;
+    public int LuckLevel;
+
+    public int CurrentResource;
 
     public TruckData[] ToArrive;
 }

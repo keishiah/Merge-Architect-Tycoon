@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrades:
   - TruskUpdate: 0
-    SoftCost: 0
+    SoftCost: 100
   - TruskUpdate: 1
     SoftCost: 0
   - TruskUpdate: 2

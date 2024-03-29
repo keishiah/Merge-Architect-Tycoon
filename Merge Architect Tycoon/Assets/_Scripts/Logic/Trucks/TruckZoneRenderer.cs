@@ -30,6 +30,9 @@ public class TruckZoneRenderer : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_playerProgress.Trucks == null || _playerProgress.Trucks.ToArrive == null)
+            return;
+
         if (_playerProgress.Trucks.ToArrive.Length > 0 && _currentTruck == null)
             ToNextTruck();
     }
