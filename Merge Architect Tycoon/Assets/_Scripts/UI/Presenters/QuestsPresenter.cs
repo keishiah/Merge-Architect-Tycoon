@@ -25,8 +25,8 @@ public class QuestsPresenter
     {
         CloseQuestElements();
 
-        ShowQuests(_playerProgress.Quests.ActiveQuests);
         ShowQuests(_playerProgress.Quests.QuestsWaitingForClaim);
+        ShowQuests(_playerProgress.Quests.ActiveQuests);
     }
     private void ShowQuests(IEnumerable<string> quests)
     {
