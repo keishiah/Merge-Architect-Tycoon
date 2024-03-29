@@ -23,24 +23,6 @@ public class CreateBuildingUiElement : MonoBehaviour
     }
 
     public void SetBuildingImage(Sprite buildingSprite) => buildingImage.sprite = buildingSprite;
-    public void SetCoinsPriceText(string text) => coinsPriceTex.text = text;
-    public void SetResourcesImages(List<MergeItem> items)
-    {
-        HideAllResources();
-        for (var i = 0; i < items.Count; i++)
-        {
-            resourceElements[i].gameObject.SetActive(true);
-            resourceElements[i].sprite = items[i].itemSprite;
-        }
-    }
-
-    private void HideAllResources()
-    {
-        foreach (var resourceElement in resourceElements)
-        {
-            resourceElement.gameObject.SetActive(false);
-        }
-    }
 
     public void SetBuildingName(string newName)
     {

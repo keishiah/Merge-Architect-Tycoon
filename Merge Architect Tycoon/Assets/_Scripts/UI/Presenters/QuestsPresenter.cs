@@ -5,10 +5,10 @@ public class QuestsPresenter
 {
     private Dictionary<QuestElement, BaseQuestInfo> _completedQuestsByElements = new();
 
-    public PlayerProgress _playerProgress { get; set; }
     private List<BaseQuestInfo> _questsInfo;
     private QuestPopup _questPopup;
     private QuestsProvider _questsProvider;
+    public PlayerProgress _playerProgress { get; set; }
 
 
     [Inject]

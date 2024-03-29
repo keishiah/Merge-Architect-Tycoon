@@ -1,12 +1,14 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 public class CreateBuildingPopup : MonoBehaviour
 {
-    public Button goToMergePanelButton;
-    public Button createBuildingButton;
+    public ResourcesPanel resourcesPanel;
 
+    private RectTransform _panelRectTransform;
+    private Vector2 _panelStartPosition;
     private MenuButtonsWidgetController _sceneButtons;
     private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
 
@@ -20,26 +22,25 @@ public class CreateBuildingPopup : MonoBehaviour
 
     public void InitializePopup()
     {
-        goToMergePanelButton.onClick.AddListener(GoToMergePanel);
-        createBuildingButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
+        _panelRectTransform = resourcesPanel.GetComponent<RectTransform>();
+        _panelStartPosition = _panelRectTransform.anchoredPosition;
+        resourcesPanel.actionButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
     }
 
-    public void OpenMergeButton()
+    public void OpenPanel()
     {
-        goToMergePanelButton.gameObject.SetActive(true);
-        createBuildingButton.gameObject.SetActive(false);
-    }
-
-    public void OpenCreateBuildingButton()
-    {
-        createBuildingButton.gameObject.SetActive(true);
-        goToMergePanelButton.gameObject.SetActive(false);
+        if (resourcesPanel.isActiveAndEnabled)
+            return;
+        _panelRectTransform.gameObject.SetActive(true);
+        _panelRectTransform.DOAnchorPosY(_panelRectTransform.anchoredPosition.y + _panelRectTransform.rect.height, 1)
+            .SetEase(Ease
+                .OutBounce);
     }
 
     public void HideButtons()
     {
-        createBuildingButton.gameObject.SetActive(false);
-        goToMergePanelButton.gameObject.SetActive(false);
+        _panelRectTransform.gameObject.SetActive(false);
+        _panelRectTransform.anchoredPosition = _panelStartPosition;
     }
 
     private void GoToMergePanel()

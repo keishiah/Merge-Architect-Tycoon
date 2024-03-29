@@ -35,7 +35,8 @@ public class TruckPresenter : MonoBehaviour
 
     private void BoostInit()
     {
-        _boostLimit = _staticDataService.TruckInfo.BoostLimit;
+        // _boostLimit = _staticDataService.TruckInfo.BoostLimit;
+        _boostLimit = 3;
     }
 
     private void RefreshBoostText(int count)

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b5ab94bf234e3e8ccba4fe8224f131, type: 3}
   m_Name: TutorialCreateFirstBuildingQuest
   m_EditorClassIdentifier: 
-  questId: TutorialBuilding
-  questText: Create building Hous
-  questSprite: {fileID: -1074963280, guid: b53dcbfd858be4e4f88f152a59fed578, type: 3}
-  requiredForActivationQuestId: TutorialDistrict
-  giveQuestCondition: 0
+  ID: 1
+  Text: 111
+  Sprite: {fileID: 547126245, guid: e86d4490498d35d47b69e3ef17448a63, type: 3}
+  RequiredForActivationQuestId: 0
+  GiveQuestCondition: 0
   coinsReward:
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
     rewardAmount: 1234
   buildingItem:
     itemText: Create building
-    itemImage: {fileID: 21300000, guid: beb85204b17c2144781d9cace53b7a8f, type: 3}
-    itemCount: 1
+    itemImage: {fileID: -533623025, guid: e86d4490498d35d47b69e3ef17448a63, type: 3}
+    GoalCount: 1
     buildingName: House
