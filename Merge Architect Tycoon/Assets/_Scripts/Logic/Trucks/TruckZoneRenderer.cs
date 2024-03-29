@@ -10,7 +10,6 @@ public class TruckZoneRenderer : MonoBehaviour
     [SerializeField] public float _startXPosition;
     [SerializeField] public float _stopXPosition;
     [SerializeField] public float _endXPosition;
-    [SerializeField] public float _speed;
 
     [Inject] private SlotsManager _slotsManager;
     [Inject] private PlayerProgress _playerProgress;
@@ -75,7 +74,7 @@ public class TruckZoneRenderer : MonoBehaviour
             _rectTtransform = GetComponent<RectTransform>(),
             _startXPosition = _startXPosition,
             _endXPosition = _stopXPosition,
-            _speed = _speed,
+            _speed = _currentTruck.Speed,
         };
         _truckBehaviour.Enter();
     }
@@ -97,7 +96,7 @@ public class TruckZoneRenderer : MonoBehaviour
             _rectTtransform = GetComponent<RectTransform>(),
             _startXPosition = _stopXPosition,
             _endXPosition = _endXPosition,
-            _speed = _speed,
+            _speed = _currentTruck.Speed,
         };
         _truckBehaviour.Enter();
     }

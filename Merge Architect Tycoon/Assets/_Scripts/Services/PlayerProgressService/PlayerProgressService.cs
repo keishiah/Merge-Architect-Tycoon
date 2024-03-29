@@ -66,17 +66,21 @@ public class PlayerProgressService
     }
     public void AddBoost(int count)
     {
-        _progress.Trucks.BoostCount = count;
+        _progress.Trucks.BoostCount.Value = count;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void RemoveBoost()
     {
-        _progress.Trucks.BoostCount--;
+        _progress.Trucks.BoostCount.Value--;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void EnqueueTruck(TruckData newTtruck)
     {
-        Queue<TruckData> trucks = new Queue<TruckData>(_progress.Trucks.ToArrive);
+        Queue<TruckData> trucks;
+        if (_progress.Trucks.ToArrive != null)
+            trucks = new Queue<TruckData>(_progress.Trucks.ToArrive);
+        else
+            trucks = new Queue<TruckData>();
         trucks.Enqueue(newTtruck);
         _progress.Trucks.ToArrive = trucks.ToArray();
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);

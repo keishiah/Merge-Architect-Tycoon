@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx;
 using Zenject;
 
 public class TruckProvider : IInitializableOnSceneLoaded
@@ -21,21 +22,28 @@ public class TruckProvider : IInitializableOnSceneLoaded
         _truckPanel.UpdateTruckButton.onClick.AddListener(UpdateTrucks);
         _truckPanel.BoostTruckButton.onClick.AddListener(BoostTrucks);
         _truckPanel.BuyTruckButton.onClick.AddListener(BuyTruck);
+        _data.BoostCount.Subscribe(_truckPanel.RenderBoost);
 
         _truckPanel.BoostInit(_truckInfo.BoostLimit);
-        _truckPanel.RenderBoost(_data.BoostCount);
+        _truckPanel.RenderBoost(_data.BoostCount.Value);
 
         RenderUpdateButton();
 
+        _truckPanel.SubscribeResources(SetResource);
         _truckPanel.ResourcesRefresh(_data.ResourceLevel);
 
         //_truckZone.
     }
 
+    private void SetResource(int resourceIndex)
+    {
+        currentResource = resourceIndex;
+    }
+
     private void CalculateUpdateData()
     {
         int capacity = 0, luck = 0, resources = 0;
-        for(int i = 0; i < _data.UpdateLevel; i++)
+        for(int i = 0; i < _data.UpdateLevel && i < _truckInfo.Upgrades.Length; i++)
         {
             switch (_truckInfo.Upgrades[i].TruskUpdate)
             {
@@ -58,7 +66,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
     public void RenderUpdateButton()
     {
-        int level = _data.ResourceLevel;
+        int level = _data.UpdateLevel;
         if (level >= _truckInfo.Upgrades.Length)
         {
             _truckPanel.UpdateButtonRefresh("MAX LEVEL", false);
@@ -78,7 +86,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
     }
     private void BoostTrucks()
     {
-        int boostCount = _truckInfo.BoostLimit - _data.BoostCount;
+        int boostCount = _truckInfo.BoostLimit - _data.BoostCount.Value;
 
         if(boostCount > 0)
             _progressService.AddBoost(boostCount);
@@ -122,6 +130,14 @@ public class TruckProvider : IInitializableOnSceneLoaded
         TruckData truckData = _progressService.DequeueTruck();
         Truck result = new Truck();
         result.TruckCargo = new();
+
+        if (_data.BoostCount.Value > 0)
+        {
+            _progressService.RemoveBoost();
+            result.Speed = _truckInfo.MaxSpeed;
+        }
+        else
+            result.Speed = _truckInfo.MinSpeed;
 
         for (int i = 0; i < truckData.Cargo.Length; i++)
         {

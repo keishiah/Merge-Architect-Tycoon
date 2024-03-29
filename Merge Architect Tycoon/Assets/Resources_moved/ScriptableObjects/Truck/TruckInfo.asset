@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c965fa983cd8042bb9252e4df19db8, type: 3}
   m_Name: TruckInfo
   m_EditorClassIdentifier: 
+  CargoMinCount: 2
+  ResourcesMinCount: 1
+  MinSpeed: 100
+  MaxSpeed: 1500
   Upgrades:
   - TruskUpdate: 0
     SoftCost: 100

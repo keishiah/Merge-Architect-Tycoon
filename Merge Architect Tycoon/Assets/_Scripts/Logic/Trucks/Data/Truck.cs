@@ -7,6 +7,7 @@ public class Truck
     //public Sprite SpriteImage;
     public List<MergeItem> TruckCargo;
     public Action DequeueAction;
+    public int Speed;
 
     public MergeItem DequeueItem()
     {

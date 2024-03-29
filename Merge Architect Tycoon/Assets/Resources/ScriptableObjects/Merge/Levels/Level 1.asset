@@ -18,7 +18,7 @@ MonoBehaviour:
   allDropSlots:
   - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
     slotState: 3
@@ -48,7 +48,7 @@ MonoBehaviour:
     slotState: 1
   - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 3
   - mergeItem: {fileID: 0}
     slotState: 2
@@ -71,7 +71,7 @@ MonoBehaviour:
   - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
-    slotState: 2
+    slotState: 3
   - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
     slotState: 2
   - mergeItem: {fileID: 0}

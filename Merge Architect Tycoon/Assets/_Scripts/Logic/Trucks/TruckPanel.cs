@@ -64,4 +64,13 @@ public class TruckPanel : MonoBehaviour
     {
         _resourceCursor.SetParent(ResourceButtons[i].transform, worldPositionStays: false);
     }
+
+    public void SubscribeResources(Action<int> setResource)
+    {
+        for (int i = 0; i < ResourceButtons.Length; i++)
+        {
+            int index = i;//new instance
+            ResourceButtons[i].onClick.AddListener(() => setResource(index));
+        }
+    }
 }
