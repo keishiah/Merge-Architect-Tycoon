@@ -1,27 +1,13 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class Truck
 {
-    public Sprite SpriteImage;
+    //public Sprite SpriteImage;
     public List<MergeItem> TruckCargo;
-
-    public Truck Clone()
-    {
-        List<MergeItem> _truckCargo = new();
-        foreach (var item in TruckCargo)
-        {
-            _truckCargo.Add(item);
-        }
-
-        Truck clone = new Truck();
-        clone.SpriteImage = this.SpriteImage;
-        clone.TruckCargo = _truckCargo;
-
-        return clone;
-    }
+    public Action DequeueAction;
+    public int Speed;
 
     public MergeItem DequeueItem()
     {
@@ -30,6 +16,9 @@ public class Truck
 
         MergeItem item = TruckCargo[TruckCargo.Count - 1];
         TruckCargo.Remove(item);
+
+        DequeueAction?.Invoke();
+
         return item;
     }
 }

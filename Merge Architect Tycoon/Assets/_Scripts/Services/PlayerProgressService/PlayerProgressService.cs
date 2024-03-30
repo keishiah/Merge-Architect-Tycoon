@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Zenject;
 
 public class PlayerProgressService
@@ -59,17 +59,64 @@ public class PlayerProgressService
     #endregion
 
     #region Trucks
-    public void AddBoostTrucks(int count)
+    public void UpdateTruck()
+    {
+        _progress.Trucks.UpdateLevel++;
+        SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
+    }
+    public void AddBoost(int count)
     {
         _progress.Trucks.BoostCount.Value = count;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
-    public void RemoveBoostTrucks()
+    public void RemoveBoost()
     {
         _progress.Trucks.BoostCount.Value--;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
+    public void EnqueueTruck(TruckData newTtruck)
+    {
+        Queue<TruckData> trucks;
+        if (_progress.Trucks.ToArrive != null)
+            trucks = new Queue<TruckData>(_progress.Trucks.ToArrive);
+        else
+            trucks = new Queue<TruckData>();
+        trucks.Enqueue(newTtruck);
+        _progress.Trucks.ToArrive = trucks.ToArray();
+        SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
+    }
+    public TruckData DequeueTruck()
+    {
+        if( _progress.Trucks.ToArrive.Length <= 0)
+            return null;
 
+        Queue<TruckData> trucks = new Queue<TruckData>(_progress.Trucks.ToArrive);
+        TruckData truck = trucks.Dequeue();
+        _progress.Trucks.ToArrive = trucks.ToArray();
+        SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
+
+        return truck;
+    }
+    public string DequeueTruckItem()
+    {
+        if (_progress.Trucks.ToArrive.Length <= 0
+            || _progress.Trucks.ToArrive[0].Cargo.Length <= 0)
+            return string.Empty;
+
+        List<string> items = new List<string>(_progress.Trucks.ToArrive[0].Cargo);
+        string itemID = items[^1];
+        items.Remove(itemID);
+
+        if (items.Count <= 0)
+            DequeueTruck();
+        else
+        {
+            _progress.Trucks.ToArrive[0].Cargo = items.ToArray();
+            SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
+        }
+
+        return itemID;
+    }
     #endregion
 
     #region Quests

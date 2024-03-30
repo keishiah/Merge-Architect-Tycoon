@@ -5,9 +5,9 @@ public class LootBox : ScriptableObject
 {
     public Loot[] Loot;
 
-    public T GetRandomItem<T>(uint limit = 16) where T : ScriptableObject
+    public T GetRandomItem<T>(int limit = 16) where T : ScriptableObject
     {
-        if (limit == 1)
+        if (limit == 0)
             return (T)Loot[0].Item;
 
         int allWeight = 0;

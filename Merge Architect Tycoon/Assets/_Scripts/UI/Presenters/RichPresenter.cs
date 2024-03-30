@@ -11,7 +11,7 @@ public class RichPresenter
     public void OnSceneLoaded()
     {
         _richPanel.PlusCoinButton.onClick.AddListener(AddCoins);
-        _richPanel.PlusDiamondButton.onClick.AddListener(AddCoins);
+        _richPanel.PlusDiamondButton.onClick.AddListener(AddDiamonds);
 
         _progress.Riches.Coins.Subscribe(i => _richPanel.RenderMoneyCount(i));
         _progress.Riches.Diamonds.Subscribe(i => _richPanel.RenderDiamandCount(i));

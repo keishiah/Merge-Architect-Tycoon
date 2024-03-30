@@ -12,25 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c965fa983cd8042bb9252e4df19db8, type: 3}
   m_Name: TruckInfo
   m_EditorClassIdentifier: 
-  TruckUpdates:
+  CargoMinCount: 2
+  ResourcesMinCount: 1
+  MinSpeed: 100
+  MaxSpeed: 1500
+  Upgrades:
   - TruskUpdate: 0
-    SoftCost: 50
+    SoftCost: 100
   - TruskUpdate: 1
-    SoftCost: 150
+    SoftCost: 0
   - TruskUpdate: 2
-    SoftCost: 350
+    SoftCost: 0
   - TruskUpdate: 0
-    SoftCost: 500
+    SoftCost: 0
   - TruskUpdate: 1
-    SoftCost: 750
+    SoftCost: 0
   - TruskUpdate: 2
-    SoftCost: 1000
+    SoftCost: 0
   - TruskUpdate: 0
-    SoftCost: 1500
+    SoftCost: 0
   - TruskUpdate: 1
-    SoftCost: 2500
+    SoftCost: 0
   - TruskUpdate: 2
-    SoftCost: 5000
+    SoftCost: 0
   BoostLimit: 10
   MergeItems:
   - Resource: {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}

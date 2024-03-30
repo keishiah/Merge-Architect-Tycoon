@@ -35,11 +35,13 @@ public class MenuButtonsWidgetController : MonoBehaviour
     }
     public void CloseCurrentWidget()
     {
-        if (_selectedButtonIndex == -1)
-            return;
+        for(int i  = 0; i < _widgets.Length; i++)
+        {
+            _widgets[i].OnClose();
+        }
 
-        _widgets[_selectedButtonIndex].OnClose();
-        _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
+        if(_selectedButtonIndex != -1)
+            _menuButtons[_selectedButtonIndex].GetComponent<Animator>().SetTrigger(AnimatorTriggerNormal);
         _selectedButtonIndex = -1;
     }
 

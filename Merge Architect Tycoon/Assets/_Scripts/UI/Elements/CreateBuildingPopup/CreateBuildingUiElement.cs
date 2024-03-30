@@ -30,7 +30,7 @@ public class CreateBuildingUiElement : MonoBehaviour
         for (var i = 0; i < items.Count; i++)
         {
             resourceElements[i].gameObject.SetActive(true);
-            resourceElements[i].sprite = items[i].itemSprite;
+            resourceElements[i].sprite = items[i].ItemSprite;
         }
     }
 

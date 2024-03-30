@@ -55,10 +55,10 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
             return;
 
         _item = newItem;
-        if (_item.itemSprite != null)
+        if (_item.ItemSprite != null)
         {
             _itemImage.enabled = true;
-            _itemImage.sprite = _item.itemSprite;
+            _itemImage.sprite = _item.ItemSprite;
         }
 
         addItemEvent?.Invoke();

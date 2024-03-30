@@ -58,4 +58,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     - {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
-  buildInProgressSprite: {fileID: 21300000, guid: 4a76d864c1e35634582a131cd8196730, type: 3}
+  buildInProgressSprite: {fileID: 0}

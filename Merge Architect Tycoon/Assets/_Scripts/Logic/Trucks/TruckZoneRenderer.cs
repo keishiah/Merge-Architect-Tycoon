@@ -5,18 +5,21 @@ using UnityEngine.UI;
 using Zenject;
 
 [RequireComponent(typeof(Image))]
-public class TruckRender : MonoBehaviour
+public class TruckZoneRenderer : MonoBehaviour
 {
     [SerializeField] public float _startXPosition;
     [SerializeField] public float _stopXPosition;
     [SerializeField] public float _endXPosition;
-    [SerializeField] public float _speed;
 
     [Inject] private SlotsManager _slotsManager;
+    [Inject] private PlayerProgress _playerProgress;
+    [Inject] private TruckProvider _truckProvider;
+
     [SerializeField] private GameObject _resourcePrefab;
     [SerializeField] private Transform _resourceHolder;
-    private Queue<Truck> _trucks = new();
+
     private TruckBehaviour _truckBehaviour;
+    private Truck _currentTruck;
     public bool _isNeedToUnload { get; private set; }
 
     private void Awake()
@@ -26,7 +29,10 @@ public class TruckRender : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_trucks.Count > 0 && _truckBehaviour == null)
+        if (_playerProgress.Trucks == null || _playerProgress.Trucks.ToArrive == null)
+            return;
+
+        if (_playerProgress.Trucks.ToArrive.Length > 0 && _currentTruck == null)
             ToNextTruck();
     }
 
@@ -34,14 +40,13 @@ public class TruckRender : MonoBehaviour
     {
         switch (_truckBehaviour)
         {
-            case TruckToUnload behaviour:
+            case TruckToUnload:
                 NextStageUnloadind();
                 break;
-            case TruckUnloading behaviour:
+            case TruckUnloading:
                 NextStageGoAway();
                 break;
-            case TruckGoAway behaviour:
-                _trucks.Dequeue();
+            case TruckGoAway:
                 ToNextTruck();
                 if (_truckBehaviour == null)
                     return;
@@ -52,12 +57,15 @@ public class TruckRender : MonoBehaviour
     }
     private void ToNextTruck()
     {
-        if (_trucks.Count == 0)
+        if (_playerProgress.Trucks.ToArrive.Length == 0)
         {
             UpdateOff();
             _truckBehaviour = null;
+            _currentTruck = null;
             return;
         }
+
+        _currentTruck = _truckProvider.Dequeue();
 
         PaintTheTruck();
 
@@ -66,7 +74,7 @@ public class TruckRender : MonoBehaviour
             _rectTtransform = GetComponent<RectTransform>(),
             _startXPosition = _startXPosition,
             _endXPosition = _stopXPosition,
-            _speed = _speed,
+            _speed = _currentTruck.Speed,
         };
         _truckBehaviour.Enter();
     }
@@ -75,11 +83,12 @@ public class TruckRender : MonoBehaviour
         _truckBehaviour = new TruckUnloading()
         {
             _slotsManager = _slotsManager,
-            _truck = _trucks.Peek(),
-            _truckPresenter = this,
+            _truck = _currentTruck,
+            _truckZone = this,
         };
         _truckBehaviour.Enter();
     }
+
     private void NextStageGoAway()
     {
         _truckBehaviour = new TruckGoAway()
@@ -87,16 +96,11 @@ public class TruckRender : MonoBehaviour
             _rectTtransform = GetComponent<RectTransform>(),
             _startXPosition = _stopXPosition,
             _endXPosition = _endXPosition,
-            _speed = _speed,
+            _speed = _currentTruck.Speed,
         };
         _truckBehaviour.Enter();
     }
 
-    public void AddNewTruck(Truck truck)
-    {
-        _trucks.Enqueue(truck);
-        UpdateOn();
-    }
     private void Update()
     {
         if (_truckBehaviour == null)
@@ -128,9 +132,8 @@ public class TruckRender : MonoBehaviour
     }
     private void PaintTheTruck()
     {
-        Truck truck = _trucks.Peek();
-        GetComponent<Image>().sprite = truck.SpriteImage;
-        List<MergeItem> mergeItems = truck.TruckCargo;
+        //GetComponent<Image>().sprite = truck.SpriteImage;
+        List<MergeItem> mergeItems = _currentTruck.TruckCargo;
         int spritesCount = _resourceHolder.childCount;
         for (int i = 0; i < mergeItems.Count; i++)
         {
@@ -138,13 +141,12 @@ public class TruckRender : MonoBehaviour
             {
                 Transform resourceTransform = _resourceHolder.GetChild(i);
                 resourceTransform.gameObject.SetActive(true);
-                Image resourceSprite = resourceTransform.GetComponentInChildren<Image>();
-                resourceSprite.sprite = truck.TruckCargo[i].itemSprite;
+                resourceTransform.GetComponentInChildren<Image>().sprite = mergeItems[i].ItemSprite;
             }
             else
             {
                 GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
-                newResource.GetComponentInChildren<Image>().sprite = truck.TruckCargo[i].itemSprite;
+                newResource.GetComponentInChildren<Image>().sprite = mergeItems[i].ItemSprite;
             }
         }
     }
