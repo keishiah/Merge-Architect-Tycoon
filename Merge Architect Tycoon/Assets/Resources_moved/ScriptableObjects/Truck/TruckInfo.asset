@@ -20,15 +20,15 @@ MonoBehaviour:
   - TruskUpdate: 0
     SoftCost: 100
   - TruskUpdate: 1
-    SoftCost: 0
+    SoftCost: 500
   - TruskUpdate: 2
-    SoftCost: 0
+    SoftCost: 1500
   - TruskUpdate: 0
-    SoftCost: 0
+    SoftCost: 5000
   - TruskUpdate: 1
-    SoftCost: 0
+    SoftCost: 15000
   - TruskUpdate: 2
-    SoftCost: 0
+    SoftCost: 50000
   - TruskUpdate: 0
     SoftCost: 0
   - TruskUpdate: 1
@@ -36,6 +36,17 @@ MonoBehaviour:
   - TruskUpdate: 2
     SoftCost: 0
   BoostLimit: 10
+  BoostCost:
+  - IsSoft: 1
+    Cost: 0
+  - IsSoft: 1
+    Cost: 50
+  - IsSoft: 1
+    Cost: 500
+  - IsSoft: 0
+    Cost: 5
+  - IsSoft: 0
+    Cost: 50
   MergeItems:
   - Resource: {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
     SoftCost: 10

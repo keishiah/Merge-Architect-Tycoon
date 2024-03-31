@@ -11,6 +11,7 @@ public class TruckPanel : MonoBehaviour
     public Button UpdateTruckButton;
     public TextMeshProUGUI UpdateTruckButtonText;
     public Button BoostTruckButton;
+    public TextMeshProUGUI BoostTruckButtonText;
     public TextMeshProUGUI[] BoostTexts;
     public Slider[] BoostSliders;
     public Button[] ResourceButtons;
@@ -47,9 +48,9 @@ public class TruckPanel : MonoBehaviour
         UpdateTruckButton.interactable = interactable;
     }
 
-    public void BoostButtonRefresh()
+    public void BoostButtonRefresh(int i)
     {
-        throw new NotImplementedException();
+        BoostTruckButtonText.text = $"BOOST ${i}";
     }
 
     public void ResourcesRefresh(int level)

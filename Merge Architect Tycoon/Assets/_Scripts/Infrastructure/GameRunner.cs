@@ -1,12 +1,14 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Zenject;
 
 public class GameRunner : MonoBehaviour
 {
-    private const string gameVersionKey = "Version";
+    private bool _isNeedDeleteAll = false;
     private IStateFactory _stateFactory;
     [SerializeField] private bool _skipTutorial;
+    [SerializeField] private bool _clearPrefs;
 
     [Inject]
     void Construct(IStateFactory stateFactory)
@@ -14,32 +16,47 @@ public class GameRunner : MonoBehaviour
         _stateFactory = stateFactory;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        CheckSaves();
+        //if need delete all prefs, await new frame.
+        if(!_isNeedDeleteAll)
+            yield return null;
         CheckTutorial();
         CheckVersion();
         CreateGameBootstrapper();
     }
 
-    private void CheckTutorial()
+    //Regex: https://regex101.com/
+    //If new version => delete all saves
+    private void CheckSaves()
     {
-        if (!_skipTutorial)
-            PlayerPrefs.SetString(SaveKey.NeedSkipTutorial.ToString(), "false");
-        else
-            PlayerPrefs.SetString(SaveKey.NeedSkipTutorial.ToString(), "true");
+        string numbersOnlyVersion = Regex.Replace(Application.version, "[^0-9.]", "");
+
+        if (!PlayerPrefs.HasKey(SaveKey.GameVersion.ToString())
+            || numbersOnlyVersion != PlayerPrefs.GetString(SaveKey.GameVersion.ToString())
+            || _clearPrefs)
+        {
+            _isNeedDeleteAll = true;
+            PlayerPrefs.DeleteAll();
+        }
     }
 
-    //If new version => delete all saves
-    //Regex: https://regex101.com/
+    private void CheckTutorial()
+    {
+        if (_skipTutorial)
+            PlayerPrefs.SetString(SaveKey.NeedSkipTutorial.ToString(), "true");
+        else
+            PlayerPrefs.SetString(SaveKey.NeedSkipTutorial.ToString(), "false");
+    }
+
     private void CheckVersion()
     {
         string numbersOnlyVersion = Regex.Replace(Application.version, "[^0-9.]", "");
 
-        if (!PlayerPrefs.HasKey(gameVersionKey)
-            || numbersOnlyVersion != PlayerPrefs.GetString(gameVersionKey))
+        if (_isNeedDeleteAll)
         {
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetString(gameVersionKey, numbersOnlyVersion);
+            PlayerPrefs.SetString(SaveKey.GameVersion.ToString(), numbersOnlyVersion);
         }
     }
 

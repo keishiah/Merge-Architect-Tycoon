@@ -66,7 +66,7 @@ public class PlayerProgressService
     }
     public void AddBoost(int count)
     {
-        _progress.Trucks.BoostCount.Value = count;
+        _progress.Trucks.BoostCount.Value += count;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void RemoveBoost()

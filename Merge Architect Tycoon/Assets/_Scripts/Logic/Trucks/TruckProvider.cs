@@ -73,7 +73,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
             return;
         }
 
-        var nextUpdate = _truckInfo.Upgrades[level];
+        TruckUpdates nextUpdate = _truckInfo.Upgrades[level];
         string text = $"+{nextUpdate.TruskUpdate} \n {nextUpdate.SoftCost}$";
         _truckPanel.UpdateButtonRefresh(text);
     }
@@ -86,11 +86,17 @@ public class TruckProvider : IInitializableOnSceneLoaded
     }
     private void BoostTrucks()
     {
-        int boostCount = _truckInfo.BoostLimit - _data.BoostCount.Value;
+        int boostCost = _truckInfo.BoostCost[_data.BoostBuyLevel].Cost;
 
-        if(boostCount > 0)
-            _progressService.AddBoost(boostCount);
-        _truckPanel.RenderBoost(_truckInfo.BoostLimit);
+        if (!_progressService.SpendCoins(boostCost))
+            return;
+
+        if (_data.BoostBuyLevel + 1 < _truckInfo.BoostCost.Length)
+            _data.BoostBuyLevel++;
+
+        _progressService.AddBoost(_truckInfo.BoostLimit);
+
+        _truckPanel.BoostButtonRefresh(_truckInfo.BoostCost[_data.BoostBuyLevel].Cost);
     }
 
     public void BuyTruck()
