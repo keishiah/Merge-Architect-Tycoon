@@ -118,16 +118,18 @@ public class TruckZoneRenderer : MonoBehaviour
 
     public void ChanceTruckSpeed(int newSpeed)
     {
-        _currentTruck.Speed = newSpeed;
-        switch (_truckBehaviour)
-        {
-            case TruckToUnload truckToUnload:
-                truckToUnload.Speed = newSpeed;
-                break;
-            case TruckGoAway truckGoAway:
-                truckGoAway.Speed = newSpeed;
-                break;
-        }
+        if(_currentTruck != null)
+            _currentTruck.Speed = newSpeed;
+        if(_truckBehaviour != null)
+            switch (_truckBehaviour)
+            {
+                case TruckToUnload truckToUnload:
+                    truckToUnload.Speed = newSpeed;
+                    break;
+                case TruckGoAway truckGoAway:
+                    truckGoAway.Speed = newSpeed;
+                    break;
+            }
     }
     public void ReadyToUnload() => _isNeedToUnload = true;
     public void UpdateOn()
