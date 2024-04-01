@@ -94,9 +94,9 @@ public class CreateBuildingPopupPresenter
         foreach (var resource in selectedBuildingData.itemsToCreate.Distinct())
         {
             var currentResourceCount = _itemsCatalogue.GetItemCount(resource);
-            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.itemName, resource.itemSprite,
-                Mathf.Min(currentResourceCount, resources.Count((item => item.itemName == resource.itemName))),
-                resources.Count((item => item.itemName == resource.itemName)));
+            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.ItemName, resource.ItemSprite,
+                Mathf.Min(currentResourceCount, resources.Count((item => item.ItemName == resource.ItemName))),
+                resources.Count((item => item.ItemName == resource.ItemName)));
         }
 
         _createBuildingPopup.resourcesPanel.RenderCoinsCount(

@@ -22,7 +22,7 @@ public class ItemsCatalogue : MonoBehaviour
     {
         return slotsManager.Slots
             .FindAll(
-                s => s.CurrentItem && s.CurrentItem.itemName == item.itemName && s.SlotState == SlotState.Draggable)
+                s => s.CurrentItem && s.CurrentItem.ItemName == item.ItemName && s.SlotState == SlotState.Draggable)
             .Count;
     }
 
