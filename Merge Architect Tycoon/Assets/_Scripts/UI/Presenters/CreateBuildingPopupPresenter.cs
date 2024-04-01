@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 public class CreateBuildingPopupPresenter
@@ -23,7 +24,7 @@ public class CreateBuildingPopupPresenter
 
     [Inject]
     void Construct(StaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
-        BuildingProvider buildingProvider, 
+        BuildingProvider buildingProvider,
         PlayerProgress playerProgress, PlayerProgressService playerProgressService,
         CreateBuildingPopup createBuildingPopup, CreateBuildingPopupScroller createBuildingPopupScroller)
     {
@@ -74,14 +75,8 @@ public class CreateBuildingPopupPresenter
     {
         TurnOfPreviousOutline(selectedBuilding);
         _selectedBuildingElement = selectedBuilding;
-        if (HasEnoughResources(_staticDataService.BuildingInfoDictionary[selectedBuilding.buildingName]))
-        {
-            _createBuildingPopup.OpenCreateBuildingButton();
-        }
-        else
-        {
-            _createBuildingPopup.OpenMergeButton();
-        }
+        _createBuildingPopup.OpenPanel();
+        SetBuildingResources();
     }
 
     public void CreateBuildingButtonClicked()
@@ -89,6 +84,23 @@ public class CreateBuildingPopupPresenter
         BuildingInfo buildingData = _staticDataService.BuildingInfoDictionary[_selectedBuildingElement.buildingName];
         CreateBuilding(buildingData.itemsToCreate,
             buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
+    }
+
+    private void SetBuildingResources()
+    {
+        BuildingInfo selectedBuildingData =
+            _staticDataService.BuildingInfoDictionary[_selectedBuildingElement.buildingName];
+        var resources = selectedBuildingData.itemsToCreate;
+        foreach (var resource in selectedBuildingData.itemsToCreate.Distinct())
+        {
+            var currentResourceCount = _itemsCatalogue.GetItemCount(resource);
+            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.ItemName, resource.ItemSprite,
+                Mathf.Min(currentResourceCount, resources.Count((item => item.ItemName == resource.ItemName))),
+                resources.Count((item => item.ItemName == resource.ItemName)));
+        }
+
+        _createBuildingPopup.resourcesPanel.RenderCoinsCount(
+            _playerProgress.Riches.Coins.Value, selectedBuildingData.coinsCountToCreate);
     }
 
     private void SortBuildingElements()
@@ -124,8 +136,6 @@ public class CreateBuildingPopupPresenter
         {
             _elements[x].SetBuildingName(_buildingInfo[x].buildingName);
             _elements[x].SetBuildingImage(_buildingInfo[x].buildPopupSprite);
-            _elements[x].SetCoinsPriceText(_buildingInfo[x].coinsCountToCreate.ToString());
-            _elements[x].SetResourcesImages(_buildingInfo[x].itemsToCreate);
             _elements[x].SetPresenter(this);
         }
     }

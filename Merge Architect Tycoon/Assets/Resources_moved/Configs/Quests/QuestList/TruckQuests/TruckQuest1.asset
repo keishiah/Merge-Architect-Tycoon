@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfba54361b74c4696bd2a2334f02640, type: 3}
   m_Name: TruckQuest1
   m_EditorClassIdentifier: 
-  questId: Truck1
-  questText: Create 3 trucks
-  questSprite: {fileID: 21300000, guid: 6005c63e9466f3e4cb63dd155911e20a, type: 3}
-  requiredForActivationQuestId: TutorialBuilding
-  giveQuestCondition: 1
+  ID: 11
+  Text: 222
+  Sprite: {fileID: 547126245, guid: e86d4490498d35d47b69e3ef17448a63, type: 3}
+  RequiredForActivationQuestId: 1
+  GiveQuestCondition: 1
   coinsReward:
     rewardSprite: {fileID: 21300000, guid: 1f9838d6cfe445e40ab5575616730d23, type: 3}
     rewardAmount: 64633
-  truckQuestItem:
-    itemText: Create 3 trucks
-    itemImage: {fileID: 21300000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
-    itemCount: 3
