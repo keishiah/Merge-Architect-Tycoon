@@ -25,7 +25,7 @@ public class RichPresenter
 // #if UNITY_EDITOR
         if (Application.version.StartsWith("d"))
         {
-            _progressService.AddCoins(100500);
+            _progressService.AddCoins(100);
         }
         // else
         // {
@@ -40,7 +40,7 @@ public class RichPresenter
     {
         if (Application.version.StartsWith("d"))
         {
-            _progressService.AddDiamonds(100500);
+            _progressService.AddDiamonds(100);
         }
     }
 }

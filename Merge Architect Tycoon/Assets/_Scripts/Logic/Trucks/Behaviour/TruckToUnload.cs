@@ -3,27 +3,28 @@ using UnityEngine;
 
 public class TruckToUnload : TruckBehaviour
 {
-    public float _startXPosition;
-    public float _endXPosition;
-    public float _speed = 250f;
+    public float StartXPosition;
+    public float EndXPosition;
+    public float Speed = 250f;
 
-    public RectTransform _rectTtransform;
+    public RectTransform RectTtransform;
 
     public override void Enter()
     {
-        _rectTtransform.anchoredPosition = new Vector2(_startXPosition, 0);
-        _time = DateTime.Now;
+        RectTtransform.anchoredPosition = new Vector2(StartXPosition, 0);
+        Time = DateTime.Now;
     }
     public override void Update()
     {
-        if(_rectTtransform.anchoredPosition.x > _endXPosition)
+        if(RectTtransform.anchoredPosition.x >= EndXPosition)
         {
+            RectTtransform.anchoredPosition = new Vector2(EndXPosition, 0);
             IsComplete = true;
             return;
         }
 
-        TimeSpan inWayTime = DateTime.Now - _time;
-        float traversedPath = (float)inWayTime.TotalSeconds * _speed;
-        _rectTtransform.anchoredPosition = new Vector2(_startXPosition + traversedPath, 0);
+        TimeSpan inWayTime = DateTime.Now - Time;
+        float traversedPath = (float)inWayTime.TotalSeconds * Speed;
+        RectTtransform.anchoredPosition = new Vector2(StartXPosition + traversedPath, 0);
     }
 }

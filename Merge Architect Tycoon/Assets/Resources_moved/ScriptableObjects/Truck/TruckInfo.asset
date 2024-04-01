@@ -49,6 +49,6 @@ MonoBehaviour:
     Cost: 50
   MergeItems:
   - Resource: {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
-    SoftCost: 10
+    SoftCost: 0
   - Resource: {fileID: 11400000, guid: 65c5a375beccce046bf31cfbe7208a49, type: 2}
-    SoftCost: 50
+    SoftCost: 100

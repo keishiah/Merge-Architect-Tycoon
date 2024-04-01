@@ -71,10 +71,10 @@ public class TruckZoneRenderer : MonoBehaviour
 
         _truckBehaviour = new TruckToUnload()
         {
-            _rectTtransform = GetComponent<RectTransform>(),
-            _startXPosition = _startXPosition,
-            _endXPosition = _stopXPosition,
-            _speed = _currentTruck.Speed,
+            RectTtransform = GetComponent<RectTransform>(),
+            StartXPosition = _startXPosition,
+            EndXPosition = _stopXPosition,
+            Speed = _currentTruck.Speed,
         };
         _truckBehaviour.Enter();
     }
@@ -93,10 +93,10 @@ public class TruckZoneRenderer : MonoBehaviour
     {
         _truckBehaviour = new TruckGoAway()
         {
-            _rectTtransform = GetComponent<RectTransform>(),
-            _startXPosition = _stopXPosition,
-            _endXPosition = _endXPosition,
-            _speed = _currentTruck.Speed,
+            RectTtransform = GetComponent<RectTransform>(),
+            StartXPosition = _stopXPosition,
+            EndXPosition = _endXPosition,
+            Speed = _currentTruck.Speed,
         };
         _truckBehaviour.Enter();
     }
@@ -110,15 +110,24 @@ public class TruckZoneRenderer : MonoBehaviour
         }
 
         _truckBehaviour.Update();
-        Refresh();
+        _isNeedToUnload = false;
 
         if (_truckBehaviour.IsComplete)
             NextStage();
     }
 
-    private void Refresh()
+    public void ChanceTruckSpeed(int newSpeed)
     {
-        _isNeedToUnload = false;
+        _currentTruck.Speed = newSpeed;
+        switch (_truckBehaviour)
+        {
+            case TruckToUnload truckToUnload:
+                truckToUnload.Speed = newSpeed;
+                break;
+            case TruckGoAway truckGoAway:
+                truckGoAway.Speed = newSpeed;
+                break;
+        }
     }
     public void ReadyToUnload() => _isNeedToUnload = true;
     public void UpdateOn()
