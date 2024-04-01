@@ -18,6 +18,14 @@ public class ItemsCatalogue : MonoBehaviour
             .Count;
     }
 
+    public int GetItemCount(MergeItem item)
+    {
+        return slotsManager.Slots
+            .FindAll(
+                s => s.CurrentItem && s.CurrentItem.ItemName == item.ItemName && s.SlotState == SlotState.Draggable)
+            .Count;
+    }
+
     public bool CheckHasItems(List<MergeItem> items)
     {
         foreach (var item in items.Distinct())
