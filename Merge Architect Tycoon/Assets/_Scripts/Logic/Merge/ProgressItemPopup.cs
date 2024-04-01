@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class ProgressItemInfo : MonoBehaviour
+public class ProgressItemPopup : MonoBehaviour
 {
     [SerializeField]
     private ItemInfoSlot infoSlotPrefab;
@@ -12,14 +12,12 @@ public class ProgressItemInfo : MonoBehaviour
     private TMP_Text mainText;
     [SerializeField]
     private Transform gridPanel;
-    [Inject]
-    private MergeItemsManager generalOopenedManager;
 
     private List<ItemInfoSlot> itemDropSlotsList = new List<ItemInfoSlot>();
 
     public void OpenProgressItemInfo(MergeItem m_mergeItem)
     {
-        GetComponent<Image>().sprite = m_mergeItem.itemSprite;
+        GetComponent<Image>().sprite = m_mergeItem.ItemSprite;
         //string[] name = m_mergeItem.name.Split('_');
 
         //mainText.text = name[0];

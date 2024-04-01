@@ -16,6 +16,6 @@ MonoBehaviour:
   - Item: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     WeightOfChance: 9
   - Item: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
-    WeightOfChance: 3
+    WeightOfChance: 27
   - Item: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
-    WeightOfChance: 1
+    WeightOfChance: 81

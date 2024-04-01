@@ -22,7 +22,7 @@ public class InformationPanel : MonoBehaviour
 
     public SelectedItem selectedItem;
 
-    public ProgressItemInfo _progressItemInfo;
+    public ProgressItemPopup _progressItemInfo;
 
     public void ConfigPanel(SlotRenderer slot)
     {
@@ -39,10 +39,10 @@ public class InformationPanel : MonoBehaviour
 
         ActivateInfromPanel(true);
 
-        itemNameText.text = mergeItem.itemName;
-        itemDescriptionText.text = mergeItem.itemDescrpition;
-        itemLvlText.text = $"(Lvl {mergeItem.itemLevel})";
-        itemCostText.text = $"+{mergeItem.itemCost}";
+        itemNameText.text = mergeItem.ItemName;
+        itemDescriptionText.text = mergeItem.ItemDescrpition;
+        itemLvlText.text = $"(Lvl {mergeItem.ItemLevel})";
+        itemCostText.text = $"+{mergeItem.ItemCost}";
         sellButton.SetActive(false);
         deleteButton.SetActive(false);
         selectedItem.SelectSlot(slotCurrent.transform);
@@ -52,14 +52,10 @@ public class InformationPanel : MonoBehaviour
             switch (mergeItem.itemType)
             {
                 case ItemType.sellable:
-                    if (mergeItem.itemCost > 0)
-                    {
+                    if (mergeItem.ItemCost > 0)
                         sellButton.SetActive(true);
-                    }
                     else
-                    {
                         deleteButton.SetActive(true);
-                    }
                     break;
                 case ItemType.spawner:
                     break;
@@ -95,7 +91,7 @@ public class InformationPanel : MonoBehaviour
         if (slotCurrent.IsEmpty)
             return;
 
-        int coins = (int)slotCurrent.CurrentItem.itemCost;
+        int coins = (int)slotCurrent.CurrentItem.ItemCost;
         _player.AddCoins(coins);
         Debug.Log($"Item sell to: {coins}");
 

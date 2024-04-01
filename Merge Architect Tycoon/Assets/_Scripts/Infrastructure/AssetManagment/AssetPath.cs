@@ -11,5 +11,4 @@ public static class AssetName
     public const string NonTouchableSlot = "NonTouchableSlot";
     public const string DeliveryZone = "DeliveryZone";
     public const string TutorialPrefab = "Tutorial";
-    public const string TruckConfig = "TruckConfig";
 }

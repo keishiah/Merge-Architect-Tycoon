@@ -14,12 +14,6 @@ public class MergeGrid : MonoBehaviour
     [Inject] public SlotsManager slotsManager;
     [Inject] private DiContainer _container;
     [Inject] private MergeLevel level;
-    [Inject] private MergeItemsManager mergeItemsGeneralOpened;
-
-    // private void Start()
-    // {
-    //     InitializeGrid();
-    // }
 
     public void OnSceneLoaded()
     {
@@ -29,7 +23,6 @@ public class MergeGrid : MonoBehaviour
             level.isNeedResetLevel = false;
         }
 
-        mergeItemsGeneralOpened.LoadItemGeneralOpened();
         Input.multiTouchEnabled = false;
         LoadInventory();
     }

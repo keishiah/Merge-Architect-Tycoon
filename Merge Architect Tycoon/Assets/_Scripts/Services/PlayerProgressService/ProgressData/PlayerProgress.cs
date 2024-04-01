@@ -9,5 +9,5 @@ public class PlayerProgress
     public TutorialData Tutorial { get; set; }
     public InventoryData Inventory { get; set; }
     public QuestsData Quests { get; set; }
-    public TruckData Trucks { get; set; }
+    public TrucksData Trucks { get; set; }
 }

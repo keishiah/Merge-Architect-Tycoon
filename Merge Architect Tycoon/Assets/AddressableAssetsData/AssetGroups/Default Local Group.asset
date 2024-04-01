@@ -28,11 +28,13 @@ MonoBehaviour:
   - m_GUID: 718bf0ffc49bbbf43a3ae4aa83cfa82f
     m_Address: NonTouchableSlot
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Slot
   - m_GUID: b865db285eb78e244931dca027324e2e
     m_Address: DeliveryZone
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Slot
   - m_GUID: 991890a890c7eab4ca64c9309dbf4b9d
     m_Address: DistrictsInfo
     m_ReadOnly: 0
@@ -49,9 +51,10 @@ MonoBehaviour:
   - m_GUID: 32efdbadd3a41354fa5fae40ae9fc932
     m_Address: BlockedSlot
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Slot
   - m_GUID: 3d1d7a1d876351e4f88b8c344a89db59
-    m_Address: TruckInfo
+    m_Address: TrucksInfo
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 27d98c0f03958a74db4e5e1a5f78d6a1

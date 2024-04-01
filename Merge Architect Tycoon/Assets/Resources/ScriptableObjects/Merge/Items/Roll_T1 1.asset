@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Roll_T1 1
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescrpition: 
-  itemLevel: 1
-  itemCost: 10
+  ItemName: 
+  ItemDescrpition: 
+  ItemLevel: 1
+  ItemCost: 0
   itemType: 0
-  itemSprite: {fileID: 21300000, guid: c031b533fab6c714d84b3b0dcae79d0a, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 168b299298ce7e74aa9adc73eef2797e, type: 3}
   nextItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}
