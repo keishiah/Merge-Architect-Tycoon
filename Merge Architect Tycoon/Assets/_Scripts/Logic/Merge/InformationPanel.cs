@@ -39,7 +39,7 @@ public class InformationPanel : MonoBehaviour
 
         ActivateInfromPanel(true);
 
-        itemNameText.text = mergeItem.ItemName;
+        // itemNameText.text = mergeItem.ItemName;
         itemDescriptionText.text = mergeItem.ItemDescrpition;
         itemLvlText.text = $"(Lvl {mergeItem.ItemLevel})";
         itemCostText.text = $"+{mergeItem.ItemCost}";

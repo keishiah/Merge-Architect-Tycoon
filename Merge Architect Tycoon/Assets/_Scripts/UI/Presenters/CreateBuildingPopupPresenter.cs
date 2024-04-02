@@ -77,6 +77,8 @@ public class CreateBuildingPopupPresenter
         _selectedBuildingElement = selectedBuilding;
         _createBuildingPopup.OpenPanel();
         SetBuildingResources();
+        _createBuildingPopup.resourcesPanel.SetButtonInteractable(HasEnoughResources(_buildingInfo
+            .FirstOrDefault(x => x.buildingName == _selectedBuildingElement.buildingName)));
     }
 
     public void CreateBuildingButtonClicked()
@@ -91,12 +93,13 @@ public class CreateBuildingPopupPresenter
         BuildingInfo selectedBuildingData =
             _staticDataService.BuildingInfoDictionary[_selectedBuildingElement.buildingName];
         var resources = selectedBuildingData.itemsToCreate;
+        _createBuildingPopup.resourcesPanel.HideAllResources();
         foreach (var resource in selectedBuildingData.itemsToCreate.Distinct())
         {
             var currentResourceCount = _itemsCatalogue.GetItemCount(resource);
-            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.ItemName, resource.ItemSprite,
-                Mathf.Min(currentResourceCount, resources.Count((item => item.ItemName == resource.ItemName))),
-                resources.Count((item => item.ItemName == resource.ItemName)));
+            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.name, resource.ItemSprite,
+                Mathf.Min(currentResourceCount, resources.Count((item => item.name == resource.name))),
+                resources.Count((item => item.name == resource.name)));
         }
 
         _createBuildingPopup.resourcesPanel.RenderCoinsCount(
