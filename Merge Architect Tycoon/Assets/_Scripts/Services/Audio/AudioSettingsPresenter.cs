@@ -23,11 +23,8 @@ public class AudioSettingsPresenter : IInitializableOnSceneLoaded
         _settingsPanel.EffectsSoundSlider.onValueChanged.AddListener(_audioService.SetEffectsVolume);
         _settingsPanel.BackgroundSoundButton.onClick.AddListener(_audioService.SwitchBackground);
         _settingsPanel.EffectsSoundButton.onClick.AddListener(_audioService.SwitchEffects);
-
-        //_audio.IsBackgroundSoundOn.Subscribe(_audioPlayer.SetBackgroundEnabled);
-        //_audio.IsEffectsSoundOn.Subscribe(_audioPlayer.SetEffectsEnabled);
-        //_audio.BackgroundSound.Subscribe(_audioService.SetBackgroundVolume);
-        //_audio.EffectsSound.Subscribe(_audioService.SetEffectsVolume);
+        _settingsPanel.BackgroundSoundButton.onClick.AddListener(_settingsPanel.SwitchBackgroundSound);
+        _settingsPanel.EffectsSoundButton.onClick.AddListener(_settingsPanel.SwitchEffectsSound);
 
         _audio.IsBackgroundSoundOn.Subscribe(_audioPlayer.SetBackgroundEnabled);
         _audio.IsEffectsSoundOn.Subscribe(_audioPlayer.SetEffectsEnabled);
