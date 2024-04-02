@@ -14,7 +14,7 @@ public class ItemsCatalogue : MonoBehaviour
     {
         return slotsManager.Slots
             .FindAll(
-                s => s.CurrentItem && s.CurrentItem.ItemName == item.ItemName && s.SlotState == SlotState.Draggable)
+                s => s.CurrentItem && s.CurrentItem.name == item.name && s.SlotState == SlotState.Draggable)
             .Count;
     }
 
@@ -22,7 +22,7 @@ public class ItemsCatalogue : MonoBehaviour
     {
         return slotsManager.Slots
             .FindAll(
-                s => s.CurrentItem && s.CurrentItem.ItemName == item.ItemName && s.SlotState == SlotState.Draggable)
+                s => s.CurrentItem && s.CurrentItem.name == item.name && s.SlotState == SlotState.Draggable)
             .Count;
     }
 
@@ -30,7 +30,7 @@ public class ItemsCatalogue : MonoBehaviour
     {
         foreach (var item in items.Distinct())
         {
-            if (items.Select(x => x.ItemName == item.ItemName).Count() > GetItemsCount(item))
+            if (items.Select(x => x.name == item.name).Count() > GetItemsCount(item))
                 return false;
         }
 
@@ -42,7 +42,7 @@ public class ItemsCatalogue : MonoBehaviour
         foreach (var item in items)
         {
             var slotItem = slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
-                                                                  s.CurrentItem.ItemName == item.ItemName &&
+                                                                  s.CurrentItem.name == item.name &&
                                                                   s.SlotState == SlotState.Draggable);
             if (slotItem != null)
             {
