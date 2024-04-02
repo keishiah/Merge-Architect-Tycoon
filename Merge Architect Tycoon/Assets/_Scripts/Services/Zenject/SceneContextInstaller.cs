@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using static RichPanel;
 
 public class SceneContextInstaller : MonoInstaller
 {
@@ -11,6 +10,7 @@ public class SceneContextInstaller : MonoInstaller
     [SerializeField] private QuestPopup questPopup;
     [SerializeField] private TruckPanel truckPanel;
     [SerializeField] private RichPanel richPanel;
+    [SerializeField] private SettingsPanel settingsPanel;
     [SerializeField] private EffectsPresenter effectsPresenter;
 
     public override void InstallBindings()
@@ -25,6 +25,7 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<QuestGiver>().AsSingle();
         Container.Bind<BuildingCreator>().AsSingle();
         Container.Bind<RichPresenter>().AsSingle();
+        Container.Bind<AudioSettingsPresenter>().AsSingle();
 
         Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();
         Container.Bind<CreateBuildingPopupScroller>().FromInstance(createBuildingPopupScroller).AsSingle();
@@ -33,6 +34,7 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<QuestPopup>().FromInstance(questPopup).AsSingle();
         Container.Bind<TruckPanel>().FromInstance(truckPanel).AsSingle();
         Container.Bind<RichPanel>().FromInstance(richPanel).AsSingle();
+        Container.Bind<SettingsPanel>().FromInstance(settingsPanel).AsSingle();
 
         Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
 

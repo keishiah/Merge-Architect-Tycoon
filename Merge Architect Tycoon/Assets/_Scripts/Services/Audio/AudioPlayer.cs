@@ -8,6 +8,8 @@ public class AudioPlayer : MonoBehaviour
     private StaticDataService _staticDataService;
     private ApplicationSettings _settings;
 
+    private AudioSettings _audioSettings => _settings.Audio;
+
     [Inject]
     void Construct(StaticDataService staticDataService, ApplicationSettings audioSettings)
     {
@@ -23,18 +25,21 @@ public class AudioPlayer : MonoBehaviour
     public void InitializeAudioPlayer()
     {
         _backgroundMusicAudioSource.clip = _staticDataService.AudioData.backgroundMusic;
-        _backgroundMusicAudioSource.loop = true;
+        _backgroundMusicAudioSource.Play();
 
-        SetBackgroundEnabled(_settings.IsBackgroundSoundOn.Value);
-        SetEffectsEnabled(_settings.IsEffectsSoundOn.Value);
-        SetBackgroundVolume(_settings.BackgroundSoundValue.Value);
-        SetEffectsVolume(_settings.EffectsSoundValue.Value);
+        SetBackgroundEnabled(_audioSettings.IsBackgroundSoundOn.Value);
+        SetEffectsEnabled(_audioSettings.IsEffectsSoundOn.Value);
+        SetBackgroundVolume(_audioSettings.BackgroundSound.Value);
+        SetEffectsVolume(_audioSettings.EffectsSound.Value);
     }
 
     public void PlayBackgroundMusic() => _backgroundMusicAudioSource.Play();
 
     public void PlayUiSound(UiSoundTypes soundTypesType)
     {
+        if (!_uiMusicAudioSource.enabled)
+            return;
+
         switch (soundTypesType)
         {
             case UiSoundTypes.ButtonClick:

@@ -30,6 +30,10 @@ public class SettingsPanel : MonoBehaviour
     {
         BackgroundSoundImage.sprite = _BackgroundOff;
     }
+    public void SerBackgroundVolume(float volume)
+    {
+        BackgroundSoundSlider.value = volume;
+    }
 
     public void SwitchEffectsSound()
     {
@@ -49,4 +53,8 @@ public class SettingsPanel : MonoBehaviour
         EffectsSoundImage.sprite = _EffectsOff;
     }
 
+    public void SerEffectsVolume(float volume)
+    {
+        EffectsSoundSlider.value = volume;
+    }
 }
