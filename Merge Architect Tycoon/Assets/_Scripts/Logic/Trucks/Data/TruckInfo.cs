@@ -10,7 +10,10 @@ public class TruckInfo : ScriptableObject
     public int MaxSpeed;
 
     public TruckUpdates[] Upgrades;
+
     public int BoostLimit;
+    public TruckBoostCost[] BoostCost;
+
     public TruckResources[] MergeItems;
     //public Sprite[] Sprites;
 }

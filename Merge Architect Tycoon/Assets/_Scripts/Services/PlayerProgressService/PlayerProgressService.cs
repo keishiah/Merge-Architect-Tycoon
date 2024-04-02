@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class PlayerProgressService
@@ -66,12 +67,17 @@ public class PlayerProgressService
     }
     public void AddBoost(int count)
     {
-        _progress.Trucks.BoostCount.Value = count;
+        _progress.Trucks.BoostCount.Value += count;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void RemoveBoost()
     {
         _progress.Trucks.BoostCount.Value--;
+        SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
+    }
+    public void SetResource(int resourceIndex)
+    {
+        _progress.Trucks.CurrentResource = resourceIndex;
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public void EnqueueTruck(TruckData newTtruck)

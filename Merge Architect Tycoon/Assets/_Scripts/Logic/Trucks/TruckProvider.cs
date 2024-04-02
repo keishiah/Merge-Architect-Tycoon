@@ -13,31 +13,50 @@ public class TruckProvider : IInitializableOnSceneLoaded
     private TruckInfo _truckInfo => _staticDataService.TruckInfo;
     private TrucksData _data => _playerProgress.Trucks;
 
-    private int currentResource = 0;
+    private int resourceCost => _truckInfo.MergeItems[_data.CurrentResource].SoftCost;
+    private int boostCost => _truckInfo.BoostCost[_data.BoostBuyLevel].Cost;
+    private int updateCost => _truckInfo.Upgrades[_data.UpdateLevel].SoftCost;
 
     public void OnSceneLoaded()
     {
         CalculateUpdateData();
 
+        _playerProgress.Riches.Coins.Subscribe(Interactebles);
         _truckPanel.UpdateTruckButton.onClick.AddListener(UpdateTrucks);
         _truckPanel.BoostTruckButton.onClick.AddListener(BoostTrucks);
-        _truckPanel.BuyTruckButton.onClick.AddListener(BuyTruck);
+        _truckPanel.BuyTruckButtonsAddListener(BuyTruck);
         _data.BoostCount.Subscribe(_truckPanel.RenderBoost);
-
-        _truckPanel.BoostInit(_truckInfo.BoostLimit);
-        _truckPanel.RenderBoost(_data.BoostCount.Value);
+        _truckPanel.SubscribeResources(SetResource);
 
         RenderUpdateButton();
 
-        _truckPanel.SubscribeResources(SetResource);
-        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
+        _truckPanel.BoostInit(_truckInfo.BoostLimit);
+        _truckPanel.RenderBoost(_data.BoostCount.Value);
+        _truckPanel.BoostButtonRefresh(boostCost);
 
-        //_truckZone.
+        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
+        _truckPanel.ResourceChoise(_data.CurrentResource);
+
+        _truckPanel.RenderCost(resourceCost);
+        Interactebles();
     }
 
-    private void SetResource(int resourceIndex)
+
+    private void Interactebles() => Interactebles(_playerProgress.Riches.Coins.Value);
+    public void Interactebles(int coinsCount)
     {
-        currentResource = resourceIndex;
+        bool isUpdatable = coinsCount >= updateCost;
+        bool isBoostable = coinsCount >= boostCost;
+        bool isBuyble = coinsCount >= resourceCost;
+
+        _truckPanel.Interactebles(isUpdatable, isBoostable, isBuyble);
+    }
+
+    private void SetResource(int index)
+    {
+        _progressService.SetResource(index);
+        _truckPanel.RenderCost(resourceCost);
+        Interactebles();
     }
 
     private void CalculateUpdateData()
@@ -73,31 +92,44 @@ public class TruckProvider : IInitializableOnSceneLoaded
             return;
         }
 
-        var nextUpdate = _truckInfo.Upgrades[level];
+        TruckUpdates nextUpdate = _truckInfo.Upgrades[level];
         string text = $"+{nextUpdate.TruskUpdate} \n {nextUpdate.SoftCost}$";
         _truckPanel.UpdateButtonRefresh(text);
     }
     private void UpdateTrucks()
     {
+        if (!_progressService.SpendCoins(updateCost))
+            return;
+
         _progressService.UpdateTruck();
         CalculateUpdateData();
         RenderUpdateButton();
         _truckPanel.ResourcesRefresh(_data.ResourceLevel);
+        Interactebles();
     }
     private void BoostTrucks()
     {
-        int boostCount = _truckInfo.BoostLimit - _data.BoostCount.Value;
+        if (!_progressService.SpendCoins(boostCost))
+            return;
 
-        if(boostCount > 0)
-            _progressService.AddBoost(boostCount);
-        _truckPanel.RenderBoost(_truckInfo.BoostLimit);
+        if (_data.BoostBuyLevel + 1 < _truckInfo.BoostCost.Length)
+            _data.BoostBuyLevel++;
+
+        _progressService.AddBoost(_truckInfo.BoostLimit);
+
+        _truckPanel.BoostButtonRefresh(boostCost);
+        _truckZone.ChanceTruckSpeed(_truckInfo.MaxSpeed);
+        Interactebles();
     }
 
     public void BuyTruck()
     {
+        if(!_progressService.SpendCoins(resourceCost))
+            return;
+
         Truck truck = new();
         truck.TruckCargo = new();
-        LootBox lootBox = _truckInfo.MergeItems[currentResource].Resource;
+        LootBox lootBox = _truckInfo.MergeItems[_data.CurrentResource].Resource;
 
         for(int i = 0; i < _data.CargoCapacity; i++)
         {
@@ -106,6 +138,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
         }
 
         AddNewTruck(truck);
+        Interactebles();
     }
 
     public void AddNewTruck(Truck truck)

@@ -2,11 +2,18 @@
 
 public enum SaveKey
 {
+    //Application
+    GameVersion,
+    SoundSettings,
+
+    //Gameplay
     Riches,
     Quests,
     Buldings,
     Inventory,
     Truck,
+
+    //Tutorial
     NeedSkipTutorial,
     Tutorial,
 }

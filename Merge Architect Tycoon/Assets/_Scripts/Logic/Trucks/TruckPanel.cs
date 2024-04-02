@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TruckPanel : MonoBehaviour
@@ -8,13 +9,20 @@ public class TruckPanel : MonoBehaviour
     public Button MenuTruckButton;
     public Sprite[] RebuyTruckSprites;
     public Image RebuyTruckImage;
+
     public Button UpdateTruckButton;
     public TextMeshProUGUI UpdateTruckButtonText;
+
     public Button BoostTruckButton;
+    public TextMeshProUGUI BoostTruckButtonText;
     public TextMeshProUGUI[] BoostTexts;
     public Slider[] BoostSliders;
+
     public Button[] ResourceButtons;
-    public Button BuyTruckButton;
+
+    //public Button CloseTruckButton;
+    public Button[] BuyTruckButtons;
+    public TextMeshProUGUI PriceText;
 
     private int _boostLimit;
     [SerializeField]
@@ -40,6 +48,10 @@ public class TruckPanel : MonoBehaviour
             text.text = $"{count}/{_boostLimit}";
         }
     }
+    public void RenderCost(int price)
+    {
+        PriceText.text = $"-{price}$ / truck";
+    }
 
     public void UpdateButtonRefresh(string text, bool interactable = true)
     {
@@ -47,9 +59,9 @@ public class TruckPanel : MonoBehaviour
         UpdateTruckButton.interactable = interactable;
     }
 
-    public void BoostButtonRefresh()
+    public void BoostButtonRefresh(int i)
     {
-        throw new NotImplementedException();
+        BoostTruckButtonText.text = $"BOOST ${i}";
     }
 
     public void ResourcesRefresh(int level)
@@ -71,6 +83,24 @@ public class TruckPanel : MonoBehaviour
         {
             int index = i;//new instance
             ResourceButtons[i].onClick.AddListener(() => setResource(index));
+        }
+    }
+
+    public void Interactebles(bool isUpdatable, bool isBoostable, bool isBuyble)
+    {
+        UpdateTruckButton.interactable = isUpdatable;
+        BoostTruckButton.interactable = isBoostable;
+        foreach(Button buyButton in BuyTruckButtons)
+        {
+            buyButton.interactable = isBuyble;
+        }
+    }
+
+    public void BuyTruckButtonsAddListener(UnityAction buyTruck)
+    {
+        foreach (Button buyButton in BuyTruckButtons)
+        {
+            buyButton.onClick.AddListener(buyTruck);
         }
     }
 }
