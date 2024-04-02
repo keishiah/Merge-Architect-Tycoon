@@ -3,8 +3,8 @@ using Zenject;
 
 public class AudioPlayer : MonoBehaviour
 {
-    private AudioSource _backgroundMusicAudioSource;
-    private AudioSource _uiMusicAudioSource;
+    [SerializeField] private AudioSource _backgroundMusicAudioSource;
+    [SerializeField] private AudioSource _uiMusicAudioSource;
     private StaticDataService _staticDataService;
     private ApplicationSettings _settings;
 
@@ -22,14 +22,13 @@ public class AudioPlayer : MonoBehaviour
 
     public void InitializeAudioPlayer()
     {
-        _backgroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
-        _uiMusicAudioSource = gameObject.AddComponent<AudioSource>();
-
         _backgroundMusicAudioSource.clip = _staticDataService.AudioData.backgroundMusic;
         _backgroundMusicAudioSource.loop = true;
 
-        _backgroundMusicAudioSource.enabled = _settings.IsBackgroundSoundOn;
-        _uiMusicAudioSource.enabled = _settings.IsEffectsSoundOn;
+        SetBackgroundEnabled(_settings.IsBackgroundSoundOn.Value);
+        SetEffectsEnabled(_settings.IsEffectsSoundOn.Value);
+        SetBackgroundVolume(_settings.BackgroundSoundValue.Value);
+        SetEffectsVolume(_settings.EffectsSoundValue.Value);
     }
 
     public void PlayBackgroundMusic() => _backgroundMusicAudioSource.Play();
@@ -46,6 +45,6 @@ public class AudioPlayer : MonoBehaviour
 
     public void SetBackgroundVolume(float volume) => _backgroundMusicAudioSource.volume = volume;
     public void SetEffectsVolume(float volume) => _uiMusicAudioSource.volume = volume;
-    public void SwitchBackgroundVolume() => _backgroundMusicAudioSource.enabled = !_backgroundMusicAudioSource.enabled;
-    public void SwitchEffectsVolume() => _uiMusicAudioSource.enabled = !_uiMusicAudioSource.enabled;
+    public void SetBackgroundEnabled(bool v) => _backgroundMusicAudioSource.enabled = v;
+    public void SetEffectsEnabled(bool v) => _uiMusicAudioSource.enabled = v;
 }

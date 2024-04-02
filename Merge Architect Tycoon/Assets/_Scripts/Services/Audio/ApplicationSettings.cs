@@ -5,7 +5,7 @@ using UniRx;
 public class ApplicationSettings
 {
     public ReactiveProperty<bool> IsBackgroundSoundOn = new(true);
-    public ReactiveProperty<float> BackgroundSoundValue = new(1f);
+    public ReactiveProperty<float> BackgroundSoundValue = new(.8f);
     public ReactiveProperty<bool> IsEffectsSoundOn = new(true);
-    public ReactiveProperty<float> EffectsSoundValue = new(1f);
+    public ReactiveProperty<float> EffectsSoundValue = new(.8f);
 }
