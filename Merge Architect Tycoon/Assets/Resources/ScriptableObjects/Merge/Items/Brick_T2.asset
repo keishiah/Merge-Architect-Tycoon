@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Brick_T2
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescrpition: 
-  itemLevel: 2
-  itemCost: 10
+  ItemName: 2
+  ItemDescrpition: 
+  ItemLevel: 1
+  ItemCost: 0
   itemType: 0
-  itemSprite: {fileID: 0}
+  ItemSprite: {fileID: 0}
   nextItem: {fileID: 11400000, guid: 49dcd533c369abb40a4e98b2a3ae88f5, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

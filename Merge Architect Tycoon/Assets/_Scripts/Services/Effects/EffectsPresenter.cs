@@ -1,5 +1,3 @@
-using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class EffectsPresenter : MonoBehaviour
@@ -9,6 +7,7 @@ public class EffectsPresenter : MonoBehaviour
 
     public void PlaySmokeEffect(Vector2 position)
     {
+        smokeEffect.gameObject.SetActive(true);
         smokeEffect.gameObject.transform.position = position;
         smokeEffect.Play();
     }
@@ -16,5 +15,7 @@ public class EffectsPresenter : MonoBehaviour
     public void StopSmokeEffect()
     {
         smokeEffect.Stop();
+        smokeEffect.gameObject.SetActive(false);
     }
+
 }

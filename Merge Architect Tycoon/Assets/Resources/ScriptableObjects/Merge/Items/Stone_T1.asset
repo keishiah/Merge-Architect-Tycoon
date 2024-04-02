@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Stone_T1
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: 14
   ItemDescrpition: 
   ItemLevel: 1
   ItemCost: 0

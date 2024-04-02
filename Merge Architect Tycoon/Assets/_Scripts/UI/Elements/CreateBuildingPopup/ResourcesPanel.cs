@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,6 @@ public class ResourcesPanel : MonoBehaviour
 
     public void RenderResourceElement(string itemName, Sprite resourceImage, int resourceCount, int resourceGoal)
     {
-        HideAllResources();
         var element = GetInactiveResourceElement();
         element.gameObject.SetActive(true);
         element.RenderElement(itemName, resourceImage, resourceCount, resourceGoal);
@@ -25,14 +25,19 @@ public class ResourcesPanel : MonoBehaviour
 
     private ResourcePanelElement GetInactiveResourceElement()
     {
-        return resourcePanelElements.Find(x => !x.gameObject.activeSelf);
+        return resourcePanelElements.FirstOrDefault(element => element.gameObject.activeInHierarchy == false);
     }
 
-    private void HideAllResources()
+    public void HideAllResources()
     {
         foreach (var resourceElement in resourcePanelElements)
         {
             resourceElement.gameObject.SetActive(false);
         }
+    }
+
+    public void SetButtonInteractable(bool interactable)
+    {
+        actionButton.interactable = interactable;
     }
 }
