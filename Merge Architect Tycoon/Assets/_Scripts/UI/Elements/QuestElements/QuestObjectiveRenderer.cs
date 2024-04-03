@@ -9,29 +9,16 @@ public class QuestObjectiveRenderer : MonoBehaviour
     public Image checkMarkImage;
     public TextMeshProUGUI performanceItemText;
 
-    private void Start()
+    public void RenderObjective(QuestObjective objective, int currentItemCount = int.MinValue)
     {
-        HideCompletedMark();
+        itemText.text = objective.itemText;
+        performanceItemImage.sprite = objective.itemImage;
+        if(currentItemCount != int.MinValue)
+        {
+            performanceItemText.text = $"{objective.itemText} {currentItemCount}/{objective.GoalCount}";
+            checkMarkImage.gameObject.SetActive(currentItemCount>= objective.GoalCount);
+        }
+        else
+            performanceItemText.text = $"{objective.itemText}";
     }
-
-    public void RenderItemPerformance(string itemName, Sprite itemImage, int currentItemCount, int itemsCount)
-    {
-        itemText.text = itemName;
-        performanceItemImage.sprite = itemImage;
-        performanceItemText.text = $"{itemName} {currentItemCount}/{itemsCount}";
-    }
-
-    public void RenderCompletedItemPerformance(string itemName, Sprite itemImage, int itemsCount)
-    {
-        itemText.text = itemName;
-        performanceItemImage.sprite = itemImage;
-        performanceItemText.text = $"{itemName} {itemsCount}/{itemsCount}";
-    }
-
-    public void ItemCompleted()
-    {
-        checkMarkImage.gameObject.SetActive(true);
-    }
-
-    public void HideCompletedMark() => checkMarkImage.gameObject.SetActive(false);
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1b7e570a226c948b210b145c8f0e6e, type: 3}
+  m_Name: TutorialFirstQuest
+  m_EditorClassIdentifier: 
+  Discription: Get an inheritance
+  Sprite: {fileID: 21300000, guid: 32efdbadd3a41354fa5fae40ae9fc932, type: 3}
+  RewardList:
+  - {fileID: 11400000, guid: 3e9ed8019482c604cba74a1bcf5754a3, type: 2}
+  - {fileID: 11400000, guid: 47375b53d95575d4d80c909d03d6eb6a, type: 2}
