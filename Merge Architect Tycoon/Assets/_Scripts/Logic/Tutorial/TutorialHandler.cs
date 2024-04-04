@@ -37,6 +37,8 @@ public class TutorialHandler : MonoBehaviour
         _sceneButtonsBlocker.SetActive(false);
         //_handPointer.transform.SetParent(this.transform);
         _blockerator.SetActive(false);
+        _blockerator.GetComponent<Image>().enabled = true;
+
     }
 
     private void NextStep()
@@ -94,7 +96,7 @@ public class TutorialHandler : MonoBehaviour
         _tempButton = buttonToNext;
         _allScreenButton.SetActive(false);
     }
-
+    
     public async UniTask NextMovingButtonReset(Button buttonNext)
     {
         if (buttonNext != null)
@@ -106,7 +108,7 @@ public class TutorialHandler : MonoBehaviour
             _sceneButtonsBlocker.SetActive(true);
 
             await CheckButtonMovement(buttonNext);
-            
+
             _buttonToClick.GetComponent<Image>().sprite = buttonNext.GetComponent<Image>().sprite;
             RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
             RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
@@ -115,7 +117,6 @@ public class TutorialHandler : MonoBehaviour
             buttonToClickRectTransform.position = buttonToNextRect.position;
             buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
             _tempButton = buttonNext;
-            
         }
         else
         {
