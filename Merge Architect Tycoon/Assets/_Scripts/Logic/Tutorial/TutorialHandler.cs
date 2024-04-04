@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class TutorialHandler : MonoBehaviour
 {
     [SerializeField] private GameObject _dialog;
-    [SerializeField] private TextMeshProUGUI _dialogText;
+    [SerializeField] private GameObject _dialogTextHolder;
+    private TextMeshProUGUI _dialogText;
     [SerializeField] private GameObject _allScreenButton;
 
     [SerializeField] private GameObject _blockerator;
@@ -25,6 +26,10 @@ public class TutorialHandler : MonoBehaviour
 
     private void Awake()
     {
+        _dialogText = _dialogTextHolder.AddComponent<TextMeshProUGUI>();
+        _dialogText.fontSize = 70;
+        _dialogText.color = Color.black;
+        _dialogText.alignment = TextAlignmentOptions.Center;
         DisableAll();
         TutorialSteps[_currentStep].Enter(this);
     }
