@@ -32,7 +32,11 @@ public class LoadPlayerProgressState : IState
         _progressService.Riches =
             SaveLoadService.Load<PlayerRiches>(SaveKey.Riches);
         if (_progressService.Riches == null)
+        {
             _progressService.Riches = new PlayerRiches();
+            _progressService.Riches.Coins.Value = 500;
+            _progressService.Riches.Diamonds.Value = 5;
+        }
 
         _progressService.Buldings =
             SaveLoadService.Load<BuildingsData>(SaveKey.Buldings);

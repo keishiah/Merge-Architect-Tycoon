@@ -106,7 +106,6 @@ public class TutorialHandler : MonoBehaviour
 
     private void OnMovingButtonClicked()
     {
-        
         _blockerator.GetComponent<Image>().enabled = true;
         _sceneButtonsBlocker.SetActive(false);
         NextStep();

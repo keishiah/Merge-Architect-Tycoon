@@ -11,6 +11,8 @@ public class CreateBuildingPopup : MonoBehaviour
     private Vector2 _panelStartPosition;
     private MenuButtonsWidgetController _sceneButtons;
     private CreateBuildingPopupPresenter _createBuildingPopupPresenter;
+    private float _rectHeight;
+    private float _startPosition;
 
     [Inject]
     void Construct(CreateBuildingPopupPresenter createBuildingPopupPresenter,
@@ -25,14 +27,17 @@ public class CreateBuildingPopup : MonoBehaviour
         _panelRectTransform = resourcesPanel.GetComponent<RectTransform>();
         _panelStartPosition = _panelRectTransform.anchoredPosition;
         resourcesPanel.actionButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
+        _rectHeight = _panelRectTransform.rect.height;
+        _startPosition = _panelRectTransform.anchoredPosition.y;
+
     }
 
     public void OpenPanel()
     {
-        if (resourcesPanel.isActiveAndEnabled)
+        if (resourcesPanel.gameObject.activeSelf)
             return;
         _panelRectTransform.gameObject.SetActive(true);
-        _panelRectTransform.DOAnchorPosY(_panelRectTransform.anchoredPosition.y + _panelRectTransform.rect.height, 1)
+        _panelRectTransform.DOAnchorPosY(_startPosition + _rectHeight, 1)
             .SetEase(Ease
                 .OutBounce);
     }
