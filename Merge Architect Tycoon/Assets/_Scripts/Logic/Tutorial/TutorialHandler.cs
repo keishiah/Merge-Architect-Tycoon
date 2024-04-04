@@ -10,7 +10,7 @@ public class TutorialHandler : MonoBehaviour
 {
     [SerializeField] private GameObject _dialog;
     [SerializeField] private GameObject _dialogTextHolder;
-    private TextMeshProUGUI _dialogText;
+    [SerializeField] private TextMeshProUGUI _dialogText;
     [SerializeField] private GameObject _allScreenButton;
 
     [SerializeField] private GameObject _blockerator;

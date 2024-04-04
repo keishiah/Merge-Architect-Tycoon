@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skipTutorial: 0
-  _clearPrefs: 1
+  _clearPrefs: 0
 --- !u!4 &327537908
 Transform:
   m_ObjectHideFlags: 0
