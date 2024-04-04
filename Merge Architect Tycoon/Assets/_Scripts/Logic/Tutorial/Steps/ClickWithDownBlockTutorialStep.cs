@@ -12,13 +12,12 @@ namespace _Scripts.Logic.Tutorial.Steps
         public AnimationClip clip;
         public string buttonName;
 
-        public override void Enter(TutorialHandler tutorialHandler)
+        public override async void Enter(TutorialHandler tutorialHandler)
         {
             GameObject buttonGameObject = GameObject.Find(buttonName);
             Button button = buttonGameObject.GetComponent<Button>();
-            tutorialHandler.NextButtonReset(tutorialHandler.CreateMovingButtonBlocker, button);
+            await tutorialHandler.NextMovingButtonReset(button);
             tutorialHandler.ShowHand(clip, buttonGameObject.transform);
         }
-
     }
 }

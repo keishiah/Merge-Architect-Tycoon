@@ -13,7 +13,7 @@ public class ClickTutorialStep : TutorialStep
         GameObject buttonGameObject = GameObject.Find(buttonName);
         Button button = buttonGameObject.GetComponent<Button>();
 
-        tutorialHandler.NextButtonReset(tutorialHandler.CreateButtonImage, button);
+        tutorialHandler.NextButtonReset(button);
         tutorialHandler.ShowHand(clip, buttonGameObject.transform);
     }
 }
