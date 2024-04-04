@@ -1,4 +1,6 @@
-﻿public class LoadLevelState : IPaylodedState<string>
+﻿using UnityEngine;
+
+public class LoadLevelState : IPaylodedState<string>
 {
     private string _sceneName;
 
@@ -6,13 +8,17 @@
 
     private readonly ISceneLoader _sceneLoader;
     private readonly AudioPlayer _audioPlayer;
+    private readonly TutorialReader _tutorialReader;
+    private readonly PlayerProgress _progress;
 
     public LoadLevelState(ISceneLoader sceneLoader,
-        SceneContextProvider sceneContextProvider, AudioPlayer audioPlayer)
+        SceneContextProvider sceneContextProvider, AudioPlayer audioPlayer,TutorialReader tutorialReader,PlayerProgress progress)
     {
         _sceneLoader = sceneLoader;
         _sceneContextProvider = sceneContextProvider;
         _audioPlayer = audioPlayer;
+        _tutorialReader = tutorialReader;
+        _progress = progress;
     }
 
     public void SetGameStateMachine(IGameStateMachine gameStateMachine){}
@@ -46,6 +52,7 @@
 
         //_sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
+        _tutorialReader.LoadProgress(_progress);
     }
 
     private void InitializePopupPresenters()

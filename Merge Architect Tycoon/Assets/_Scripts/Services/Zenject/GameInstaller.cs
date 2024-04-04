@@ -54,10 +54,10 @@ public class GameInstaller : MonoInstaller
     {
         IEnumerable<IProgressReader> readers = new IProgressReader[]
         {
-            new TutorialReader(),
+            // new TutorialReader(),
         };
-
         Container.BindInstance(readers).AsSingle();
+        Container.Bind<TutorialReader>().AsSingle();
     }
 
     private void BindBuilder()

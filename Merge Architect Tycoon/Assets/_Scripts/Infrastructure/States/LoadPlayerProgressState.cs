@@ -73,8 +73,8 @@ public class LoadPlayerProgressState : IState
 
     private void NotifyProgressReaderServices()
     {
-        foreach (IProgressReader reader in _progressReaderServices)
-            reader.LoadProgress(_progressService);
+        // foreach (IProgressReader reader in _progressReaderServices)
+        //     reader.LoadProgress(_progressService);
     }
 
     public void Exit()
