@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class QuestRewardRenderer : MonoBehaviour
 {
     public TextMeshProUGUI questText;
-    public Image rewardImage1;
+    public Image rewardImage;
         
     public void RenderReward(string text, Sprite sprite)
     {
         questText.text = text;
-        rewardImage1.sprite = sprite;
+        rewardImage.sprite = sprite;
     }
 }

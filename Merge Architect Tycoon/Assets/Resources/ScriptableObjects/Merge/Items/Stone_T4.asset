@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Stone_T4
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescrpition: 
-  itemLevel: 4
-  itemCost: 10
+  ItemName: 
+  ItemDescrpition: 
+  ItemLevel: 1
+  ItemCost: 50
   itemType: 0
-  itemSprite: {fileID: 0}
+  ItemSprite: {fileID: 21300000, guid: 43f86439c5a150d4bbcf1af66233aefc, type: 3}
   nextItem: {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

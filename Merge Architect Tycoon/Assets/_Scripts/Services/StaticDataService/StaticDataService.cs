@@ -31,7 +31,7 @@ public class StaticDataService
         DistrictsInfo districtsData = await _assetProvider.Load<DistrictsInfo>(DistrictsInfoPath);
         DistrictsInfoDictionary = districtsData.districts.ToDictionary(x => x.districtId, x => x);
 
-        var questsData = await _assetProvider.LoadStaticDataByLabel<BaseQuestInfo>(QuestLabel);
+        IList<BaseQuestInfo> questsData = await _assetProvider.LoadStaticDataByLabel<BaseQuestInfo>(QuestLabel);
         Quests = questsData.ToList();
 
         TruckInfo = await _assetProvider.Load<TruckInfo>(TrucksInfoPath);

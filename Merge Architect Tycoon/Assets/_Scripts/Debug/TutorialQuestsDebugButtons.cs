@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -7,8 +6,8 @@ namespace _Scripts.Debug
 {
     public class TutorialQuestsDebugButtons : MonoBehaviour
     {
-        public Button addQuestButton;
-        public Button completeQuestButton;
+        //public Button addQuestButton;
+        //public Button completeQuestButton;
         public Button clearSavesButton;
 
         private QuestsProvider _questsProvider;
@@ -25,8 +24,8 @@ namespace _Scripts.Debug
 
         private void Start()
         {
-            addQuestButton.onClick.AddListener(AddQuest);
-            completeQuestButton.onClick.AddListener(CompleteQuest);
+            //addQuestButton.onClick.AddListener(AddQuest);
+            //completeQuestButton.onClick.AddListener(CompleteQuest);
             clearSavesButton.onClick.AddListener(ClearSaves);
         }
 
@@ -36,16 +35,10 @@ namespace _Scripts.Debug
             Application.Quit();
         }
 
-        private void AddQuest()
-        {
-            _questGiver.CheckAllQuestsForActivation();
-            _firebaseLogger.LogEvent("tutorial_get_quest_quests_popup");
-        }
-
-        private void CompleteQuest()
-        {
-            _questsProvider.CheckAllQuestsCompleted();
-        }
-        
+        //private void AddQuest()
+        //{
+        //    _questGiver.CheckAllQuestsForActivation();
+        //    _firebaseLogger.LogEvent("tutorial_get_quest_quests_popup");
+        //}
     }
 }
