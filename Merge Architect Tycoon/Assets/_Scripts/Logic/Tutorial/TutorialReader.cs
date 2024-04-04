@@ -19,7 +19,7 @@ public class TutorialReader : IProgressReader
     {
         AsyncOperationHandle opHandle = Addressables.LoadAssetAsync<GameObject>(AssetName.TutorialPrefab);
         await opHandle.Task;
-        
+
         if (opHandle.Status != AsyncOperationStatus.Succeeded)
         {
             Debug.LogError($"Failed to load a prefab resource named \"{AssetName.TutorialPrefab}\"!");
