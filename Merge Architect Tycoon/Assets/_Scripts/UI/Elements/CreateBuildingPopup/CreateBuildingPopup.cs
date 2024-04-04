@@ -37,9 +37,9 @@ public class CreateBuildingPopup : MonoBehaviour
         if (resourcesPanel.gameObject.activeSelf)
             return;
         _panelRectTransform.gameObject.SetActive(true);
-        _panelRectTransform.DOAnchorPosY(_startPosition + _rectHeight, 1)
+        _panelRectTransform.DOAnchorPosY(_startPosition + _rectHeight, .7f)
             .SetEase(Ease
-                .OutBounce);
+                .OutCubic);
     }
 
     public void HideButtons()

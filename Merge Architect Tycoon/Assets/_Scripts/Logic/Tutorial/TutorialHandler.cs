@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -38,8 +39,11 @@ public class TutorialHandler : MonoBehaviour
     {
         _dialog.SetActive(false);
         _handPointer.SetActive(false);
+        _sceneButtonsBlocker.SetActive(false);
         //_handPointer.transform.SetParent(this.transform);
         _blockerator.SetActive(false);
+        _blockerator.GetComponent<Image>().enabled = true;
+
     }
 
     private void NextStep()
@@ -68,11 +72,11 @@ public class TutorialHandler : MonoBehaviour
         _dialogText.text = text;
     }
 
-    public void NextButtonReset(Action<Button> tutorialAction,Button buttonToNext = null)
+    public void NextButtonReset(Button buttonToNext = null)
     {
         if (buttonToNext != null)
         {
-            tutorialAction?.Invoke(buttonToNext);
+            CreateButtonImage(buttonToNext);
         }
         else
         {
@@ -82,7 +86,7 @@ public class TutorialHandler : MonoBehaviour
         }
     }
 
-    public void CreateButtonImage(Button buttonToNext)
+    private void CreateButtonImage(Button buttonToNext)
     {
         _blockerator.SetActive(true);
         _buttonToClick.GetComponent<Image>().sprite = buttonToNext.GetComponent<Image>().sprite;
@@ -97,23 +101,54 @@ public class TutorialHandler : MonoBehaviour
         _tempButton = buttonToNext;
         _allScreenButton.SetActive(false);
     }
-
-    public void CreateMovingButtonBlocker(Button buttonNext)
+    
+    public async UniTask NextMovingButtonReset(Button buttonNext)
     {
-        CreateButtonImage(buttonNext);
-        _blockerator.GetComponent<Image>().enabled = false;
-        _sceneButtonsBlocker.SetActive(true);
-        
-        buttonNext.OnClickAsObservable()
-            .Subscribe(_ => OnMovingButtonClicked())
-            .AddTo(this); 
+        if (buttonNext != null)
+        {
+            _tempButton = buttonNext;
+            buttonNext.gameObject.SetActive(false);
+            _blockerator.SetActive(true);
+            _blockerator.GetComponent<Image>().enabled = false;
+            _sceneButtonsBlocker.SetActive(true);
+
+            await CheckButtonMovement(buttonNext);
+
+            _buttonToClick.GetComponent<Image>().sprite = buttonNext.GetComponent<Image>().sprite;
+            RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
+            RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
+
+            buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
+            buttonToClickRectTransform.position = buttonToNextRect.position;
+            buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
+            _tempButton = buttonNext;
+        }
+        else
+        {
+            _blockerator.SetActive(false);
+            _tempButton = null;
+            _allScreenButton.SetActive(true);
+        }
     }
 
-    private void OnMovingButtonClicked()
+
+    private async UniTask CheckButtonMovement(Button button)
     {
-        _blockerator.GetComponent<Image>().enabled = true;
-        _sceneButtonsBlocker.SetActive(false);
-        NextStep();
+        Vector3 previousPosition = button.transform.position;
+
+        while (true)
+        {
+            await UniTask.DelayFrame(100);
+
+            if (button.transform.position != previousPosition)
+            {
+                previousPosition = button.transform.position;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     public void ClickOnButton()
@@ -131,6 +166,7 @@ public class TutorialHandler : MonoBehaviour
 
     public void ShowHand(AnimationClip clip, Transform transform = null)
     {
+        Debug.Log(clip.name);
         _handPointer.SetActive(true);
         _handAnimation.clip = clip;
         _handAnimation.Play();

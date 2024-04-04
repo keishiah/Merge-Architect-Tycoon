@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1787e43d606ad7f4aabb8ffbcbda3445, type: 3}
   m_Name: 6SkipCreationTime
   m_EditorClassIdentifier: 
-  clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
+  clip: {fileID: 7400000, guid: b33d261f6ed1d9a4b9ae8611518a514f, type: 2}
   buttonName: SkipCreationButton1
