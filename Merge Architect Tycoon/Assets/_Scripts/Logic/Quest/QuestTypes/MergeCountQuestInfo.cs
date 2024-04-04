@@ -5,8 +5,8 @@ public class MergeCountQuestInfo : BaseQuestInfo
 {
     public override bool IsCompleted(QuestData questData)
     {
-        if (questData is MergeCountData questMergeCountData)
-            return ObjectivesList[0].GoalCount >= questMergeCountData.currentMergeCount;
+        //if (questData is MergeCountData questMergeCountData)
+        //    return ObjectivesList[0].GoalCount >= questMergeCountData.currentMergeCount;
 
         return false;
     }

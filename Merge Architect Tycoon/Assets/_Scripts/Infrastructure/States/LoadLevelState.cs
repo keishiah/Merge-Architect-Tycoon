@@ -44,7 +44,7 @@
     {
         InitializePopupPresenters();
 
-        _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
+        //_sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
     }
 

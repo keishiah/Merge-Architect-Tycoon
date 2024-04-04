@@ -5,15 +5,15 @@ public class CoinsQuestInfo : BaseQuestInfo
 {
     public override bool IsCompleted(QuestData questData)
     {
-        if(questData is CoinsQuestData data)
-        {
-            bool isComplete = data.currentCoinsCount >= ObjectivesList[0].GoalCount;
-            if (isComplete)
-            {
-                data.OnComplete?.Invoke(questData);
-                return true;
-            }
-        }
+        //if(questData is CoinsQuestData data)
+        //{
+        //    bool isComplete = data.currentCoinsCount >= ObjectivesList[0].;
+        //    if (isComplete)
+        //    {
+        //        data.OnComplete?.Invoke(questData);
+        //        return true;
+        //    }
+        //}
 
         return false;
     }

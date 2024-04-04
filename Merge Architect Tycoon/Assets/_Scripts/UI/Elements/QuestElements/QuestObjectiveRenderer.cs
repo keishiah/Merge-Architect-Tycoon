@@ -15,8 +15,8 @@ public class QuestObjectiveRenderer : MonoBehaviour
         performanceItemImage.sprite = objective.itemImage;
         if(currentItemCount != int.MinValue)
         {
-            performanceItemText.text = $"{objective.itemText} {currentItemCount}/{objective.GoalCount}";
-            checkMarkImage.gameObject.SetActive(currentItemCount>= objective.GoalCount);
+            //performanceItemText.text = $"{objective.itemText} {currentItemCount}/{objective.GoalCount}";
+            //checkMarkImage.gameObject.SetActive(currentItemCount>= objective.GoalCount);
         }
         else
             performanceItemText.text = $"{objective.itemText}";

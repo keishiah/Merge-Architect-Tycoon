@@ -13,6 +13,7 @@ public class BuildingObjective : QuestObjective
 
     public override bool IsComplete()
     {
-        return progress.Buldings.CreatedBuildings.Contains(buildingName);
+        return false;
+            //progress.Buldings.CreatedBuildings.Contains(buildingName);
     }
 }
