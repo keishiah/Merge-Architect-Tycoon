@@ -3,30 +3,50 @@ using UnityEngine;
 
 public abstract class BaseQuestInfo : ScriptableObject
 {
-    public string ID;
-    public string Text;
+    public string Discription;
     public Sprite Sprite;
     
-    public string RequiredForActivationQuestId;
-    [HideInInspector] public GiveQuestCondition GiveQuestCondition;
+    public List<Reward> RewardList;
+    public List<QuestObjective> ObjectivesList;
+    public List<string> RequiredCompletedQuests;
 
-    public abstract List<Reward> GetRewardList();
-    public abstract List<QuestObjective> GetQuestObjectives();
-    public abstract void InitializeRewardsAndItems();
-    public abstract void GiveReward(PlayerProgressService progressService);
-    public abstract bool IsCompleted(QuestData questData);
-
-    public  bool IsReadyToStart(PlayerProgress progress)
+    public virtual void GiveReward(PlayerProgressService progressService)
     {
-        return RequiredForActivationQuestId == "Start" ||
-               progress.Quests.CompletedQuests.Contains(RequiredForActivationQuestId);
+        foreach (Reward reward in RewardList)
+        {
+            reward.GiveReward(progressService);
+        }
+    }
+    public virtual bool IsCompleted(QuestData questData)
+    {
+        for(int i = 0; i < ObjectivesList.Count; i++)
+        {
+            if(!ObjectivesList[i].IsComplete())
+                return false;
+        }
+
+        return true;
+    }
+    public virtual bool IsReadyToStart(PlayerProgress progress)
+    {
+        foreach(string questID in RequiredCompletedQuests)
+        {
+            if(!progress.Quests.CompletedQuests.Contains(questID))
+                return false;
+        }
+
+        return true;
+    }
+    public virtual QuestData GetNewQuestData()
+    {
+        QuestData result = new QuestData();
+        SetParams(result);
+        return result;
     }
 
-    public abstract QuestData GetNewQuestData();
-}
-
-public enum GiveQuestCondition
-{
-    Tutorial,
-    Base
+    protected void SetParams(QuestData questData)
+    {
+        questData.QuestInfo = this;
+        questData.ProgressList = new int[ObjectivesList.Count];
+    }
 }

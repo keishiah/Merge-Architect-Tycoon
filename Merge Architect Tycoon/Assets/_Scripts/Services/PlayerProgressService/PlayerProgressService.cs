@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Zenject;
 
 public class PlayerProgressService
@@ -126,7 +125,25 @@ public class PlayerProgressService
     #endregion
 
     #region Quests
+    public void AddQuest(BaseQuestInfo questInfo)
+    {
+        _progress.Quests.ActiveQuests.Add(questInfo.GetNewQuestData());
+        SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
+    }
+    public void AddQuest(QuestData quest)
+    {
+        if (_progress.Quests.ActiveQuests.Contains(quest))
+            return;
 
+        _progress.Quests.ActiveQuests.Add(quest);
+        SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
+    }
+    public void QuestComplete(QuestData quest)
+    {
+        _progress.Quests.ActiveQuests.Remove(quest);
+        _progress.Quests.CompletedQuests.Add(quest.QuestInfo.name);
+        SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
+    }
     #endregion
     public void SaveAll()
     {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Zenject;
 
@@ -10,15 +9,17 @@ public class GameInstaller : MonoInstaller
 
         BindGameStateMachine();
 
+        BindStateFactory();
+
+        BindGameStates();
+
         BindStaticDataService();
+
+        BindApplicationSettings();
 
         BindPlayerProgressService();
 
         BindGameTutorial();
-
-        BindGameStates();
-
-        BindStateFactory();
 
         BindAssetProvider();
 
@@ -32,6 +33,7 @@ public class GameInstaller : MonoInstaller
 
         BindAudioPlayer();
     }
+
 
     private void BindAudioPlayer()
     {
@@ -85,6 +87,11 @@ public class GameInstaller : MonoInstaller
     private void BindAssetProvider()
     {
         Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
+    }
+    private void BindApplicationSettings()
+    {
+        Container.Bind<ApplicationSettings>().AsSingle();
+        Container.Bind<AudioServise>().AsSingle();
     }
 
     private void BindPlayerProgressService()

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Wood_T5
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescrpition: 
-  itemLevel: 5
-  itemCost: 10
+  ItemName: 
+  ItemDescrpition: 
+  ItemLevel: 1
+  ItemCost: 150
   itemType: 0
-  itemSprite: {fileID: 0}
+  ItemSprite: {fileID: 21300000, guid: e2fc6af968662c143992db7f89dc9e60, type: 3}
   nextItem: {fileID: 11400000, guid: 4f0dca2832e7bd6409edc62a58c0c584, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

@@ -15,9 +15,9 @@ MonoBehaviour:
   ItemName: 11
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 0
+  ItemCost: 50
   itemType: 0
-  ItemSprite: {fileID: 0}
+  ItemSprite: {fileID: 21300000, guid: 2789f6f39ef7d544eaf949ecdc830c6c, type: 3}
   nextItem: {fileID: 11400000, guid: da39ab5ee6d290540b69872a39661af5, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

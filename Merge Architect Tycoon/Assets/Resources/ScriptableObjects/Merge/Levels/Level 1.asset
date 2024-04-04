@@ -18,7 +18,7 @@ MonoBehaviour:
   allDropSlots:
   - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 2fa8d02feacaf874b99b97c9639d9727, type: 2}
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
     slotState: 3
@@ -26,53 +26,53 @@ MonoBehaviour:
     slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 1
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: fbf6f727eda068e40b2ca52be0029909, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
+  - mergeItem: {fileID: 11400000, guid: ab37ca1d95f9a3d43afd0bc437b3e788, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
+  - mergeItem: {fileID: 11400000, guid: da39ab5ee6d290540b69872a39661af5, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1
-  - mergeItem: {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
+  - mergeItem: {fileID: 11400000, guid: 8a20706ccfa6a7745952826b4d41700b, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 8de1cef6e60b46442bd3e5bfd5df6851, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
+  - mergeItem: {fileID: 11400000, guid: 3337ee787c2d27842bc8d181df1cd804, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
+  - mergeItem: {fileID: 0}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1
-  - mergeItem: {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
+  - mergeItem: {fileID: 11400000, guid: f6ab2ce0ce770e2499d0a8bee089bab5, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 7960935566e61b34ebcbc6369773c7bd, type: 2}
     slotState: 2
   - mergeItem: {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 60f327530a940034696ccf0201ddcf04, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
+  - mergeItem: {fileID: 11400000, guid: 06d534b0ca665bc42ad2159cd3e9055b, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
+  - mergeItem: {fileID: 11400000, guid: d791c37b96d577245901e28751d7854b, type: 2}
     slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1
-  - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
+  - mergeItem: {fileID: 11400000, guid: 4f0dca2832e7bd6409edc62a58c0c584, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
+  - mergeItem: {fileID: 11400000, guid: f25959355b2defa408464f946105f058, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
+  - mergeItem: {fileID: 11400000, guid: f674736e479f9094181f9d25563177b5, type: 2}
     slotState: 3
-  - mergeItem: {fileID: 11400000, guid: 18ee0844e498e7641a7488aa994b9a33, type: 2}
+  - mergeItem: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
     slotState: 2
   - mergeItem: {fileID: 0}
     slotState: 1

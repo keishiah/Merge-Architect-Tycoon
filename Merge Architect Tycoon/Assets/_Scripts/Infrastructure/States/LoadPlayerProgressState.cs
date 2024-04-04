@@ -5,11 +5,14 @@ public class LoadPlayerProgressState : IState
     private IGameStateMachine _gameStateMachine;
     private readonly IEnumerable<IProgressReader> _progressReaderServices;
     private readonly PlayerProgress _progressService;
+    private ApplicationSettings _settings;
 
-    public LoadPlayerProgressState(PlayerProgress progressService,
+    public LoadPlayerProgressState(PlayerProgress progressService, 
+        ApplicationSettings settings,
         IEnumerable<IProgressReader> progressReaderServices)
     {
         _progressService = progressService;
+        _settings = settings;
         _progressReaderServices = progressReaderServices;
     }
 
@@ -20,11 +23,20 @@ public class LoadPlayerProgressState : IState
 
     public void Enter()
     {
+        LoadSettingsOrInitNew();
+
         LoadProgressOrInitNew();
 
         NotifyProgressReaderServices();
 
         _gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
+    }
+
+    private void LoadSettingsOrInitNew()
+    {
+        _settings.Audio = SaveLoadService.Load<AudioSettings>(SaveKey.SoundSettings);
+        if( _settings.Audio == null )
+            _settings.Audio = new AudioSettings();
     }
 
     private void LoadProgressOrInitNew()

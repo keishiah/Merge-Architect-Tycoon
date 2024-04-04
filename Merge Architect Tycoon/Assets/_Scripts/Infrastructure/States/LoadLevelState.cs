@@ -30,17 +30,22 @@
     private void OnLoaded()
     {
         _sceneContextProvider.SetCurrentSceneContext(_sceneName);
+        InitSettings();
         InitLevel();
+    }
+
+    private void InitSettings()
+    {
+        _audioPlayer.InitializeAudioPlayer();
+        _sceneContextProvider.Resolve<AudioSettingsPresenter>().OnSceneLoaded();
     }
 
     private void InitLevel()
     {
         InitializePopupPresenters();
 
-        _sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
+        //_sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
-        _audioPlayer.InitializeAudioPlayer();
-        //_audioPlayer.PlayBackgroundMusic();
     }
 
     private void InitializePopupPresenters()

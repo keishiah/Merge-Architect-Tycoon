@@ -11,7 +11,7 @@ public class LootBox : ScriptableObject
             return (T)Loot[0].Item;
 
         int allWeight = 0;
-        for (int i = 0; i < Loot.Length && i < limit; i++)
+        for (int i = 0; i < Loot.Length && i <= limit; i++)
         {
             allWeight += Loot[i].WeightOfChance;
         }
