@@ -771,7 +771,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2353605661259289117}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 72.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 83.8}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 274.5, y: 248.5}
@@ -828,6 +828,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
   - {fileID: 7400000, guid: 5d650f9126e1c4942992a4a36d860e2c, type: 2}
+  - {fileID: 7400000, guid: b33d261f6ed1d9a4b9ae8611518a514f, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
