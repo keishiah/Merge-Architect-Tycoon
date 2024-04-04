@@ -48,10 +48,11 @@ public class BuildingCreator
 
     public void CreateInMoment(BuildingPlace buildingPlace, int diamondsCountToSkip)
     {
-        if (!_playerProgressService.SpendCoins(diamondsCountToSkip))
-            return;
-        buildingPlace.CanselToken();
-        CreateBuilding(buildingPlace);
+        if (_playerProgressService.SpendDiamonds(diamondsCountToSkip))
+        {
+            buildingPlace.CanselToken();
+            CreateBuilding(buildingPlace);
+        }
     }
 
     private void CreateBuilding(BuildingPlace buildingPlace)

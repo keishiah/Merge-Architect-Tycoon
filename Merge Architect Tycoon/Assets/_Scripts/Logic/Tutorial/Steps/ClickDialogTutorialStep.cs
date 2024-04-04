@@ -15,7 +15,7 @@ public class ClickDialogTutorialStep : TutorialStep
         GameObject buttonGameObject = GameObject.Find(buttonName);
         Button button = buttonGameObject.GetComponent<Button>();
 
-        tutorialHandler.NextButtonReset(button);
+        tutorialHandler.NextButtonReset(tutorialHandler.CreateButtonImage,button);
         tutorialHandler.ShowDialog(text);
         tutorialHandler.ShowHand(clip, buttonGameObject.transform);
     }
