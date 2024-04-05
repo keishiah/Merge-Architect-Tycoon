@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
-  m_Name: Wood_T1
+  m_Name: Wood_T7 1
   m_EditorClassIdentifier: 
-  ItemName: 15
+  ItemName: 
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 0
+  ItemCost: 1500
   itemType: 0
-  ItemSprite: {fileID: 21300000, guid: 692938bb29198594e9663598dcf45237, type: 3}
-  nextItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
+  ItemSprite: {fileID: 21300000, guid: db7aa2b4bf7e34848844a546d3757f6d, type: 3}
+  nextItem: {fileID: 0}
   InItemsCount: 0
   InItem: {fileID: 0}
