@@ -164,7 +164,6 @@ public class TutorialHandler : MonoBehaviour
 
     public void ShowHand(AnimationClip clip, Transform transform = null)
     {
-        Debug.Log(clip.name);
         _handPointer.SetActive(true);
         _handAnimation.clip = clip;
         _handAnimation.Play();
