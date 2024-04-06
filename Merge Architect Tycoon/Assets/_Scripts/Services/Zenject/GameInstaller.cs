@@ -52,11 +52,6 @@ public class GameInstaller : MonoInstaller
 
     private void BindGameTutorial()
     {
-        IEnumerable<IProgressReader> readers = new IProgressReader[]
-        {
-            // new TutorialReader(),
-        };
-        Container.BindInstance(readers).AsSingle();
         Container.Bind<TutorialReader>().AsSingle();
     }
 

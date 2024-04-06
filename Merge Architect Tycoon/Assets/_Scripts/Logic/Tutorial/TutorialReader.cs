@@ -2,7 +2,7 @@
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class TutorialReader : IProgressReader
+public class TutorialReader
 {
     public void LoadProgress(PlayerProgress progress)
     {

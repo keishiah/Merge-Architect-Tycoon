@@ -8,30 +8,13 @@ public abstract class BaseQuestInfo : ScriptableObject
     
     public List<Reward> RewardList;
     public List<QuestObjective> ObjectivesList;
-    public List<string> RequiredCompletedQuests;
+    public List<QuestRequires> Requires;
 
-    public virtual void GiveReward(PlayerProgressService progressService)
-    {
-        foreach (Reward reward in RewardList)
-        {
-            reward.GiveReward(progressService);
-        }
-    }
-    public virtual bool IsCompleted(QuestData questData)
-    {
-        for(int i = 0; i < ObjectivesList.Count; i++)
-        {
-            if(!ObjectivesList[i].IsComplete())
-                return false;
-        }
-
-        return true;
-    }
     public virtual bool IsReadyToStart(PlayerProgress progress)
     {
-        foreach(string questID in RequiredCompletedQuests)
+        foreach(QuestRequires require in Requires)
         {
-            if(!progress.Quests.CompletedQuests.Contains(questID))
+            if(!require.IsComplete())
                 return false;
         }
 

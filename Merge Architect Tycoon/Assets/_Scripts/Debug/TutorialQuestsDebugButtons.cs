@@ -11,14 +11,12 @@ namespace _Scripts.Debug
         public Button clearSavesButton;
 
         private QuestsProvider _questsProvider;
-        private QuestGiver _questGiver;
         private FirebaseLogger _firebaseLogger;
 
         [Inject]
-        void Construct(QuestsProvider questsProvider, QuestGiver questGiver,FirebaseLogger firebaseLogger)
+        void Construct(QuestsProvider questsProvider, FirebaseLogger firebaseLogger)
         {
             _questsProvider = questsProvider;
-            _questGiver = questGiver;
             _firebaseLogger = firebaseLogger;
         }
 
