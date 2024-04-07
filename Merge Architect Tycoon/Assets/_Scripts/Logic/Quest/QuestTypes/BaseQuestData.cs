@@ -1,42 +1,67 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class QuestData
 {
+    public bool Done { get; private set; }
+
     public BaseQuestInfo QuestInfo;
-    public int[] ProgressList;
+    public List<QuestProgress> ProgressList;
 
     public Action OnActivate;
     public Action<QuestData> OnComplete;
 
     public virtual void Subscribe(PlayerProgress playerProgress)
     {
-        foreach (QuestObjective objective in QuestInfo.ObjectivesList)
+        for(int i = 0; i < QuestInfo.Objectives.Count; i++)
         {
-            //objective.Subscribe(playerProgress);
+            int index = i;//need new instance to subscribe
+            QuestInfo.Objectives[i].DoSubscribe(playerProgress, ProgressList[index]);
         }
     }
 
-    private void ChangeProgress(int index, int value)
+    public bool IsComplete(PlayerProgress playerProgress)
     {
-        ProgressList[index] = value;
-        if (QuestInfo.ObjectivesList[index].IsComplete())
-            IsComplete();
-    }
+        List<QuestObjective> objectives = QuestInfo.Objectives;
 
-    private void IsComplete()
-    {
-        foreach (QuestObjective objective in QuestInfo.ObjectivesList)
+        if(objectives == null)
+            return true;
+
+        for (int i = 0; i < objectives.Count; i++)
         {
-            //objective.Subscribe(playerProgress);
+            if(!objectives[i].IsComplete(playerProgress, ProgressList[i]))
+                return false;
         }
-    }
 
+        return true;
+    }
     public virtual void GiveReward(PlayerProgressService progressService)
     {
         foreach (Reward reward in QuestInfo.RewardList)
         {
             reward.GiveReward(progressService);
         }
+
+        Unsubscribe();
     }
+
+    private void Unsubscribe()
+    {
+        for(int i = 0; i< ProgressList.Count; i++)
+        {
+            ProgressList[i].Subscription.Dispose();
+        }
+        ProgressList.Clear();
+        Done = true;
+    }
+}
+
+[Serializable]
+public class QuestProgress
+{
+    public bool IsComplete;
+    public int Value;
+
+    public IDisposable Subscription;
 }

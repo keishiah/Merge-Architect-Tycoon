@@ -1,12 +1,36 @@
+using System;
+using UniRx;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "BuyTruckObjective",
+    menuName = "StaticData/Quests/Objectives/BuyTruckObjective")]
 public class TruckQuestObjective : QuestObjective
 {
-    public override string GetProgress()
+    [SerializeField] private int trucksCount;
+
+    public override void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress)
     {
-        throw new System.NotImplementedException();
+        IDisposable subscription = Observable.Start(playerProgress.Trucks.OnAddTruck)
+            .Subscribe(x => questProgress.Value++);
+
+        questProgress.Subscription = subscription;
     }
 
-    public override bool IsComplete()
+    public override string GetDescription()
     {
-        throw new System.NotImplementedException();
+        return "Buy trucks";
+    }
+
+    public override string GetProgressText(QuestProgress questProgress)
+    {
+        return $"{questProgress.Value}/{trucksCount}";
+    }
+
+    public override bool IsComplete(PlayerProgress playerProgress, QuestProgress questProgress = null)
+    {
+        if (questProgress != null)
+            return questProgress.Value >= trucksCount;
+
+        return false;
     }
 }

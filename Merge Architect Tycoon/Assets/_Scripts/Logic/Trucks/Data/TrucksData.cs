@@ -1,5 +1,6 @@
 ﻿using System;
 using UniRx;
+using UnityEngine;
 
 [Serializable]
 public class TrucksData
@@ -17,6 +18,9 @@ public class TrucksData
     public int CurrentResource;
 
     public TruckData[] ToArrive;
+
+    //Statistic
+    public Action OnAddTruck;
 }
 
 [Serializable]

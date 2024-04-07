@@ -2,8 +2,10 @@ using UnityEngine;
 
 public abstract class QuestObjective : ScriptableObject
 {
-    public string itemText;
-    public Sprite itemImage;
-    public abstract string GetProgress();
-    public abstract bool IsComplete();
+    public Sprite Sprite;
+
+    public abstract string GetDescription();
+    public abstract string GetProgressText(QuestProgress questProgress);
+    public abstract void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress);
+    public abstract bool IsComplete(PlayerProgress playerProgress, QuestProgress questProgress = null);
 }

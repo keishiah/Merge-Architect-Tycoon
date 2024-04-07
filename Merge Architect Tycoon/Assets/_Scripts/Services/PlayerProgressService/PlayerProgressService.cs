@@ -88,6 +88,7 @@ public class PlayerProgressService
             trucks = new Queue<TruckData>();
         trucks.Enqueue(newTtruck);
         _progress.Trucks.ToArrive = trucks.ToArray();
+        _progress.Trucks.OnAddTruck?.Invoke();
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public TruckData DequeueTruck()

@@ -42,7 +42,7 @@ public class QuestRenderer : MonoBehaviour
         {
             RenderRewardElement(i);
         }
-        for (int i = 0; i < info.ObjectivesList.Count || i < ObjectiveRenderers.Count; i++)
+        for (int i = 0; i < info.Objectives.Count || i < ObjectiveRenderers.Count; i++)
         {
             RenderObjectiveElement(i);
         }
@@ -55,10 +55,10 @@ public class QuestRenderer : MonoBehaviour
             ObjectiveRenderers.Add(element);
         }
 
-        if (i < info.ObjectivesList.Count)
+        if (i < info.Objectives.Count)
         {
             ObjectiveRenderers[i].gameObject.SetActive(true);
-            ObjectiveRenderers[i].RenderObjective(info.ObjectivesList[i], CurrentData.ProgressList[i]);
+            ObjectiveRenderers[i].RenderObjective(info.Objectives[i], CurrentData.ProgressList[i].Value);
         }
         else if (i < ObjectiveRenderers.Count)
             ObjectiveRenderers[i].gameObject.SetActive(false);

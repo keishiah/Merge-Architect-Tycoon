@@ -43,7 +43,6 @@ public class QuestsProvider : IInitializableOnSceneLoaded
     {
         quest.Subscribe(_playerProgress);
         _playerProgressService.AddQuest(quest);
-        //questBase.OnComplete += CheckQuestsCompleted;
     }
 
     public void ClaimQuestReward(QuestData quest)
