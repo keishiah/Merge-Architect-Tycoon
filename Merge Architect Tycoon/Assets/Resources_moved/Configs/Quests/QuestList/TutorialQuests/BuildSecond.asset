@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eebe292afe4709c4cb3ab04e2fb77bb4, type: 3}
-  m_Name: TutorialFirstQuest
-  m_EditorClassIdentifier: 
-  Discription: Get an inheritance
-  Sprite: {fileID: 21300000, guid: ac3a1c7c9032e7348abc9920801351ff, type: 3}
-  Requires: []
-  Objectives: []
+  m_Name: BuildSecond
+  m_EditorClassIdentifier: Assembly-CSharp::QuestBaseInfo
+  Discription: Build lumber mill
+  Sprite: {fileID: 21300000, guid: 910c48016965c4340a01af12df4ed971, type: 3}
+  Requires:
+  - {fileID: 11400000, guid: d62dac70ab00f2a46956f364f53588ce, type: 2}
+  Objectives:
+  - {fileID: 11400000, guid: ad2bde76409d520439b8f4c43cde44c7, type: 2}
   RewardList:
-  - {fileID: 11400000, guid: 3e9ed8019482c604cba74a1bcf5754a3, type: 2}
   - {fileID: 11400000, guid: 47375b53d95575d4d80c909d03d6eb6a, type: 2}

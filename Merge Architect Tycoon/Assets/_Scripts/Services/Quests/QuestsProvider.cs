@@ -22,7 +22,7 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     private void CheckAllQuestsForActivation()
     {
-        foreach (BaseQuestInfo quest in _staticDataService.Quests)
+        foreach (QuestBaseInfo quest in _staticDataService.Quests)
         {
             if (_playerProgress.Quests.CompletedQuests.Contains(quest.name))
                 continue;

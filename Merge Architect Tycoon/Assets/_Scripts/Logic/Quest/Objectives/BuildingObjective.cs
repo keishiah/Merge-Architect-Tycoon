@@ -13,7 +13,7 @@ public class BuildingObjective : QuestObjective
     }
     public override string GetProgressText(QuestProgress questProgress)
     {
-        return $"{questProgress.Value}/1";
+        return $"{questProgress.Numeral}/1";
     }
     public override void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress)
     {
@@ -26,7 +26,7 @@ public class BuildingObjective : QuestObjective
 
     private void QuestDone(QuestProgress questProgress)
     {
-        questProgress.Value = 1;
+        questProgress.Numeral = 1;
         questProgress.IsComplete = true;
     }
 

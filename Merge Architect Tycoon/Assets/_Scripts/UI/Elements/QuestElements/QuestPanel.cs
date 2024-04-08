@@ -18,16 +18,17 @@ public class QuestPanel : MonoBehaviour
     public void SetQuestElement(QuestData quest)
     {
         QuestRenderer questElement = ElementsPool.Find(x => x.CurrentData == quest);
-        if (questElement != null)
+        if (questElement == null)
         {
-            questElement.gameObject.SetActive(true);
-            return;
+            questElement = ElementsPool.Find(x => !x.gameObject.activeSelf);
+            if(questElement == null)
+            {
+                questElement = Instantiate(questRendererPrefab, questRendererParent);
+                ElementsPool.Add(questElement);
+            }
         }
-
-        questElement = ElementsPool.Find(x => !x.gameObject.activeSelf);
-        if(questElement == null)
-            questElement = Instantiate(questRendererPrefab, questRendererParent);
         
-        questElement.Show(quest);
+        questElement.gameObject.SetActive(true);
+        questElement.Render(quest);
     }
 }

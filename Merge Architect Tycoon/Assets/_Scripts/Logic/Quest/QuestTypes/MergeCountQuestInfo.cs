@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MergeCountQuest", menuName = "StaticData/Quests/MergeCountQuest")]
-public class MergeCountQuestInfo : BaseQuestInfo
+public class MergeCountQuestInfo : QuestBaseInfo
 {
     public override QuestData GetNewQuestData()
     {

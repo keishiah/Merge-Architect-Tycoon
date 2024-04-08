@@ -6,6 +6,8 @@ public class InventoryData
 
     public Slot[] items;
 
+    public Action OnInventoryChanged;
+
     [Serializable]
     public struct Slot
     {

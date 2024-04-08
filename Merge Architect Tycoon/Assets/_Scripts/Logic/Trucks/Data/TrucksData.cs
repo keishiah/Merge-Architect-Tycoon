@@ -1,6 +1,5 @@
 ﻿using System;
 using UniRx;
-using UnityEngine;
 
 [Serializable]
 public class TrucksData
@@ -20,7 +19,7 @@ public class TrucksData
     public TruckData[] ToArrive;
 
     //Statistic
-    public Action OnAddTruck;
+    public ReactiveProperty<int> TruckBuyCount = new();
 }
 
 [Serializable]

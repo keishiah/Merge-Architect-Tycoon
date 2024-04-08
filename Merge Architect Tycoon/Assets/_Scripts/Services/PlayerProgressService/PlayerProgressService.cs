@@ -88,7 +88,9 @@ public class PlayerProgressService
             trucks = new Queue<TruckData>();
         trucks.Enqueue(newTtruck);
         _progress.Trucks.ToArrive = trucks.ToArray();
-        _progress.Trucks.OnAddTruck?.Invoke();
+
+        _progress.Trucks.TruckBuyCount.Value++;
+
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
     }
     public TruckData DequeueTruck()
@@ -126,7 +128,7 @@ public class PlayerProgressService
     #endregion
 
     #region Quests
-    public void AddQuest(BaseQuestInfo questInfo)
+    public void AddQuest(QuestBaseInfo questInfo)
     {
         _progress.Quests.ActiveQuests.Add(questInfo.GetNewQuestData());
         SaveLoadService.Save(SaveKey.Quests, _progress.Quests);

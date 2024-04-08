@@ -101,7 +101,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213892375223827107}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -113,8 +113,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 531, y: 0}
-  m_SizeDelta: {x: 1009.09, y: 456.2}
+  m_AnchoredPosition: {x: 540, y: 0}
+  m_SizeDelta: {x: 1080, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1213892375223827111
 CanvasRenderer:
@@ -149,7 +149,7 @@ MonoBehaviour:
   questObjectiveRendererPrefab: {fileID: 4213882770476703072, guid: 8f82edf94e6cfa447a63fe15dab8e518, type: 3}
   CurrentData:
     QuestInfo: {fileID: 0}
-    ProgressList: 
+    ProgressList: []
 --- !u!1 &1213892375269343455
 GameObject:
   m_ObjectHideFlags: 0

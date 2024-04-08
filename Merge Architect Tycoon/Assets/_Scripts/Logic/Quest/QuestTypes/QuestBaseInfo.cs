@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseQuestInfo : ScriptableObject
+[CreateAssetMenu(fileName = "Quest",
+    menuName = "StaticData/Quests/Quest")]
+public class QuestBaseInfo : ScriptableObject
 {
     public string Discription;
     public Sprite Sprite;
-    
-    public List<Reward> RewardList;
-    public List<QuestObjective> Objectives;
     public List<QuestObjective> Requires;
+
+    [Header("BODY")]
+    public List<QuestObjective> Objectives;
+    public List<Reward> RewardList;
 
     public virtual bool IsReadyToStart(PlayerProgress playerProgress)
     {
@@ -34,7 +37,7 @@ public abstract class BaseQuestInfo : ScriptableObject
         questData.ProgressList = new List<QuestProgress>(Objectives.Count);
         for(int i = 0; i < Objectives.Count; i++)
         {
-
+            questData.ProgressList.Add(new QuestProgress());
         }
     }
 }

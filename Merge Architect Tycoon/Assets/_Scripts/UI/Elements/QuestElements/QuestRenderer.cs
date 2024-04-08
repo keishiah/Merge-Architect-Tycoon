@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,13 +19,20 @@ public class QuestRenderer : MonoBehaviour
 
     [Space]
     public QuestData CurrentData;
-    private BaseQuestInfo info => CurrentData.QuestInfo;
+    private QuestBaseInfo info => CurrentData.QuestInfo;
 
-    public void Show(QuestData quest)
+    public void Render(QuestData quest)
     {
         CurrentData = quest;
         RenderQuestHeader();
+        DisableAllDetails();
         RenderDetails();
+        SetButton();
+    }
+
+    private void SetButton()
+    {
+        ClaimButton.gameObject.SetActive(CurrentData.IsQuestComplete());
     }
 
     private void RenderQuestHeader()
@@ -38,15 +44,28 @@ public class QuestRenderer : MonoBehaviour
     }
     private void RenderDetails()
     {
-        for (int i = 0; i < info.RewardList.Count || i < RewardRenderers.Count; i++)
+        for (int i = 0; i < info.RewardList.Count; i++)
         {
             RenderRewardElement(i);
         }
-        for (int i = 0; i < info.Objectives.Count || i < ObjectiveRenderers.Count; i++)
+        for (int i = 0; i < info.Objectives.Count; i++)
         {
             RenderObjectiveElement(i);
         }
     }
+
+    private void DisableAllDetails()
+    {
+        for (int i = 0; i < RewardRenderers.Count; i++)
+        {
+            RewardRenderers[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < ObjectiveRenderers.Count; i++)
+        {
+            ObjectiveRenderers[i].gameObject.SetActive(false);
+        }
+    }
+
     private void RenderObjectiveElement(int i)
     {
         if (i >= ObjectiveRenderers.Count)
@@ -58,10 +77,8 @@ public class QuestRenderer : MonoBehaviour
         if (i < info.Objectives.Count)
         {
             ObjectiveRenderers[i].gameObject.SetActive(true);
-            ObjectiveRenderers[i].RenderObjective(info.Objectives[i], CurrentData.ProgressList[i].Value);
+            ObjectiveRenderers[i].RenderObjective(CurrentData.ProgressList[i], info.Objectives[i], CurrentData.IsObjectiveComplete(i));
         }
-        else if (i < ObjectiveRenderers.Count)
-            ObjectiveRenderers[i].gameObject.SetActive(false);
     }
     private void RenderRewardElement(int i)
     {
@@ -76,7 +93,5 @@ public class QuestRenderer : MonoBehaviour
             RewardRenderers[i].gameObject.SetActive(true);
             RewardRenderers[i].RenderReward(info.RewardList[i].rewardAmount.ToString(), info.RewardList[i].rewardSprite);
         }
-        else if (i < RewardRenderers.Count)
-            RewardRenderers[i].gameObject.SetActive(false);
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CoinsQuest", menuName = "StaticData/Quests/CoinsQuest")]
-public class CoinsQuestInfo : BaseQuestInfo
+public class CoinsQuestInfo : QuestBaseInfo
 {
     public override QuestData GetNewQuestData()
     {

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using UniRx;
 
 [Serializable]
 public class QuestData
 {
-    public bool Done { get; private set; }
-
-    public BaseQuestInfo QuestInfo;
+    public QuestBaseInfo QuestInfo;
     public List<QuestProgress> ProgressList;
 
-    public Action OnActivate;
-    public Action<QuestData> OnComplete;
+    public PlayerProgress playerProgress;
 
     public virtual void Subscribe(PlayerProgress playerProgress)
     {
+        this.playerProgress = playerProgress;
         for(int i = 0; i < QuestInfo.Objectives.Count; i++)
         {
             int index = i;//need new instance to subscribe
@@ -21,7 +20,7 @@ public class QuestData
         }
     }
 
-    public bool IsComplete(PlayerProgress playerProgress)
+    public bool IsQuestComplete()
     {
         List<QuestObjective> objectives = QuestInfo.Objectives;
 
@@ -30,11 +29,15 @@ public class QuestData
 
         for (int i = 0; i < objectives.Count; i++)
         {
-            if(!objectives[i].IsComplete(playerProgress, ProgressList[i]))
+            if(!IsObjectiveComplete(i))
                 return false;
         }
-
+        
         return true;
+    }
+    public bool IsObjectiveComplete(int index)
+    {
+        return QuestInfo.Objectives[index].IsComplete(playerProgress, ProgressList[index]);
     }
     public virtual void GiveReward(PlayerProgressService progressService)
     {
@@ -53,7 +56,6 @@ public class QuestData
             ProgressList[i].Subscription.Dispose();
         }
         ProgressList.Clear();
-        Done = true;
     }
 }
 
@@ -61,7 +63,7 @@ public class QuestData
 public class QuestProgress
 {
     public bool IsComplete;
-    public int Value;
+    public int Numeral;
 
     public IDisposable Subscription;
 }
