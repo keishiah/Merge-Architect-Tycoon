@@ -105,13 +105,4 @@ public class SlotsManager
         SlotRenderer slot = slots.Find(x => x.CurrentItem == item);
         slot.RemoveItem();
     }
-
-    public void RemoveAllItems()
-    {
-        foreach (SlotRenderer slot in slots)
-        {
-            slot.RemoveItem();
-            slot.ChangeState(SlotState.Draggable);
-        }
-    }
 }

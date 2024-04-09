@@ -14,7 +14,8 @@ public class ItemsCatalogue : MonoBehaviour
     {
         return slotsManager.Slots
             .FindAll(
-                s => s.CurrentItem && s.CurrentItem.name == item.name && s.SlotState == SlotState.Draggable)
+                s => s.CurrentItem && s.CurrentItem.name == item.name 
+                && (s.SlotState == SlotState.Draggable || s.SlotState == SlotState.Unloading))
             .Count;
     }
 
@@ -35,7 +36,7 @@ public class ItemsCatalogue : MonoBehaviour
         {
             var slotItem = slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
                                                                   s.CurrentItem.name == item.name &&
-                                                                  s.SlotState == SlotState.Draggable);
+                         (s.SlotState == SlotState.Unloading || s.SlotState == SlotState.Draggable));
             if (slotItem != null)
             {
                 if (informationPanel.slotCurrent == slotItem)

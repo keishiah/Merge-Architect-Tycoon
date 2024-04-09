@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class QuestPanel : MonoBehaviour
 {
     public List<QuestRenderer> ElementsPool;
     [SerializeField] private RectTransform questRendererParent;
     [SerializeField] private QuestRenderer questRendererPrefab;
+
+    [Inject] private QuestsPresenter questsPresenter;
 
     public void CloseQuestElements()
     {
@@ -24,11 +27,25 @@ public class QuestPanel : MonoBehaviour
             if(questElement == null)
             {
                 questElement = Instantiate(questRendererPrefab, questRendererParent);
+                questElement.Panel = this;
                 ElementsPool.Add(questElement);
             }
         }
         
         questElement.gameObject.SetActive(true);
         questElement.Render(quest);
+    }
+
+    public void ShowQuests(IEnumerable<QuestData> quests)
+    {
+        foreach (QuestData quest in quests)
+        {
+            SetQuestElement(quest);
+        }
+    }
+
+    public void Refresh()
+    {
+        questsPresenter.OpenQuestPopup();
     }
 }

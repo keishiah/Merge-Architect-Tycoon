@@ -6,6 +6,6 @@ public class DiamondsReward : Reward
 {
     public override void GiveReward(PlayerProgressService progress)
     {
-        progress.AddDiamonds(rewardAmount);
+        progress.AddDiamonds(Amount);
     }
 }

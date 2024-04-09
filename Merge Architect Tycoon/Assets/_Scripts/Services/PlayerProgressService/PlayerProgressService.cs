@@ -128,17 +128,17 @@ public class PlayerProgressService
     #endregion
 
     #region Quests
-    public void AddQuest(QuestBaseInfo questInfo)
+    public void ActivateQuest(QuestInfo quest)
     {
-        _progress.Quests.ActiveQuests.Add(questInfo.GetNewQuestData());
-        SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
+        ActivateQuest(quest.GetNewQuestData());
     }
-    public void AddQuest(QuestData quest)
+    public void ActivateQuest(QuestData quest)
     {
         if (_progress.Quests.ActiveQuests.Contains(quest))
             return;
 
         _progress.Quests.ActiveQuests.Add(quest);
+        quest.Subscribe(_progress, this);
         SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
     }
     public void QuestComplete(QuestData quest)
@@ -148,9 +148,24 @@ public class PlayerProgressService
         SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
     }
     #endregion
+
+    #region Inventory
+    public void ChangeInventory(InventoryData saveData)
+    {
+        if (_progress.Inventory == null)
+            _progress.Inventory = saveData;
+        else
+            _progress.Inventory.items = saveData.items;
+
+        _progress.Inventory.InventoryFlag.Value = !_progress.Inventory.InventoryFlag.Value;
+        SaveLoadService.Save(SaveKey.Inventory, _progress.Inventory);
+    }
+    #endregion
+
     public void SaveAll()
     {
         SaveLoadService.Save(SaveKey.Riches, _progress.Riches);
+        SaveLoadService.Save(SaveKey.Inventory, _progress.Inventory);
         SaveLoadService.Save(SaveKey.Buldings, _progress.Buldings);
         SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);

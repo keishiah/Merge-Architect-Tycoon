@@ -11,6 +11,8 @@ public class QuestRenderer : MonoBehaviour
     public List<QuestObjectiveRenderer> ObjectiveRenderers;
     public Button ClaimButton;
 
+    public QuestPanel Panel;
+
     [Space]
     [SerializeField] private RectTransform questRewardRendererParent;
     [SerializeField] private QuestRewardRenderer questRewardRendererPrefab;
@@ -19,18 +21,19 @@ public class QuestRenderer : MonoBehaviour
 
     [Space]
     public QuestData CurrentData;
-    private QuestBaseInfo info => CurrentData.QuestInfo;
+    private QuestInfo info => CurrentData.QuestInfo;
 
-    public void Render(QuestData quest)
+    public void Render(QuestData quest = null)
     {
-        CurrentData = quest;
-        RenderQuestHeader();
+        if(quest != null) CurrentData = quest;
+
         DisableAllDetails();
+        RenderQuestHeader();
         RenderDetails();
-        SetButton();
+        SetButtons();
     }
 
-    private void SetButton()
+    private void SetButtons()
     {
         ClaimButton.gameObject.SetActive(CurrentData.IsQuestComplete());
     }
@@ -82,6 +85,9 @@ public class QuestRenderer : MonoBehaviour
     }
     private void RenderRewardElement(int i)
     {
+        if (info.RewardList[i].IsHiden)
+            return;
+
         if (i >= RewardRenderers.Count)
         {
             QuestRewardRenderer element = Instantiate(questRewardRendererPrefab, questRewardRendererParent);
@@ -91,7 +97,13 @@ public class QuestRenderer : MonoBehaviour
         if (i < info.RewardList.Count)
         {
             RewardRenderers[i].gameObject.SetActive(true);
-            RewardRenderers[i].RenderReward(info.RewardList[i].rewardAmount.ToString(), info.RewardList[i].rewardSprite);
+            RewardRenderers[i].RenderReward(info.RewardList[i].Amount.ToString(), info.RewardList[i].Sprite);
         }
+    }
+
+    public void ClaimReward()
+    {
+        CurrentData.ClaimQuestReward();
+        Panel.Refresh();
     }
 }

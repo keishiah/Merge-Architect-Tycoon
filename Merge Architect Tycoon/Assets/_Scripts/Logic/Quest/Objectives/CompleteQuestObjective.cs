@@ -6,7 +6,7 @@ using UnityEngine;
     menuName = "StaticData/Quests/Objectives/CompleteQuestObjective")]
 public class CompleteQuestObjective : QuestObjective
 {
-    [SerializeField] private QuestBaseInfo questInfo;
+    [SerializeField] private QuestInfo questInfo;
 
     public override void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress)
     {

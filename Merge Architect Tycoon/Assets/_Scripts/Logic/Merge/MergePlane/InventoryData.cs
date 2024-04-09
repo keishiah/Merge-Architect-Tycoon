@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 
 public class InventoryData
 {
@@ -6,7 +7,7 @@ public class InventoryData
 
     public Slot[] items;
 
-    public Action OnInventoryChanged;
+    public ReactiveProperty<bool> InventoryFlag = new();
 
     [Serializable]
     public struct Slot

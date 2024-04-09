@@ -1,3 +1,4 @@
+using System;
 using Zenject;
 
 public class QuestsProvider : IInitializableOnSceneLoaded
@@ -17,37 +18,37 @@ public class QuestsProvider : IInitializableOnSceneLoaded
 
     public void OnSceneLoaded()
     {
+        InitActiveQuests();
         CheckAllQuestsForActivation();
     }
 
-    private void CheckAllQuestsForActivation()
+    private void InitActiveQuests()
     {
-        foreach (QuestBaseInfo quest in _staticDataService.Quests)
+        foreach(QuestData quest in _playerProgress.Quests.ActiveQuests)
+            ActivateQuest(quest);
+    }
+
+    public void CheckAllQuestsForActivation()
+    {
+        foreach (QuestInfo quest in _staticDataService.Quests)
         {
             if (_playerProgress.Quests.CompletedQuests.Contains(quest.name))
                 continue;
 
             QuestData questData = _playerProgress.Quests.ActiveQuests.Find(x => x.QuestInfo.name == quest.name);
             if (questData != null)
-            {
-                ActivateQuest(questData);
                 continue;
-            }
 
             if (quest.IsReadyToStart(_playerProgress))
-                ActivateQuest(quest.GetNewQuestData());
+                ActivateQuest(quest);
         }
     }
-
+    public void ActivateQuest(QuestInfo quest)
+    {
+        ActivateQuest(quest.GetNewQuestData());
+    }
     public void ActivateQuest(QuestData quest)
     {
-        quest.Subscribe(_playerProgress);
-        _playerProgressService.AddQuest(quest);
-    }
-
-    public void ClaimQuestReward(QuestData quest)
-    {
-        quest.GiveReward(_playerProgressService);
-        _playerProgressService.QuestComplete(quest);
+        _playerProgressService.ActivateQuest(quest);
     }
 }

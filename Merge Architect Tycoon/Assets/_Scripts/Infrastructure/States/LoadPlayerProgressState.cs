@@ -58,6 +58,11 @@
             SaveLoadService.Load<TrucksData>(SaveKey.Truck);
         if (_progressService.Trucks == null)
             _progressService.Trucks = new TrucksData();
+
+        _progressService.Inventory =
+            SaveLoadService.Load<InventoryData>(SaveKey.Inventory);
+        if (_progressService.Inventory == null)
+            _progressService.Inventory = new InventoryData();
     }
 
     public void Exit()

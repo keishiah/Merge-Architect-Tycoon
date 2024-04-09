@@ -12,7 +12,7 @@ public class NeedItemObjective : QuestObjective
 
     public override void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress)
     {
-        IDisposable subscription = Observable.Start(playerProgress.Inventory.OnInventoryChanged)
+        IDisposable subscription = playerProgress.Inventory.InventoryFlag.AsObservable()
             .Subscribe(x => GetItemsCount(playerProgress, questProgress)) ;
 
         questProgress.Subscription = subscription;
@@ -22,7 +22,8 @@ public class NeedItemObjective : QuestObjective
     {
         questProgress.Numeral = 
             Array.FindAll(playerProgress.Inventory.items, i 
-            => i.ItemID == neededItem.name && i.SlotState == SlotState.Draggable).Count();
+            => i.ItemID == neededItem.name 
+            && (i.SlotState == SlotState.Draggable || i.SlotState == SlotState.Unloading)).Count();
     }
 
     public override string GetDescription()
