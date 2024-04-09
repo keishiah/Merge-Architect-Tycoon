@@ -17,6 +17,9 @@ public class TrucksData
     public int CurrentResource;
 
     public TruckData[] ToArrive;
+
+    //Statistic
+    public ReactiveProperty<int> TruckBuyCount = new();
 }
 
 [Serializable]

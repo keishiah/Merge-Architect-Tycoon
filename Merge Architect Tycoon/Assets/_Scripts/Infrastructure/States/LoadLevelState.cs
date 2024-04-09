@@ -12,7 +12,8 @@ public class LoadLevelState : IPaylodedState<string>
     private readonly PlayerProgress _progress;
 
     public LoadLevelState(ISceneLoader sceneLoader,
-        SceneContextProvider sceneContextProvider, AudioPlayer audioPlayer,TutorialReader tutorialReader,PlayerProgress progress)
+        SceneContextProvider sceneContextProvider, AudioPlayer audioPlayer,
+        TutorialReader tutorialReader,PlayerProgress progress)
     {
         _sceneLoader = sceneLoader;
         _sceneContextProvider = sceneContextProvider;
@@ -50,7 +51,7 @@ public class LoadLevelState : IPaylodedState<string>
     {
         InitializePopupPresenters();
 
-        //_sceneContextProvider.Resolve<QuestGiver>().OnSceneLoaded();
+        _sceneContextProvider.Resolve<QuestsProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
         _tutorialReader.LoadProgress(_progress);
     }

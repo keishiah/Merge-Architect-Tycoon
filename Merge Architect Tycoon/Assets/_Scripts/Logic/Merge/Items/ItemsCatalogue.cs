@@ -10,19 +10,12 @@ public class ItemsCatalogue : MonoBehaviour
     [Inject] SlotsManager slotsManager;
     [Inject] InformationPanel informationPanel;
 
-    private int GetItemsCount(MergeItem item)
-    {
-        return slotsManager.Slots
-            .FindAll(
-                s => s.CurrentItem && s.CurrentItem.name == item.name && s.SlotState == SlotState.Draggable)
-            .Count;
-    }
-
     public int GetItemCount(MergeItem item)
     {
         return slotsManager.Slots
             .FindAll(
-                s => s.CurrentItem && s.CurrentItem.name == item.name && s.SlotState == SlotState.Draggable)
+                s => s.CurrentItem && s.CurrentItem.name == item.name 
+                && (s.SlotState == SlotState.Draggable || s.SlotState == SlotState.Unloading))
             .Count;
     }
 
@@ -30,7 +23,7 @@ public class ItemsCatalogue : MonoBehaviour
     {
         foreach (var item in items.Distinct())
         {
-            if (items.Select(x => x.name == item.name).Count() > GetItemsCount(item))
+            if (items.Select(x => x.name == item.name).Count() > GetItemCount(item))
                 return false;
         }
 
@@ -43,7 +36,7 @@ public class ItemsCatalogue : MonoBehaviour
         {
             var slotItem = slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
                                                                   s.CurrentItem.name == item.name &&
-                                                                  s.SlotState == SlotState.Draggable);
+                         (s.SlotState == SlotState.Unloading || s.SlotState == SlotState.Draggable));
             if (slotItem != null)
             {
                 if (informationPanel.slotCurrent == slotItem)

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26870c4cd3aa3a44ad89d6c75d039cd, type: 3}
+  m_Name: BuildSecond
+  m_EditorClassIdentifier: Assembly-CSharp::QuestBaseInfo
+  Discription: Build secondHouse
+  Sprite: {fileID: 0}
+  Requires:
+  - {fileID: 11400000, guid: d62dac70ab00f2a46956f364f53588ce, type: 2}
+  Objectives:
+  - {fileID: 11400000, guid: ad2bde76409d520439b8f4c43cde44c7, type: 2}
+  RewardList:
+  - {fileID: 11400000, guid: 3e9ed8019482c604cba74a1bcf5754a3, type: 2}

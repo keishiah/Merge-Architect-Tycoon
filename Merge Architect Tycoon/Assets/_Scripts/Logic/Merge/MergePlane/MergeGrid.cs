@@ -14,6 +14,8 @@ public class MergeGrid : MonoBehaviour
     [Inject] public SlotsManager slotsManager;
     [Inject] private DiContainer _container;
     [Inject] private MergeLevel level;
+    [Inject] private PlayerProgress _progress;
+    [Inject] private PlayerProgressService _progressService;
 
     public void OnSceneLoaded()
     {
@@ -83,12 +85,12 @@ public class MergeGrid : MonoBehaviour
             items = itemList.ToArray()
         };
 
-        SaveLoadService.Save(SaveKey.Inventory, saveData);
+        _progressService.ChangeInventory(saveData);
     }
 
     public void LoadInventory()
     {
-        InventoryData loadData = SaveLoadService.Load<InventoryData>(SaveKey.Inventory);
+        InventoryData loadData = _progress.Inventory;
         if (loadData == null || loadData.items == null)
         {
             CreateNewLevel();
@@ -125,5 +127,6 @@ public class MergeGrid : MonoBehaviour
     {
         CreateLayout(level.columns, level.rows);
         slotsManager.InitialItems(level.allDropSlots);
+        SaveInventory();
     }
 }

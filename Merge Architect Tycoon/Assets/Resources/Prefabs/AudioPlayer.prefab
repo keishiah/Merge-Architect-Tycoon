@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backgroundMusicAudioSource: {fileID: 5857515410627810795}
   _uiMusicAudioSource: {fileID: 1186213828865771258}
+  _isLoadVolume: 0
 --- !u!81 &1294220396607423718
 AudioListener:
   m_ObjectHideFlags: 0
@@ -69,7 +70,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -165,7 +166,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

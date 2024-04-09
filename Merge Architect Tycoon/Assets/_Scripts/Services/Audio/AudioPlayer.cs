@@ -29,6 +29,7 @@ public class AudioPlayer : MonoBehaviour
 
         SetBackgroundEnabled(_audioSettings.IsBackgroundSoundOn.Value);
         SetEffectsEnabled(_audioSettings.IsEffectsSoundOn.Value);
+
         SetBackgroundVolume(_audioSettings.BackgroundSound.Value);
         SetEffectsVolume(_audioSettings.EffectsSound.Value);
     }

@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
-
-public class LoadPlayerProgressState : IState
+﻿public class LoadPlayerProgressState : IState
 {
     private IGameStateMachine _gameStateMachine;
-    private readonly IEnumerable<IProgressReader> _progressReaderServices;
     private readonly PlayerProgress _progressService;
     private ApplicationSettings _settings;
 
     public LoadPlayerProgressState(PlayerProgress progressService, 
-        ApplicationSettings settings,
-        IEnumerable<IProgressReader> progressReaderServices)
+        ApplicationSettings settings)
     {
         _progressService = progressService;
         _settings = settings;
-        _progressReaderServices = progressReaderServices;
     }
 
     public void SetGameStateMachine(IGameStateMachine gameStateMachine)
@@ -26,8 +21,6 @@ public class LoadPlayerProgressState : IState
         LoadSettingsOrInitNew();
 
         LoadProgressOrInitNew();
-
-        NotifyProgressReaderServices();
 
         _gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
     }
@@ -44,11 +37,7 @@ public class LoadPlayerProgressState : IState
         _progressService.Riches =
             SaveLoadService.Load<PlayerRiches>(SaveKey.Riches);
         if (_progressService.Riches == null)
-        {
             _progressService.Riches = new PlayerRiches();
-            _progressService.Riches.Coins.Value = 500;
-            _progressService.Riches.Diamonds.Value = 5;
-        }
 
         _progressService.Buldings =
             SaveLoadService.Load<BuildingsData>(SaveKey.Buldings);
@@ -69,12 +58,11 @@ public class LoadPlayerProgressState : IState
             SaveLoadService.Load<TrucksData>(SaveKey.Truck);
         if (_progressService.Trucks == null)
             _progressService.Trucks = new TrucksData();
-    }
 
-    private void NotifyProgressReaderServices()
-    {
-        // foreach (IProgressReader reader in _progressReaderServices)
-        //     reader.LoadProgress(_progressService);
+        _progressService.Inventory =
+            SaveLoadService.Load<InventoryData>(SaveKey.Inventory);
+        if (_progressService.Inventory == null)
+            _progressService.Inventory = new InventoryData();
     }
 
     public void Exit()

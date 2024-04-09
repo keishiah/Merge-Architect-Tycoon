@@ -22,7 +22,6 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<DistrictsPresenter>().AsSingle();
         Container.Bind<CurrencyCreator>().AsSingle();
         Container.Bind<QuestsProvider>().AsSingle();
-        Container.Bind<QuestGiver>().AsSingle();
         Container.Bind<BuildingCreator>().AsSingle();
         Container.Bind<RichPresenter>().AsSingle();
         Container.Bind<AudioSettingsPresenter>().AsSingle();

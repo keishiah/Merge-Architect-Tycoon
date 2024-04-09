@@ -2,8 +2,10 @@ using UnityEngine;
 
 public abstract class Reward : ScriptableObject
 {
-    public Sprite rewardSprite;
-    public int rewardAmount;
+    public bool IsHiden;
+
+    public Sprite Sprite;
+    public int Amount;
 
     public abstract void GiveReward(PlayerProgressService progress);
 }

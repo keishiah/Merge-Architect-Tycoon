@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1b7e570a226c948b210b145c8f0e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: c26870c4cd3aa3a44ad89d6c75d039cd, type: 3}
   m_Name: TutorialFirstQuest
   m_EditorClassIdentifier: 
   Discription: Get an inheritance
-  Sprite: {fileID: 21300000, guid: 32efdbadd3a41354fa5fae40ae9fc932, type: 3}
+  Sprite: {fileID: 21300000, guid: ac3a1c7c9032e7348abc9920801351ff, type: 3}
+  Requires: []
+  Objectives: []
   RewardList:
   - {fileID: 11400000, guid: 3e9ed8019482c604cba74a1bcf5754a3, type: 2}
   - {fileID: 11400000, guid: 47375b53d95575d4d80c909d03d6eb6a, type: 2}
+  - {fileID: 11400000, guid: e14a8882d0f624d4faf0edda61dde841, type: 2}

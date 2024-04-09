@@ -14,7 +14,7 @@ public class StaticDataService
     private readonly IAssetProvider _assetProvider;
     public Dictionary<string, BuildingInfo> BuildingInfoDictionary { get; private set; } = new();
     public Dictionary<int, DistrictInfo> DistrictsInfoDictionary { get; private set; } = new();
-    public List<BaseQuestInfo> Quests { get; private set; }
+    public List<QuestInfo> Quests { get; private set; }
     public TruckInfo TruckInfo { get; private set; }
     //public List<MergeItem> ItemsInfo { get; private set; }
     public AudioData AudioData { get; private set; }
@@ -31,7 +31,7 @@ public class StaticDataService
         DistrictsInfo districtsData = await _assetProvider.Load<DistrictsInfo>(DistrictsInfoPath);
         DistrictsInfoDictionary = districtsData.districts.ToDictionary(x => x.districtId, x => x);
 
-        IList<BaseQuestInfo> questsData = await _assetProvider.LoadStaticDataByLabel<BaseQuestInfo>(QuestLabel);
+        IList<QuestInfo> questsData = await _assetProvider.LoadStaticDataByLabel<QuestInfo>(QuestLabel);
         Quests = questsData.ToList();
 
         TruckInfo = await _assetProvider.Load<TruckInfo>(TrucksInfoPath);
