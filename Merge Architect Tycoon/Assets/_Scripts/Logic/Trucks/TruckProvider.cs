@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UniRx;
 using Zenject;
+using System;
 
 public class TruckProvider : IInitializableOnSceneLoaded
 {
@@ -30,7 +31,6 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         RenderUpdateButton();
 
-        _truckPanel.BoostInit(_truckInfo.BoostLimit);
         _truckPanel.RenderBoost(_data.BoostCount.Value);
         _truckPanel.BoostButtonRefresh(boostCost);
 
@@ -129,11 +129,15 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         Truck truck = new();
         truck.TruckCargo = new();
-        LootBox lootBox = _truckInfo.MergeItems[_data.CurrentResource].Resource;
+
+        TruckResources resource = _truckInfo.MergeItems[_data.CurrentResource];
+
+        int index = Math.Min(resource.Resource.Length-1, _data.LuckLevel);
+        LootBox lootBox = resource.Resource[index];
 
         for(int i = 0; i < _data.CargoCapacity; i++)
         {
-            MergeItem mergeItem = lootBox.GetRandomItem<MergeItem>(_data.LuckLevel);
+            MergeItem mergeItem = lootBox.GetRandomItem<MergeItem>();
             truck.TruckCargo.Add(mergeItem);
         }
 

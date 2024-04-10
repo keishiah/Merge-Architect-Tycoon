@@ -16,7 +16,6 @@ public class TruckPanel : MonoBehaviour
     public Button BoostTruckButton;
     public TextMeshProUGUI BoostTruckButtonText;
     public TextMeshProUGUI[] BoostTexts;
-    public Slider[] BoostSliders;
 
     public Button[] ResourceButtons;
 
@@ -24,28 +23,14 @@ public class TruckPanel : MonoBehaviour
     public Button[] BuyTruckButtons;
     public TextMeshProUGUI PriceText;
 
-    private int _boostLimit;
     [SerializeField]
     private RectTransform _resourceCursor;
 
-    public void BoostInit(int limit)
-    {
-        _boostLimit = limit;
-        foreach (Slider slider in BoostSliders)
-        {
-            slider.maxValue = _boostLimit;
-        }
-    }
-
     public void RenderBoost(int count)
     {
-        foreach (Slider slider in BoostSliders)
-        {
-            slider.value = count;
-        }
         foreach (TextMeshProUGUI text in BoostTexts)
         {
-            text.text = $"{count}/{_boostLimit}";
+            text.text = $"{count}";
         }
     }
     public void RenderCost(int price)

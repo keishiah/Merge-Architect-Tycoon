@@ -115,13 +115,8 @@ public class PlayerProgressService
         string itemID = items[^1];
         items.Remove(itemID);
 
-        if (items.Count <= 0)
-            DequeueTruck();
-        else
-        {
-            _progress.Trucks.ToArrive[0].Cargo = items.ToArray();
-            SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
-        }
+        _progress.Trucks.ToArrive[0].Cargo = items.ToArray();
+        SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
 
         return itemID;
     }

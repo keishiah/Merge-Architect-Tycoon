@@ -3,6 +3,6 @@
 [Serializable]
 public class TruckResources
 {
-    public LootBox Resource;
+    public LootBox[] Resource;
     public int SoftCost;
 }

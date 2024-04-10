@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 416ec4bee099318439d2f92c256e6e7a, type: 3}
-  m_Name: Tools
+  m_Name: ToolsLv0
   m_EditorClassIdentifier: 
   Loot:
   - Item: {fileID: 11400000, guid: 2fa8d02feacaf874b99b97c9639d9727, type: 2}
-    WeightOfChance: 9
-  - Item: {fileID: 11400000, guid: 473604411a654484091699b5eee43f1c, type: 2}
-    WeightOfChance: 27
-  - Item: {fileID: 11400000, guid: e910c33a7ae05e7439efd4a05510d12f, type: 2}
-    WeightOfChance: 81
+    WeightOfChance: 1
+  - Item: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
+    WeightOfChance: 1
