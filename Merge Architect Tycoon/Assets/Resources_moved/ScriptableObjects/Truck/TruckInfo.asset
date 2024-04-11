@@ -19,7 +19,7 @@ MonoBehaviour:
   Upgrades:
   - TruskUpdate: 0
     SoftCost: 100
-  - TruskUpdate: 0
+  - TruskUpdate: 1
     SoftCost: 200
   - TruskUpdate: 0
     SoftCost: 300

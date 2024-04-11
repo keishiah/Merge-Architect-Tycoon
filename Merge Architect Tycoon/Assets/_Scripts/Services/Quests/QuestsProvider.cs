@@ -25,7 +25,11 @@ public class QuestsProvider : IInitializableOnSceneLoaded
     private void InitActiveQuests()
     {
         foreach(QuestData quest in _playerProgress.Quests.ActiveQuests)
+        {
+            QuestInfo questInfo = _staticDataService.Quests.Find(q => q.name == quest.QuestID);
+            questInfo.SetParams(quest);
             ActivateQuest(quest);
+        }
     }
 
     public void CheckAllQuestsForActivation()

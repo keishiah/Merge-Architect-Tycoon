@@ -10,8 +10,8 @@ public class CompleteQuestObjective : QuestObjective
 
     public override void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress)
     {
-        IDisposable subscription = playerProgress.Quests.CompletedQuests.ObserveAdd()
-            .Where(x => x.Value == questInfo.name)
+        IDisposable subscription = playerProgress.Quests.LastCompletedQuest
+            .Where(x => x == questInfo.name)
             .Subscribe(x => QuestDone(questProgress));
 
         questProgress.Subscription = subscription;
@@ -21,6 +21,7 @@ public class CompleteQuestObjective : QuestObjective
     {
         questProgress.Numeral = 1;
         questProgress.IsComplete = true;
+        questProgress.ProgressAction?.Invoke();
     }
 
     public override string GetDescription()

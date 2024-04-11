@@ -20,6 +20,7 @@ public class TruckZoneRenderer : MonoBehaviour
 
     private TruckBehaviour _truckBehaviour;
     private Truck _currentTruck;
+    private float _lastTruckSpeed;
     public bool _isNeedToUnload { get; private set; }
 
     private void Awake()
@@ -65,7 +66,8 @@ public class TruckZoneRenderer : MonoBehaviour
             return;
         }
 
-        _currentTruck = _truckProvider.Dequeue();
+        if(_currentTruck == null)
+            _currentTruck = _truckProvider.Pop();
 
         PaintTheTruck();
 
@@ -91,12 +93,15 @@ public class TruckZoneRenderer : MonoBehaviour
 
     private void NextStageGoAway()
     {
+        _lastTruckSpeed = _currentTruck.Speed;
+        _currentTruck = _truckProvider.Dequeue();
+
         _truckBehaviour = new TruckGoAway()
         {
             RectTtransform = GetComponent<RectTransform>(),
             StartXPosition = _stopXPosition,
             EndXPosition = _endXPosition,
-            Speed = _currentTruck.Speed,
+            Speed = _currentTruck != null ? _currentTruck.Speed : _lastTruckSpeed,
         };
         _truckBehaviour.Enter();
     }

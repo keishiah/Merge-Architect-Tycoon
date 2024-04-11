@@ -11,11 +11,17 @@ public class TruckQuestObjective : QuestObjective
     public override void DoSubscribe(PlayerProgress playerProgress, QuestProgress questProgress)
     {
         IDisposable subscription = playerProgress.Trucks.TruckBuyCount.AsObservable()
-            .Subscribe(x => questProgress.Numeral++);
+            .Subscribe(x => AddProgress(questProgress));
         //We compensate the method call at the subscription
         questProgress.Numeral--;
 
         questProgress.Subscription = subscription;
+    }
+
+    private void AddProgress(QuestProgress questProgress)
+    {
+        questProgress.Numeral++;
+        questProgress.ProgressAction?.Invoke();
     }
 
     public override string GetDescription()

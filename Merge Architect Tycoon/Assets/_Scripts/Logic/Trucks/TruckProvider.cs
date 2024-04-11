@@ -39,6 +39,8 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         _truckPanel.RenderCost(resourceCost);
         Interactebles();
+
+        _truckZone.UpdateOn();
     }
 
 
@@ -151,6 +153,16 @@ public class TruckProvider : IInitializableOnSceneLoaded
         _truckZone.UpdateOn();
     }
 
+    public Truck Dequeue()
+    {
+        TruckData truckData = _progressService.DequeueTruck();
+        return Prepare(truckData);
+    }
+    public Truck Pop()
+    {
+        TruckData truck = _playerProgress.Trucks.ToArrive[0];
+        return Prepare(truck);
+    }
     private TruckData Prepare(Truck truckData)
     {
         string[] CargoID = new string[truckData.TruckCargo.Count];
@@ -161,10 +173,11 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         return new TruckData() { Cargo = CargoID };
     }
-
-    public Truck Dequeue()
+    private Truck Prepare(TruckData truckData)
     {
-        TruckData truckData = _progressService.DequeueTruck();
+        if(truckData == null)
+            return null;
+
         Truck result = new Truck();
         result.TruckCargo = new();
 
@@ -182,7 +195,6 @@ public class TruckProvider : IInitializableOnSceneLoaded
             result.TruckCargo.Add(item);
         }
         result.DequeueAction += DequeueTruckItem;
-
         return result;
     }
 
