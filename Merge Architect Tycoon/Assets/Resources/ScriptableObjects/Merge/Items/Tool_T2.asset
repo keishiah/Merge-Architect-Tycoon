@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Tool_T2
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: Paint roller
   ItemDescrpition: 
-  ItemLevel: 1
-  ItemCost: 50
+  ItemLevel: 2
+  ItemCost: 10
   itemType: 0
-  ItemSprite: {fileID: 21300000, guid: 6eee245eab1618e478298564972a506f, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 7f22efdb7f3f1524abefba2a273933cc, type: 3}
   nextItem: {fileID: 11400000, guid: e910c33a7ae05e7439efd4a05510d12f, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

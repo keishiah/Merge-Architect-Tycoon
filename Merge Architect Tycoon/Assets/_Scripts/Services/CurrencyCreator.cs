@@ -16,16 +16,17 @@ public class CurrencyCreator
     {
         try
         {
-            float timeToCreate = _staticDataService.DistrictsInfoDictionary[district.districtId].timeToEarn;
+            float timeToCreate = _staticDataService.DistrictsInfoDictionary[district.DistrictId].timeToEarn;
             district.SetSliderMaxValue(timeToCreate);
-            district.coinsSlider.gameObject.SetActive(true);
+            district.SetSliderValue(timeToCreate);
+            district.CoinsSlider.gameObject.SetActive(true);
 
             while (timeToCreate > 0)
             {
-                var delayTimeSpan = TimeSpan.FromSeconds(1f);
+                var delayTimeSpan = TimeSpan.FromSeconds(0.03f);
 
                 await UniTask.Delay(delayTimeSpan, cancellationToken: district.ActivityToken.Token);
-                timeToCreate--;
+                timeToCreate -= 0.03f;
                 district.SetSliderValue(timeToCreate);
             }
         }

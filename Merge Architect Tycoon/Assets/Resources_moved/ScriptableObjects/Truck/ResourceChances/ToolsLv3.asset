@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416ec4bee099318439d2f92c256e6e7a, type: 3}
+  m_Name: ToolsLv3
+  m_EditorClassIdentifier: 
+  Loot:
+  - Item: {fileID: 11400000, guid: 2fa8d02feacaf874b99b97c9639d9727, type: 2}
+    WeightOfChance: 50
+  - Item: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
+    WeightOfChance: 50
+  - Item: {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
+    WeightOfChance: 50
+  - Item: {fileID: 11400000, guid: 473604411a654484091699b5eee43f1c, type: 2}
+    WeightOfChance: 30
+  - Item: {fileID: 11400000, guid: e73b3daebb83b4b47b78cc1a51b854f0, type: 2}
+    WeightOfChance: 30
+  - Item: {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}
+    WeightOfChance: 30
+  - Item: {fileID: 11400000, guid: e910c33a7ae05e7439efd4a05510d12f, type: 2}
+    WeightOfChance: 20
+  - Item: {fileID: 11400000, guid: fe507aad616079c4fb2afa42fa2d14a3, type: 2}
+    WeightOfChance: 20
+  - Item: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}
+    WeightOfChance: 20

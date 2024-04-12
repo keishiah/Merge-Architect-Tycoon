@@ -30,11 +30,10 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Slot
-  - m_GUID: dc0cb42a6d8e75b42a0ac50d3ca5482d
+  - m_GUID: ef89f0b462c8e3c45b9bb63f046e466c
     m_Address: DeliveryZone
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Slot
+    m_SerializedLabels: []
   - m_GUID: 991890a890c7eab4ca64c9309dbf4b9d
     m_Address: DistrictsInfo
     m_ReadOnly: 0
