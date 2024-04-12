@@ -93,7 +93,6 @@ public class InformationPanel : MonoBehaviour
 
         int coins = (int)slotCurrent.CurrentItem.ItemCost;
         _player.AddCoins(coins);
-        Debug.Log($"Item sell to: {coins}");
 
         DeleteItem();
     }

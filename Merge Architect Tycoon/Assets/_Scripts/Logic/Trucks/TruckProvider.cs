@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UniRx;
 using Zenject;
+using System;
 
 public class TruckProvider : IInitializableOnSceneLoaded
 {
@@ -30,7 +31,6 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         RenderUpdateButton();
 
-        _truckPanel.BoostInit(_truckInfo.BoostLimit);
         _truckPanel.RenderBoost(_data.BoostCount.Value);
         _truckPanel.BoostButtonRefresh(boostCost);
 
@@ -39,6 +39,8 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         _truckPanel.RenderCost(resourceCost);
         Interactebles();
+
+        _truckZone.UpdateOn();
     }
 
 
@@ -129,11 +131,15 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         Truck truck = new();
         truck.TruckCargo = new();
-        LootBox lootBox = _truckInfo.MergeItems[_data.CurrentResource].Resource;
+
+        TruckResources resource = _truckInfo.MergeItems[_data.CurrentResource];
+
+        int index = Math.Min(resource.Resource.Length-1, _data.LuckLevel);
+        LootBox lootBox = resource.Resource[index];
 
         for(int i = 0; i < _data.CargoCapacity; i++)
         {
-            MergeItem mergeItem = lootBox.GetRandomItem<MergeItem>(_data.LuckLevel);
+            MergeItem mergeItem = lootBox.GetRandomItem<MergeItem>();
             truck.TruckCargo.Add(mergeItem);
         }
 
@@ -147,6 +153,16 @@ public class TruckProvider : IInitializableOnSceneLoaded
         _truckZone.UpdateOn();
     }
 
+    public Truck Dequeue()
+    {
+        TruckData truckData = _progressService.DequeueTruck();
+        return Prepare(truckData);
+    }
+    public Truck Pop()
+    {
+        TruckData truck = _playerProgress.Trucks.ToArrive[0];
+        return Prepare(truck);
+    }
     private TruckData Prepare(Truck truckData)
     {
         string[] CargoID = new string[truckData.TruckCargo.Count];
@@ -157,10 +173,11 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         return new TruckData() { Cargo = CargoID };
     }
-
-    public Truck Dequeue()
+    private Truck Prepare(TruckData truckData)
     {
-        TruckData truckData = _progressService.DequeueTruck();
+        if(truckData == null)
+            return null;
+
         Truck result = new Truck();
         result.TruckCargo = new();
 
@@ -178,7 +195,6 @@ public class TruckProvider : IInitializableOnSceneLoaded
             result.TruckCargo.Add(item);
         }
         result.DequeueAction += DequeueTruckItem;
-
         return result;
     }
 

@@ -28,6 +28,7 @@ public class BuildingObjective : QuestObjective
     {
         questProgress.Numeral = 1;
         questProgress.IsComplete = true;
+        questProgress.ProgressAction?.Invoke();
     }
 
     public override bool IsComplete(PlayerProgress playerData, QuestProgress questProgress = null)

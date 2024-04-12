@@ -22,6 +22,7 @@ public static class SaveLoadService
 {
     public static void Save<T>(SaveKey key, T data)
     {
+        Debug.Log(data.ToJson());
         PlayerPrefs.SetString(key.ToString(), data.ToJson());
     }
 

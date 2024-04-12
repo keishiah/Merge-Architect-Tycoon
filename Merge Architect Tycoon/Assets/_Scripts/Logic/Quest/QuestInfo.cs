@@ -31,13 +31,18 @@ public class QuestInfo : ScriptableObject
         return result;
     }
 
-    protected void SetParams(QuestData questData)
+    public void SetParams(QuestData questData)
     {
+        questData.QuestID = name;
         questData.QuestInfo = this;
-        questData.ProgressList = new List<QuestProgress>(Objectives.Count);
-        for(int i = 0; i < Objectives.Count; i++)
+        if(questData.ProgressList == null)
         {
-            questData.ProgressList.Add(new QuestProgress());
+            questData.ProgressList = new QuestProgress[Objectives.Count];
+            for(int i = 0; i < Objectives.Count; i++)
+            {
+                questData.ProgressList[i] = new QuestProgress();
+            }
         }
+        
     }
 }

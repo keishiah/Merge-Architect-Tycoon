@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class PlayerProgressService
@@ -99,11 +100,12 @@ public class PlayerProgressService
             return null;
 
         Queue<TruckData> trucks = new Queue<TruckData>(_progress.Trucks.ToArrive);
-        TruckData truck = trucks.Dequeue();
+        trucks.Dequeue();
         _progress.Trucks.ToArrive = trucks.ToArray();
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
-
-        return truck;
+        
+        if (trucks.Count <= 0) return null;
+        return trucks.Peek();
     }
     public string DequeueTruckItem()
     {
@@ -115,13 +117,8 @@ public class PlayerProgressService
         string itemID = items[^1];
         items.Remove(itemID);
 
-        if (items.Count <= 0)
-            DequeueTruck();
-        else
-        {
-            _progress.Trucks.ToArrive[0].Cargo = items.ToArray();
-            SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
-        }
+        _progress.Trucks.ToArrive[0].Cargo = items.ToArray();
+        SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);
 
         return itemID;
     }
@@ -134,17 +131,23 @@ public class PlayerProgressService
     }
     public void ActivateQuest(QuestData quest)
     {
-        if (_progress.Quests.ActiveQuests.Contains(quest))
-            return;
+        QuestData questData = _progress.Quests.ActiveQuests.Find(x => x.QuestID == quest.QuestID);
+        if (questData == null)
+            _progress.Quests.ActiveQuests.Add(quest);
 
-        _progress.Quests.ActiveQuests.Add(quest);
         quest.Subscribe(_progress, this);
         SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
     }
     public void QuestComplete(QuestData quest)
     {
         _progress.Quests.ActiveQuests.Remove(quest);
-        _progress.Quests.CompletedQuests.Add(quest.QuestInfo.name);
+        _progress.Quests.CompletedQuests.Add(quest.QuestID);
+        _progress.Quests.LastCompletedQuest.Value = quest.QuestID;
+        SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
+    }
+
+    public void SaveQuests()
+    {
         SaveLoadService.Save(SaveKey.Quests, _progress.Quests);
     }
     #endregion
@@ -152,10 +155,9 @@ public class PlayerProgressService
     #region Inventory
     public void ChangeInventory(InventoryData saveData)
     {
-        if (_progress.Inventory == null)
-            _progress.Inventory = saveData;
-        else
-            _progress.Inventory.items = saveData.items;
+        _progress.Inventory.GridX = saveData.GridX;
+        _progress.Inventory.GridY = saveData.GridY;
+        _progress.Inventory.items = saveData.items;
 
         _progress.Inventory.InventoryFlag.Value = !_progress.Inventory.InventoryFlag.Value;
         SaveLoadService.Save(SaveKey.Inventory, _progress.Inventory);

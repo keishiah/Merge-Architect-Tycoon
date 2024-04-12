@@ -21,7 +21,7 @@ MonoBehaviour:
     SoftCost: 100
   - TruskUpdate: 1
     SoftCost: 200
-  - TruskUpdate: 2
+  - TruskUpdate: 0
     SoftCost: 300
   - TruskUpdate: 1
     SoftCost: 400
@@ -48,13 +48,13 @@ MonoBehaviour:
   - IsSoft: 0
     Cost: 1500
   MergeItems:
-  - Resource: {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
+  - Resource:
+    - {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
+    - {fileID: 11400000, guid: 6f6942985092ae6458b4f9e67ed5e974, type: 2}
+    - {fileID: 11400000, guid: 80c410d492f257848b8dadd0bb77ed46, type: 2}
     SoftCost: 0
-  - Resource: {fileID: 11400000, guid: 65c5a375beccce046bf31cfbe7208a49, type: 2}
+  - Resource:
+    - {fileID: 11400000, guid: 00c4104d69ba955439b6a810186972be, type: 2}
+    - {fileID: 11400000, guid: c1c39876cfb3ac549a8fee128d0fdb01, type: 2}
+    - {fileID: 11400000, guid: 695365f493446ec429e037dc450c54ed, type: 2}
     SoftCost: 100
-  - Resource: {fileID: 11400000, guid: c1c39876cfb3ac549a8fee128d0fdb01, type: 2}
-    SoftCost: 200
-  - Resource: {fileID: 11400000, guid: 0cbfcb9db6280fb4c8112bbd4a8d38ae, type: 2}
-    SoftCost: 500
-  - Resource: {fileID: 11400000, guid: 609a2e8a61db8f24bb9ed343aeaa692a, type: 2}
-    SoftCost: 1000

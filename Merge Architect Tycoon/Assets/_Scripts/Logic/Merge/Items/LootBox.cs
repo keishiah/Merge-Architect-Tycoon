@@ -5,13 +5,13 @@ public class LootBox : ScriptableObject
 {
     public Loot[] Loot;
 
-    public T GetRandomItem<T>(int limit = 16) where T : ScriptableObject
+    public T GetRandomItem<T>() where T : ScriptableObject
     {
-        if (limit == 0)
+        if (Loot.Length <= 1)
             return (T)Loot[0].Item;
 
         int allWeight = 0;
-        for (int i = 0; i < Loot.Length && i <= limit; i++)
+        for (int i = 0; i < Loot.Length; i++)
         {
             allWeight += Loot[i].WeightOfChance;
         }
@@ -19,7 +19,7 @@ public class LootBox : ScriptableObject
         int cursor = Random.Range(0, allWeight);
 
         int index = 0;
-        while (cursor > Loot[index].WeightOfChance)
+        while (cursor >= Loot[index].WeightOfChance)
         {
             cursor -= Loot[index].WeightOfChance;
             index++;

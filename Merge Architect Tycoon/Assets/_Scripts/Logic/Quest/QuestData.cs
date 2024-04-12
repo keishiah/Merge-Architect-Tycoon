@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class QuestData
 {
+    public string QuestID;
     public QuestInfo QuestInfo;
-    public List<QuestProgress> ProgressList;
+    public QuestProgress[] ProgressList;
 
     public PlayerProgress PlayerProgress;
     public PlayerProgressService PlayerProgressService;
@@ -18,6 +20,7 @@ public class QuestData
         {
             int index = i;//need new instance to subscribe
             QuestInfo.Objectives[i].DoSubscribe(playerProgress, ProgressList[index]);
+            ProgressList[index].ProgressAction += playerProgressService.SaveQuests;
         }
     }
 
@@ -56,11 +59,12 @@ public class QuestData
     }
     protected virtual void Unsubscribe()
     {
-        for(int i = 0; i< ProgressList.Count; i++)
+        for(int i = 0; i< ProgressList.Length; i++)
         {
             ProgressList[i].Subscription.Dispose();
+            ProgressList[i].ProgressAction -= PlayerProgressService.SaveQuests;
         }
-        ProgressList.Clear();
+        ProgressList = null;
     }
 }
 
@@ -70,5 +74,6 @@ public class QuestProgress
     public bool IsComplete;
     public int Numeral;
 
+    public Action ProgressAction;
     public IDisposable Subscription;
 }
