@@ -4,6 +4,6 @@ using UniRx;
 [Serializable]
 public class PlayerRiches
 {
-    public ReactiveProperty<int> Coins { get; private set; } = new(500);
-    public ReactiveProperty<int> Diamonds { get; private set; } = new(5);
+    public ReactiveProperty<int> Coins = new(500);
+    public ReactiveProperty<int> Diamonds = new(5);
 }

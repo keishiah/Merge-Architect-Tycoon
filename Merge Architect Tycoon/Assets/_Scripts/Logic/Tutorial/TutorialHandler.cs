@@ -1,4 +1,6 @@
 using System;
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TMPro;
@@ -29,9 +31,13 @@ public class TutorialHandler : MonoBehaviour
     {
 
         DisableAll();
-        TutorialSteps[_currentStep].Enter(this);
     }
 
+    public void StartTutorialFromIndex(int stepIndex)
+    {
+        _currentStep = stepIndex;
+        TutorialSteps[_currentStep].Enter(this);
+    }
     private void DisableAll()
     {
         _dialog.SetActive(false);
