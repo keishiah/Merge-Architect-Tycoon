@@ -35,7 +35,7 @@ public class BuildingPlace : MonoBehaviour
         ActivityToken = new CancellationTokenSource();
         _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
         buildingButton.OnClickAsObservable().Subscribe(
-            _ => _cameraZoomer.ZoomButtonClicked(buildingButton.transform));
+            _ => _cameraZoomer.ZoomButtonClicked(buildingButton.transform, buildingName));
     }
 
     public void SetBuildingState(BuildingStateEnum state)

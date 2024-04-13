@@ -11,7 +11,7 @@ public class CameraZoomer : MonoBehaviour
     private bool _zoomedIn = false;
     private bool _inProgress;
     private Vector2 _baseCameraPosition;
-
+    private string _currentBuildingClicked;
 
     private void Start()
     {
@@ -19,18 +19,23 @@ public class CameraZoomer : MonoBehaviour
         BackgroundButton.onClick.AddListener(MoveCameraBack);
     }
 
-    public void ZoomButtonClicked(Transform target)
+    public void ZoomButtonClicked(Transform target, string buildingName)
     {
         if (_inProgress)
             return;
-        if (_zoomedIn)
-        {
-            MoveCamera(target);
-        }
 
         if (!_zoomedIn)
         {
             MoveAndZoomCamera(target);
+            _currentBuildingClicked = buildingName;
+        }
+        else if (_currentBuildingClicked == buildingName)
+        {
+            MoveCameraBack();
+        }
+        else
+        {
+            MoveCamera(target);
         }
     }
 
@@ -52,6 +57,7 @@ public class CameraZoomer : MonoBehaviour
         await mainCamera.transform.DOMove(newPosition, 1f).AsyncWaitForCompletion();
         _inProgress = false;
     }
+
     private async void MoveAndZoomCamera(Transform target)
     {
         _inProgress = true;

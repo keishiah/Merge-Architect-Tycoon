@@ -76,7 +76,8 @@ public class CreateBuildingPopupPresenter
 
     public void SelectBuilding(CreateBuildingUiElement selectedBuilding)
     {
-        _cameraZoomer.ZoomButtonClicked(_buildingProvider.GetBuildingTransform(selectedBuilding.buildingName));
+        _cameraZoomer.ZoomButtonClicked(_buildingProvider.GetBuildingTransform(selectedBuilding.buildingName),
+            selectedBuilding.buildingName);
         TurnOfPreviousOutline(selectedBuilding);
         _selectedBuildingElement = selectedBuilding;
         _createBuildingPopup.OpenPanel();
@@ -91,7 +92,7 @@ public class CreateBuildingPopupPresenter
         CreateBuilding(buildingData.itemsToCreate,
             buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
     }
-    
+
 
     private void SetBuildingResources()
     {
