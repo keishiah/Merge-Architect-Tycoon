@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -30,9 +31,13 @@ public class TutorialHandler : MonoBehaviour
         _dialogText.color = Color.black;
         _dialogText.alignment = TextAlignmentOptions.Center;
         DisableAll();
-        TutorialSteps[_currentStep].Enter(this);
     }
 
+    public void StartTutorialFromIndex(int stepIndex)
+    {
+        _currentStep = stepIndex;
+        TutorialSteps[_currentStep].Enter(this);
+    }
     private void DisableAll()
     {
         _dialog.SetActive(false);
@@ -61,7 +66,7 @@ public class TutorialHandler : MonoBehaviour
         else
             TutorialSteps[_currentStep].Enter(this);
 
-        //SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
+        SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
     }
 
     public void ShowDialog(string text)

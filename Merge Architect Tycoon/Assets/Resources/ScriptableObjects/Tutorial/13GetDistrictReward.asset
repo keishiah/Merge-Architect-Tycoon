@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: 13GetDistrictReward
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
-  buttonName: EarnCurrencyButton1
+  buttonName: CurrencyImage1
