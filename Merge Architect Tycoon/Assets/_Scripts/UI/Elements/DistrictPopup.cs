@@ -8,7 +8,7 @@ public class DistrictPopup : MonoBehaviour
     public int DistrictId;
     public Slider CoinsSlider;
     public Button DistrictButton;
-    public GameObject Dollars;
+    public Image DollarsImage;
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
@@ -32,17 +32,17 @@ public class DistrictPopup : MonoBehaviour
         _districtsPresenter.AddDistrict(this);
 
         DistrictButton.onClick.AddListener(TapDistrict);
-
+        DistrictButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 1f;
         CoinsSlider.gameObject.SetActive(false);
-        Dollars.SetActive(false);
+        DollarsImage.enabled = false;
     }
 
     private void TapDistrict()
     {
-        if (Dollars.activeInHierarchy)
+        if (DollarsImage.enabled)
         {
             _districtsPresenter.EarnCurrency(DistrictId);
-            Dollars.SetActive(false);
+            DollarsImage.enabled = false;
         }
         else
             CloseMap();
@@ -61,7 +61,7 @@ public class DistrictPopup : MonoBehaviour
 
     public void TurnOnEarnButton()
     {
-        Dollars.SetActive(true);
+        DollarsImage.enabled = true;
     }
 
     public void OnDestroy()

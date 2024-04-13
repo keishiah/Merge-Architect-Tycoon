@@ -712,13 +712,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1773601019}
     m_Modifications:
-    - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2602698440799797844, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4088272855628103415, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -863,6 +867,10 @@ PrefabInstance:
     - target: {fileID: 7408740393252066727, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_Name
       value: District4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408740393252066727, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8815098806946936290, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1653,8 +1661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d23676f0bd4f8b9d1199223acd5523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skipTutorial: 1
-  _clearPrefs: 1
+  _skipTutorial: 0
+  _clearPrefs: 0
 --- !u!4 &327537908
 Transform:
   m_ObjectHideFlags: 0
@@ -3288,13 +3296,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1773601019}
     m_Modifications:
-    - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2602698440799797844, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4088272855628103415, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3435,6 +3447,10 @@ PrefabInstance:
     - target: {fileID: 7408740393252066727, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_Name
       value: District3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408740393252066727, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8815098806946936290, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -8130,13 +8146,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1773601019}
     m_Modifications:
-    - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2602698440799797844, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4088272855628103415, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -8277,6 +8297,10 @@ PrefabInstance:
     - target: {fileID: 7408740393252066727, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_Name
       value: District2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408740393252066727, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8815098806946936290, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -8745,7 +8769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1773601019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11003,11 +11027,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2766843588450768836, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4158708728324018250, guid: c8dff241fd9775b4b871511affda4e36, type: 3}
       propertyPath: m_Enabled
