@@ -26,6 +26,6 @@ public class TutorialReader
             return;
         }
 
-        GameObject.Instantiate((GameObject)opHandle.Result, GameObject.Find("TutorialRoot").transform);
+        // GameObject.Instantiate((GameObject)opHandle.Result, GameObject.Find("TutorialRoot").transform);
     }
 }

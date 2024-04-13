@@ -21,14 +21,12 @@ public class BuildingRenderer : MonoBehaviour
 
     public void SetViewInactive()
     {
-        buildingStateImage.raycastTarget = false;
         timerText.gameObject.SetActive(false);
         buildingStateImage.gameObject.SetActive(false);
     }
 
     public void SetViewBuildInProgress()
     {
-        buildingStateImage.raycastTarget = false;
         _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
         createBuildingInMomentButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
@@ -36,8 +34,7 @@ public class BuildingRenderer : MonoBehaviour
 
     public void SetViewBuildCreated()
     {
-        buildingStateImage.raycastTarget = false;
-        Destroy(timerText.gameObject);
+        timerText.gameObject.SetActive(false);
     }
 
     public void UpdateTimerText(string formattedTime)
@@ -53,7 +50,6 @@ public class BuildingRenderer : MonoBehaviour
         buildingStateImage.sprite = spriteToShow;
         ScaleSpriteWithEffect(buildingStateImage.transform);
         createBuildingInMomentButton.gameObject.SetActive(false);
-
     }
 
     public void ShowBuildingSprite(Sprite spriteToShow)

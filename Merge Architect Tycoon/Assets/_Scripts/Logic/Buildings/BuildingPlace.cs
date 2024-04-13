@@ -1,11 +1,14 @@
 ﻿using System.Threading;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class BuildingPlace : MonoBehaviour
 {
     public BuildingRenderer buildingView;
     public string buildingName;
+    public Button buildingButton;
     [HideInInspector] public int districtId;
 
     public CancellationTokenSource ActivityToken { get; private set; }
@@ -14,14 +17,16 @@ public class BuildingPlace : MonoBehaviour
     private BuildingProvider _buildingProvider;
     private BuildingCreator _buildingCreator;
     private PlayerProgress _playerProgressService;
+    private CameraZoomer _cameraZoomer;
 
     [Inject]
     void Construct(StaticDataService staticDataService, BuildingCreator buildingCreator,
-        BuildingProvider buildingProvider, PlayerProgress playerProgressService)
+        BuildingProvider buildingProvider, PlayerProgress playerProgressService, CameraZoomer cameraZoomer)
     {
         _staticDataService = staticDataService;
         _buildingCreator = buildingCreator;
         _buildingProvider = buildingProvider;
+        _cameraZoomer = cameraZoomer;
     }
 
     public void InitializeBuilding(int district)
@@ -29,6 +34,8 @@ public class BuildingPlace : MonoBehaviour
         districtId = district;
         ActivityToken = new CancellationTokenSource();
         _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
+        buildingButton.OnClickAsObservable().Subscribe(
+            _ => _cameraZoomer.ZoomButtonClicked(buildingButton.transform));
     }
 
     public void SetBuildingState(BuildingStateEnum state)
@@ -44,7 +51,8 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildSpriteOnCreate(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
+                buildingView.ShowBuildSpriteOnCreate(_staticDataService.BuildingInfoDictionary[buildingName]
+                    .districtSprite);
                 break;
             case BuildingStateEnum.ShowBuilding:
                 buildingView.SetViewBuildCreated();
