@@ -13,47 +13,58 @@ MonoBehaviour:
   m_Name: BuildingData
   m_EditorClassIdentifier: 
   buildings:
-  - buildingName: House
-    districtSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    buildPopupSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
+  - buildingName: Inn
+    districtSprite: {fileID: 21300000, guid: 54c7d7c983a66dc4c8ee631f89f112c7, type: 3}
+    buildPopupSprite: {fileID: 1970229507, guid: a3372e4fdd252e147a8f6c68727b63c7, type: 3}
     timeToCreate: 60
     coinsCountToCreate: 100
     diamondsCountToSkip: 1
     itemsToCreate: []
-  - buildingName: pension
-    districtSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    buildPopupSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
+  - buildingName: Lambermill
+    districtSprite: {fileID: -1276803385, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
+    buildPopupSprite: {fileID: 1182848882, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
     timeToCreate: 10800
-    coinsCountToCreate: 150
+    coinsCountToCreate: 800
     diamondsCountToSkip: 5
     itemsToCreate:
     - {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
-  - buildingName: School
-    districtSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    buildPopupSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    timeToCreate: 25
-    coinsCountToCreate: 200
-    diamondsCountToSkip: 0
+  - buildingName: Forester's house
+    districtSprite: {fileID: -1705453678, guid: 455e3fb6e773f7e4c9c78b99e2194717, type: 3}
+    buildPopupSprite: {fileID: -180363452, guid: 455e3fb6e773f7e4c9c78b99e2194717, type: 3}
+    timeToCreate: 10800
+    coinsCountToCreate: 2000
+    diamondsCountToSkip: 15
     itemsToCreate:
     - {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
-  - buildingName: Skyscrapper
-    districtSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    buildPopupSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    timeToCreate: 35
-    coinsCountToCreate: 300
-    diamondsCountToSkip: 0
+    - {fileID: 11400000, guid: f25959355b2defa408464f946105f058, type: 2}
+  - buildingName: Fastfood
+    districtSprite: {fileID: -968017688, guid: ab045372d9679c04daba5dbb024d17a6, type: 3}
+    buildPopupSprite: {fileID: -266944120, guid: ab045372d9679c04daba5dbb024d17a6, type: 3}
+    timeToCreate: 10800
+    coinsCountToCreate: 3000
+    diamondsCountToSkip: 20
     itemsToCreate:
-    - {fileID: 11400000, guid: b1779ba9957411c4f9df71b2225d49aa, type: 2}
+    - {fileID: 11400000, guid: 4f0dca2832e7bd6409edc62a58c0c584, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
-    - {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
-  - buildingName: LightTower
-    districtSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    buildPopupSprite: {fileID: 21300000, guid: 43d338fbd0f62ae46b8991c5a530fa65, type: 3}
-    timeToCreate: 45
-    coinsCountToCreate: 450
-    diamondsCountToSkip: 0
+    - {fileID: 11400000, guid: 06d534b0ca665bc42ad2159cd3e9055b, type: 2}
+  - buildingName: Water tower
+    districtSprite: {fileID: -1879613358, guid: aa1554d85734e19418f236da096e85e8, type: 3}
+    buildPopupSprite: {fileID: -1984595000, guid: aa1554d85734e19418f236da096e85e8, type: 3}
+    timeToCreate: 10800
+    coinsCountToCreate: 4500
+    diamondsCountToSkip: 25
     itemsToCreate:
     - {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
-    - {fileID: 11400000, guid: 6c35ec4378adf294dbb45f21d25eb5f4, type: 2}
+    - {fileID: 11400000, guid: 60f327530a940034696ccf0201ddcf04, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
+  - buildingName: School
+    districtSprite: {fileID: 21300000, guid: 1f768ec8229fedf44b19025cda04f7cb, type: 3}
+    buildPopupSprite: {fileID: -1447104700, guid: da31066ecb7726c409a8d38ad3ebad43, type: 3}
+    timeToCreate: 10800
+    coinsCountToCreate: 10000
+    diamondsCountToSkip: 30
+    itemsToCreate:
+    - {fileID: 11400000, guid: eb0500105f966fc49915f5b5b9c2c91c, type: 2}
+    - {fileID: 11400000, guid: ee3482945425eb34cb897f6c50384f11, type: 2}
+    - {fileID: 11400000, guid: 1e9b27abdf4304548bd5fc1de01296ce, type: 2}
   buildInProgressSprite: {fileID: 0}

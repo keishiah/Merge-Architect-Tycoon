@@ -12,10 +12,10 @@ public class TutorialReader
         if (progress.Tutorial.IsComplite)
             return;
 
-        LoadTutorial();
+        LoadTutorial(progress);
     }
 
-    private async void LoadTutorial()
+    private async void LoadTutorial(PlayerProgress progress)
     {
         AsyncOperationHandle opHandle = Addressables.LoadAssetAsync<GameObject>(AssetName.TutorialPrefab);
         await opHandle.Task;
@@ -26,6 +26,7 @@ public class TutorialReader
             return;
         }
 
-        GameObject.Instantiate((GameObject)opHandle.Result, GameObject.Find("TutorialRoot").transform);
+        GameObject Tutorial = GameObject.Instantiate((GameObject)opHandle.Result, GameObject.Find("TutorialRoot").transform);
+        Tutorial.GetComponent<TutorialHandler>().StartTutorialFromIndex(progress.Tutorial.StepIndex);
     }
 }
