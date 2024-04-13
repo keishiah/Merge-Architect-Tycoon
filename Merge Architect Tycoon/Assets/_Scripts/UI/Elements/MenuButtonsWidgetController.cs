@@ -17,6 +17,7 @@ public class MenuButtonsWidgetController : MonoBehaviour
     [SerializeField] private Button[] _menuButtons;
     [SerializeField] private WidgetView[] _widgets;
     [Inject] private AudioPlayer _audioPlayer;
+    [Inject] private CameraZoomer _cameraZoomer;
 
     private const string AnimatorTriggerNormal = "Normal";
     private const string AnimatorTriggerSelected = "Selected";
@@ -48,7 +49,7 @@ public class MenuButtonsWidgetController : MonoBehaviour
     private void OnMenuButtonClick(int i)
     {
         _audioPlayer.PlayUiSound(UiSoundTypes.ButtonClick);
-
+        _cameraZoomer.MoveCameraBack();
         bool needToSelect = _selectedButtonIndex != i;
 
         CloseCurrentWidget();

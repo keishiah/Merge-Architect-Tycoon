@@ -34,9 +34,8 @@ public class CameraZoomer : MonoBehaviour
         }
     }
 
-    private async void MoveCameraBack()
+    public async void MoveCameraBack()
     {
-        print("back");
         if (_inProgress || !_zoomedIn)
             return;
         _inProgress = true;

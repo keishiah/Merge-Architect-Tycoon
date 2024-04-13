@@ -35,7 +35,7 @@ public class QuestRenderer : MonoBehaviour
         RenderQuestHeader();
         RenderDetails();
         SetButtons();
-        SetUpObjectives();
+        SetUpObjectivesHeight();
     }
 
     private void Start()
@@ -43,7 +43,7 @@ public class QuestRenderer : MonoBehaviour
         OpenCloseObjectivesButton.onClick.AddListener(OpenCloseObjectives);
     }
 
-    private void SetUpObjectives()
+    private void SetUpObjectivesHeight()
     {
         if (ObjectiveRenderers.Count > 0)
         {
@@ -58,14 +58,28 @@ public class QuestRenderer : MonoBehaviour
     private void OpenCloseObjectives()
     {
         if (!_isOpened)
+        {
+            _isOpened = true;
             DOTween.To(() => ObjectivesLayout.padding.top, x =>
                 {
                     ObjectivesLayout.padding.top = x;
                     LayoutRebuilder.ForceRebuildLayoutImmediate(ObjectivesLayout.GetComponent<RectTransform>());
                 }, 0, .7f)
                 .SetEase(Ease.OutCubic);
+        }
+        else
+        {
+            _isOpened = false;
+
+            DOTween.To(() => ObjectivesLayout.padding.top, x =>
+                {
+                    ObjectivesLayout.padding.top = x;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(ObjectivesLayout.GetComponent<RectTransform>());
+                }, _objectivesHeight, .7f)
+                .SetEase(Ease.OutCubic);
+        }
     }
-    
+
     public void ClaimReward()
     {
         CurrentData.ClaimQuestReward();
