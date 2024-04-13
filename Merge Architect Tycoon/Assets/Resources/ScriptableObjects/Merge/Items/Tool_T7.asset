@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Tool_T7
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: Lawn mower
   ItemDescrpition: 
   ItemLevel: 7
-  ItemCost: 50
+  ItemCost: 10
   itemType: 0
-  ItemSprite: {fileID: 21300000, guid: ee4fe6a0f2532cf4f90e4104e08bcb54, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 8a4846f84cde63a4f849af55f1c19857, type: 3}
   nextItem: {fileID: 0}
   InItemsCount: 0
   InItem: {fileID: 0}

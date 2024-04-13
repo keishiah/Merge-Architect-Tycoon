@@ -5,10 +5,10 @@ using Zenject;
 
 public class DistrictPopup : MonoBehaviour
 {
-    public int districtId;
-    public Slider coinsSlider;
-    public Button earnCurrencyButton;
-    public Button closeMapButton;
+    public int DistrictId;
+    public Slider CoinsSlider;
+    public Button DistrictButton;
+    public Image DollarsImage;
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
@@ -22,8 +22,8 @@ public class DistrictPopup : MonoBehaviour
         Initialize();
     }
 
-    public void SetSliderMaxValue(float maxValue) => coinsSlider.maxValue = maxValue;
-    public void SetSliderValue(float value) => coinsSlider.value = value;
+    public void SetSliderMaxValue(float maxValue) => CoinsSlider.maxValue = maxValue;
+    public void SetSliderValue(float value) => CoinsSlider.value = value;
 
     private void Initialize()
     {
@@ -31,22 +31,26 @@ public class DistrictPopup : MonoBehaviour
 
         _districtsPresenter.AddDistrict(this);
 
-        earnCurrencyButton.onClick.AddListener(EarnCurrency);
-        closeMapButton.onClick.AddListener(CloseMap);
-
-        coinsSlider.gameObject.SetActive(false);
-        earnCurrencyButton.gameObject.SetActive(false);
+        DistrictButton.onClick.AddListener(TapDistrict);
+        DistrictButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 1f;
+        CoinsSlider.gameObject.SetActive(false);
+        DollarsImage.enabled = false;
     }
 
-    private void EarnCurrency()
+    private void TapDistrict()
     {
-        _districtsPresenter.EarnCurrency(districtId);
-        earnCurrencyButton.gameObject.SetActive(false);
+        if (DollarsImage.enabled)
+        {
+            _districtsPresenter.EarnCurrency(DistrictId);
+            DollarsImage.enabled = false;
+        }
+        else
+            CloseMap();
     }
 
     public void OpenDistrict()
     {
-        _districtsPresenter.SetCurrentDistrict(districtId);
+        _districtsPresenter.SetCurrentDistrict(DistrictId);
     }
 
     private void CloseMap()
@@ -57,7 +61,7 @@ public class DistrictPopup : MonoBehaviour
 
     public void TurnOnEarnButton()
     {
-        earnCurrencyButton.gameObject.SetActive(true);
+        DollarsImage.enabled = true;
     }
 
     public void OnDestroy()

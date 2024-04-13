@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Glass_T6
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: Balcony window
   ItemDescrpition: 
-  ItemLevel: 1
-  ItemCost: 50
+  ItemLevel: 6
+  ItemCost: 10
   itemType: 0
-  ItemSprite: {fileID: 21300000, guid: 81db98d4430824c4ab7dcc9c89f15516, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 5f79c9d718eb52540b59c91771494935, type: 3}
   nextItem: {fileID: 11400000, guid: ee3482945425eb34cb897f6c50384f11, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

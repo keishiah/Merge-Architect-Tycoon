@@ -19,21 +19,21 @@ MonoBehaviour:
   Upgrades:
   - TruskUpdate: 0
     SoftCost: 100
-  - TruskUpdate: 1
+  - TruskUpdate: 2
     SoftCost: 200
   - TruskUpdate: 0
     SoftCost: 300
-  - TruskUpdate: 1
-    SoftCost: 400
-  - TruskUpdate: 0
-    SoftCost: 500
-  - TruskUpdate: 1
-    SoftCost: 600
-  - TruskUpdate: 0
-    SoftCost: 700
   - TruskUpdate: 2
-    SoftCost: 800
+    SoftCost: 400
   - TruskUpdate: 1
+    SoftCost: 500
+  - TruskUpdate: 0
+    SoftCost: 600
+  - TruskUpdate: 2
+    SoftCost: 700
+  - TruskUpdate: 0
+    SoftCost: 800
+  - TruskUpdate: 0
     SoftCost: 900
   BoostLimit: 10
   BoostCost:
@@ -52,9 +52,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
     - {fileID: 11400000, guid: 6f6942985092ae6458b4f9e67ed5e974, type: 2}
     - {fileID: 11400000, guid: 80c410d492f257848b8dadd0bb77ed46, type: 2}
+    - {fileID: 11400000, guid: 32278bc51c48fb148bb05769e093c604, type: 2}
     SoftCost: 0
   - Resource:
     - {fileID: 11400000, guid: 00c4104d69ba955439b6a810186972be, type: 2}
     - {fileID: 11400000, guid: c1c39876cfb3ac549a8fee128d0fdb01, type: 2}
     - {fileID: 11400000, guid: 695365f493446ec429e037dc450c54ed, type: 2}
+    - {fileID: 11400000, guid: 62867b30cea27c243acf15bfb574afde, type: 2}
     SoftCost: 100

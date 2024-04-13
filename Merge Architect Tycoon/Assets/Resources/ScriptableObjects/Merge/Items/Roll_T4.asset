@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 
   ItemDescrpition: 
-  ItemLevel: 1
-  ItemCost: 50
+  ItemLevel: 4
+  ItemCost: 10
   itemType: 0
   ItemSprite: {fileID: 0}
   nextItem: {fileID: 11400000, guid: fa6a3e5b13397b24d8fa1427e0d67a72, type: 2}

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Tool_T4
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: Hammer
   ItemDescrpition: 
-  ItemLevel: 1
-  ItemCost: 50
+  ItemLevel: 4
+  ItemCost: 10
   itemType: 0
-  ItemSprite: {fileID: 21300000, guid: 58e8b02135d8d884db61e40e6261e28b, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 5eff37d40713dbd4885e1cd32aee4608, type: 3}
   nextItem: {fileID: 11400000, guid: 06d534b0ca665bc42ad2159cd3e9055b, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

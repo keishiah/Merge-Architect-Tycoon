@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d35107601fe1d498dddcde5229899b, type: 3}
   m_Name: Wood_T3
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: Small boards
   ItemDescrpition: 
-  ItemLevel: 1
-  ItemCost: 15
+  ItemLevel: 3
+  ItemCost: 10
   itemType: 0
-  ItemSprite: {fileID: 21300000, guid: 8b0b55e253c664342b368869e06f69d1, type: 3}
+  ItemSprite: {fileID: 21300000, guid: ae5536e2bcc08fd4a8329f1a49d830cf, type: 3}
   nextItem: {fileID: 11400000, guid: f674736e479f9094181f9d25563177b5, type: 2}
   InItemsCount: 0
   InItem: {fileID: 0}

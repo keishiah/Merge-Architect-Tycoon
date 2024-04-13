@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class InformationPanel : MonoBehaviour
@@ -8,10 +9,13 @@ public class InformationPanel : MonoBehaviour
     private PlayerProgressService _player;
 
     [Header("Texts")]
+    public Image itemImage;
     public TMP_Text itemNameText;
     public TMP_Text itemDescriptionText;
     public TMP_Text itemLvlText;
     public TMP_Text itemCostText;
+
+    public TMP_Text infoText;
 
     public SlotRenderer slotCurrent;
 
@@ -22,14 +26,14 @@ public class InformationPanel : MonoBehaviour
 
     public SelectedItem selectedItem;
 
-    public ProgressItemPopup _progressItemInfo;
+    //public ProgressItemPopup _progressItemInfo;
 
     public void ConfigPanel(SlotRenderer slot)
     {
         if (slotCurrent
             && slotCurrent != slot
-            && slotCurrent.currentDraggableItem() != null)
-            slotCurrent.currentDraggableItem().isClicked = false;
+            && slotCurrent.„RurrentDraggableItem() != null)
+            slotCurrent.„RurrentDraggableItem().isClicked = false;
 
         slotCurrent = slot;
 
@@ -39,7 +43,8 @@ public class InformationPanel : MonoBehaviour
 
         ActivateInfromPanel(true);
 
-        // itemNameText.text = mergeItem.ItemName;
+        itemImage.sprite = mergeItem.ItemSprite;
+        itemNameText.text = mergeItem.ItemName;
         itemDescriptionText.text = mergeItem.ItemDescrpition;
         itemLvlText.text = $"(Lvl {mergeItem.ItemLevel})";
         itemCostText.text = $"+{mergeItem.ItemCost}";
@@ -66,20 +71,21 @@ public class InformationPanel : MonoBehaviour
 
     }
 
-    public void OpenProgressInfoPanel()
-    {
-        _progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
-    }
+    //public void OpenProgressInfoPanel()
+    //{
+    //    _progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
+    //}
 
     public void ActivateInfromPanel(bool state)
     {
         selectedItem.gameObject.SetActive(state);
         informPanel.SetActive(state);
+        infoText.gameObject.SetActive(!state);
 
         if (!(state == false && slotCurrent != null))
             return;
 
-        DraggableItem draggableItem = slotCurrent.currentDraggableItem();
+        DraggableItem draggableItem = slotCurrent.„RurrentDraggableItem();
         if (draggableItem == null)
             return;
 

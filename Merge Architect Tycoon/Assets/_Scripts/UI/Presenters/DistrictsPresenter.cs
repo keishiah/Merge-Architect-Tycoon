@@ -40,7 +40,7 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         StartEarningCurrencyOnInitialization();
     }
 
-    public void AddDistrict(DistrictPopup districtUi) => _districts.Add(districtUi.districtId, districtUi);
+    public void AddDistrict(DistrictPopup districtUi) => _districts.Add(districtUi.DistrictId, districtUi);
 
     public void EarnCurrency(int districtId)
     {

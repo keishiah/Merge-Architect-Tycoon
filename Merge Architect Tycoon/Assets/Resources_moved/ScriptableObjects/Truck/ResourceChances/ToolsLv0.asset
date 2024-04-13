@@ -17,3 +17,5 @@ MonoBehaviour:
     WeightOfChance: 1
   - Item: {fileID: 11400000, guid: 89036cc2b5334954ca5d5d10ec36dbaa, type: 2}
     WeightOfChance: 1
+  - Item: {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
+    WeightOfChance: 1

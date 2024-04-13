@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 416ec4bee099318439d2f92c256e6e7a, type: 3}
-  m_Name: Stone
+  m_Name: WoodLv3
   m_EditorClassIdentifier: 
   Loot:
+  - Item: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
+    WeightOfChance: 50
   - Item: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
-    WeightOfChance: 9
+    WeightOfChance: 50
+  - Item: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
+    WeightOfChance: 30
   - Item: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
-    WeightOfChance: 3
+    WeightOfChance: 30
+  - Item: {fileID: 11400000, guid: 792e1bb92a3809b4c9b8dd52caf4833a, type: 2}
+    WeightOfChance: 20
   - Item: {fileID: 11400000, guid: 226a46cfe0c876244a9b2d16f40af990, type: 2}
-    WeightOfChance: 1
+    WeightOfChance: 20

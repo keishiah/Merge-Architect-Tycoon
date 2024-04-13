@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Loot:
   - Item: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
-    WeightOfChance: 1
+    WeightOfChance: 60
   - Item: {fileID: 11400000, guid: 20a10f03e2ef22a41a10620d775fb2ce, type: 2}
-    WeightOfChance: 1
+    WeightOfChance: 60
   - Item: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
-    WeightOfChance: 1
+    WeightOfChance: 40
   - Item: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
-    WeightOfChance: 1
+    WeightOfChance: 40
