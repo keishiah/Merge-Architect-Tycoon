@@ -88,6 +88,7 @@ public class CreateBuildingPopupPresenter
 
     public void CreateBuildingButtonClicked()
     {
+        _cameraZoomer.MoveCameraBack();
         BuildingInfo buildingData = _staticDataService.BuildingInfoDictionary[_selectedBuildingElement.buildingName];
         CreateBuilding(buildingData.itemsToCreate,
             buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);

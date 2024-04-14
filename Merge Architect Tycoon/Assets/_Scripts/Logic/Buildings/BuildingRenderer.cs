@@ -45,7 +45,6 @@ public class BuildingRenderer : MonoBehaviour
     public void ShowBuildSpriteOnCreate(Sprite spriteToShow)
     {
         buildingStateImage.transform.localScale = Vector3.zero;
-        _effectsPresenter.StopSmokeEffect();
         buildingStateImage.gameObject.SetActive(true);
         buildingStateImage.sprite = spriteToShow;
         ScaleSpriteWithEffect(buildingStateImage.transform);
@@ -61,6 +60,6 @@ public class BuildingRenderer : MonoBehaviour
     private void ScaleSpriteWithEffect(Transform imageTransform)
     {
         imageTransform.DOScale(1, 1)
-            .SetEase(Ease.OutBounce).AsyncWaitForCompletion().AsUniTask();
+            .SetEase(Ease.OutBounce).OnComplete(() => _effectsPresenter.StopSmokeEffect());
     }
 }

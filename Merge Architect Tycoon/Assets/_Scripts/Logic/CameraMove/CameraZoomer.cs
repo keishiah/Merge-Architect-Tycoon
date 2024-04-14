@@ -36,6 +36,7 @@ public class CameraZoomer : MonoBehaviour
         else
         {
             MoveCamera(target);
+            _currentBuildingClicked = buildingName;
         }
     }
 
