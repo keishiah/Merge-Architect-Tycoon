@@ -6,7 +6,8 @@ using Zenject;
 public class CreateBuildingPopup : MonoBehaviour
 {
     public ResourcesPanel resourcesPanel;
-
+    public RectTransform panelBackgroundTransform;
+    
     private RectTransform _panelRectTransform;
     private Vector2 _panelStartPosition;
     private MenuButtonsWidgetController _sceneButtons;
@@ -27,7 +28,7 @@ public class CreateBuildingPopup : MonoBehaviour
         _panelRectTransform = resourcesPanel.GetComponent<RectTransform>();
         _panelStartPosition = _panelRectTransform.anchoredPosition;
         resourcesPanel.actionButton.onClick.AddListener(_createBuildingPopupPresenter.CreateBuildingButtonClicked);
-        _rectHeight = _panelRectTransform.rect.height;
+        _rectHeight = panelBackgroundTransform.rect.height;
         _startPosition = _panelRectTransform.anchoredPosition.y;
 
     }
@@ -37,7 +38,7 @@ public class CreateBuildingPopup : MonoBehaviour
         if (resourcesPanel.gameObject.activeSelf)
             return;
         _panelRectTransform.gameObject.SetActive(true);
-        _panelRectTransform.DOAnchorPosY(_startPosition + _rectHeight, .7f)
+        _panelRectTransform.DOAnchorPosY(_startPosition + _rectHeight, 1)
             .SetEase(Ease
                 .OutCubic);
     }

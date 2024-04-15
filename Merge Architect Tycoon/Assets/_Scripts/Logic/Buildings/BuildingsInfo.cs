@@ -6,7 +6,6 @@ using UnityEngine;
 public class BuildingsInfo : ScriptableObject
 {
     public List<BuildingInfo> buildings;
-    public Sprite buildInProgressSprite;
 }
 
 [Serializable]

@@ -17,6 +17,7 @@ public class CreateBuildingPopupPresenter
     private BuildingProvider _buildingProvider;
     private PlayerProgress _playerProgress;
     private PlayerProgressService _playerProgressService;
+    private CameraZoomer _cameraZoomer;
 
     private List<BuildingInfo> _sortedBuildings = new();
     private List<BuildingInfo> _readyToBuild = new();
@@ -26,7 +27,8 @@ public class CreateBuildingPopupPresenter
     void Construct(StaticDataService staticDataService, ItemsCatalogue itemsCatalogue,
         BuildingProvider buildingProvider,
         PlayerProgress playerProgress, PlayerProgressService playerProgressService,
-        CreateBuildingPopup createBuildingPopup, CreateBuildingPopupScroller createBuildingPopupScroller)
+        CreateBuildingPopup createBuildingPopup, CreateBuildingPopupScroller createBuildingPopupScroller,
+        CameraZoomer cameraZoomer)
     {
         _staticDataService = staticDataService;
         _itemsCatalogue = itemsCatalogue;
@@ -35,6 +37,7 @@ public class CreateBuildingPopupPresenter
         _playerProgressService = playerProgressService;
         _createBuildingPopup = createBuildingPopup;
         _createBuildingPopupScroller = createBuildingPopupScroller;
+        _cameraZoomer = cameraZoomer;
     }
 
     public void InitializePresenter()
@@ -73,6 +76,8 @@ public class CreateBuildingPopupPresenter
 
     public void SelectBuilding(CreateBuildingUiElement selectedBuilding)
     {
+        _cameraZoomer.ZoomButtonClicked(_buildingProvider.GetBuildingTransform(selectedBuilding.buildingName),
+            selectedBuilding.buildingName);
         TurnOfPreviousOutline(selectedBuilding);
         _selectedBuildingElement = selectedBuilding;
         _createBuildingPopup.OpenPanel();
@@ -83,10 +88,12 @@ public class CreateBuildingPopupPresenter
 
     public void CreateBuildingButtonClicked()
     {
+        _cameraZoomer.MoveCameraBack();
         BuildingInfo buildingData = _staticDataService.BuildingInfoDictionary[_selectedBuildingElement.buildingName];
         CreateBuilding(buildingData.itemsToCreate,
             buildingData.coinsCountToCreate, _selectedBuildingElement.buildingName);
     }
+
 
     private void SetBuildingResources()
     {

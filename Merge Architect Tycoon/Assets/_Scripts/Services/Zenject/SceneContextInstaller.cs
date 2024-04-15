@@ -12,6 +12,7 @@ public class SceneContextInstaller : MonoInstaller
     [SerializeField] private RichPanel richPanel;
     [SerializeField] private SettingsPanel settingsPanel;
     [SerializeField] private EffectsPresenter effectsPresenter;
+    [SerializeField] private CameraZoomer cameraZoomer;
 
     public override void InstallBindings()
     {
@@ -34,6 +35,7 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<TruckPanel>().FromInstance(truckPanel).AsSingle();
         Container.Bind<RichPanel>().FromInstance(richPanel).AsSingle();
         Container.Bind<SettingsPanel>().FromInstance(settingsPanel).AsSingle();
+        Container.Bind<CameraZoomer>().FromInstance(cameraZoomer).AsSingle();
 
         Container.BindInstance<MergeLevel>(_mergeLevel).AsSingle();
 

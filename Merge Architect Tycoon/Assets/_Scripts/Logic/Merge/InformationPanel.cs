@@ -32,8 +32,8 @@ public class InformationPanel : MonoBehaviour
     {
         if (slotCurrent
             && slotCurrent != slot
-            && slotCurrent.„RurrentDraggableItem() != null)
-            slotCurrent.„RurrentDraggableItem().isClicked = false;
+            && slotCurrent.RurrentDraggableItem() != null)
+            slotCurrent.RurrentDraggableItem().isClicked = false;
 
         slotCurrent = slot;
 
@@ -85,7 +85,7 @@ public class InformationPanel : MonoBehaviour
         if (!(state == false && slotCurrent != null))
             return;
 
-        DraggableItem draggableItem = slotCurrent.„RurrentDraggableItem();
+        DraggableItem draggableItem = slotCurrent.RurrentDraggableItem();
         if (draggableItem == null)
             return;
 

@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
 
 public class MoveCameraWithTouch : MonoBehaviour
 {
     public float dragSpeed = 2f;
+
     private Vector3 dragOrigin;
     private Vector3 lastMousePosition;
+
 
     void LateUpdate()
     {
@@ -21,7 +25,7 @@ public class MoveCameraWithTouch : MonoBehaviour
             Vector3 difference = currentMousePosition - lastMousePosition;
             lastMousePosition = currentMousePosition;
 
-            Vector3 move = new Vector3(-difference.x, -difference.y, 0) * dragSpeed * Time.deltaTime;
+            Vector3 move = dragSpeed * Time.deltaTime * new Vector3(-difference.x, -difference.y, 0);
 
             transform.Translate(move, Space.World);
         }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,27 +12,78 @@ public class QuestRenderer : MonoBehaviour
     public List<QuestRewardRenderer> RewardRenderers;
     public List<QuestObjectiveRenderer> ObjectiveRenderers;
     public Button ClaimButton;
+    public Button OpenCloseObjectivesButton;
+    public VerticalLayoutGroup ObjectivesLayout;
+    private int _objectivesHeight;
+    private bool _isOpened;
 
     public QuestPanel Panel;
 
-    [Space]
-    [SerializeField] private RectTransform questRewardRendererParent;
+    [Space] [SerializeField] private RectTransform questRewardRendererParent;
     [SerializeField] private QuestRewardRenderer questRewardRendererPrefab;
     [SerializeField] private RectTransform questObjectiveRendererParent;
     [SerializeField] private QuestObjectiveRenderer questObjectiveRendererPrefab;
 
-    [Space]
-    public QuestData CurrentData;
+    [Space] public QuestData CurrentData;
     private QuestInfo info => CurrentData.QuestInfo;
 
     public void Render(QuestData quest = null)
     {
-        if(quest != null) CurrentData = quest;
+        if (quest != null) CurrentData = quest;
 
         DisableAllDetails();
         RenderQuestHeader();
         RenderDetails();
         SetButtons();
+        SetUpObjectivesHeight();
+    }
+
+    private void Start()
+    {
+        OpenCloseObjectivesButton.onClick.AddListener(OpenCloseObjectives);
+    }
+
+    private void SetUpObjectivesHeight()
+    {
+        if (ObjectiveRenderers.Count > 0)
+        {
+            var height = (int)ObjectiveRenderers[0].GetComponent<LayoutElement>().preferredHeight;
+            ObjectivesLayout.padding.top =
+                -1 * height * ObjectiveRenderers.Count - (int)ObjectivesLayout.spacing;
+            _objectivesHeight = ObjectivesLayout.padding.top;
+        }
+    }
+
+
+    private void OpenCloseObjectives()
+    {
+        if (!_isOpened)
+        {
+            _isOpened = true;
+            DOTween.To(() => ObjectivesLayout.padding.top, x =>
+                {
+                    ObjectivesLayout.padding.top = x;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(ObjectivesLayout.GetComponent<RectTransform>());
+                }, 0, .7f)
+                .SetEase(Ease.OutCubic);
+        }
+        else
+        {
+            _isOpened = false;
+
+            DOTween.To(() => ObjectivesLayout.padding.top, x =>
+                {
+                    ObjectivesLayout.padding.top = x;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(ObjectivesLayout.GetComponent<RectTransform>());
+                }, _objectivesHeight, .7f)
+                .SetEase(Ease.OutCubic);
+        }
+    }
+
+    public void ClaimReward()
+    {
+        CurrentData.ClaimQuestReward();
+        Panel.Refresh();
     }
 
     private void SetButtons()
@@ -40,17 +93,19 @@ public class QuestRenderer : MonoBehaviour
 
     private void RenderQuestHeader()
     {
-        if(!gameObject.activeSelf)
+        if (!gameObject.activeSelf)
             gameObject.SetActive(true);
         QuestText.text = info.Discription;
         QuestiImage.sprite = info.Sprite;
     }
+
     private void RenderDetails()
     {
         for (int i = 0; i < info.RewardList.Count; i++)
         {
             RenderRewardElement(i);
         }
+
         for (int i = 0; i < info.Objectives.Count; i++)
         {
             RenderObjectiveElement(i);
@@ -63,6 +118,7 @@ public class QuestRenderer : MonoBehaviour
         {
             RewardRenderers[i].gameObject.SetActive(false);
         }
+
         for (int i = 0; i < ObjectiveRenderers.Count; i++)
         {
             ObjectiveRenderers[i].gameObject.SetActive(false);
@@ -80,9 +136,11 @@ public class QuestRenderer : MonoBehaviour
         if (i < info.Objectives.Count)
         {
             ObjectiveRenderers[i].gameObject.SetActive(true);
-            ObjectiveRenderers[i].RenderObjective(CurrentData.ProgressList[i], info.Objectives[i], CurrentData.IsObjectiveComplete(i));
+            ObjectiveRenderers[i].RenderObjective(CurrentData.ProgressList[i], info.Objectives[i],
+                CurrentData.IsObjectiveComplete(i));
         }
     }
+
     private void RenderRewardElement(int i)
     {
         if (info.RewardList[i].IsHiden)
@@ -99,11 +157,5 @@ public class QuestRenderer : MonoBehaviour
             RewardRenderers[i].gameObject.SetActive(true);
             RewardRenderers[i].RenderReward(info.RewardList[i].Amount.ToString(), info.RewardList[i].Sprite);
         }
-    }
-
-    public void ClaimReward()
-    {
-        CurrentData.ClaimQuestReward();
-        Panel.Refresh();
     }
 }

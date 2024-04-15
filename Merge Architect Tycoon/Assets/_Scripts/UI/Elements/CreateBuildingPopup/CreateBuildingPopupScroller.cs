@@ -21,7 +21,6 @@ public class CreateBuildingPopupScroller : MonoBehaviour
     public void InitializeScroller()
     {
         _createBuildingPopupPresenter.InitializeBuildingElements(createBuildingElements);
-        _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
     }
 
     public void OpenScroller()
@@ -51,8 +50,11 @@ public class CreateBuildingPopupScroller : MonoBehaviour
 
     private void SetContentWidth()
     {
+        _elementWidth = createBuildingElements[0].GetComponent<RectTransform>().rect.width;
+
         var activeElementsCount = createBuildingElements.Count(element => element.gameObject.activeSelf);
+
         scrollRect.content.sizeDelta =
-            new Vector2(_elementWidth * activeElementsCount, scrollRect.content.sizeDelta.y);
+            new Vector2(_elementWidth * activeElementsCount * .5f, scrollRect.content.sizeDelta.y);
     }
 }

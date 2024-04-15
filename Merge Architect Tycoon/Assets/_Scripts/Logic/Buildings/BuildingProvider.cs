@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 public class BuildingProvider : IInitializableOnSceneLoaded
@@ -31,9 +32,23 @@ public class BuildingProvider : IInitializableOnSceneLoaded
         LoadCreatedBuildings();
     }
 
+    public void CreateBuildingInTimeAsync(string buildingName)
+    {
+        if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
+            return;
+
+        buildingPlace.StartCreatingBuilding();
+        _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken).Forget();
+    }
+
     public void AddBuildingPlaceToSceneDictionary(string buildingName, BuildingPlace buildingPlace)
     {
         SceneBuildingsDictionary.Add(buildingName, buildingPlace);
+    }
+
+    public Transform GetBuildingTransform(string buildingName)
+    {
+        return SceneBuildingsDictionary[buildingName].buildingButton.transform;
     }
 
     private void LoadCreatedBuildings()
@@ -61,15 +76,6 @@ public class BuildingProvider : IInitializableOnSceneLoaded
             timeRest).Forget();
     }
 
-
-    public void CreateBuildingInTimeAsync(string buildingName)
-    {
-        if (!SceneBuildingsDictionary.TryGetValue(buildingName, out var buildingPlace))
-            return;
-
-        buildingPlace.StartCreatingBuilding();
-        _buildingCreator.CreateBuildingInTimeAsync(buildingPlace, buildingPlace.ActivityToken).Forget();
-    }
 
     private void CreateBuildingOnStart(string buildingName)
     {

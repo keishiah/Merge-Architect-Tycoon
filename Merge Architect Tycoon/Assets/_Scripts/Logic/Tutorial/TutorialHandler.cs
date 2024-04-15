@@ -1,7 +1,10 @@
+using System;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,10 +29,7 @@ public class TutorialHandler : MonoBehaviour
 
     private void Awake()
     {
-        _dialogText = _dialogTextHolder.AddComponent<TextMeshProUGUI>();
-        _dialogText.fontSize = 70;
-        _dialogText.color = Color.black;
-        _dialogText.alignment = TextAlignmentOptions.Center;
+
         DisableAll();
     }
 
@@ -43,7 +43,6 @@ public class TutorialHandler : MonoBehaviour
         _dialog.SetActive(false);
         _handPointer.SetActive(false);
         _sceneButtonsBlocker.SetActive(false);
-        //_handPointer.transform.SetParent(this.transform);
         _blockerator.SetActive(false);
         _blockerator.GetComponent<Image>().enabled = true;
 
@@ -92,14 +91,8 @@ public class TutorialHandler : MonoBehaviour
     private void CreateButtonImage(Button buttonToNext)
     {
         _blockerator.SetActive(true);
-        _buttonToClick.GetComponent<Image>().sprite = buttonToNext.GetComponent<Image>().sprite;
+        CreateTempButton(buttonToNext);
 
-        RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
-        RectTransform buttonToNextRect = buttonToNext.GetComponent<RectTransform>();
-
-        buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
-        buttonToClickRectTransform.position = buttonToNextRect.position;
-        buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
 
         _tempButton = buttonToNext;
         _allScreenButton.SetActive(false);
@@ -109,7 +102,6 @@ public class TutorialHandler : MonoBehaviour
     {
         if (buttonNext != null)
         {
-            _tempButton = buttonNext;
             buttonNext.gameObject.SetActive(false);
             _blockerator.SetActive(true);
             _blockerator.GetComponent<Image>().enabled = false;
@@ -117,14 +109,7 @@ public class TutorialHandler : MonoBehaviour
 
             await CheckButtonMovement(buttonNext);
 
-            _buttonToClick.GetComponent<Image>().sprite = buttonNext.GetComponent<Image>().sprite;
-            RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
-            RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
-
-            buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
-            buttonToClickRectTransform.position = buttonToNextRect.position;
-            buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
-            _tempButton = buttonNext;
+            CreateTempButton(buttonNext);
         }
         else
         {
@@ -132,6 +117,18 @@ public class TutorialHandler : MonoBehaviour
             _tempButton = null;
             _allScreenButton.SetActive(true);
         }
+    }
+
+    private void CreateTempButton(Button buttonNext)
+    {
+        _buttonToClick.GetComponent<Image>().sprite = buttonNext.GetComponent<Image>().sprite;
+        RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
+        RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
+
+        buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
+        buttonToClickRectTransform.position = buttonToNextRect.position;
+        buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
+        _tempButton = buttonNext;
     }
 
 
@@ -173,7 +170,5 @@ public class TutorialHandler : MonoBehaviour
         _handAnimation.clip = clip;
         _handAnimation.Play();
 
-        //if (transform != null)
-        //    _handPointer.transform.SetParent(transform);
     }
 }

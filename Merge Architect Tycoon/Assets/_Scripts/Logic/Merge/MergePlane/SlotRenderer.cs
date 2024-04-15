@@ -106,7 +106,7 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
         }
     }
 
-    public DraggableItem „RurrentDraggableItem()
+    public DraggableItem RurrentDraggableItem()
     {
         return GetComponentInChildren<DraggableItem>();
     }
@@ -124,7 +124,7 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
 
         ChangeSlot(draggableItem.slot);
         OnClick();
-        „RurrentDraggableItem().isClicked = true;
+        RurrentDraggableItem().isClicked = true;
     }
 
     private void ChangeSlot(SlotRenderer fromSlot)
@@ -187,7 +187,7 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
 
     public void OnClick()
     {
-        DraggableItem item = „RurrentDraggableItem();
+        DraggableItem item = RurrentDraggableItem();
         if (item == null) return;
         
         if (!IsEmpty)
@@ -266,7 +266,7 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
 
     public void DisableSelected()
     {
-        „RurrentDraggableItem().isClicked = false;
+        RurrentDraggableItem().isClicked = false;
     }
 
     public void UseItemInside()
