@@ -2,7 +2,6 @@ using DG.Tweening;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
 
-
 public class CameraZoomer : MonoBehaviour
 {
     public Camera mainCamera;
