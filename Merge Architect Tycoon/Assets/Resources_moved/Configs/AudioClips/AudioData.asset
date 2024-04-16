@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeac3ed15dd040d5b70472e97cf699dd, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  BackgroundMusic: {fileID: 8300000, guid: d6efc8c8bdd2a4a4886b52d9d80edfe9, type: 3}
+  MenuButton:
+  - {fileID: 8300000, guid: da51895b3cca599449815487558dcc5d, type: 3}
+  - {fileID: 8300000, guid: 0eb30df3e413fba41b7170d48d61f1ce, type: 3}
+  - {fileID: 8300000, guid: 5b01dccf30e76284ab2a9fcd9a282754, type: 3}
+  MergeItem:
+  - {fileID: 8300000, guid: e922d87b5cc652b478a0c6244d2ed019, type: 3}
+  - {fileID: 8300000, guid: 0b2a3f1d1c53e114f8edb884c38383b2, type: 3}
+  - {fileID: 8300000, guid: 24e4ddff915e37f479e410149d6d48b1, type: 3}
+  - {fileID: 8300000, guid: 3463cfe4de0755e4f9711cf86d02c73a, type: 3}
+  - {fileID: 8300000, guid: 1dcc00c0f493b534eb07774c96f3c1eb, type: 3}
+  - {fileID: 8300000, guid: 3e1fcdd9d33c1ac4e8bf1905effd4785, type: 3}
+  SalesRegister: {fileID: 8300000, guid: 3081b19cab1157d47a023481ba8b20c9, type: 3}
+  Building: {fileID: 8300000, guid: 1b5c9a677365b10428f1fab9e3076464, type: 3}
+  MoneyAdd:
+  - {fileID: 8300000, guid: a95b5ccaa7c123e44a838d280c8dee2b, type: 3}
+  - {fileID: 8300000, guid: 59e10203e68ca91439fd6830b68470d0, type: 3}
+  Victory: {fileID: 8300000, guid: 142b1ca1697489241bd603d2a00baccf, type: 3}

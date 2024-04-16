@@ -13,11 +13,13 @@ public class BuildingRenderer : MonoBehaviour
     public Button buildingButton;
 
     private EffectsPresenter _effectsPresenter;
+    private AudioPlayer _audio;
 
     [Inject]
-    void Construct(EffectsPresenter effectsPresenter)
+    void Construct(EffectsPresenter effectsPresenter, AudioPlayer audio)
     {
         _effectsPresenter = effectsPresenter;
+        _audio = audio;
     }
 
     public void SetViewInactive()
@@ -29,6 +31,8 @@ public class BuildingRenderer : MonoBehaviour
     public void SetViewBuildInProgress()
     {
         _effectsPresenter.PlaySmokeEffect(buildingButton.transform.position);
+        _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
+        _audio.PlayUiSound(UiSoundTypes.Building);
         createBuildingInMomentButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
     }

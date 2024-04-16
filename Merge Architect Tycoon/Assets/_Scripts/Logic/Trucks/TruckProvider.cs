@@ -10,13 +10,20 @@ public class TruckProvider : IInitializableOnSceneLoaded
     [Inject] private PlayerProgressService _progressService;
     [Inject] private PlayerProgress _playerProgress;
     [Inject] private StaticDataService _staticDataService;
+    [Inject] private AudioPlayer _audio;
 
     private TruckInfo _truckInfo => _staticDataService.TruckInfo;
     private TrucksData _data => _playerProgress.Trucks;
 
     private int resourceCost => _truckInfo.MergeItems[_data.CurrentResource].SoftCost;
     private int boostCost => _truckInfo.BoostCost[_data.BoostBuyLevel].Cost;
-    private int updateCost => _truckInfo.Upgrades[_data.UpdateLevel].SoftCost;
+    private int UpdateCost()
+    {
+        if(_data.UpdateLevel >= _truckInfo.Upgrades.Length)
+            return int.MaxValue;
+
+        return _truckInfo.Upgrades[_data.UpdateLevel].SoftCost;
+    }
 
     public void OnSceneLoaded()
     {
@@ -47,7 +54,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
     private void Interactebles() => Interactebles(_playerProgress.Riches.Coins.Value);
     public void Interactebles(int coinsCount)
     {
-        bool isUpdatable = coinsCount >= updateCost;
+        bool isUpdatable = coinsCount >= UpdateCost();
         bool isBoostable = coinsCount >= boostCost;
         bool isBuyble = coinsCount >= resourceCost;
 
@@ -100,9 +107,10 @@ public class TruckProvider : IInitializableOnSceneLoaded
     }
     private void UpdateTrucks()
     {
-        if (!_progressService.SpendCoins(updateCost))
+        if (!_progressService.SpendCoins(UpdateCost()))
             return;
 
+        _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
         _progressService.UpdateTruck();
         CalculateUpdateData();
         RenderUpdateButton();
@@ -114,6 +122,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
         if (!_progressService.SpendCoins(boostCost))
             return;
 
+        _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
         if (_data.BoostBuyLevel + 1 < _truckInfo.BoostCost.Length)
             _data.BoostBuyLevel++;
 
@@ -131,6 +140,9 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         if(!_progressService.SpendCoins(resourceCost))
             return;
+
+        if(resourceCost > 0)
+            _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
 
         Truck truck = new();
         truck.TruckCargo = new();

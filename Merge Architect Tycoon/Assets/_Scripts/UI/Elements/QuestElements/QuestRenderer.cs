@@ -19,13 +19,16 @@ public class QuestRenderer : MonoBehaviour
 
     public QuestPanel Panel;
 
-    [Space] [SerializeField] private RectTransform questRewardRendererParent;
+    [Space]
+    [SerializeField] private RectTransform questRewardRendererParent;
     [SerializeField] private QuestRewardRenderer questRewardRendererPrefab;
     [SerializeField] private RectTransform questObjectiveRendererParent;
     [SerializeField] private QuestObjectiveRenderer questObjectiveRendererPrefab;
 
     [Space] public QuestData CurrentData;
     private QuestInfo info => CurrentData.QuestInfo;
+
+    private AudioPlayer _audio;
 
     public void Render(QuestData quest = null)
     {
@@ -83,6 +86,7 @@ public class QuestRenderer : MonoBehaviour
     public void ClaimReward()
     {
         CurrentData.ClaimQuestReward();
+        _audio.PlayUiSound(UiSoundTypes.QuestComplete);
         Panel.Refresh();
     }
 
@@ -157,5 +161,10 @@ public class QuestRenderer : MonoBehaviour
             RewardRenderers[i].gameObject.SetActive(true);
             RewardRenderers[i].RenderReward(info.RewardList[i].Amount.ToString(), info.RewardList[i].Sprite);
         }
+    }
+
+    public void SetAudio(AudioPlayer audio)
+    {
+        _audio = audio;
     }
 }
