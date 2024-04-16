@@ -1,30 +1,27 @@
-using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
 
 public class CameraZoomer : MonoBehaviour
 {
-    // public Camera mainCamera;
-    public CinemachineVirtualCamera CinemachineVirtualCamera;
-    public Button BackgroundButton;
+    public Canvas backGroundCanvas;
+    public Camera Camera;
+    public Button backgroundButton;
 
     private bool _zoomedIn = false;
-    private bool _inProgress;
+    private Vector2 _yOffset = new(0, -200);
     private Vector2 _baseCameraPosition;
     private string _currentBuildingClicked;
 
     private void Start()
     {
-        _baseCameraPosition = CinemachineVirtualCamera.transform.position;
-        BackgroundButton.onClick.AddListener(MoveCameraBack);
+        _baseCameraPosition = Vector2.zero;
+        backgroundButton.onClick.AddListener(MoveCameraBack);
+        backGroundCanvas.renderMode = RenderMode.WorldSpace;
     }
 
     public void ZoomButtonClicked(Transform target, string buildingName)
     {
-        if (_inProgress)
-            return;
-
         if (!_zoomedIn)
         {
             MoveAndZoomCamera(target);
@@ -36,53 +33,36 @@ public class CameraZoomer : MonoBehaviour
         }
         else
         {
-            MoveCamera(target);
+            MoveCameraTo(target);
             _currentBuildingClicked = buildingName;
         }
     }
 
-    public async void MoveCameraBack()
+    private void MoveAndZoomCamera(Transform target)
     {
-        if (_inProgress || !_zoomedIn)
-            return;
-        _inProgress = true;
-        CinemachineVirtualCamera.transform.DOMove(_baseCameraPosition, 1);
-        DOTween.To(() => CinemachineVirtualCamera.m_Lens.OrthographicSize,
-                x => CinemachineVirtualCamera.m_Lens.OrthographicSize = x, 960, 1)
-            .OnComplete(ZoomFalse);
-        // await mainCamera.DOOrthoSize(960, 1).AsyncWaitForCompletion();
-        // _inProgress = false;
-        // _zoomedIn = false;
+        ZoomTrue();
+        Vector2 newPosition = (Vector2)target.position + _yOffset;
+        DOTween
+            .To(() => Camera.orthographicSize,
+                x =>  Camera.orthographicSize = x, 500, 1f);
+        Camera.transform.DOMove(newPosition, 1f);
     }
 
-    private void ZoomFalse()
+    public void MoveCameraBack()
     {
-        _inProgress = false;
-        _zoomedIn = false;
+        ZoomFalse();
+        DOTween.To(() =>  Camera.orthographicSize,
+            x =>  Camera.orthographicSize = x, 960, 1f);
+        Camera.transform.DOMove(_baseCameraPosition, 1);
     }
 
-    private void ZoomTrue()
+    private void ZoomFalse() => _zoomedIn = false;
+
+    private void ZoomTrue() => _zoomedIn = true;
+
+    private void MoveCameraTo(Transform target)
     {
-        _inProgress = false;
-        _zoomedIn = true;
-    }
-    private async void MoveCamera(Transform target)
-    {
-        _inProgress = true;
         Vector2 newPosition = (target.position);
-        await CinemachineVirtualCamera.transform.DOMove(newPosition, 1f).AsyncWaitForCompletion();
-        _inProgress = false;
-    }
-
-    private async void MoveAndZoomCamera(Transform target)
-    {
-        _inProgress = true;
-        Vector2 newPosition = (target.position);
-        CinemachineVirtualCamera.transform.DOMove(newPosition, 1f);
-         DOTween
-            .To(() => CinemachineVirtualCamera.m_Lens.OrthographicSize,
-                x => CinemachineVirtualCamera.m_Lens.OrthographicSize = x, 500, 1).OnComplete(ZoomTrue);
-         // _inProgress = false;
-         // _zoomedIn = true;
+        Camera.transform.DOMove(newPosition, 1f);
     }
 }
