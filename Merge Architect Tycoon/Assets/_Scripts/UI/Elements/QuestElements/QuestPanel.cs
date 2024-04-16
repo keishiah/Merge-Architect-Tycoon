@@ -9,6 +9,7 @@ public class QuestPanel : MonoBehaviour
     [SerializeField] private QuestRenderer questRendererPrefab;
 
     [Inject] private QuestsPresenter questsPresenter;
+    [Inject] private AudioPlayer _audio;
 
     public void CloseQuestElements()
     {
@@ -33,6 +34,7 @@ public class QuestPanel : MonoBehaviour
         }
         
         questElement.gameObject.SetActive(true);
+        questElement.SetAudio(_audio);
         questElement.Render(quest);
     }
 

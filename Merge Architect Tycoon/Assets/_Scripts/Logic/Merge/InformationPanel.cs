@@ -7,6 +7,8 @@ public class InformationPanel : MonoBehaviour
 {
     [Inject]
     private PlayerProgressService _player;
+    [Inject]
+    private AudioPlayer _audio;
 
     [Header("Texts")]
     public Image itemImage;
@@ -99,7 +101,7 @@ public class InformationPanel : MonoBehaviour
 
         int coins = (int)slotCurrent.CurrentItem.ItemCost;
         _player.AddCoins(coins);
-
+        _audio.PlayUiSound(UiSoundTypes.SellItem);
         DeleteItem();
     }
 
