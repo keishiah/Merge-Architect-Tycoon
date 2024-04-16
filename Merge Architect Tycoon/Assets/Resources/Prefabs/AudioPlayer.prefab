@@ -47,9 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d80dca60403430c9146263bd1c671e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backgroundMusicAudioSource: {fileID: 5857515410627810795}
-  _uiMusicAudioSource: {fileID: 1186213828865771258}
-  _isLoadVolume: 0
+  _backgroundMusic: {fileID: 5857515410627810795}
+  _ui: {fileID: 1186213828865771258}
 --- !u!81 &1294220396607423718
 AudioListener:
   m_ObjectHideFlags: 0

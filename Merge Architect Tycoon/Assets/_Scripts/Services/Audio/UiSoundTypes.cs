@@ -1,4 +1,9 @@
 public enum UiSoundTypes
 {
-    ButtonClick,
+    MenuButtonClick,
+    MergeItem,
+    SellItem,
+    BuyUpdate,
+    QuestComplete,
+    Building,
 }

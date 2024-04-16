@@ -19,6 +19,7 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
     [Inject] private PlayerProgressService _playerProgressService;
     [Inject] private SlotsManager _slotsManager;
     [Inject] private InformationPanel _informationPanel;
+    [Inject] private AudioPlayer _audio;
 
     [SerializeField] private Image _itemImage;
     [SerializeField] private SlotState _slotState;
@@ -177,12 +178,12 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
         if (slotFrom.CurrentItem != slotTo.CurrentItem)
             return;
 
+        _audio.PlayMergeSound(slotFrom.CurrentItem.ItemLevel);
+
         _playerProgressService.AddCoins(10);
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();
-
-        //_playerProgressService.
     }
 
     public void OnClick()

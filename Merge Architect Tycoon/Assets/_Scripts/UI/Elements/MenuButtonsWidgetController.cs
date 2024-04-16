@@ -15,6 +15,7 @@ public class MenuButtonsWidgetController : MonoBehaviour
     private int _selectedButtonIndex = -1;
 
     [SerializeField] private Button[] _menuButtons;
+    [SerializeField] private Button[] _closeButtons;
     [SerializeField] private WidgetView[] _widgets;
     [Inject] private AudioPlayer _audioPlayer;
     [Inject] private CameraZoomer _cameraZoomer;
@@ -28,6 +29,10 @@ public class MenuButtonsWidgetController : MonoBehaviour
         {
             int index = i; //allocate new "instance" EACH Step of loop
             _menuButtons[i].onClick.AddListener(() => { OnMenuButtonClick(index); });
+        }
+        for (int i = 0; i < _closeButtons.Length; i++)
+        {
+            _closeButtons[i].onClick.AddListener(() => { _audioPlayer.PlayUiSound(UiSoundTypes.MenuButtonClick); });
         }
     }
     public void OnMenuButtonClick(MenuButtonsEnum i)
@@ -48,7 +53,7 @@ public class MenuButtonsWidgetController : MonoBehaviour
 
     private void OnMenuButtonClick(int i)
     {
-        _audioPlayer.PlayUiSound(UiSoundTypes.ButtonClick);
+        _audioPlayer.PlayUiSound(UiSoundTypes.MenuButtonClick);
         _cameraZoomer.MoveCameraBack();
         bool needToSelect = _selectedButtonIndex != i;
 
