@@ -158,7 +158,6 @@ public class TruckZoneRenderer : MonoBehaviour
 
         for (int i = 0; i < mergeItems.Count; i++)
         {
-            Debug.Log(mergeItems[i].name);
             Transform resourceTransform = _resourceHolder.GetChild(i);
             resourceTransform.gameObject.SetActive(true);
             resourceTransform.GetComponentInChildren<Image>().sprite = mergeItems[i].ItemSprite;
