@@ -21,8 +21,8 @@ MonoBehaviour:
     diamondsCountToSkip: 1
     itemsToCreate: []
   - buildingName: Lambermill
-    districtSprite: {fileID: 21300000, guid: 9112343ac8b9f7741b03861615204704, type: 3}
-    buildPopupSprite: {fileID: -1276803385, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
+    districtSprite: {fileID: -1276803385, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
+    buildPopupSprite: {fileID: 1182848882, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
     timeToCreate: 10800
     coinsCountToCreate: 800
     diamondsCountToSkip: 5
@@ -38,8 +38,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7b09fb335d7c7874ebacae5e37ca857b, type: 2}
     - {fileID: 11400000, guid: f25959355b2defa408464f946105f058, type: 2}
   - buildingName: Fastfood
-    districtSprite: {fileID: 21300000, guid: 8bb2ec23d593ff04980a77c807cb3efa, type: 3}
-    buildPopupSprite: {fileID: -968017688, guid: ab045372d9679c04daba5dbb024d17a6, type: 3}
+    districtSprite: {fileID: -968017688, guid: ab045372d9679c04daba5dbb024d17a6, type: 3}
+    buildPopupSprite: {fileID: -266944120, guid: ab045372d9679c04daba5dbb024d17a6, type: 3}
     timeToCreate: 10800
     coinsCountToCreate: 3000
     diamondsCountToSkip: 20

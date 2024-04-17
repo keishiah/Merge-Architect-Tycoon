@@ -82,6 +82,7 @@ public class CreateBuildingPopupPresenter
         _selectedBuildingElement = selectedBuilding;
         _createBuildingPopup.OpenPanel();
         SetBuildingResources();
+        
         _createBuildingPopup.resourcesPanel.SetButtonInteractable(HasEnoughResources(_buildingInfo
             .FirstOrDefault(x => x.buildingName == _selectedBuildingElement.buildingName)));
     }

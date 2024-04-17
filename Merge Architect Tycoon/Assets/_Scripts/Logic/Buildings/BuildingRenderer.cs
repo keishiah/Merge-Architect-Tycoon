@@ -31,7 +31,6 @@ public class BuildingRenderer : MonoBehaviour
     public void SetViewBuildInProgress()
     {
         _effectsPresenter.PlaySmokeEffect(buildingButton.transform.position);
-        _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
         _audio.PlayUiSound(UiSoundTypes.Building);
         createBuildingInMomentButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
