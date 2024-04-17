@@ -1,13 +1,14 @@
 using DG.Tweening;
 using UnityEngine;
-using Button = UnityEngine.UI.Button;
+using Zenject;
 
 public class CameraZoomer : MonoBehaviour
 {
     public Canvas backGroundCanvas;
     public Camera Camera;
-    public Button backgroundButton;
-
+    
+    [Inject] BackGroundButton backgroundButton;
+    
     private bool _zoomedIn = false;
     private Vector2 _yOffset = new(0, -200);
     private Vector2 _baseCameraPosition;
@@ -16,7 +17,7 @@ public class CameraZoomer : MonoBehaviour
     private void Start()
     {
         _baseCameraPosition = Vector2.zero;
-        backgroundButton.onClick.AddListener(MoveCameraBack);
+        backgroundButton.button.onClick.AddListener(MoveCameraBack);
         backGroundCanvas.renderMode = RenderMode.WorldSpace;
     }
 

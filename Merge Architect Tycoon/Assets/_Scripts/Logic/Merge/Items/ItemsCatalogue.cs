@@ -14,8 +14,8 @@ public class ItemsCatalogue : MonoBehaviour
     {
         return slotsManager.Slots
             .FindAll(
-                s => s.CurrentItem && s.CurrentItem.name == item.name 
-                && (s.SlotState == SlotState.Draggable || s.SlotState == SlotState.Unloading))
+                s => s.CurrentItem && s.CurrentItem.name == item.name
+                                   && (s.SlotState == SlotState.Draggable || s.SlotState == SlotState.Unloading))
             .Count;
     }
 
@@ -23,10 +23,12 @@ public class ItemsCatalogue : MonoBehaviour
     {
         foreach (var item in items.Distinct())
         {
-            if (items.Select(x => x.name == item.name).Count() > GetItemCount(item))
+            int itemCountInList = items.Count(x => x.name == item.name);
+            if (itemCountInList > GetItemCount(item))
+            {
                 return false;
+            }
         }
-
         return true;
     }
 
@@ -36,7 +38,8 @@ public class ItemsCatalogue : MonoBehaviour
         {
             var slotItem = slotsManager.Slots.FirstOrDefault(s => s.CurrentItem &&
                                                                   s.CurrentItem.name == item.name &&
-                         (s.SlotState == SlotState.Unloading || s.SlotState == SlotState.Draggable));
+                                                                  (s.SlotState == SlotState.Unloading ||
+                                                                   s.SlotState == SlotState.Draggable));
             if (slotItem != null)
             {
                 if (informationPanel.slotCurrent == slotItem)
