@@ -49,7 +49,7 @@ public class AudioPlayer : MonoBehaviour
             case UiSoundTypes.MenuButtonClick:
                 PlayMenuButtonSound();
                 break;
-            case UiSoundTypes.SellItem:
+            case UiSoundTypes.AddMoney:
                 PlaySellSound();
                 break;
             case UiSoundTypes.BuyUpdate:

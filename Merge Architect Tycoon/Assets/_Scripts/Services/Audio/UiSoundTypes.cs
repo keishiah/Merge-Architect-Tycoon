@@ -2,7 +2,7 @@ public enum UiSoundTypes
 {
     MenuButtonClick,
     MergeItem,
-    SellItem,
+    AddMoney,
     BuyUpdate,
     QuestComplete,
     Building,

@@ -20,11 +20,12 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     private CurrencyCreator _currencyCreator;
     private StaticDataService _staticDataService;
     private MenuButtonsWidgetController _sceneButtons;
+    private AudioPlayer _audioPlayer;
 
     [Inject]
     void Construct(PlayerProgress playerProgress, PlayerProgressService playerProgressService,
         StaticDataService staticDataService, BuildingProvider buildingProvider,
-        CurrencyCreator currencyCreator, MenuButtonsWidgetController sceneButtons)
+        CurrencyCreator currencyCreator, MenuButtonsWidgetController sceneButtons, AudioPlayer audioPlayer)
     {
         _playerProgress = playerProgress;
         _playerProgressService = playerProgressService;
@@ -32,6 +33,7 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         _currencyCreator = currencyCreator;
         _staticDataService = staticDataService;
         _sceneButtons = sceneButtons;
+        _audioPlayer = audioPlayer;
     }
 
     public void OnSceneLoaded()
@@ -46,6 +48,7 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     {
         var coinsForDistrict = _staticDataService.DistrictsInfoDictionary[districtId].currencyCount;
         var coinsToAdd = Mathf.RoundToInt(coinsForDistrict * .1f * _tempoDistrictsCount[districtId]);
+        _audioPlayer.PlayUiSound(UiSoundTypes.AddMoney);
         _playerProgressService.AddCoins(coinsToAdd);
         TurnOnCurrencyEarningCountdown(districtId);
     }

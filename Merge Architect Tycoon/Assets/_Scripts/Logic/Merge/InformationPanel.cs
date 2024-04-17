@@ -101,7 +101,7 @@ public class InformationPanel : MonoBehaviour
 
         int coins = (int)slotCurrent.CurrentItem.ItemCost;
         _player.AddCoins(coins);
-        _audio.PlayUiSound(UiSoundTypes.SellItem);
+        _audio.PlayUiSound(UiSoundTypes.AddMoney);
         DeleteItem();
     }
 
