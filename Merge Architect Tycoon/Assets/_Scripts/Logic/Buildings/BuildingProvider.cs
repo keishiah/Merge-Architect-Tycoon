@@ -48,7 +48,7 @@ public class BuildingProvider : IInitializableOnSceneLoaded
 
     public Transform GetBuildingTransform(string buildingName)
     {
-        return SceneBuildingsDictionary[buildingName].buildingButton.transform;
+        return SceneBuildingsDictionary[buildingName].GetBuildingButtonTransform();
     }
 
     private void LoadCreatedBuildings()

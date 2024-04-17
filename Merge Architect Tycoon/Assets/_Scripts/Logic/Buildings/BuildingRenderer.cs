@@ -10,6 +10,7 @@ public class BuildingRenderer : MonoBehaviour
     public Image buildingStateImage;
     public TextMeshProUGUI timerText;
     public Button createBuildingInMomentButton;
+    public Button buildingButton;
 
     private EffectsPresenter _effectsPresenter;
     private AudioPlayer _audio;
@@ -29,6 +30,7 @@ public class BuildingRenderer : MonoBehaviour
 
     public void SetViewBuildInProgress()
     {
+        _effectsPresenter.PlaySmokeEffect(buildingButton.transform.position);
         _effectsPresenter.PlaySmokeEffect(buildingStateImage.transform.position);
         _audio.PlayUiSound(UiSoundTypes.Building);
         createBuildingInMomentButton.gameObject.SetActive(true);
@@ -37,6 +39,7 @@ public class BuildingRenderer : MonoBehaviour
 
     public void SetViewBuildCreated()
     {
+        buildingButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(false);
     }
 

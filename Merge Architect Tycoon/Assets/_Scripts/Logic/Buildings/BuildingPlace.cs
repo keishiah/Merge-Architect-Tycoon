@@ -8,7 +8,6 @@ public class BuildingPlace : MonoBehaviour
 {
     public BuildingRenderer buildingView;
     public string buildingName;
-    public Button buildingButton;
     [HideInInspector] public int districtId;
 
     public CancellationTokenSource ActivityToken { get; private set; }
@@ -34,8 +33,8 @@ public class BuildingPlace : MonoBehaviour
         districtId = district;
         ActivityToken = new CancellationTokenSource();
         _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
-        buildingButton.OnClickAsObservable().Subscribe(
-            _ => _cameraZoomer.ZoomButtonClicked(buildingButton.transform, buildingName));
+        buildingView.buildingButton.OnClickAsObservable().Subscribe(
+            _ => _cameraZoomer.ZoomButtonClicked(buildingView.buildingButton.transform, buildingName));
     }
 
     public void SetBuildingState(BuildingStateEnum state)
@@ -87,5 +86,10 @@ public class BuildingPlace : MonoBehaviour
     {
         _buildingCreator.CreateInMoment(this,
             _staticDataService.BuildingInfoDictionary[buildingName].diamondsCountToSkip);
+    }
+
+    public Transform GetBuildingButtonTransform()
+    {
+        return buildingView.buildingButton.transform;
     }
 }
