@@ -65,6 +65,6 @@ public class BuildingRenderer : MonoBehaviour
     private void ScaleSpriteWithEffect(Transform imageTransform)
     {
         imageTransform.DOScale(1, 1)
-            .SetEase(Ease.OutBounce).OnComplete(() => _effectsPresenter.StopSmokeEffect());
+            .SetEase(Ease.OutBounce).OnComplete(() => _effectsPresenter.StopSmokeEffect(buildingButton.transform.position));
     }
 }
