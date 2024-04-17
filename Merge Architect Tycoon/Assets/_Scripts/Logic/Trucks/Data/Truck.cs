@@ -15,7 +15,7 @@ public class Truck
             return null;
 
         MergeItem item = TruckCargo[TruckCargo.Count - 1];
-        TruckCargo.Remove(item);
+        TruckCargo.RemoveAt(TruckCargo.Count - 1);
 
         DequeueAction?.Invoke();
 

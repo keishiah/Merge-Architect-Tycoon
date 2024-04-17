@@ -115,7 +115,7 @@ public class PlayerProgressService
 
         List<string> items = new List<string>(_progress.Trucks.ToArrive[0].Cargo);
         string itemID = items[^1];
-        items.Remove(itemID);
+        items.RemoveAt(items.Count-1);
 
         _progress.Trucks.ToArrive[0].Cargo = items.ToArray();
         SaveLoadService.Save(SaveKey.Truck, _progress.Trucks);

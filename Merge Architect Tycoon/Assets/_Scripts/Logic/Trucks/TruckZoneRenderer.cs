@@ -150,20 +150,18 @@ public class TruckZoneRenderer : MonoBehaviour
     {
         //GetComponent<Image>().sprite = truck.SpriteImage;
         List<MergeItem> mergeItems = _currentTruck.TruckCargo;
-        int spritesCount = _resourceHolder.childCount;
+
+        while (_resourceHolder.childCount < mergeItems.Count)
+        {
+            Instantiate(_resourcePrefab, _resourceHolder);
+        }
+
         for (int i = 0; i < mergeItems.Count; i++)
         {
-            if (i < spritesCount)
-            {
-                Transform resourceTransform = _resourceHolder.GetChild(i);
-                resourceTransform.gameObject.SetActive(true);
-                resourceTransform.GetComponentInChildren<Image>().sprite = mergeItems[i].ItemSprite;
-            }
-            else
-            {
-                GameObject newResource = Instantiate(_resourcePrefab, _resourceHolder);
-                newResource.GetComponentInChildren<Image>().sprite = mergeItems[i].ItemSprite;
-            }
+            Debug.Log(mergeItems[i].name);
+            Transform resourceTransform = _resourceHolder.GetChild(i);
+            resourceTransform.gameObject.SetActive(true);
+            resourceTransform.GetComponentInChildren<Image>().sprite = mergeItems[i].ItemSprite;
         }
     }
 
