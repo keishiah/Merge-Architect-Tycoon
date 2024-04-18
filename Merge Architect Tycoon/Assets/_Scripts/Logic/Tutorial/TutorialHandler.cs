@@ -165,6 +165,5 @@ public class TutorialHandler : MonoBehaviour
         _handPointer.SetActive(true);
         _handAnimation.clip = clip;
         _handAnimation.Play();
-
     }
 }
