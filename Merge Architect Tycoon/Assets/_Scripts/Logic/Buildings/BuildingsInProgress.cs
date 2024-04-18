@@ -17,14 +17,7 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
 
     public void AddBuildingProgress(string name, int timeRest)
     {
-        if (BuildingsInProgressDict.ContainsKey(name))
-        {
-            BuildingsInProgressDict[name] = timeRest;
-        }
-        else
-        {
-            BuildingsInProgressDict.Add(name, timeRest);
-        }
+        BuildingsInProgressDict[name] = timeRest;
     }
 
     public void RemoveBuildingProgress(string name) => BuildingsInProgressDict.Remove(name);
