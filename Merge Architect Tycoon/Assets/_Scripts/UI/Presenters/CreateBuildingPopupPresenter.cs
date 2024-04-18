@@ -54,6 +54,14 @@ public class CreateBuildingPopupPresenter
         {
             _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
         }
+
+        List<string> _buildingsInProgress = _playerProgress.Buldings.buildingsInProgress.BuildingsInProgressDict.Keys
+            .ToList();
+
+        foreach (string building in _buildingsInProgress)
+        {
+            _createBuildingPopupScroller.RemoveBuildingElementFromPopup(building);
+        }
     }
 
     public void InitializeBuildingElements(List<CreateBuildingUiElement> elements) => _elements = elements;
@@ -82,7 +90,7 @@ public class CreateBuildingPopupPresenter
         _selectedBuildingElement = selectedBuilding;
         _createBuildingPopup.OpenPanel();
         SetBuildingResources();
-        
+
         _createBuildingPopup.resourcesPanel.SetButtonInteractable(HasEnoughResources(_buildingInfo
             .FirstOrDefault(x => x.buildingName == _selectedBuildingElement.buildingName)));
     }
