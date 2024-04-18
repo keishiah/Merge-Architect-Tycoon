@@ -5,34 +5,33 @@ using UnityEngine.Serialization;
 public class EffectsPresenter : MonoBehaviour
 {
     public List<ParticleSystem> smokeEffectsList;
+    private Dictionary<string, ParticleSystem> _activeSmokeEffects = new();
 
-
-    public void PlaySmokeEffect(Vector2 position)
+    public void PlaySmokeEffect(Vector2 position, string buildingName)
     {
         if (GetInactiveSmoke(out ParticleSystem smokeEffect))
         {
+            _activeSmokeEffects.Add(buildingName, smokeEffect);
             smokeEffect.gameObject.SetActive(true);
             smokeEffect.gameObject.transform.position = position;
             smokeEffect.Play();
         }
     }
 
-    public void StopSmokeEffect(Vector2 position)
+    public void StopSmokeEffect(Vector2 position, string buildingName)
     {
-        foreach (ParticleSystem smoke in smokeEffectsList)
+        if (_activeSmokeEffects.TryGetValue(buildingName, out ParticleSystem smoke))
         {
-            if (smoke.gameObject.activeSelf && (Vector2)smoke.gameObject.transform.position == position)
-            {
-                smoke.Stop();
-                smoke.gameObject.SetActive(false);
-                return;
-            }
+            smoke.Stop();
+            smoke.gameObject.SetActive(false);
+            _activeSmokeEffects.Remove(buildingName);
         }
     }
 
+
     private bool GetInactiveSmoke(out ParticleSystem smokeEffect)
     {
-        foreach (ParticleSystem smoke in this.smokeEffectsList)
+        foreach (ParticleSystem smoke in smokeEffectsList)
         {
             if (!smoke.gameObject.activeSelf)
             {

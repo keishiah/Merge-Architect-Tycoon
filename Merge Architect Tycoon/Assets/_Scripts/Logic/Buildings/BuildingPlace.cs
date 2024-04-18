@@ -33,6 +33,7 @@ public class BuildingPlace : MonoBehaviour
         districtId = district;
         ActivityToken = new CancellationTokenSource();
         _buildingProvider.AddBuildingPlaceToSceneDictionary(buildingName, this);
+        buildingView.SetBuildingName(buildingName);
         buildingView.buildingButton.OnClickAsObservable().Subscribe(
             _ => _cameraZoomer.ZoomButtonClicked(buildingView.buildingButton.transform, buildingName));
     }

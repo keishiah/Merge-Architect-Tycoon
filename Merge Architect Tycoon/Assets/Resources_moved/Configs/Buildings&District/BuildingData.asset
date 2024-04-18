@@ -59,7 +59,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
   - buildingName: School
     districtSprite: {fileID: -1447104700, guid: da31066ecb7726c409a8d38ad3ebad43, type: 3}
-    buildPopupSprite: {fileID: 21300000, guid: ab9b8c0ab0f96564e839082e8c841f2f, type: 3}
+    buildPopupSprite: {fileID: 21300000, guid: eb42abd07121f08499548ee0a2358ad2, type: 3}
     timeToCreate: 10800
     coinsCountToCreate: 10000
     diamondsCountToSkip: 30

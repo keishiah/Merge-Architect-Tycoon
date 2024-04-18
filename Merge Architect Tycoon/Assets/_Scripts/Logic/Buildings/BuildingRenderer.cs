@@ -15,11 +15,18 @@ public class BuildingRenderer : MonoBehaviour
     private EffectsPresenter _effectsPresenter;
     private AudioPlayer _audio;
 
+    private string _buildingName;
+
     [Inject]
     void Construct(EffectsPresenter effectsPresenter, AudioPlayer audio)
     {
         _effectsPresenter = effectsPresenter;
         _audio = audio;
+    }
+
+    public void SetBuildingName(string buildingName)
+    {
+        _buildingName = buildingName;
     }
 
     public void SetViewInactive()
@@ -30,7 +37,7 @@ public class BuildingRenderer : MonoBehaviour
 
     public void SetViewBuildInProgress()
     {
-        _effectsPresenter.PlaySmokeEffect(buildingButton.transform.position);
+        _effectsPresenter.PlaySmokeEffect(buildingButton.transform.position, _buildingName);
         _audio.PlayUiSound(UiSoundTypes.Building);
         createBuildingInMomentButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
@@ -64,7 +71,8 @@ public class BuildingRenderer : MonoBehaviour
 
     private void ScaleSpriteWithEffect(Transform imageTransform)
     {
+        _effectsPresenter.StopSmokeEffect(buildingButton.transform.position, _buildingName);
         imageTransform.DOScale(1, 1)
-            .SetEase(Ease.OutBounce).OnComplete(() => _effectsPresenter.StopSmokeEffect(buildingButton.transform.position));
+            .SetEase(Ease.OutBounce);
     }
 }
