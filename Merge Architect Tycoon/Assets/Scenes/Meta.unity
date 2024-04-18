@@ -1675,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &308289431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27445,7 +27445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &678282050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27899,7 +27899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &721963934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28284,13 +28284,14 @@ GameObject:
   - component: {fileID: 771080292}
   - component: {fileID: 771080291}
   - component: {fileID: 771080290}
+  - component: {fileID: 771080293}
   m_Layer: 5
   m_Name: BuildingImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &771080289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28393,6 +28394,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771080288}
   m_CullTransparentMesh: 1
+--- !u!225 &771080293
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771080288}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &783093970
 GameObject:
   m_ObjectHideFlags: 0
@@ -28411,7 +28424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &783093971
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28814,7 +28827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &882823042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49397,7 +49410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1200680735
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55290,7 +55303,6 @@ GameObject:
   - component: {fileID: 1434689137}
   - component: {fileID: 1434689140}
   - component: {fileID: 1434689139}
-  - component: {fileID: 1434689142}
   - component: {fileID: 1434689143}
   m_Layer: 5
   m_Name: BuildingImage
@@ -55298,7 +55310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1434689137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55357,27 +55369,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434689136}
   m_CullTransparentMesh: 1
---- !u!223 &1434689142
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434689136}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!225 &1434689143
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -55481,7 +55472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1474064844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56870,7 +56861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1640730869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57003,7 +56994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1651171239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -64011,7 +64002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2036968887
 RectTransform:
   m_ObjectHideFlags: 0
