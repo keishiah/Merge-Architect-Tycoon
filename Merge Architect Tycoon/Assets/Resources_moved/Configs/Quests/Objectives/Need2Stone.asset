@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966fea1174404224e9c1d2d984882b05, type: 3}
   m_Name: Need2Stone
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 9df107ddea8f6894283457dfe14316cc, type: 3}
+  Sprite: {fileID: 21300000, guid: 6242f71dd2ccc234f8181b8ae8c3c114, type: 3}
   neededItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}
   count: 2

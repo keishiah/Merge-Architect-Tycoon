@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: TruckQuest
   m_EditorClassIdentifier: 
   Discription: Buy trucks
-  Sprite: {fileID: -267212630, guid: 97fa3124a219a164b8e1d0949cd1ecd2, type: 3}
+  Sprite: {fileID: 1543906144, guid: 97fa3124a219a164b8e1d0949cd1ecd2, type: 3}
   Requires: []
   Objectives:
   - {fileID: 11400000, guid: cd02d08e43b17c04aa8d60beb13d9d1c, type: 2}
   RewardList:
+  - {fileID: 11400000, guid: 3e9ed8019482c604cba74a1bcf5754a3, type: 2}
   - {fileID: 11400000, guid: bb2775ee2e5fe4d439c4e377bd1e8c11, type: 2}

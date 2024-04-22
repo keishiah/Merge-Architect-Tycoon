@@ -113,7 +113,7 @@ public class CreateBuildingPopupPresenter
         foreach (var resource in selectedBuildingData.itemsToCreate.Distinct())
         {
             var currentResourceCount = _itemsCatalogue.GetItemCount(resource);
-            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.name, resource.ItemSprite,
+            _createBuildingPopup.resourcesPanel.RenderResourceElement(resource.ItemName, resource.ItemSprite,
                 Mathf.Min(currentResourceCount, resources.Count((item => item.name == resource.name))),
                 resources.Count((item => item.name == resource.name)));
         }

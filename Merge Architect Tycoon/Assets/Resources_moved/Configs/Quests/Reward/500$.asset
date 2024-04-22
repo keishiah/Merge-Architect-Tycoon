@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 500$
   m_EditorClassIdentifier: 
   IsHiden: 0
-  Sprite: {fileID: 1845904305, guid: e86d4490498d35d47b69e3ef17448a63, type: 3}
+  Sprite: {fileID: 2026926889, guid: e86d4490498d35d47b69e3ef17448a63, type: 3}
   Amount: 500

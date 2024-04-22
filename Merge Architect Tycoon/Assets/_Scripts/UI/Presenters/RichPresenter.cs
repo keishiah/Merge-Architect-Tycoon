@@ -22,27 +22,32 @@ public class RichPresenter
 
     public void AddCoins()
     {
-#if UNITY_EDITOR
-        if (Application.version.StartsWith("d"))
-        {
-            _progressService.AddCoins(1000);
-        }
-        else
-        {
-#endif
-            //Shop.TryToBuy();
-#if UNITY_EDITOR
-        }
-#endif
+        _progressService.AddCoins(1000);
+
+// #if UNITY_EDITOR
+//         if (Application.version.StartsWith("d"))
+//         {
+//             _progressService.AddCoins(1000);
+//         }
+//         else
+//         {
+// #endif
+//             //Shop.TryToBuy();
+// #if UNITY_EDITOR
+//         }
+// #endif
     }
 
     public void AddDiamonds()
     {
-#if UNITY_EDITOR
-        if (Application.version.StartsWith("d"))
-        {
-            _progressService.AddDiamonds(100);
-        }
-#endif
+        _progressService.AddDiamonds(100);
+
+//         _progressService.AddDiamonds(100);
+// #if UNITY_EDITOR
+//         if (Application.version.StartsWith("d"))
+//         {
+//             _progressService.AddDiamonds(100);
+//         }
+// #endif
     }
 }

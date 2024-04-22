@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuildSecond
   m_EditorClassIdentifier: Assembly-CSharp::QuestBaseInfo
   Discription: Build secondHouse
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 1182848882, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
   Requires:
   - {fileID: 11400000, guid: d62dac70ab00f2a46956f364f53588ce, type: 2}
   Objectives:

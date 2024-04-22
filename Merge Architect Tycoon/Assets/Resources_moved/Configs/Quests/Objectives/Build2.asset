@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Build2
   m_EditorClassIdentifier: 
   Sprite: {fileID: 235299546, guid: 97fa3124a219a164b8e1d0949cd1ecd2, type: 3}
-  targetBuildingName: School
+  targetBuildingName: Lambermill

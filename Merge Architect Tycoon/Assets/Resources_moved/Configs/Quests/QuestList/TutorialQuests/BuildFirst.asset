@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: BuildFirst
   m_EditorClassIdentifier: 
   Discription: Build house
-  Sprite: {fileID: 235299546, guid: 97fa3124a219a164b8e1d0949cd1ecd2, type: 3}
+  Sprite: {fileID: 1970229507, guid: a3372e4fdd252e147a8f6c68727b63c7, type: 3}
   Requires:
   - {fileID: 11400000, guid: 381b330df0d063e43acf3326df8a9c6e, type: 2}
   Objectives:
-  - {fileID: 11400000, guid: da5b7869a420dd34d9a9011013b2fe14, type: 2}
   - {fileID: 11400000, guid: da5b7869a420dd34d9a9011013b2fe14, type: 2}
   RewardList:
   - {fileID: 11400000, guid: 9f62710e56ad4254e95b3ff116de4dbc, type: 2}

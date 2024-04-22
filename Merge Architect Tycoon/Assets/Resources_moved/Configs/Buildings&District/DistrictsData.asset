@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   districts:
   - districtId: 0
-    currencyCount: 10
+    currencyCount: 100
     timeToEarn: 5
   - districtId: 1
     currencyCount: 100

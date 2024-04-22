@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966fea1174404224e9c1d2d984882b05, type: 3}
   m_Name: Need5Wood
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 692938bb29198594e9663598dcf45237, type: 3}
+  Sprite: {fileID: 21300000, guid: 7fb08bc80ec313f4294d7110f1fbf0d0, type: 3}
   neededItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
   count: 5
