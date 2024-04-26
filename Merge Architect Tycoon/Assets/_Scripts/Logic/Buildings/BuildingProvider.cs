@@ -55,14 +55,24 @@ public class BuildingProvider : IInitializableOnSceneLoaded
     {
         BuildingsData buildings = _playerProgress.Buldings;
         var buildingsInProgressDict =
-            _playerProgress.Buldings.buildingsInProgress.BuildingsInProgressDict;
+            _playerProgress.Buldings.buildingsInProgress;
 
+        var afkTime = _playerProgress.PlayerStats.GetAfkTime();
         foreach (var buildingName in SceneBuildingsDictionary.Keys)
         {
             if (buildings.CreatedBuildings.Contains(buildingName))
                 CreateBuildingOnStart(buildingName);
-            else if (buildingsInProgressDict.ContainsKey(buildingName))
-                ContinueBuildingCreation(buildingName, buildingsInProgressDict[buildingName]);
+            else if (buildingsInProgressDict.GetBuildingCreationProgress(buildingName, afkTime, out var timeRest))
+            {
+                if (timeRest > 0)
+                {
+                    ContinueBuildingCreation(buildingName, timeRest);
+                }
+                else
+                {
+                    ContinueBuildingCreation(buildingName, -1);
+                }
+            }
         }
     }
 

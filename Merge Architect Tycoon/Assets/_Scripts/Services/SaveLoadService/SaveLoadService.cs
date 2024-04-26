@@ -12,6 +12,7 @@ public enum SaveKey
     Buldings,
     Inventory,
     Truck,
+    Stats,
 
     //Tutorial
     NeedSkipTutorial,
