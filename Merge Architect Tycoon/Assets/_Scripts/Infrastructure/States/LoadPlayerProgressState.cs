@@ -63,6 +63,10 @@
             SaveLoadService.Load<InventoryData>(SaveKey.Inventory);
         if (_progressService.Inventory == null)
             _progressService.Inventory = new InventoryData();
+        _progressService.PlayerStats =
+            SaveLoadService.Load<PlayerStats>(SaveKey.Stats);
+        if (_progressService.PlayerStats == null)
+            _progressService.PlayerStats = new PlayerStats();
     }
 
     public void Exit()

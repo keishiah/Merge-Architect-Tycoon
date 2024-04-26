@@ -10,9 +10,27 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
 
     public Dictionary<string, int> BuildingsInProgressDict = new();
 
-    public int GetBuildingCreationProgress(string tier)
+    public bool GetBuildingCreationProgress(string name, int afkTime, out int rescaledTimeRest)
     {
-        return BuildingsInProgressDict.ContainsKey(tier) ? BuildingsInProgressDict[tier] : 0;
+        rescaledTimeRest = 0;
+        if (BuildingsInProgressDict.TryGetValue(name, out int timeRest))
+        {
+            rescaledTimeRest = timeRest - afkTime;
+        }
+        else
+        {
+            return false;
+        }
+
+        if (rescaledTimeRest > 0)
+        {
+            return true;
+        }
+
+
+        BuildingsInProgressDict.Remove(name);
+        rescaledTimeRest = 0;
+        return true;
     }
 
     public void AddBuildingProgress(string name, int timeRest)
