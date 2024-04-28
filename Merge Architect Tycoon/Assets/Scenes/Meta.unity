@@ -57598,7 +57598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1773601019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -64273,7 +64273,6 @@ GameObject:
   - component: {fileID: 2056391990}
   - component: {fileID: 2056391992}
   - component: {fileID: 2056391991}
-  - component: {fileID: 2056391993}
   m_Layer: 5
   m_Name: Building
   m_TagString: Untagged
@@ -64339,18 +64338,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056391989}
   m_CullTransparentMesh: 1
---- !u!225 &2056391993
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056391989}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &2056794217
 GameObject:
   m_ObjectHideFlags: 0
@@ -85018,7 +85005,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8155105abe4b2c246b761a3803e9bfda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c6ac10bcf6188948be13243b9b12e34, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -85197,7 +85184,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196595544152238}
   DistrictButton: {fileID: 2602698441356309048}
   DollarsImage: {fileID: 1736421416}
-  BuildingImage: {fileID: 0}
+  BuildingImage: {fileID: 2079237880}
 --- !u!224 &7408740391950287880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85258,7 +85245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a846f85b23a7bca4a88729e94ee2eb07, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f40c3ae64fd5906478e5b14fb31b3527, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -85336,7 +85323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 277ddf9d7c6bd67459455e248c7a1950, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4f3c7e382468d74894b9235a1b31f00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -85400,7 +85387,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196596711781635}
   DistrictButton: {fileID: 2602698440188747669}
   DollarsImage: {fileID: 1268697173}
-  BuildingImage: {fileID: 0}
+  BuildingImage: {fileID: 1149290311}
 --- !u!1 &7408740392656210022
 GameObject:
   m_ObjectHideFlags: 0

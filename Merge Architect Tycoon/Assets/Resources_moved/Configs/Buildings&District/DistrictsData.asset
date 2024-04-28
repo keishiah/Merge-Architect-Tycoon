@@ -22,7 +22,7 @@ MonoBehaviour:
     currencyCount: 100
     timeToEarn: 15
     districtGrey: {fileID: 0}
-    districtColored: {fileID: 21300000, guid: 849c01848b8232e4e9947f98ba754369, type: 3}
+    districtColored: {fileID: 21300000, guid: e031d4bc2999dfa4ba8badc24ed35b6e, type: 3}
   - districtId: 2
     currencyCount: 200
     timeToEarn: 50

@@ -32,7 +32,6 @@ public class DistrictPopup : MonoBehaviour
 
         DistrictButton.onClick.AddListener(TapDistrict);
         DistrictButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 1f;
-        // BuildingImage.GetComponent<Image>().alphaHitTestMinimumThreshold = 1f;
         CoinsSlider.gameObject.SetActive(false);
         DollarsImage.enabled = false;
     }

@@ -12,4 +12,6 @@ public class PlayerProgress
     public InventoryData Inventory { get; set; }
     public QuestsData Quests { get; set; }
     public TrucksData Trucks { get; set; }
+
+    public DistrictData DistrictData { get; set; }
 }

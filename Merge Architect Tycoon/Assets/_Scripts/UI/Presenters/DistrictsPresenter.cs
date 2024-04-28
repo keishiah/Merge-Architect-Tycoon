@@ -67,6 +67,8 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         foreach (DistrictPopup district in _citiesMapPopup.Districts)
         {
             district.Initialize();
+            if (_playerProgress.DistrictData.openedDistrictsId.Contains(district.DistrictId))
+                district.ActivateDistrict(GetDistrictInfo(district.DistrictId));
         }
     }
 
@@ -96,10 +98,9 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
 
     private void OpenNextDistrict(int districtId)
     {
-        Debug.Log(_districtsCreatedBuildings[districtId]);
-        Debug.Log(_cities.GetBuildingsCountInDistrict(districtId));
         if (_districtsCreatedBuildings[districtId] >= _cities.GetBuildingsCountInDistrict(districtId))
         {
+            _playerProgressService.AddDistrict(districtId + 1);
             var nextDistrictPopup = _citiesMapPopup.GetNextDistrict(districtId);
             nextDistrictPopup.ActivateDistrict(GetDistrictInfo(districtId + 1));
         }

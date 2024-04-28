@@ -4,7 +4,7 @@
     private readonly PlayerProgress _progressService;
     private ApplicationSettings _settings;
 
-    public LoadPlayerProgressState(PlayerProgress progressService, 
+    public LoadPlayerProgressState(PlayerProgress progressService,
         ApplicationSettings settings)
     {
         _progressService = progressService;
@@ -28,7 +28,7 @@
     private void LoadSettingsOrInitNew()
     {
         _settings.Audio = SaveLoadService.Load<AudioSettings>(SaveKey.SoundSettings);
-        if( _settings.Audio == null )
+        if (_settings.Audio == null)
             _settings.Audio = new AudioSettings();
     }
 
@@ -44,7 +44,7 @@
         if (_progressService.Buldings == null)
             _progressService.Buldings = new BuildingsData();
 
-        _progressService.Quests = 
+        _progressService.Quests =
             SaveLoadService.Load<QuestsData>(SaveKey.Quests);
         if (_progressService.Quests == null)
             _progressService.Quests = new QuestsData();
@@ -67,10 +67,13 @@
             SaveLoadService.Load<PlayerStats>(SaveKey.Stats);
         if (_progressService.PlayerStats == null)
             _progressService.PlayerStats = new PlayerStats();
+        _progressService.DistrictData =
+            SaveLoadService.Load<DistrictData>(SaveKey.Districts);
+        if (_progressService.DistrictData == null)
+            _progressService.DistrictData = new DistrictData();
     }
 
     public void Exit()
     {
     }
-
 }
