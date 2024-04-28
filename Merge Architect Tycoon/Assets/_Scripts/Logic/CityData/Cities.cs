@@ -9,6 +9,18 @@ public class Cities : MonoBehaviour
     public int GetBuildingsCountInDistrict(int districtId)
     {
         District district = Districts.Find(x => x.districtId == districtId);
-        return district.GetComponentsInChildren<BuildingPlace>().Length;
+        int countBuildingPlace = 0;
+
+        BuildingPlace[] allBuildingPlaces = district.GetComponentsInChildren<BuildingPlace>();
+
+        foreach (BuildingPlace building in allBuildingPlaces)
+        {
+            if (building is not Main)
+            {
+                countBuildingPlace++;
+            }
+        }
+
+        return countBuildingPlace;
     }
 }
