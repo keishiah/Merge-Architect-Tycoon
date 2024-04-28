@@ -329,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &72915568
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48723,7 +48723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149290310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48815,7 +48815,7 @@ MonoBehaviour:
   _mergeLevel: {fileID: 11400000, guid: 3d5557e8dc965db48b1ab92f59e87f23, type: 2}
   createBuildingPopup: {fileID: 301110683}
   createBuildingPopupScroller: {fileID: 6111723704502396923}
-  district: {fileID: 1577001344}
+  citiesMapPopup: {fileID: 1773601024}
   questPopup: {fileID: 4399105216859306360}
   truckPanel: {fileID: 1890234801}
   richPanel: {fileID: 1666017448}
@@ -48823,6 +48823,7 @@ MonoBehaviour:
   effectsPresenter: {fileID: 1625863716584848965}
   cameraZoomer: {fileID: 631571501}
   backGroundButton: {fileID: 1505939981}
+  cities: {fileID: 1666056074}
 --- !u!114 &1153209361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56213,9 +56214,9 @@ GameObject:
   - component: {fileID: 1577001343}
   - component: {fileID: 1577001347}
   - component: {fileID: 1577001346}
-  - component: {fileID: 1577001344}
+  - component: {fileID: 1577001348}
   m_Layer: 5
-  m_Name: Background
+  m_Name: District1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56248,19 +56249,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1577001344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577001342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64a5be73d0d44ba9afb7b3caeb83208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  districtId: 0
 --- !u!114 &1577001346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56299,6 +56287,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577001342}
   m_CullTransparentMesh: 1
+--- !u!114 &1577001348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577001342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc46a78f5444bb08b0a15251155a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  districtId: 0
 --- !u!1 &1605227592
 GameObject:
   m_ObjectHideFlags: 0
@@ -56968,6 +56969,7 @@ GameObject:
   - component: {fileID: 1666056072}
   - component: {fileID: 1666056071}
   - component: {fileID: 1666056070}
+  - component: {fileID: 1666056074}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -57057,6 +57059,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1666056074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666056068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af38b9169c6442e3afbf3f0170c1f0d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Districts:
+  - {fileID: 1577001348}
 --- !u!1 &1690553155
 GameObject:
   m_ObjectHideFlags: 0
@@ -57252,7 +57268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1708365118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57567,7 +57583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1773601019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57656,6 +57672,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d235c3d9a94f479b970088d86cd17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Districts:
+  - {fileID: 7408740393207463435}
+  - {fileID: 7408740392656210019}
+  - {fileID: 7408740391680484814}
+  - {fileID: 7380616605213231280}
 --- !u!114 &1773601025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63431,7 +63452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1999519509
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69279,7 +69300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2079237879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69320,7 +69341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08fa01b1e2f6bb446af58f4c434ca8d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b223f127662ff3346a81a95bb3e9aa4f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -85035,6 +85056,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4743617268240152016}
   DistrictButton: {fileID: 2639867914078969670}
   DollarsImage: {fileID: 1974328813}
+  BuildingImage: {fileID: 2056391991}
 --- !u!224 &7380616605213231282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85147,6 +85169,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196595544152238}
   DistrictButton: {fileID: 2602698441356309048}
   DollarsImage: {fileID: 1736421416}
+  BuildingImage: {fileID: 2079237880}
 --- !u!224 &7408740391950287880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85207,7 +85230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e5226017df96da94da9b1e500f87d7d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a846f85b23a7bca4a88729e94ee2eb07, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -85285,7 +85308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 867ac4dcf059d9d4ba8cbb39a5e0f3c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 277ddf9d7c6bd67459455e248c7a1950, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -85349,6 +85372,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196596711781635}
   DistrictButton: {fileID: 2602698440188747669}
   DollarsImage: {fileID: 1268697173}
+  BuildingImage: {fileID: 1708365119}
 --- !u!1 &7408740392656210022
 GameObject:
   m_ObjectHideFlags: 0
@@ -85413,6 +85437,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196597205173099}
   DistrictButton: {fileID: 2602698440769186301}
   DollarsImage: {fileID: 581449802}
+  BuildingImage: {fileID: 1149290311}
 --- !u!1 &7408740393207463438
 GameObject:
   m_ObjectHideFlags: 0
@@ -85491,7 +85516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ba30d012396abb74ea34cd0ef4e831a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd68a6f40e145994abbe8da62d2086d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

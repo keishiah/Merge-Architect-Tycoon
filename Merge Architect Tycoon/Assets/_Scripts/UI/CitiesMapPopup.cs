@@ -1,14 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class CitiesMapPopup : MonoBehaviour
 {
-    private DistrictsPresenter _districtsPresenter;
+    public List<DistrictPopup> Districts;
 
-    [Inject]
-    void Construct(DistrictsPresenter districtsPresenter)
-    {
-        _districtsPresenter = districtsPresenter;
-        _districtsPresenter.CitiesMapPopup = gameObject;
-    }
+    public DistrictPopup GetNextDistrict(int districtId) => Districts.Find(x => x.DistrictId == districtId + 1);
 }

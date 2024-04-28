@@ -16,12 +16,20 @@ MonoBehaviour:
   - districtId: 0
     currencyCount: 100
     timeToEarn: 5
+    districtGrey: {fileID: 0}
+    districtColored: {fileID: 0}
   - districtId: 1
     currencyCount: 100
     timeToEarn: 15
+    districtGrey: {fileID: 0}
+    districtColored: {fileID: 21300000, guid: 849c01848b8232e4e9947f98ba754369, type: 3}
   - districtId: 2
     currencyCount: 200
     timeToEarn: 50
+    districtGrey: {fileID: 0}
+    districtColored: {fileID: 0}
   - districtId: 3
     currencyCount: 1000
     timeToEarn: 500
+    districtGrey: {fileID: 0}
+    districtColored: {fileID: 0}
