@@ -19,9 +19,11 @@ public class BuildingCreator
         CancellationTokenSource cancellationTokenSource, int creationTime = default)
     {
         string buildingNameTempo = buildingPlace.buildingName;
-        int timeToCreate = creationTime == default
+        int timeToCreate = creationTime == 0
             ? _staticDataService.BuildingInfoDictionary[buildingNameTempo].timeToCreate
             : creationTime;
+
+
         buildingPlace.UpdateTimerText(timeToCreate);
 
         while (timeToCreate > 0 && !cancellationTokenSource.IsCancellationRequested)
@@ -55,7 +57,7 @@ public class BuildingCreator
         }
     }
 
-    private void CreateBuilding(BuildingPlace buildingPlace)
+    public void CreateBuilding(BuildingPlace buildingPlace)
     {
         _playerProgressService.RemoveBuildingInProgress(buildingPlace.buildingName);
         _playerProgressService.AddBuilding(buildingPlace.buildingName);
