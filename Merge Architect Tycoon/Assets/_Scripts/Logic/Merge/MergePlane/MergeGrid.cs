@@ -10,6 +10,7 @@ public class MergeGrid : MonoBehaviour
     private const string EMPTY_ITEM_NAME = "Empty";
 
     [SerializeField] private SlotRenderer slotPrefab;
+    [SerializeField] private Sprite slotAlterSprite;
 
     [Inject] public SlotsManager slotsManager;
     [Inject] private DiContainer _container;
@@ -40,12 +41,16 @@ public class MergeGrid : MonoBehaviour
         {
             int slot_x = i % slotsColumns;
             int slot_y = i / slotsColumns;
+            bool isAlter = (i % 2 == 1);
 
             SlotRenderer initSlot = _container.InstantiatePrefabForComponent<SlotRenderer>(slotPrefab);
 
             initSlot.endMoveEvent += SaveInventory;
 
             RectTransform slotRect = initSlot.GetComponent<RectTransform>();
+
+            if (isAlter)
+                initSlot.GetComponent<Image>().sprite = slotAlterSprite;
 
             initSlot.name = $"Slot: {slot_y}_{slot_x} ID: {i}";
             initSlot.transform.SetParent(transform);

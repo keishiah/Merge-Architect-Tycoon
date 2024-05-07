@@ -1,8 +1,18 @@
-using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
+    [Multiline(10)]
+    public string WARNING = "Global Bindings Using Project Context\r\n" +
+        "This all works great for each individual scene, \r\n" +
+        "but what if you have dependencies that you wish to persist permanently across all scenes?\r\n" +
+        " In Zenject you can do this by adding installers to a ProjectContext object.\r\n\r\n" +
+        "To do this, first you need to create a prefab for the ProjectContext, and then you can add installers to it.\r\n" +
+        " You can do this most easily by selecting the menu item Edit -> Zenject -> Create Project Context.\r\n" +
+        " You should then see a new asset in the folder \bAssets/Resources\b called 'ProjectContext'.\r\n" +
+        " Alternatively, you can right click somewhere in Projects tab and select Create -> Zenject -> ProjectContext.";
+
     public override void InstallBindings()
     {
         BindSceneLoader();
@@ -37,7 +47,7 @@ public class GameInstaller : MonoInstaller
 
     private void BindAudioPlayer()
     {
-        Container.Bind<AudioPlayer>().FromComponentInNewPrefabResource("Prefabs/AudioPlayer").AsSingle();
+        Container.Bind<AudioPlayer>().FromComponentInNewPrefabResource(AssetPath.AudioPlayer).AsSingle();
     }
 
     private void BindFirebaseLogger()

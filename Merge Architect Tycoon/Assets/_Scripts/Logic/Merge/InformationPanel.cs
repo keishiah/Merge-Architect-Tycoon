@@ -10,6 +10,10 @@ public class InformationPanel : MonoBehaviour
     [Inject]
     private AudioPlayer _audio;
 
+    [Header("Sprites")]
+    public Sprite DefaultSprite;
+    public Sprite OnSelectionSprite;
+
     [Header("Texts")]
     public Image itemImage;
     public TMP_Text itemNameText;
@@ -80,9 +84,11 @@ public class InformationPanel : MonoBehaviour
 
     public void ActivateInfromPanel(bool state)
     {
+        GetComponent<Image>().sprite = state ? OnSelectionSprite : DefaultSprite;
+
         selectedItem.gameObject.SetActive(state);
         informPanel.SetActive(state);
-        infoText.gameObject.SetActive(!state);
+        //infoText.gameObject.SetActive(!state);
 
         if (!(state == false && slotCurrent != null))
             return;

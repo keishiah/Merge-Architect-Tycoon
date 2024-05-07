@@ -31,6 +31,8 @@ public class PreStart : MonoBehaviour
         _loadingSlider.gameObject.SetActive(true);
         _loadingSlider.value = 0;
 
+        yield return null;
+
         float step = 1 / fakeLoadDuration;
 
         while (_loadingSlider.value < 0.8f)
