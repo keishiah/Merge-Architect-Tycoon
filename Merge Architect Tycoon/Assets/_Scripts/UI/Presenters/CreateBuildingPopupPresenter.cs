@@ -82,6 +82,12 @@ public class CreateBuildingPopupPresenter
         }
     }
 
+    public void SelectFirstBuilding()
+    {
+        CreateBuildingUiElement buildingToSelect = _elements.First(x => x.gameObject.activeSelf);
+        SelectBuilding(buildingToSelect);
+    }
+
     public void SelectBuilding(CreateBuildingUiElement selectedBuilding)
     {
         _cameraZoomer.ZoomButtonClicked(_buildingProvider.GetBuildingTransform(selectedBuilding.buildingName),

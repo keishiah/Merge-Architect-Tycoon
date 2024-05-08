@@ -53,6 +53,7 @@ public class LoadLevelState : IPaylodedState<string>
 
         _sceneContextProvider.Resolve<QuestsProvider>().OnSceneLoaded();
         _sceneContextProvider.Resolve<MergeGrid>().OnSceneLoaded();
+        _sceneContextProvider.Resolve<BuildingQuestPresenter>().OnSceneLoaded();
         _tutorialReader.LoadProgress(_progress);
     }
 
@@ -65,5 +66,4 @@ public class LoadLevelState : IPaylodedState<string>
         _sceneContextProvider.Resolve<DistrictsPresenter>().OnSceneLoaded();
         _sceneContextProvider.Resolve<TruckProvider>().OnSceneLoaded();
     }
-
 }
