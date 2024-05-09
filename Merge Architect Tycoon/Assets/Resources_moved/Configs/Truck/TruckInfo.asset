@@ -53,7 +53,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6f6942985092ae6458b4f9e67ed5e974, type: 2}
     - {fileID: 11400000, guid: 80c410d492f257848b8dadd0bb77ed46, type: 2}
     - {fileID: 11400000, guid: 32278bc51c48fb148bb05769e093c604, type: 2}
-    SoftCost: 0
+    SoftCost: 3500
   - Resource:
     - {fileID: 11400000, guid: 00c4104d69ba955439b6a810186972be, type: 2}
     - {fileID: 11400000, guid: c1c39876cfb3ac549a8fee128d0fdb01, type: 2}

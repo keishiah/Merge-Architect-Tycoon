@@ -17,32 +17,37 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
     private int resourceCost => _truckInfo.MergeItems[_data.CurrentResource].SoftCost;
     private int boostCost => _truckInfo.BoostCost[_data.BoostBuyLevel].Cost;
-    private int UpdateCost()
+    private int UpdateSoftCost()
     {
         if(_data.UpdateLevel >= _truckInfo.Upgrades.Length)
             return int.MaxValue;
 
         return _truckInfo.Upgrades[_data.UpdateLevel].SoftCost;
     }
+    private int UpdateHardCost()
+    {
+        if (_data.UpdateLevel >= _truckInfo.Upgrades.Length)
+            return int.MaxValue;
+
+        return _truckInfo.Upgrades[_data.UpdateLevel].HardCost;
+    }
+    
 
     public void OnSceneLoaded()
     {
         CalculateUpdateData();
 
         _playerProgress.Riches.Coins.Subscribe(Interactebles);
-        _truckPanel.UpdateTruckButton.onClick.AddListener(UpdateTrucks);
+        _truckPanel.UpdateTruckBySoftButton.onClick.AddListener(UpdateTrucksBySoft);
+        _truckPanel.UpdateTruckByHardButton.onClick.AddListener(UpdateTrucksByHard);
         _truckPanel.BoostTruckButton.onClick.AddListener(BoostTrucks);
         _truckPanel.BuyTruckButtonsAddListener(BuyTruck);
         _data.BoostCount.Subscribe(_truckPanel.RenderBoost);
-        _truckPanel.SubscribeResources(SetResource);
 
         RenderUpdateButton();
 
         _truckPanel.RenderBoost(_data.BoostCount.Value);
         _truckPanel.BoostButtonRefresh(boostCost);
-
-        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
-        _truckPanel.ResourceChoise(_data.CurrentResource);
 
         _truckPanel.RenderCost(resourceCost);
         Interactebles();
@@ -50,22 +55,14 @@ public class TruckProvider : IInitializableOnSceneLoaded
         _truckZone.UpdateOn();
     }
 
-
     private void Interactebles() => Interactebles(_playerProgress.Riches.Coins.Value);
     public void Interactebles(int coinsCount)
     {
-        bool isUpdatable = coinsCount >= UpdateCost();
+        bool isUpdatable = coinsCount >= UpdateSoftCost();
         bool isBoostable = coinsCount >= boostCost;
         bool isBuyble = coinsCount >= resourceCost;
 
         _truckPanel.Interactebles(isUpdatable, isBoostable, isBuyble);
-    }
-
-    private void SetResource(int index)
-    {
-        _progressService.SetResource(index);
-        _truckPanel.RenderCost(resourceCost);
-        Interactebles();
     }
 
     private void CalculateUpdateData()
@@ -105,16 +102,27 @@ public class TruckProvider : IInitializableOnSceneLoaded
         string text = $"+{nextUpdate.TruskUpdate} \n {nextUpdate.SoftCost}$";
         _truckPanel.UpdateButtonRefresh(text);
     }
-    private void UpdateTrucks()
+    private void UpdateTrucksByHard()
     {
-        if (!_progressService.SpendCoins(UpdateCost()))
+        if (!_progressService.SpendDiamonds(UpdateHardCost()))
             return;
 
+        UpdateTrucks();
+    }
+    private void UpdateTrucksBySoft()
+    {
+        if (!_progressService.SpendCoins(UpdateSoftCost()))
+            return;
+
+        UpdateTrucks(); 
+    }
+
+    private void UpdateTrucks()
+    {
         _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
         _progressService.UpdateTruck();
         CalculateUpdateData();
         RenderUpdateButton();
-        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
         Interactebles();
     }
     private void BoostTrucks()
