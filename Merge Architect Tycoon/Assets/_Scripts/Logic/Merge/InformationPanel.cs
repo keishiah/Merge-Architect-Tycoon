@@ -10,8 +10,13 @@ public class InformationPanel : MonoBehaviour
     [Inject]
     private AudioPlayer _audio;
 
+    [Header("Sprites")]
+    public Sprite DefaultSprite;
+    public Sprite OnSelectionSprite;
+
     [Header("Texts")]
     public Image itemImage;
+    public Image backgroundImage;
     public TMP_Text itemNameText;
     public TMP_Text itemDescriptionText;
     public TMP_Text itemLvlText;
@@ -50,26 +55,25 @@ public class InformationPanel : MonoBehaviour
         itemDescriptionText.text = mergeItem.ItemDescrpition;
         itemLvlText.text = $"(Lvl {mergeItem.ItemLevel})";
         itemCostText.text = $"+{mergeItem.ItemCost}";
-        sellButton.SetActive(false);
-        deleteButton.SetActive(false);
         selectedItem.SelectSlot(slotCurrent.transform);
-        if (slot.SlotState == SlotState.Draggable 
-            || slot.SlotState == SlotState.Unloading)
-        {
-            switch (mergeItem.itemType)
-            {
-                case ItemType.sellable:
-                    if (mergeItem.ItemCost > 0)
-                        sellButton.SetActive(true);
-                    else
-                        deleteButton.SetActive(true);
-                    break;
-                case ItemType.spawner:
-                    break;
-                case ItemType.unsellable:
-                    break;
-            }
-        }
+        //deleteButton.SetActive(false);
+        //if (slot.SlotState == SlotState.Draggable 
+        //    || slot.SlotState == SlotState.Unloading)
+        //{
+        //    switch (mergeItem.itemType)
+        //    {
+        //        case ItemType.sellable:
+        //            if (mergeItem.ItemCost > 0)
+        //                sellButton.SetActive(true);
+        //            else
+        //                deleteButton.SetActive(true);
+        //            break;
+        //        case ItemType.spawner:
+        //            break;
+        //        case ItemType.unsellable:
+        //            break;
+        //    }
+        //}
 
     }
 
@@ -80,9 +84,12 @@ public class InformationPanel : MonoBehaviour
 
     public void ActivateInfromPanel(bool state)
     {
+        backgroundImage.sprite = state ? OnSelectionSprite : DefaultSprite;
+
         selectedItem.gameObject.SetActive(state);
-        informPanel.SetActive(state);
-        infoText.gameObject.SetActive(!state);
+        sellButton.SetActive(state);
+        itemNameText.gameObject.SetActive(state);
+        //infoText.gameObject.SetActive(!state);
 
         if (!(state == false && slotCurrent != null))
             return;

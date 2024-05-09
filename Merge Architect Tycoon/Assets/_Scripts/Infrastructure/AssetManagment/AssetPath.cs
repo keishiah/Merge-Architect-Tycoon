@@ -1,7 +1,8 @@
 ﻿public static class AssetPath
 {
     public const string StartGameScene = "Meta";
-    public const string GameBootsTrapper = "Prefabs/Game Bootstraper";
+    public const string GameBootsTrapper = "InitializationPrefabs/Game Bootstraper";
+    public const string AudioPlayer = "InitializationPrefabs/AudioPlayer";
     public const string Items = "ScriptableObjects/Merge/Items/";
 }
 

@@ -26,6 +26,7 @@ public class SceneContextInstaller : MonoInstaller
         Container.Bind<QuestsProvider>().AsSingle();
         Container.Bind<BuildingCreator>().AsSingle();
         Container.Bind<RichPresenter>().AsSingle();
+        Container.Bind<BuildingQuestPresenter>().AsSingle();
         Container.Bind<AudioSettingsPresenter>().AsSingle();
 
         Container.Bind<CreateBuildingPopup>().FromInstance(createBuildingPopup).AsSingle();

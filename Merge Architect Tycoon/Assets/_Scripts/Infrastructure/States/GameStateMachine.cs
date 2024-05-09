@@ -6,8 +6,7 @@ public class GameStateMachine : IGameStateMachine
     private Dictionary<Type, IExitableState> _registeredStates;
     private IExitableState _currentState;
 
-    public GameStateMachine(
-        IStateFactory stateFactory)
+    public GameStateMachine(IStateFactory stateFactory)
     {
         _registeredStates = new Dictionary<Type, IExitableState>();
 

@@ -30,7 +30,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Slot
-  - m_GUID: ef89f0b462c8e3c45b9bb63f046e466c
+  - m_GUID: 76ad8fedfa7890843813729be011ed87
     m_Address: DeliveryZone
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -58,6 +58,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 27d98c0f03958a74db4e5e1a5f78d6a1
     m_Address: AudioData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b59618ccb5215824480ef537687d2914
+    m_Address: Slot2
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
