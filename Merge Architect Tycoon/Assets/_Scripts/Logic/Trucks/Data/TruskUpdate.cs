@@ -1,6 +1,6 @@
 ﻿public enum TruskUpdate
 {
     Capacity,
-    NewResource,
-    Chance,
+    Diversity,
+    Luck,
 }

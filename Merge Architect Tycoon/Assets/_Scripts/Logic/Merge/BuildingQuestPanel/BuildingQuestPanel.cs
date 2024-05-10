@@ -10,6 +10,7 @@ public class BuildingQuestPanel : MonoBehaviour
     [Inject] private PlayerProgress playerProgress;
     [Inject] private MenuButtonsWidgetController menu;
     [Inject] private CreateBuildingPopupPresenter createBuildingPopupPresenter;
+    [Inject]  private ProgressItemPopup progressItemInfo;
 
     [SerializeField] private BuildingQuestPoint pointPrefab;
 
@@ -51,13 +52,13 @@ public class BuildingQuestPanel : MonoBehaviour
         {
             BuildingQuestPoint point = transform.GetChild(i).GetComponent<BuildingQuestPoint>();
             int itemsNeedetCount = 1;
-            point.NewInitialization(playerProgress, itemsNeedetCount, itemsToCreate[i]);
+            point.NewInitialization(playerProgress, progressItemInfo, itemsNeedetCount, itemsToCreate[i]);
         }
 
         //soft
         int lastChild = transform.childCount - 1;
         BuildingQuestPoint softPoint = transform.GetChild(lastChild).GetComponent<BuildingQuestPoint>();
-        softPoint.NewInitialization(playerProgress, buildingInfo.coinsCountToCreate);
+        softPoint.NewInitialization(playerProgress, progressItemInfo, buildingInfo.coinsCountToCreate);
     }
 
     private void SetBuildingQuestPanelOff()

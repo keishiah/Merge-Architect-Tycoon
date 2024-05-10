@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -14,9 +15,15 @@ public class TruckPanel : MonoBehaviour
     public Sprite[] UpdateTruckSprites;
     public GameObject UpdatePanel;
     public Button UpdateTruckBySoftButton;
+    public TextMeshProUGUI UpdateTruckBySoftText;
     public Button UpdateTruckByHardButton;
-    public TextMeshProUGUI UpdateTruckButtonText;
+    public TextMeshProUGUI UpdateTruckByHardText;
+
+    public TextMeshProUGUI UpdateTruckHeaderText;
     public Image UpdateTruckImage;
+
+    private bool isEnoughSoftToUpdate;
+    private bool isEnoughHardToUpdate;
     [Header("Boost")]
     public Sprite[] BoostTruckSprites;
     public GameObject BoostPanel;
@@ -26,38 +33,66 @@ public class TruckPanel : MonoBehaviour
     public Image BoostTruckImage;
 
     [Header("Else")]
-    public Button CloseTruckButton;
+    public GameObject ToShopPopup;
+    public GameObject ClosePopupsTruckButton;
 
     public void RenderBoost(int count)
     {
         BoostTexts.text = $"{count}";
     }
-    public void RenderCost(int price)
+    public void RenderResourceCost(int price)
     {
         PriceText.text = $"-{price}";
     }
 
-    public void UpdateButtonRefresh(string text, bool interactable = true)
+    public void UpdateButtonRefresh(string text, TruckUpdates update = null)
     {
-        UpdateTruckButtonText.text = text;
-        UpdateTruckBySoftButton.interactable = interactable;
+        UpdateTruckHeaderText.text = text;
+
+        if (update != null)
+        {
+            UpdateTruckBySoftText.text = update.SoftCost.ToString();
+            UpdateTruckByHardText.text = update.HardCost.ToString();
+        }
+        else
+        {
+            UpdateTruckBySoftText.text = "inf";
+            UpdateTruckByHardText.text = "inf";
+        }
     }
 
     public void BoostButtonRefresh(int i)
     {
-        BoostTruckButtonText.text = $"BOOST ${i}";
+        BoostTruckButtonText.text = $"{i}";
     }
 
-    public void Interactebles(bool isUpdatable, bool isBoostable, bool isBuyble)
+    public void InteracteblesBySoft(bool isSoftUpdatable, bool isBuyble)
     {
-        BuyTruckButtons.interactable = isBuyble;
         RebuyTruckImage.sprite = isBuyble ? RebuyTruckSprites[0] : RebuyTruckSprites[1];
 
-        UpdateTruckBySoftButton.interactable = isUpdatable;
-        UpdateTruckImage.sprite = isUpdatable ? UpdateTruckSprites[0] : UpdateTruckSprites[1];
+        isEnoughSoftToUpdate = isSoftUpdatable;
+        CheckUpdateSprite();
+    }
+    public void InteracteblesByHard(bool isHardUpdatable, bool isBoostable)
+    {
+        bool isBoostSelected = BoostPanel.activeSelf;
+        if (!isBoostSelected)
+            BoostTruckImage.sprite = isBoostable ? BoostTruckSprites[0] : BoostTruckSprites[1];
+        else
+            BoostTruckImage.sprite = isBoostable ? BoostTruckSprites[2] : BoostTruckSprites[3];
 
-        BoostTruckButton.interactable = isBoostable;
-        BoostTruckImage.sprite = isBoostable ? BoostTruckSprites[0] : BoostTruckSprites[1];
+        isEnoughHardToUpdate = isHardUpdatable;
+        CheckUpdateSprite();
+    }
+
+    private void CheckUpdateSprite()
+    {
+        bool isUpdatable = isEnoughSoftToUpdate || isEnoughHardToUpdate;
+        bool isSelected = UpdatePanel.activeSelf;
+        if (!isSelected)
+            UpdateTruckImage.sprite = isUpdatable ? UpdateTruckSprites[0] : UpdateTruckSprites[1];
+        else
+            UpdateTruckImage.sprite = isUpdatable ? UpdateTruckSprites[2] : UpdateTruckSprites[3];
     }
 
     public void BuyTruckButtonsAddListener(UnityAction buyTruck)
@@ -67,8 +102,8 @@ public class TruckPanel : MonoBehaviour
 
     public void OpenUpdatePopup()
     {
-        BoostPanel.SetActive(false);
-        
+        CloseBoost();
+
         if (UpdateTruckImage.sprite == UpdateTruckSprites[0])
         {
             UpdateTruckImage.sprite = UpdateTruckSprites[2];
@@ -89,11 +124,22 @@ public class TruckPanel : MonoBehaviour
             UpdateTruckImage.sprite = UpdateTruckSprites[1];
             UpdatePanel.SetActive(false);
         }
+
+        ClosePopupsTruckButton.SetActive(UpdatePanel.activeSelf);
+    }
+
+    private void CloseBoost()
+    {
+        BoostPanel.SetActive(false);
+        if (BoostTruckImage.sprite == BoostTruckSprites[2])
+            BoostTruckImage.sprite = BoostTruckSprites[0];
+        else if (BoostTruckImage.sprite == BoostTruckSprites[3])
+            BoostTruckImage.sprite = BoostTruckSprites[1];
     }
 
     public void OpenBoostPopup()
     {
-        UpdatePanel.SetActive(false);
+        CloseUpdate();
 
         if (BoostTruckImage.sprite == BoostTruckSprites[0])
         {
@@ -115,5 +161,31 @@ public class TruckPanel : MonoBehaviour
             BoostTruckImage.sprite = BoostTruckSprites[1];
             BoostPanel.SetActive(false);
         }
+
+        ClosePopupsTruckButton.SetActive(BoostPanel.activeSelf);
+    }
+
+    private void CloseUpdate()
+    {
+        UpdatePanel.SetActive(false);
+
+        if (UpdateTruckImage.sprite == UpdateTruckSprites[2])
+            UpdateTruckImage.sprite = UpdateTruckSprites[0];
+        else if (UpdateTruckImage.sprite == UpdateTruckSprites[3])
+            UpdateTruckImage.sprite = UpdateTruckSprites[1];
+
+        
+    }
+
+    public void ClosePopups()
+    {
+        CloseBoost();
+        CloseUpdate();
+        ClosePopupsTruckButton.SetActive(false);
+    }
+
+    public void ShowToShopPopup()
+    {
+        ToShopPopup.SetActive(true);
     }
 }

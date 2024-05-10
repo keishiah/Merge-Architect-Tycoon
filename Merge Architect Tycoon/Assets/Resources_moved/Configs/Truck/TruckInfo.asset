@@ -14,46 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CargoMinCount: 2
   ResourcesMinCount: 1
-  MinSpeed: 100
+  MinSpeed: 200
   MaxSpeed: 1500
   Upgrades:
   - TruskUpdate: 0
     SoftCost: 100
+    HardCost: 10
   - TruskUpdate: 2
     SoftCost: 200
+    HardCost: 20
   - TruskUpdate: 0
     SoftCost: 300
+    HardCost: 30
   - TruskUpdate: 2
     SoftCost: 400
+    HardCost: 40
   - TruskUpdate: 1
     SoftCost: 500
+    HardCost: 50
   - TruskUpdate: 0
     SoftCost: 600
+    HardCost: 60
   - TruskUpdate: 2
     SoftCost: 700
+    HardCost: 70
   - TruskUpdate: 0
     SoftCost: 800
+    HardCost: 80
   - TruskUpdate: 0
     SoftCost: 900
+    HardCost: 90
   BoostLimit: 10
   BoostCost:
-  - IsSoft: 1
-    Cost: 0
-  - IsSoft: 1
-    Cost: 50
-  - IsSoft: 1
-    Cost: 200
-  - IsSoft: 0
-    Cost: 500
-  - IsSoft: 0
-    Cost: 1500
+    IsSoft: 0
+    Cost: 1
   MergeItems:
   - Resource:
     - {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
     - {fileID: 11400000, guid: 6f6942985092ae6458b4f9e67ed5e974, type: 2}
     - {fileID: 11400000, guid: 80c410d492f257848b8dadd0bb77ed46, type: 2}
     - {fileID: 11400000, guid: 32278bc51c48fb148bb05769e093c604, type: 2}
-    SoftCost: 3500
+    SoftCost: 10
   - Resource:
     - {fileID: 11400000, guid: 00c4104d69ba955439b6a810186972be, type: 2}
     - {fileID: 11400000, guid: c1c39876cfb3ac549a8fee128d0fdb01, type: 2}
