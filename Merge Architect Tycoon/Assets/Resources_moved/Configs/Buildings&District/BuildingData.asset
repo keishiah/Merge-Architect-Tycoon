@@ -57,13 +57,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     - {fileID: 11400000, guid: 60f327530a940034696ccf0201ddcf04, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
-  - buildingName: School
+  - buildingName: Main1
     districtSprite: {fileID: -1447104700, guid: da31066ecb7726c409a8d38ad3ebad43, type: 3}
     buildPopupSprite: {fileID: 21300000, guid: eb42abd07121f08499548ee0a2358ad2, type: 3}
     timeToCreate: 10800
     coinsCountToCreate: 10000
     diamondsCountToSkip: 30
-    itemsToCreate:
-    - {fileID: 11400000, guid: eb0500105f966fc49915f5b5b9c2c91c, type: 2}
-    - {fileID: 11400000, guid: ee3482945425eb34cb897f6c50384f11, type: 2}
-    - {fileID: 11400000, guid: 1e9b27abdf4304548bd5fc1de01296ce, type: 2}
+    itemsToCreate: []
+  mainParts: []
