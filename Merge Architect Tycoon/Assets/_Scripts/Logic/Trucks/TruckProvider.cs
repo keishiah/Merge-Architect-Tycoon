@@ -113,9 +113,11 @@ public class TruckProvider : IInitializableOnSceneLoaded
     }
     private void UpdateTrucksByHard()
     {
-        if (!_progressService.SpendDiamonds(UpdateHardCost()))
+        int cost = UpdateHardCost();
+        if (!_progressService.SpendDiamonds(cost))
         {
-            _truckPanel.ShowToShopPopup();
+            int missingCurrency = cost - _playerProgress.Riches.Diamonds.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency);
             return;
         }
 
@@ -123,9 +125,11 @@ public class TruckProvider : IInitializableOnSceneLoaded
     }
     private void UpdateTrucksBySoft()
     {
+        int cost = UpdateSoftCost();
         if (!_progressService.SpendCoins(UpdateSoftCost()))
         {
-            _truckPanel.ShowToShopPopup();
+            int missingCurrency = cost - _playerProgress.Riches.Coins.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency, isHardCurrency: false);
             return;
         }
 
@@ -145,7 +149,8 @@ public class TruckProvider : IInitializableOnSceneLoaded
     {
         if (!_progressService.SpendDiamonds(boostCost))
         {
-            _truckPanel.ShowToShopPopup();
+            int missingCurrency = boostCost - _playerProgress.Riches.Diamonds.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency);
             return;
         }
 
@@ -167,7 +172,8 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
         if(!_progressService.SpendCoins(resourceCost))
         {
-            _truckPanel.ShowToShopPopup();
+            int missingCurrency = resourceCost - _playerProgress.Riches.Coins.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency, isHardCurrency: false);
             return;
         }
 

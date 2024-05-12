@@ -23,7 +23,7 @@ public class ProgressItemPopup : MonoBehaviour
         gameObject.SetActive(true);
 
         mainImage.sprite = m_mergeItem.ItemSprite;
-        mainText.text = m_mergeItem.ItemName + $" (Lvl {m_mergeItem.ItemLevel})";
+        mainText.text = m_mergeItem.ItemName + $"\n (Lvl {m_mergeItem.ItemLevel})";
         
         int i = 0;
         for(; i < categories.Length; i++)

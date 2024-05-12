@@ -34,6 +34,12 @@ public class TruckPanel : MonoBehaviour
 
     [Header("Else")]
     public GameObject ToShopPopup;
+    public TextMeshProUGUI TextShopPopup;
+    public Image ImageShopPopup;
+
+    [SerializeField] private Sprite hardCurrencySprite;
+    [SerializeField] private Sprite softCurrencySprite;
+
     public GameObject ClosePopupsTruckButton;
 
     public void RenderBoost(int count)
@@ -184,8 +190,11 @@ public class TruckPanel : MonoBehaviour
         ClosePopupsTruckButton.SetActive(false);
     }
 
-    public void ShowToShopPopup()
+    public void ShowToShopPopup(int missingCurrency, bool isHardCurrency = true)
     {
+        ClosePopups();
+        TextShopPopup.text = $"You are missing {missingCurrency}";
+        ImageShopPopup.sprite = isHardCurrency ? hardCurrencySprite : softCurrencySprite;
         ToShopPopup.SetActive(true);
     }
 }
