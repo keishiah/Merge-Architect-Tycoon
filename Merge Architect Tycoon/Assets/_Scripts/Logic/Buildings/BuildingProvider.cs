@@ -9,26 +9,29 @@ public class BuildingProvider : IInitializableOnSceneLoaded
 
     private BuildingCreator _buildingCreator;
     private PlayerProgress _playerProgress;
+    private Cities _cities;
     private PlayerProgressService _playerProgressService;
-    private District _district;
 
     [Inject]
-    void Construct(BuildingCreator buildingCreator, District district,
-        PlayerProgressService playerProgressService, PlayerProgress playerProgress)
+    void Construct(BuildingCreator buildingCreator,
+        PlayerProgressService playerProgressService, PlayerProgress playerProgress, Cities cities)
     {
         _playerProgress = playerProgress;
         _playerProgressService = playerProgressService;
-        _district = district;
         _buildingCreator = buildingCreator;
+        _cities = cities;
     }
 
     public void OnSceneLoaded()
     {
-        foreach (var building in _district.GetComponentsInChildren<BuildingPlace>())
+        foreach (var district in _cities.Districts)
         {
-            building.InitializeBuilding(_district.districtId);
+            foreach (var building in district.GetComponentsInChildren<BuildingPlace>())
+            {
+                building.InitializeBuilding(district.districtId);
+            }
         }
-
+        
         LoadCreatedBuildings();
     }
 

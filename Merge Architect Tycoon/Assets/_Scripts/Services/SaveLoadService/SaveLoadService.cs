@@ -13,6 +13,7 @@ public enum SaveKey
     Inventory,
     Truck,
     Stats,
+    Districts,
 
     //Tutorial
     NeedSkipTutorial,

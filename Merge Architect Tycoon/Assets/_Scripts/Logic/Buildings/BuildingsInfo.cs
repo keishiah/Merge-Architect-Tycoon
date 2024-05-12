@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "BuildingsInfo", menuName = "StaticData/BuildingsInfo", order = 0)]
 public class BuildingsInfo : ScriptableObject
 {
     public List<BuildingInfo> buildings;
+    public List<MainInfo> mainParts;
 }
 
 [Serializable]
-public struct BuildingInfo
+public class BuildingInfo
 {
     public string buildingName;
     public Sprite districtSprite;
@@ -18,4 +20,9 @@ public struct BuildingInfo
     public int coinsCountToCreate;
     public int diamondsCountToSkip;
     public List<MergeItem> itemsToCreate;
+}
+
+[Serializable]
+public class MainInfo : BuildingInfo
+{
 }

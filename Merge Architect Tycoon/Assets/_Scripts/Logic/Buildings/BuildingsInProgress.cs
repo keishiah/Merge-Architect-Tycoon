@@ -8,8 +8,6 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
     [SerializeField] private List<string> buildingName = new();
     [SerializeField] private List<int> creationRest = new();
 
-    public Action OnAddBuildingProgress;
-
     public Dictionary<string, int> BuildingsInProgressDict = new();
 
     public bool GetBuildingCreationProgress(string name, int afkTime, out int rescaledTimeRest)
@@ -38,7 +36,6 @@ public class BuildingsInProgress : ISerializationCallbackReceiver
     public void AddBuildingProgress(string name, int timeRest)
     {
         BuildingsInProgressDict[name] = timeRest;
-        OnAddBuildingProgress?.Invoke();
     }
 
     public void RemoveBuildingProgress(string name) => BuildingsInProgressDict.Remove(name);
