@@ -33,8 +33,6 @@ public class InformationPanel : MonoBehaviour
 
     public SelectedItem selectedItem;
 
-    //public ProgressItemPopup _progressItemInfo;
-
     public void ConfigPanel(SlotRenderer slot)
     {
         if (slotCurrent
@@ -56,31 +54,7 @@ public class InformationPanel : MonoBehaviour
         itemLvlText.text = $"(Lvl {mergeItem.ItemLevel})";
         itemCostText.text = $"+{mergeItem.ItemCost}";
         selectedItem.SelectSlot(slotCurrent.transform);
-        //deleteButton.SetActive(false);
-        //if (slot.SlotState == SlotState.Draggable 
-        //    || slot.SlotState == SlotState.Unloading)
-        //{
-        //    switch (mergeItem.itemType)
-        //    {
-        //        case ItemType.sellable:
-        //            if (mergeItem.ItemCost > 0)
-        //                sellButton.SetActive(true);
-        //            else
-        //                deleteButton.SetActive(true);
-        //            break;
-        //        case ItemType.spawner:
-        //            break;
-        //        case ItemType.unsellable:
-        //            break;
-        //    }
-        //}
-
     }
-
-    //public void OpenProgressInfoPanel()
-    //{
-    //    _progressItemInfo.OpenProgressItemInfo(slotCurrent.CurrentItem);
-    //}
 
     public void ActivateInfromPanel(bool state)
     {

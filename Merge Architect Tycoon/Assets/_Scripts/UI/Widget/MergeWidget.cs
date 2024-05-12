@@ -2,7 +2,6 @@
 
 public class MergeWidget : WidgetView
 {
-    [SerializeField] private GameObject _trucks;
     [SerializeField] private GameObject _infoPanel;
     [SerializeField] private GameObject _menuPanel;
 
@@ -21,7 +20,6 @@ public class MergeWidget : WidgetView
     public override void OnOpen()
     {
         base.OnOpen();
-        _trucks.SetActive(false);
         _infoPanel.SetActive(false);
         _menuPanel.SetActive(false);
     }
