@@ -13,7 +13,7 @@ public class LoadLevelState : IPaylodedState<string>
 
     public LoadLevelState(ISceneLoader sceneLoader,
         SceneContextProvider sceneContextProvider, AudioPlayer audioPlayer,
-        TutorialReader tutorialReader,PlayerProgress progress)
+        TutorialReader tutorialReader, PlayerProgress progress)
     {
         _sceneLoader = sceneLoader;
         _sceneContextProvider = sceneContextProvider;
@@ -22,7 +22,10 @@ public class LoadLevelState : IPaylodedState<string>
         _progress = progress;
     }
 
-    public void SetGameStateMachine(IGameStateMachine gameStateMachine){}
+    public void SetGameStateMachine(IGameStateMachine gameStateMachine)
+    {
+    }
+
     public void Enter(string sceneName)
     {
         _sceneName = sceneName;

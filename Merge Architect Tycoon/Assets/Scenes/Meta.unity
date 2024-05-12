@@ -48982,7 +48982,7 @@ MonoBehaviour:
   _mergeLevel: {fileID: 11400000, guid: 3d5557e8dc965db48b1ab92f59e87f23, type: 2}
   createBuildingPopup: {fileID: 301110683}
   createBuildingPopupScroller: {fileID: 6111723704502396923}
-  district: {fileID: 1577001344}
+  citiesMapPopup: {fileID: 1773601024}
   questPopup: {fileID: 4399105216859306360}
   truckPanel: {fileID: 1890234801}
   richPanel: {fileID: 1666017448}
@@ -48990,6 +48990,7 @@ MonoBehaviour:
   effectsPresenter: {fileID: 1625863716584848965}
   cameraZoomer: {fileID: 631571501}
   backGroundButton: {fileID: 1505939981}
+  cities: {fileID: 1666056074}
 --- !u!114 &1153209361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56487,9 +56488,9 @@ GameObject:
   - component: {fileID: 1577001343}
   - component: {fileID: 1577001347}
   - component: {fileID: 1577001346}
-  - component: {fileID: 1577001344}
+  - component: {fileID: 1577001348}
   m_Layer: 5
-  m_Name: Background
+  m_Name: District
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56522,19 +56523,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1577001344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577001342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64a5be73d0d44ba9afb7b3caeb83208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  districtId: 0
 --- !u!114 &1577001346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56573,6 +56561,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577001342}
   m_CullTransparentMesh: 1
+--- !u!114 &1577001348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577001342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc46a78f5444bb08b0a15251155a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  districtId: 0
 --- !u!1 &1605227592
 GameObject:
   m_ObjectHideFlags: 0
@@ -57242,6 +57243,7 @@ GameObject:
   - component: {fileID: 1666056072}
   - component: {fileID: 1666056071}
   - component: {fileID: 1666056070}
+  - component: {fileID: 1666056074}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -57331,6 +57333,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1666056074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666056068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af38b9169c6442e3afbf3f0170c1f0d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Districts:
+  - {fileID: 1577001348}
 --- !u!1 &1690553155
 GameObject:
   m_ObjectHideFlags: 0
@@ -57930,6 +57946,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d235c3d9a94f479b970088d86cd17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Districts:
+  - {fileID: 7408740393207463435}
+  - {fileID: 7408740392656210019}
+  - {fileID: 7408740391680484814}
+  - {fileID: 7380616605213231280}
 --- !u!114 &1773601025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79813,10 +79834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9869ffdf7db7c124582e3c149c26fb80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultSprite: {fileID: 21300000, guid: 09da48390846116469067986eb878037, type: 3}
-  OnSelectionSprite: {fileID: 21300000, guid: 544c8cec511fe724c8c56640568cd6db, type: 3}
+  DefaultSprite: {fileID: 0}
+  OnSelectionSprite: {fileID: 0}
   itemImage: {fileID: 1657809054062901113}
-  backgroundImage: {fileID: 1657809055438026571}
+  backgroundImage: {fileID: 0}
   itemNameText: {fileID: 1657809054745669828}
   itemDescriptionText: {fileID: 1657809054333525185}
   itemLvlText: {fileID: 1657809053785462651}
@@ -80541,7 +80562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 4075098824852774151, guid: b3465ae6a5b49634a8c518e40c6c6530, type: 3}
-  slotAlterSprite: {fileID: 21300000, guid: b59618ccb5215824480ef537687d2914, type: 3}
+  slotAlterSprite: {fileID: 0}
 --- !u!224 &1657809055555197969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85191,6 +85212,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4743617268240152016}
   DistrictButton: {fileID: 2639867914078969670}
   DollarsImage: {fileID: 1974328813}
+  BuildingImage: {fileID: 0}
 --- !u!224 &7380616605213231282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85303,6 +85325,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196595544152238}
   DistrictButton: {fileID: 2602698441356309048}
   DollarsImage: {fileID: 1736421416}
+  BuildingImage: {fileID: 0}
 --- !u!224 &7408740391950287880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85505,6 +85528,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196596711781635}
   DistrictButton: {fileID: 2602698440188747669}
   DollarsImage: {fileID: 1268697173}
+  BuildingImage: {fileID: 0}
 --- !u!1 &7408740392656210022
 GameObject:
   m_ObjectHideFlags: 0
@@ -85569,6 +85593,7 @@ MonoBehaviour:
   CoinsSlider: {fileID: 4713196597205173099}
   DistrictButton: {fileID: 2602698440769186301}
   DollarsImage: {fileID: 581449802}
+  BuildingImage: {fileID: 0}
 --- !u!1 &7408740393207463438
 GameObject:
   m_ObjectHideFlags: 0
