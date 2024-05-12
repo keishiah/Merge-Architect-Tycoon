@@ -15,7 +15,7 @@ public class Cities : MonoBehaviour
 
         foreach (BuildingPlace building in allBuildingPlaces)
         {
-            if (building is not Main)
+            if (building is not MainPlace)
             {
                 countBuildingPlace++;
             }

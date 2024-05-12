@@ -1076,7 +1076,7 @@ RectTransform:
   - {fileID: 667905202}
   - {fileID: 901859633}
   m_Father: {fileID: 1577001343}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -48186,6 +48186,7 @@ GameObject:
   - component: {fileID: 1051480138}
   - component: {fileID: 1051480140}
   - component: {fileID: 1051480139}
+  - component: {fileID: 1051480141}
   m_Layer: 5
   m_Name: BuildingPlace (1)
   m_TagString: Untagged
@@ -48210,7 +48211,7 @@ RectTransform:
   - {fileID: 1429953177}
   - {fileID: 1628131091}
   m_Father: {fileID: 1577001343}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -48248,6 +48249,23 @@ MonoBehaviour:
   buildingView: {fileID: 1051480139}
   buildingName: School
   districtId: 0
+--- !u!114 &1051480141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051480137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b391334802174e678b9a9209b8cf6a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingView: {fileID: 1051480139}
+  buildingName: School
+  districtId: 0
+  showMainPopupButton: {fileID: 0}
+  mainPopup: {fileID: 0}
 --- !u!1 &1059124289
 GameObject:
   m_ObjectHideFlags: 0
@@ -50064,7 +50082,7 @@ RectTransform:
   - {fileID: 1059124290}
   - {fileID: 962190014}
   m_Father: {fileID: 1577001343}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -55587,7 +55605,7 @@ RectTransform:
   - {fileID: 1391761188}
   - {fileID: 1862661640}
   m_Father: {fileID: 1577001343}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -56510,11 +56528,11 @@ RectTransform:
   m_Children:
   - {fileID: 1505939977}
   - {fileID: 2006964707}
-  - {fileID: 1051480138}
   - {fileID: 1472589434}
   - {fileID: 214232654}
   - {fileID: 1989544583}
   - {fileID: 1367603703}
+  - {fileID: 1051480138}
   m_Father: {fileID: 1666056073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63670,7 +63688,7 @@ RectTransform:
   - {fileID: 1558319542}
   - {fileID: 516040492}
   m_Father: {fileID: 1577001343}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
