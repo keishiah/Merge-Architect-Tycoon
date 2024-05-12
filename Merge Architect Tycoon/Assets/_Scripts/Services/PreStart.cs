@@ -18,6 +18,7 @@ public class PreStart : MonoBehaviour
 
         _gameRunner.SetActive(true);
         DontDestroyOnLoad(this);
+        FakeLoad();
     }
 
     public void FakeLoad()
