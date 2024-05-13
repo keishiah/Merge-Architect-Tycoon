@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Cement
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 1
+  ItemCost: 5
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 396108836e40dd747963db6ce3ac8f72, type: 3}
   nextItem: {fileID: 11400000, guid: be52007edf1a20f4babb1fb78c11c17b, type: 2}

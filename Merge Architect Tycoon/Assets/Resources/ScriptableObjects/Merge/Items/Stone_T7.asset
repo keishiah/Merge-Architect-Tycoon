@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Stone fountain
   ItemDescrpition: 
   ItemLevel: 7
-  ItemCost: 10
+  ItemCost: 17
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: fa22fe83b81557647898f9fc7e537a61, type: 3}
   nextItem: {fileID: 0}

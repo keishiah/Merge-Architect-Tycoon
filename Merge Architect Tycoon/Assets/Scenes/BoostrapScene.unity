@@ -596,7 +596,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 900, y: 150}
+  m_SizeDelta: {x: 621, y: 119}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045087541
 MonoBehaviour:
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da62e4ca179450e49a25ff84f1c5b2b8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9bafcf8f67c9ce84fba9de079a09924f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -833,7 +833,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -120, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1426451326
 GameObject:
@@ -894,7 +894,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 713bab5341e91fa4481ec5378670a597, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1fce769127afa204eba4b7bf470d4fd3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1098,7 +1098,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.2}
   m_AnchorMax: {x: 0.5, y: 0.2}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 900, y: 150}
+  m_SizeDelta: {x: 621, y: 119}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1552402052
 MonoBehaviour:
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1186,8 +1186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 120, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1564858071
 MonoBehaviour:
@@ -1209,8 +1209,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fca1774726667e54a9bbc182723f811e, type: 3}
-  m_Type: 2
+  m_Sprite: {fileID: 21300000, guid: de0da4cd95afa6d4895d7a716738187c, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

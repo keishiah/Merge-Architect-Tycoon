@@ -50,14 +50,9 @@ MonoBehaviour:
     Cost: 1
   MergeItems:
   - Resource:
-    - {fileID: 11400000, guid: e5b6d8c54a8953f479ca54451cae0c6e, type: 2}
-    - {fileID: 11400000, guid: 6f6942985092ae6458b4f9e67ed5e974, type: 2}
-    - {fileID: 11400000, guid: 80c410d492f257848b8dadd0bb77ed46, type: 2}
-    - {fileID: 11400000, guid: 32278bc51c48fb148bb05769e093c604, type: 2}
-    SoftCost: 10
-  - Resource:
-    - {fileID: 11400000, guid: 00c4104d69ba955439b6a810186972be, type: 2}
-    - {fileID: 11400000, guid: c1c39876cfb3ac549a8fee128d0fdb01, type: 2}
-    - {fileID: 11400000, guid: 695365f493446ec429e037dc450c54ed, type: 2}
-    - {fileID: 11400000, guid: 62867b30cea27c243acf15bfb574afde, type: 2}
-    SoftCost: 100
+    - {fileID: 11400000, guid: 2f7d1034470752344840b08a91e5c177, type: 2}
+    - {fileID: 11400000, guid: 722056e9fc1b77c4fab4f89d7386c1d2, type: 2}
+    - {fileID: 11400000, guid: f2192e4924542c841a61d5209bf23bc8, type: 2}
+    - {fileID: 11400000, guid: 5ea6ebc8e0b0c9a4188f0d85b94407c6, type: 2}
+    - {fileID: 11400000, guid: 5977d29668a0d3c4691e2243b5ca942b, type: 2}
+    SoftCost: 75
