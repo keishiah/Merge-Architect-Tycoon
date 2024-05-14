@@ -16,56 +16,62 @@ public class TruckProvider : IInitializableOnSceneLoaded
     private TrucksData _data => _playerProgress.Trucks;
 
     private int resourceCost => _truckInfo.MergeItems[_data.CurrentResource].SoftCost;
-    private int boostCost => _truckInfo.BoostCost[_data.BoostBuyLevel].Cost;
-    private int UpdateCost()
+    private int boostCost => _truckInfo.BoostCost.Cost;
+    private int UpdateSoftCost()
     {
         if(_data.UpdateLevel >= _truckInfo.Upgrades.Length)
             return int.MaxValue;
 
         return _truckInfo.Upgrades[_data.UpdateLevel].SoftCost;
     }
+    private int UpdateHardCost()
+    {
+        if (_data.UpdateLevel >= _truckInfo.Upgrades.Length)
+            return int.MaxValue;
+
+        return _truckInfo.Upgrades[_data.UpdateLevel].HardCost;
+    }
+    
 
     public void OnSceneLoaded()
     {
         CalculateUpdateData();
 
-        _playerProgress.Riches.Coins.Subscribe(Interactebles);
-        _truckPanel.UpdateTruckButton.onClick.AddListener(UpdateTrucks);
+        _playerProgress.Riches.Coins.Subscribe(InteracteblesBySoft);
+        _playerProgress.Riches.Diamonds.Subscribe(InteracteblesByHard);
+        _truckPanel.UpdateTruckBySoftButton.onClick.AddListener(UpdateTrucksBySoft);
+        _truckPanel.UpdateTruckByHardButton.onClick.AddListener(UpdateTrucksByHard);
         _truckPanel.BoostTruckButton.onClick.AddListener(BoostTrucks);
         _truckPanel.BuyTruckButtonsAddListener(BuyTruck);
         _data.BoostCount.Subscribe(_truckPanel.RenderBoost);
-        _truckPanel.SubscribeResources(SetResource);
 
         RenderUpdateButton();
 
         _truckPanel.RenderBoost(_data.BoostCount.Value);
         _truckPanel.BoostButtonRefresh(boostCost);
 
-        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
-        _truckPanel.ResourceChoise(_data.CurrentResource);
-
-        _truckPanel.RenderCost(resourceCost);
-        Interactebles();
+        _truckPanel.RenderResourceCost(resourceCost);
+        InteracteblesBySoft();
+        InteracteblesByHard();
 
         _truckZone.UpdateOn();
     }
 
-
-    private void Interactebles() => Interactebles(_playerProgress.Riches.Coins.Value);
-    public void Interactebles(int coinsCount)
+    private void InteracteblesBySoft() => InteracteblesBySoft(_playerProgress.Riches.Coins.Value);
+    public void InteracteblesBySoft(int coinsCount)
     {
-        bool isUpdatable = coinsCount >= UpdateCost();
-        bool isBoostable = coinsCount >= boostCost;
+        bool isUpdatable = coinsCount >= UpdateSoftCost();
         bool isBuyble = coinsCount >= resourceCost;
 
-        _truckPanel.Interactebles(isUpdatable, isBoostable, isBuyble);
+        _truckPanel.InteracteblesBySoft(isUpdatable, isBuyble);
     }
-
-    private void SetResource(int index)
+    private void InteracteblesByHard() => InteracteblesByHard(_playerProgress.Riches.Diamonds.Value);
+    public void InteracteblesByHard(int diamondsCount)
     {
-        _progressService.SetResource(index);
-        _truckPanel.RenderCost(resourceCost);
-        Interactebles();
+        bool isUpdatable = diamondsCount >= UpdateHardCost();
+        bool isBoostable = diamondsCount >= boostCost;
+
+        _truckPanel.InteracteblesByHard(isUpdatable, isBoostable);
     }
 
     private void CalculateUpdateData()
@@ -78,10 +84,10 @@ public class TruckProvider : IInitializableOnSceneLoaded
                 case TruskUpdate.Capacity:
                     capacity++;
                     break;
-                case TruskUpdate.Chance:
+                case TruskUpdate.Luck:
                     luck++;
                     break;
-                case TruskUpdate.NewResource:
+                case TruskUpdate.Diversity:
                     resources++;
                     break;
             }
@@ -97,40 +103,66 @@ public class TruckProvider : IInitializableOnSceneLoaded
         int level = _data.UpdateLevel;
         if (level >= _truckInfo.Upgrades.Length)
         {
-            _truckPanel.UpdateButtonRefresh("MAX LEVEL", false);
+            _truckPanel.UpdateButtonRefresh("MAX LEVEL");
             return;
         }
 
         TruckUpdates nextUpdate = _truckInfo.Upgrades[level];
-        string text = $"+{nextUpdate.TruskUpdate} \n {nextUpdate.SoftCost}$";
-        _truckPanel.UpdateButtonRefresh(text);
+        string text = $"+{nextUpdate.TruskUpdate}";
+        _truckPanel.UpdateButtonRefresh(text, nextUpdate);
     }
+    private void UpdateTrucksByHard()
+    {
+        int cost = UpdateHardCost();
+        if (!_progressService.SpendDiamonds(cost))
+        {
+            int missingCurrency = cost - _playerProgress.Riches.Diamonds.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency);
+            return;
+        }
+
+        UpdateTrucks();
+    }
+    private void UpdateTrucksBySoft()
+    {
+        int cost = UpdateSoftCost();
+        if (!_progressService.SpendCoins(UpdateSoftCost()))
+        {
+            int missingCurrency = cost - _playerProgress.Riches.Coins.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency, isHardCurrency: false);
+            return;
+        }
+
+        UpdateTrucks(); 
+    }
+
     private void UpdateTrucks()
     {
-        if (!_progressService.SpendCoins(UpdateCost()))
-            return;
-
         _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
         _progressService.UpdateTruck();
         CalculateUpdateData();
         RenderUpdateButton();
-        _truckPanel.ResourcesRefresh(_data.ResourceLevel);
-        Interactebles();
+        InteracteblesBySoft();
+        InteracteblesByHard();
     }
     private void BoostTrucks()
     {
-        if (!_progressService.SpendCoins(boostCost))
+        if (!_progressService.SpendDiamonds(boostCost))
+        {
+            int missingCurrency = boostCost - _playerProgress.Riches.Diamonds.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency);
             return;
+        }
 
         _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
-        if (_data.BoostBuyLevel + 1 < _truckInfo.BoostCost.Length)
-            _data.BoostBuyLevel++;
+        //if (_data.BoostBuyLevel + 1 < _truckInfo.BoostCost.Length)
+        //    _data.BoostBuyLevel++;
 
         _progressService.AddBoost(_truckInfo.BoostLimit);
 
         _truckPanel.BoostButtonRefresh(boostCost);
         _truckZone.ChanceTruckSpeed(_truckInfo.MaxSpeed);
-        Interactebles();
+        InteracteblesByHard();
     }
 
     public void BuyTruck()
@@ -139,9 +171,13 @@ public class TruckProvider : IInitializableOnSceneLoaded
             return;
 
         if(!_progressService.SpendCoins(resourceCost))
+        {
+            int missingCurrency = resourceCost - _playerProgress.Riches.Coins.Value;
+            _truckPanel.ShowToShopPopup(missingCurrency, isHardCurrency: false);
             return;
+        }
 
-        if(resourceCost > 0)
+        if (resourceCost > 0)
             _audio.PlayUiSound(UiSoundTypes.BuyUpdate);
 
         Truck truck = new();
@@ -159,7 +195,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
         }
 
         AddNewTruck(truck);
-        Interactebles();
+        InteracteblesBySoft();
     }
 
     public void AddNewTruck(Truck truck)

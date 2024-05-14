@@ -23,6 +23,7 @@ public class BuildingCreator
             ? _staticDataService.BuildingInfoDictionary[buildingNameTempo].timeToCreate
             : creationTime;
 
+        _playerProgressService.AddBuildingCreationTimeRest(buildingNameTempo, timeToCreate);
 
         buildingPlace.UpdateTimerText(timeToCreate);
 

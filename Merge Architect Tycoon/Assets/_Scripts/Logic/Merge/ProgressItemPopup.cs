@@ -1,59 +1,71 @@
-using System.Collections.Generic;
 using TMPro;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ProgressItemPopup : MonoBehaviour
 {
     [SerializeField]
-    private ItemInfoSlot infoSlotPrefab;
+    private Categories[] categories;
+
+    [SerializeField]
+    private Image mainImage;
+    [SerializeField]
+    private Image[] stagesImage;
     [SerializeField]
     private TMP_Text mainText;
     [SerializeField]
-    private Transform gridPanel;
-
-    private List<ItemInfoSlot> itemDropSlotsList = new List<ItemInfoSlot>();
+    private Transform selectedCursor;
 
     public void OpenProgressItemInfo(MergeItem m_mergeItem)
     {
-        GetComponent<Image>().sprite = m_mergeItem.ItemSprite;
-        //string[] name = m_mergeItem.name.Split('_');
-
-        //mainText.text = name[0];
-
-        //List<MergeItem> list = new List<MergeItem>();
-        //list.AddRange(generalOopenedManager.mergeItems.FindAll(x => x.name.Split('_')[0] == name[0]));
-
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    ItemInfoSlot iis = Instantiate(infoSlotPrefab, gridPanel);
-        //    iis.SetItem(list[i], generalOopenedManager.GetItemOpenedInfo(list[i]));
-        //    itemDropSlotsList.Add(iis);
-        //}
-
         gameObject.SetActive(true);
-    }
 
-    private void Clear()
-    {
-        if (itemDropSlotsList.Count > 0)
+        mainImage.sprite = m_mergeItem.ItemSprite;
+        mainText.text = m_mergeItem.ItemName + $"\n (Lvl {m_mergeItem.ItemLevel})";
+        
+        int i = 0;
+        for(; i < categories.Length; i++)
         {
-            foreach (var item in itemDropSlotsList)
-            {
-                Destroy(item.gameObject);
-            }
-
-            itemDropSlotsList.Clear();
-        }
-    }
-
-    private void OnDisable()
-    {
-        foreach (var item in itemDropSlotsList)
-        {
-            Destroy(item.gameObject);
+            if (categories[i].sprites.Contains(m_mergeItem.ItemSprite))
+                break;
         }
 
-        itemDropSlotsList.Clear();
+        for(int j = 0;  j < stagesImage.Length; j++)
+        {
+            stagesImage[j].sprite = categories[i].sprites[j];
+        }
+
+        selectedCursor.position = stagesImage[m_mergeItem.ItemLevel-1].transform.position;
+    }
+
+    //private void Clear()
+    //{
+    //    if (itemDropSlotsList.Count > 0)
+    //    {
+    //        foreach (var item in itemDropSlotsList)
+    //        {
+    //            Destroy(item.gameObject);
+    //        }
+
+    //        itemDropSlotsList.Clear();
+    //    }
+    //}
+
+    //private void OnDisable()
+    //{
+    //    foreach (var item in itemDropSlotsList)
+    //    {
+    //        Destroy(item.gameObject);
+    //    }
+
+    //    itemDropSlotsList.Clear();
+    //}
+
+    [Serializable]
+    private class Categories
+    {
+        public Sprite[] sprites;
     }
 }

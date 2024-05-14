@@ -13,19 +13,26 @@ public class BuildingQuestPoint : MonoBehaviour
     [SerializeField] public Image doneIcon;
     [SerializeField] public Sprite coinSprite;
 
+    [SerializeField] public Image button;
+
     public int targetNumber;
-    public string targetItem;
+    public MergeItem targetItem;
     public bool IsDone;
+
+    private ProgressItemPopup _progressItemInfo;
 
     private IDisposable subscription;
 
-    public void NewInitialization(PlayerProgress playerProgress, int count, MergeItem item = null)
+    public void NewInitialization(PlayerProgress playerProgress, ProgressItemPopup _progressItemInfo, int count, MergeItem item = null)
     {
         if(subscription != null)
             subscription.Dispose();
 
         targetNumber = count;
+        this._progressItemInfo = _progressItemInfo;
 
+        targetItem = item;
+        
         if (item == null)
         {
             Icon.sprite = coinSprite;
@@ -35,7 +42,6 @@ public class BuildingQuestPoint : MonoBehaviour
         else
         {
             Icon.sprite = item.ItemSprite;
-            targetItem = item.name;
             subscription = playerProgress.Inventory.InventoryFlag.AsObservable()
                 .Subscribe(x => GetItemsCount(playerProgress));
         }
@@ -55,7 +61,7 @@ public class BuildingQuestPoint : MonoBehaviour
             Array.FindAll
             (
                 playerProgress.Inventory.items,
-                i => i.ItemID == targetItem && (i.SlotState == SlotState.Draggable || i.SlotState == SlotState.Unloading)
+                i => i.ItemID == targetItem.name && (i.SlotState == SlotState.Draggable || i.SlotState == SlotState.Unloading)
             )
             .Count();
 
@@ -69,14 +75,22 @@ public class BuildingQuestPoint : MonoBehaviour
             Text.enabled = false;
             doneIcon.enabled = true;
             IsDone = true;
+            button.enabled = false;
         }
         else
         {
             Text.enabled = true;
             doneIcon.enabled = false;
             IsDone = false;
-            if(Icon.sprite != coinSprite)
+            button.enabled = true;
+            if (Icon.sprite != coinSprite)
                 Text.text = $"{number} / {targetNumber}";
         }
+    }
+
+    public void OpenProgressItemInfo()
+    {
+        if(targetItem != null)
+            _progressItemInfo.OpenProgressItemInfo(targetItem);
     }
 }
