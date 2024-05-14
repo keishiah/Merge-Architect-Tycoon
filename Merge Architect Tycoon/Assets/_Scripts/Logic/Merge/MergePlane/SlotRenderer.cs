@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -39,6 +40,8 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
     public SlotDelegate addItemEvent;
     public SlotDelegate removeItemEvent;
     public SlotDelegate endMoveEvent;
+
+    public static Action MergeEvent;
 
     public bool IsEmpty => _item == null;
     public bool IsOpen => _slotState == SlotState.Draggable;
@@ -184,6 +187,8 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();
+
+        MergeEvent?.Invoke();
     }
 
     public void OnClick()

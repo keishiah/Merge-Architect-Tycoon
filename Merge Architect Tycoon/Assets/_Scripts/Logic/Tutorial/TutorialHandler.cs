@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,10 +13,10 @@ public class TutorialHandler : MonoBehaviour
     [SerializeField] private GameObject _allScreenButton;
 
     [SerializeField] private GameObject _blockerator;
-    [SerializeField] private GameObject _sceneButtonsBlocker;
     [SerializeField] private Button _buttonToClick;
 
     [SerializeField] private GameObject _handPointer;
+    [SerializeField] private Transform _handParent;
     [SerializeField] private Animation _handAnimation;
 
     public List<TutorialStep> TutorialSteps = new();
@@ -37,13 +38,13 @@ public class TutorialHandler : MonoBehaviour
     {
         _dialog.SetActive(false);
         _handPointer.SetActive(false);
-        _sceneButtonsBlocker.SetActive(false);
+        _buttonToClick.enabled = false;
         _blockerator.SetActive(false);
         _blockerator.GetComponent<Image>().enabled = true;
 
     }
 
-    private void NextStep()
+    public void NextStep()
     {
         DisableAll();
 
@@ -99,10 +100,7 @@ public class TutorialHandler : MonoBehaviour
     {
         if (buttonNext != null)
         {
-            buttonNext.gameObject.SetActive(false);
             _blockerator.SetActive(true);
-            _blockerator.GetComponent<Image>().enabled = false;
-            _sceneButtonsBlocker.SetActive(true);
 
             await CheckButtonMovement(buttonNext);
 
@@ -118,13 +116,14 @@ public class TutorialHandler : MonoBehaviour
 
     private void CreateTempButton(Button buttonNext)
     {
-        _buttonToClick.GetComponent<Image>().sprite = buttonNext.GetComponent<Image>().sprite;
+        _buttonToClick.enabled = true;
         RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
         RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
 
         buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
         buttonToClickRectTransform.position = buttonToNextRect.position;
-        buttonToClickRectTransform.sizeDelta = buttonToNextRect.sizeDelta;
+        buttonToClickRectTransform.sizeDelta = buttonToNextRect.rect.size;
+
         _tempButton = buttonNext;
     }
 
@@ -163,6 +162,11 @@ public class TutorialHandler : MonoBehaviour
 
     public void ShowHand(AnimationClip clip, Transform transform = null)
     {
+        if(transform != null)
+            _handPointer.transform.SetParent(transform, false);
+        else
+            _handPointer.transform.SetParent(_handParent, false);
+
         _handPointer.SetActive(true);
         _handAnimation.clip = clip;
         _handAnimation.Play();

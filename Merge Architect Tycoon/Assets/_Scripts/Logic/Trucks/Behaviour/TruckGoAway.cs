@@ -19,6 +19,7 @@ public class TruckGoAway : TruckBehaviour
     {
         if (RectTtransform.anchoredPosition.x > EndXPosition)
         {
+            RectTtransform.anchoredPosition = new Vector2(EndXPosition, 0);
             IsComplete = true;
             return;
         }
