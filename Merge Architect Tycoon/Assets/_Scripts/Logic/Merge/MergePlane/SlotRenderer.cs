@@ -180,7 +180,7 @@ public class SlotRenderer : MonoBehaviour, IDropHandler
 
         _audio.PlayMergeSound(slotFrom.CurrentItem.ItemLevel);
 
-        _playerProgressService.AddCoins(10);
+        _playerProgressService.AddCoins(2);
 
         slotFrom.RemoveItem();
         slotTo.UpgradeItem();

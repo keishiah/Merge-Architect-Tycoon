@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Square window
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 1
+  ItemCost: 5
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: be40830a9425db1419dacea7624a014e, type: 3}
   nextItem: {fileID: 11400000, guid: 0916715778d223a40a86b0e5414cb6fa, type: 2}

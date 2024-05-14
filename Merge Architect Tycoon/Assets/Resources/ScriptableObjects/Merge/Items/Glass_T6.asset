@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Balcony window
   ItemDescrpition: 
   ItemLevel: 6
-  ItemCost: 10
+  ItemCost: 15
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 5f79c9d718eb52540b59c91771494935, type: 3}
   nextItem: {fileID: 11400000, guid: ee3482945425eb34cb897f6c50384f11, type: 2}

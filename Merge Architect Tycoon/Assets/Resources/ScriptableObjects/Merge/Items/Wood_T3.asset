@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Small boards
   ItemDescrpition: 
   ItemLevel: 3
-  ItemCost: 10
+  ItemCost: 9
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: ae5536e2bcc08fd4a8329f1a49d830cf, type: 3}
   nextItem: {fileID: 11400000, guid: f674736e479f9094181f9d25563177b5, type: 2}
