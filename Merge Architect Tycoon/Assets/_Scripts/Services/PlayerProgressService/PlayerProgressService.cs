@@ -186,7 +186,13 @@ public class PlayerProgressService
 
     #endregion
 
-    public void SaveQuitTime()
+    public void AddDistrict(int districtId)
+    {
+        _progress.DistrictData.openedDistrictsId.Add(districtId);
+        SaveLoadService.Save(SaveKey.Districts, _progress.DistrictData);
+    }
+
+    private void SaveQuitTime()
     {
         _progress.PlayerStats.SaveDateTime();
         SaveLoadService.Save(SaveKey.Stats, _progress.PlayerStats);

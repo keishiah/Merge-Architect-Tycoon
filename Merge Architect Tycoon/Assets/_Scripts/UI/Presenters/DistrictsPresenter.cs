@@ -6,7 +6,6 @@ using Zenject;
 
 public class DistrictsPresenter : IInitializableOnSceneLoaded
 {
-    public GameObject CitiesMapPopup { get; set; }
     private int _currentDistrictId;
     public int CurrentDistrictId => _currentDistrictId;
 
@@ -21,11 +20,14 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
     private StaticDataService _staticDataService;
     private MenuButtonsWidgetController _sceneButtons;
     private AudioPlayer _audioPlayer;
+    private CitiesMapPopup _citiesMapPopup;
+    private Cities _cities;
 
     [Inject]
     void Construct(PlayerProgress playerProgress, PlayerProgressService playerProgressService,
         StaticDataService staticDataService, BuildingProvider buildingProvider,
-        CurrencyCreator currencyCreator, MenuButtonsWidgetController sceneButtons, AudioPlayer audioPlayer)
+        CurrencyCreator currencyCreator, MenuButtonsWidgetController sceneButtons, AudioPlayer audioPlayer,
+        CitiesMapPopup citiesMapPopup, Cities cities)
     {
         _playerProgress = playerProgress;
         _playerProgressService = playerProgressService;
@@ -34,10 +36,13 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         _staticDataService = staticDataService;
         _sceneButtons = sceneButtons;
         _audioPlayer = audioPlayer;
+        _citiesMapPopup = citiesMapPopup;
+        _cities = cities;
     }
 
     public void OnSceneLoaded()
     {
+        InitializeDistricts();
         _playerProgress.Buldings.SubscribeToBuildingsChanges(AddCreatedBuildingToDistrictsDict);
         StartEarningCurrencyOnInitialization();
     }
@@ -53,18 +58,27 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         TurnOnCurrencyEarningCountdown(districtId);
     }
 
-    public void CloseMap()
-    {
-        _sceneButtons.CloseCurrentWidget();
-    }
+    public void CloseMap() => _sceneButtons.CloseCurrentWidget();
 
     public void SetCurrentDistrict(int currentDistrictId) => _currentDistrictId = currentDistrictId;
 
+    private void InitializeDistricts()
+    {
+        foreach (DistrictPopup district in _citiesMapPopup.Districts)
+        {
+            district.Initialize();
+            if (_playerProgress.DistrictData.openedDistrictsId.Contains(district.DistrictId))
+                district.ActivateDistrict(GetDistrictInfo(district.DistrictId));
+        }
+    }
+
+    private DistrictInfo GetDistrictInfo(int districtId) => _staticDataService.DistrictsInfoDictionary[districtId];
+
     private void AddCreatedBuildingToDistrictsDict(string createdBuilding)
     {
-        var createdBuildingDistrictId = _buildingProvider.SceneBuildingsDictionary[createdBuilding].districtId;
-
-        AddCreatedBuildingToDistrictDict(createdBuildingDistrictId);
+        _buildingProvider.SceneBuildingsDictionary.TryGetValue(createdBuilding, out var buildingPlace);
+        if (buildingPlace != null)
+            AddCreatedBuildingToDistrictDict(buildingPlace.districtId);
     }
 
     private void AddCreatedBuildingToDistrictDict(int districtId)
@@ -77,6 +91,18 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
         {
             _districtsCreatedBuildings[districtId] = 1;
             TurnOnCurrencyEarningCountdown(districtId);
+        }
+
+        OpenNextDistrict(districtId);
+    }
+
+    private void OpenNextDistrict(int districtId)
+    {
+        if (_districtsCreatedBuildings[districtId] >= _cities.GetBuildingsCountInDistrict(districtId))
+        {
+            _playerProgressService.AddDistrict(districtId + 1);
+            var nextDistrictPopup = _citiesMapPopup.GetNextDistrict(districtId);
+            nextDistrictPopup.ActivateDistrict(GetDistrictInfo(districtId + 1));
         }
     }
 
@@ -92,6 +118,8 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
 
         foreach (var building in createdBuildings)
         {
+            if (!_buildingProvider.SceneBuildingsDictionary.Keys.Contains(building))
+                return;
             var createdBuildingDistrictId = _buildingProvider.SceneBuildingsDictionary[building].districtId;
             if (_districtsCreatedBuildings.Keys.Contains(createdBuildingDistrictId))
             {

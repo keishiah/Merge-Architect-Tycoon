@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +28,7 @@ public class BuildingRenderer : MonoBehaviour
         _buildingName = buildingName;
     }
 
-    public void SetViewInactive()
+    public virtual void SetViewInactive()
     {
         timerText.gameObject.SetActive(false);
         buildingStateImage.gameObject.SetActive(false);
@@ -43,7 +42,7 @@ public class BuildingRenderer : MonoBehaviour
         timerText.gameObject.SetActive(true);
     }
 
-    public void SetViewBuildCreated()
+    public virtual void SetViewBuildCreated()
     {
         buildingButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(false);
