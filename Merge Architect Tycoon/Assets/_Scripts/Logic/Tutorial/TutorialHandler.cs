@@ -25,7 +25,6 @@ public class TutorialHandler : MonoBehaviour
 
     private void Awake()
     {
-
         DisableAll();
     }
 
@@ -57,17 +56,20 @@ public class TutorialHandler : MonoBehaviour
         {
             tutorialData.IsComplite = true;
             Destroy(gameObject);
+            SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
+            return;
         }
-        else
-            TutorialSteps[_currentStep].Enter(this);
 
-        SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
+        TutorialSteps[_currentStep].Enter(this);
+
+        if(TutorialSteps[_currentStep].IsKeyStep)
+            SaveLoadService.Save(SaveKey.Tutorial, tutorialData);
     }
 
     public void ShowDialog(string text)
     {
-        _dialog.SetActive(true);
         _dialogText.text = text;
+        _dialog.SetActive(true);
     }
 
     public void NextButtonReset(Button buttonToNext = null)
@@ -88,7 +90,6 @@ public class TutorialHandler : MonoBehaviour
     {
         _blockerator.SetActive(true);
         CreateTempButton(buttonToNext);
-
 
         _tempButton = buttonToNext;
         _allScreenButton.SetActive(false);
