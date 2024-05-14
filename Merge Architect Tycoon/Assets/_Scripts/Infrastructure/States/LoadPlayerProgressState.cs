@@ -67,6 +67,10 @@
             SaveLoadService.Load<PlayerStats>(SaveKey.Stats);
         if (_progressService.PlayerStats == null)
             _progressService.PlayerStats = new PlayerStats();
+        _progressService.DistrictData =
+            SaveLoadService.Load<DistrictData>(SaveKey.Districts);
+        if (_progressService.DistrictData == null)
+            _progressService.DistrictData = new DistrictData();
     }
 
     public void Exit()

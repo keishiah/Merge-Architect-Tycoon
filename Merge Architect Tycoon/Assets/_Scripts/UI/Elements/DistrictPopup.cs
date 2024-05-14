@@ -9,6 +9,7 @@ public class DistrictPopup : MonoBehaviour
     public Slider CoinsSlider;
     public Button DistrictButton;
     public Image DollarsImage;
+    public Image BuildingImage;
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
@@ -18,14 +19,12 @@ public class DistrictPopup : MonoBehaviour
     void Construct(DistrictsPresenter districtsPresenter)
     {
         _districtsPresenter = districtsPresenter;
-
-        Initialize();
     }
 
     public void SetSliderMaxValue(float maxValue) => CoinsSlider.maxValue = maxValue;
     public void SetSliderValue(float value) => CoinsSlider.value = value;
 
-    private void Initialize()
+    public void Initialize()
     {
         ActivityToken = new CancellationTokenSource();
 
@@ -48,9 +47,12 @@ public class DistrictPopup : MonoBehaviour
             CloseMap();
     }
 
-    public void OpenDistrict()
+    public void OpenDistrict() => _districtsPresenter.SetCurrentDistrict(DistrictId);
+
+    public void ActivateDistrict(DistrictInfo districtInfo)
     {
-        _districtsPresenter.SetCurrentDistrict(DistrictId);
+        BuildingImage.gameObject.SetActive(true);
+        DistrictButton.image.sprite = districtInfo.districtColored;
     }
 
     private void CloseMap()
