@@ -8,11 +8,11 @@ using UnityEngine;
 public class BuildingsData : ISerializationCallbackReceiver, IDisposable
 {
     [SerializeField] private List<string> savedCreatedBuildings = new();
-    
+    public List<string> createdMainParts = new();
     private ReactiveCollection<string> _createdBuildingsReactiveCollection = new();
     public ReactiveCollection<string> CreatedBuildings => _createdBuildingsReactiveCollection;
     public BuildingsInProgress buildingsInProgress = new();
-    
+
     private Subject<string> _buildingAddedSubject = new();
     public IObservable<string> BuildingAddedObservable => _buildingAddedSubject;
 

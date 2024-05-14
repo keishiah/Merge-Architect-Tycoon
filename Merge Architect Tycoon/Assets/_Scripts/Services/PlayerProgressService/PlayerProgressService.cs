@@ -192,7 +192,7 @@ public class PlayerProgressService
         SaveLoadService.Save(SaveKey.Districts, _progress.DistrictData);
     }
 
-    public void SaveQuitTime()
+    private void SaveQuitTime()
     {
         _progress.PlayerStats.SaveDateTime();
         SaveLoadService.Save(SaveKey.Stats, _progress.PlayerStats);

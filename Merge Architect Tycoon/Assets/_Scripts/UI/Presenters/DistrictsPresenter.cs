@@ -76,9 +76,9 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
 
     private void AddCreatedBuildingToDistrictsDict(string createdBuilding)
     {
-        var createdBuildingDistrictId = _buildingProvider.SceneBuildingsDictionary[createdBuilding].districtId;
-
-        AddCreatedBuildingToDistrictDict(createdBuildingDistrictId);
+        _buildingProvider.SceneBuildingsDictionary.TryGetValue(createdBuilding, out var buildingPlace);
+        if (buildingPlace != null)
+            AddCreatedBuildingToDistrictDict(buildingPlace.districtId);
     }
 
     private void AddCreatedBuildingToDistrictDict(int districtId)
@@ -118,6 +118,8 @@ public class DistrictsPresenter : IInitializableOnSceneLoaded
 
         foreach (var building in createdBuildings)
         {
+            if (!_buildingProvider.SceneBuildingsDictionary.Keys.Contains(building))
+                return;
             var createdBuildingDistrictId = _buildingProvider.SceneBuildingsDictionary[building].districtId;
             if (_districtsCreatedBuildings.Keys.Contains(createdBuildingDistrictId))
             {

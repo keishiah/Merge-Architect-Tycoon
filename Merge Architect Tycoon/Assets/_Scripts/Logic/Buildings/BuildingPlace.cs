@@ -12,9 +12,9 @@ public class BuildingPlace : MonoBehaviour
 
     public CancellationTokenSource ActivityToken { get; private set; }
 
-    private StaticDataService _staticDataService;
+    protected BuildingCreator _buildingCreator;
+    protected StaticDataService _staticDataService;
     private BuildingProvider _buildingProvider;
-    private BuildingCreator _buildingCreator;
     private PlayerProgress _playerProgressService;
     private CameraZoomer _cameraZoomer;
 
@@ -28,7 +28,7 @@ public class BuildingPlace : MonoBehaviour
         _cameraZoomer = cameraZoomer;
     }
 
-    public void InitializeBuilding(int district)
+    public virtual void InitializeBuilding(int district)
     {
         districtId = district;
         ActivityToken = new CancellationTokenSource();
@@ -51,25 +51,30 @@ public class BuildingPlace : MonoBehaviour
                 break;
             case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildSpriteOnCreate(_staticDataService.BuildingInfoDictionary[buildingName]
-                    .districtSprite);
+                ShowBuildingSprite();
                 break;
             case BuildingStateEnum.ShowBuilding:
                 buildingView.SetViewBuildCreated();
-                buildingView.ShowBuildingSprite(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
+                SHowBuilding();
                 break;
         }
     }
 
-    public void StartCreatingBuilding()
+    public virtual void SHowBuilding()
     {
-        SetBuildingState(BuildingStateEnum.BuildInProgress);
+        buildingView.ShowBuildingSprite(_staticDataService.BuildingInfoDictionary[buildingName].districtSprite);
     }
 
-    public void UpdateTimerText(int totalSeconds)
+    public virtual void ShowBuildingSprite()
     {
-        buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
+        buildingView.ShowBuildSpriteOnCreate(_staticDataService.BuildingInfoDictionary[buildingName]
+            .districtSprite);
     }
+
+    public void StartCreatingBuilding() => SetBuildingState(BuildingStateEnum.BuildInProgress);
+
+    public void UpdateTimerText(int totalSeconds) =>
+        buildingView.UpdateTimerText(StaticMethods.FormatTimerText(totalSeconds));
 
 
     public void OnApplicationQuit()
@@ -83,14 +88,11 @@ public class BuildingPlace : MonoBehaviour
         ActivityToken?.Cancel();
     }
 
-    private void CreateInMoment()
+    public virtual void CreateInMoment()
     {
         _buildingCreator.CreateInMoment(this,
             _staticDataService.BuildingInfoDictionary[buildingName].diamondsCountToSkip);
     }
 
-    public Transform GetBuildingButtonTransform()
-    {
-        return buildingView.buildingButton.transform;
-    }
+    public Transform GetBuildingButtonTransform() => buildingView.buildingButton.transform;
 }
