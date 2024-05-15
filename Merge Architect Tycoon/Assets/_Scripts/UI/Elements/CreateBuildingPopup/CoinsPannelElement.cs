@@ -18,9 +18,12 @@ public class CoinsPannelElement : MonoBehaviour
 
     public void RenderCoinsCount(int currentCoins, int coinsGoal)
     {
+        resourceCount.transform.parent.gameObject.SetActive(true);
+
         if (currentCoins >= coinsGoal)
         {
-            resourceCount.text = $"{coinsGoal}/{coinsGoal}";
+            // resourceCount.text = $"{coinsGoal}/{coinsGoal}";
+            resourceCount.transform.parent.gameObject.SetActive(false);
             checkMark.gameObject.SetActive(true);
         }
         else

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e9203ceefe5647b7b9395e7bc2895, type: 3}
   m_Name: CompleteBuildQuest
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 0eb07a430fdca7246bfed218ee08a8b8, type: 3}
+  Sprite: {fileID: -180363452, guid: 455e3fb6e773f7e4c9c78b99e2194717, type: 3}
   questInfo: {fileID: 11400000, guid: 0eecbcda5ee63b544813d0f659a9a02d, type: 2}
