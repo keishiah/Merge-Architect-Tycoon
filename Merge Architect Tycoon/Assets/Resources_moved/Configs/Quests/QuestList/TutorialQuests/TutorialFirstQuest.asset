@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutorialFirstQuest
   m_EditorClassIdentifier: 
   Discription: Get an inheritance
-  Sprite: {fileID: 21300000, guid: ac3a1c7c9032e7348abc9920801351ff, type: 3}
+  Sprite: {fileID: 21300000, guid: 7b8187347bbeae4459618291f4522d1b, type: 3}
   Requires: []
   Objectives: []
   RewardList:

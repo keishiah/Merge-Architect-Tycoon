@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44678139552a2d24c9be087cc4c3a62c, type: 3}
   m_Name: 10NeedTruck
   m_EditorClassIdentifier: 
-  IsKeyStep: 0
+  IsKeyStep: 1
   text: We need to call a construction company to buy building materials for new
     buildings.

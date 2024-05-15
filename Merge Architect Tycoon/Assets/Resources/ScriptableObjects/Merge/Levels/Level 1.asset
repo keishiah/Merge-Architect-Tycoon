@@ -32,7 +32,7 @@ MonoBehaviour:
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: da39ab5ee6d290540b69872a39661af5, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1
@@ -42,7 +42,7 @@ MonoBehaviour:
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: 3337ee787c2d27842bc8d181df1cd804, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1
@@ -52,7 +52,7 @@ MonoBehaviour:
     slotState: 3
   - mergeItem: {fileID: 11400000, guid: 7960935566e61b34ebcbc6369773c7bd, type: 2}
     slotState: 2
-  - mergeItem: {fileID: 0}
+  - mergeItem: {fileID: 11400000, guid: 6d99a09ec85e1c54fa46db28643ff0ff, type: 2}
     slotState: 0
   - mergeItem: {fileID: 0}
     slotState: 1

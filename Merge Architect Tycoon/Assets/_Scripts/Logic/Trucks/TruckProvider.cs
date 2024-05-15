@@ -167,7 +167,7 @@ public class TruckProvider : IInitializableOnSceneLoaded
 
     public void BuyTruck()
     {
-        if (_playerProgress.Trucks.ToArrive != null && _playerProgress.Trucks.ToArrive.Length > 2)
+        if (_playerProgress.Trucks.ToArrive != null && _playerProgress.Trucks.ToArrive.Length > 0)
             return;
 
         if(!_progressService.SpendCoins(resourceCost))

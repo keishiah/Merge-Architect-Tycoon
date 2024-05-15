@@ -10,7 +10,7 @@ public class TrucksData
     public int CargoCapacity;
     public int LuckLevel;
 
-    public ReactiveProperty<int> BoostCount = new();
+    public ReactiveProperty<int> BoostCount = new(1);
     public int BoostBuyLevel;
     public DateTime lastResetDate;
 

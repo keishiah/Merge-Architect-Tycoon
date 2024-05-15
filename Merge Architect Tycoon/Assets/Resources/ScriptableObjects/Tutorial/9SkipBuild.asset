@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 9SkipBuild
   m_EditorClassIdentifier: 
   IsKeyStep: 0
-  clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
+  clip: {fileID: 7400000, guid: 98ff1d3aa6601ec4dbb3719b14a6dddc, type: 2}
   buttonName: SkipCreationButton1

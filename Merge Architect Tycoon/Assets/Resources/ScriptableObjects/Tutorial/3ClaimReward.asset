@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 3ClaimReward
   m_EditorClassIdentifier: 
   IsKeyStep: 0
-  clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
+  clip: {fileID: 7400000, guid: 5d5e2d3c65925be49821dad4493200cd, type: 2}
   buttonName: Claim Reward Button

@@ -17,6 +17,6 @@ public class ClickDialogTutorialStep : TutorialStep
 
         tutorialHandler.NextButtonReset(button);
         tutorialHandler.ShowDialog(text);
-        tutorialHandler.ShowHand(clip, buttonGameObject.transform);
+        tutorialHandler.ShowHand(clip);
     }
 }

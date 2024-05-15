@@ -26,10 +26,11 @@ public class ProgressItemPopup : MonoBehaviour
         mainText.text = m_mergeItem.ItemName + $"\n (Lvl {m_mergeItem.ItemLevel})";
         
         int i = 0;
-        for(; i < categories.Length; i++)
+        bool isFindCategory = false;
+        for(; !isFindCategory; i++)
         {
             if (categories[i].sprites.Contains(m_mergeItem.ItemSprite))
-                break;
+                isFindCategory = true;
         }
 
         for(int j = 0;  j < stagesImage.Length; j++)
