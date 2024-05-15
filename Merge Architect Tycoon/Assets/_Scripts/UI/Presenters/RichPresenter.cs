@@ -21,8 +21,6 @@ public class RichPresenter
 
     public void AddCoins()
     {
-        _progressService.AddCoins(1000);
-
 // #if UNITY_EDITOR
 //         if (Application.version.StartsWith("d"))
 //         {
@@ -39,8 +37,6 @@ public class RichPresenter
 
     public void AddDiamonds()
     {
-        _progressService.AddDiamonds(100);
-
 //         _progressService.AddDiamonds(100);
 // #if UNITY_EDITOR
 //         if (Application.version.StartsWith("d"))

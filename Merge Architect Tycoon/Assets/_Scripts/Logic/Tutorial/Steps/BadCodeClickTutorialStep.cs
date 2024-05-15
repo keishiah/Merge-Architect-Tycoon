@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "ClickTutorialStep", menuName = "StaticData/Tutorial/ClickTutorialStep")]
-public class ClickTutorialStep : TutorialStep
+[CreateAssetMenu(fileName = "BadCodeClickTutorialStep", menuName = "StaticData/Tutorial/BadCodeClickTutorialStep")]
+public class BadCodeClickTutorialStep : TutorialStep
 {
     public AnimationClip clip;
     public string buttonName;
@@ -13,7 +13,7 @@ public class ClickTutorialStep : TutorialStep
         GameObject buttonGameObject = GameObject.Find(buttonName);
         Button button = buttonGameObject.GetComponent<Button>();
 
-        tutorialHandler.NextButtonReset(button);
+        tutorialHandler.BadCodeCreateTempButton(button);
         tutorialHandler.ShowHand(clip);
     }
 }
