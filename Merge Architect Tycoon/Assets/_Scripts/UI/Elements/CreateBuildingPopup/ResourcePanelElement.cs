@@ -20,9 +20,12 @@ public class ResourcePanelElement : MonoBehaviour
 
     private void RenderResourcesText(int currentCount, int resourceGoal)
     {
+        resourceCountText.transform.parent.gameObject.SetActive(true);
+
         if (currentCount >= resourceGoal)
         {
-            resourceCountText.text = $"{resourceGoal}/{resourceGoal}";
+            // resourceCountText.text = $"{resourceGoal}/{resourceGoal}";
+            resourceCountText.transform.parent.gameObject.SetActive(false);
             checkMark.gameObject.SetActive(true);
         }
         else
