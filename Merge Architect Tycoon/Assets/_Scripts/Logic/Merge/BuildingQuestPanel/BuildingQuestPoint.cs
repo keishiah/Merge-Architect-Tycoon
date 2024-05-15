@@ -10,6 +10,7 @@ public class BuildingQuestPoint : MonoBehaviour
     [SerializeField] public Image Icon;
     [SerializeField] public TextMeshProUGUI Text;
 
+    [SerializeField] public Image notDoneIcon;
     [SerializeField] public Image doneIcon;
     [SerializeField] public Sprite coinSprite;
 
@@ -74,6 +75,7 @@ public class BuildingQuestPoint : MonoBehaviour
         {
             Text.enabled = false;
             doneIcon.enabled = true;
+            notDoneIcon.enabled = false;
             IsDone = true;
             button.enabled = false;
         }
@@ -81,6 +83,7 @@ public class BuildingQuestPoint : MonoBehaviour
         {
             Text.enabled = true;
             doneIcon.enabled = false;
+            notDoneIcon.enabled = true;
             IsDone = false;
             button.enabled = true;
             if (Icon.sprite != coinSprite)

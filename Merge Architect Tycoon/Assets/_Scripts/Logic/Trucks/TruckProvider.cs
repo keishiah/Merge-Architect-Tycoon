@@ -108,7 +108,9 @@ public class TruckProvider : IInitializableOnSceneLoaded
         }
 
         TruckUpdates nextUpdate = _truckInfo.Upgrades[level];
-        string text = $"+{nextUpdate.TruskUpdate}";
+        string text = $"+ {nextUpdate.TruskUpdate}";
+        if (nextUpdate.TruskUpdate == TruskUpdate.Luck)
+            text = $"+ Upgrade truck";
         _truckPanel.UpdateButtonRefresh(text, nextUpdate);
     }
     private void UpdateTrucksByHard()
