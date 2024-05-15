@@ -41,19 +41,6 @@ public class LoadPlayerProgressState : IState
             SaveLoadService.Load<TutorialData>(SaveKey.Tutorial);
         if (_progressService.Tutorial == null)
             _progressService.Tutorial = new TutorialData();
-        else if (!_progressService.Tutorial.IsComplite && _progressService.Tutorial.StepIndex > 0)
-        {
-            PlayerPrefs.DeleteAll();
-            _progressService.Tutorial = new TutorialData();
-            _progressService.Riches = new PlayerRiches();
-            _progressService.Buldings = new BuildingsData();
-            _progressService.Quests = new QuestsData();
-            _progressService.Trucks = new TrucksData();
-            _progressService.Inventory = new InventoryData();
-            _progressService.PlayerStats = new PlayerStats();
-            _progressService.DistrictData = new DistrictData();
-            return;
-        }
 
         _progressService.Riches =
             SaveLoadService.Load<PlayerRiches>(SaveKey.Riches);

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 22SellItem
   m_EditorClassIdentifier: 
   IsKeyStep: 0
-  clip: {fileID: 7400000, guid: 8eeb178236a011c459ab91caf64d6a6c, type: 2}
+  clip: {fileID: 7400000, guid: 9dec17308e4eb674f8a4a5f5ee53f726, type: 2}
   buttonName: Sell Button

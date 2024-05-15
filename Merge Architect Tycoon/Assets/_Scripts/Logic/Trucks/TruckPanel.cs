@@ -104,6 +104,7 @@ public class TruckPanel : MonoBehaviour
     public void BuyTruckButtonsAddListener(UnityAction buyTruck)
     {
         BuyTruckButtons.onClick.AddListener(buyTruck);
+        BuyTruckButtons.onClick.AddListener(ClosePopups);
     }
 
     public void OpenUpdatePopup()
@@ -193,7 +194,7 @@ public class TruckPanel : MonoBehaviour
     public void ShowToShopPopup(int missingCurrency, bool isHardCurrency = true)
     {
         ClosePopups();
-        TextShopPopup.text = $"You are missing {missingCurrency}";
+        TextShopPopup.text = $"You've lack of coins {missingCurrency}";
         ImageShopPopup.sprite = isHardCurrency ? hardCurrencySprite : softCurrencySprite;
         ToShopPopup.SetActive(true);
     }

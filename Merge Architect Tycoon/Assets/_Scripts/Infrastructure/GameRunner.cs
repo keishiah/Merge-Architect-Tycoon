@@ -33,12 +33,16 @@ public class GameRunner : MonoBehaviour
     {
         string numbersOnlyVersion = Regex.Replace(Application.version, "[^0-9.]", "");
 
+        TutorialData Tutorial = SaveLoadService.Load<TutorialData>(SaveKey.Tutorial);
+
         if (!PlayerPrefs.HasKey(SaveKey.GameVersion.ToString())
             || numbersOnlyVersion != PlayerPrefs.GetString(SaveKey.GameVersion.ToString())
-            || _clearPrefs)
+            || _clearPrefs
+            || (Tutorial != null && !Tutorial.IsComplite && Tutorial.StepIndex > 0))
         {
             _isNeedDeleteAll = true;
             PlayerPrefs.DeleteAll();
+            Debug.Log("DeleteAll2");
         }
     }
 

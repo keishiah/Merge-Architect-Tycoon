@@ -33,8 +33,8 @@ RectTransform:
   m_Father: {fileID: 493250701707882070}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 381.6466, y: 84.7003}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You are missing 100
+  m_text: You've lack of coins 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.4
+  m_fontSize: 40
   m_fontSizeBase: 43.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -103,8 +103,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: -3
+  m_wordSpacing: -10
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -162,16 +162,16 @@ RectTransform:
   m_GameObject: {fileID: 2888518157085368285}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 493250701707882070}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 112}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4678614108567458121
 CanvasRenderer:
@@ -381,10 +381,10 @@ RectTransform:
   m_Father: {fileID: 6147920903109950802}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -190, y: -1042.5}
+  m_SizeDelta: {x: 890, y: 1297.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9196404289278806168
 CanvasRenderer:
@@ -457,10 +457,10 @@ RectTransform:
   m_Father: {fileID: 5069940355814389780}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 421.2}
-  m_SizeDelta: {x: 580.1752, y: 145.0438}
+  m_SizeDelta: {x: -309.82483, y: -1182.9562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5164258595384497687
 CanvasRenderer:
@@ -2094,16 +2094,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RebuyTruckSprites:
-  - {fileID: 21300000, guid: 616f52eb4f431bd4fbe559becda12c53, type: 3}
-  - {fileID: 21300000, guid: d27f2cb562be8d94aa9bc21c1351ddcd, type: 3}
+  - {fileID: 21300000, guid: ea2f4fe3db5908f438773a47fd5e91dd, type: 3}
+  - {fileID: 21300000, guid: 01d20d59942c4d149a5ff58045001dc0, type: 3}
   BuyTruckButtons: {fileID: 6147920904782372523}
   PriceText: {fileID: 6147920904718163452}
   RebuyTruckImage: {fileID: 6147920904782372520}
   UpdateTruckSprites:
-  - {fileID: 21300000, guid: 69c91bf9b239054488ae3f079d8ef7e5, type: 3}
-  - {fileID: 21300000, guid: a643ac8cc324c0c43a277a24425fc438, type: 3}
-  - {fileID: 21300000, guid: 7035b30bbabae3147a565495699d66a7, type: 3}
-  - {fileID: 21300000, guid: 78c55297abcd1c24b9e2c08212c18389, type: 3}
+  - {fileID: 21300000, guid: d071818f769effb4abc8a1b02121fe41, type: 3}
+  - {fileID: 21300000, guid: 0c23d2ff1eec72140b59bedf4da33daa, type: 3}
+  - {fileID: 21300000, guid: bb772c452772f56478d8dbfb11333154, type: 3}
+  - {fileID: 21300000, guid: 66d113d1a971088428d314670b6e8cc3, type: 3}
   UpdatePanel: {fileID: 6147920903981447525}
   UpdateTruckBySoftButton: {fileID: 6147920904619761866}
   UpdateTruckBySoftText: {fileID: 6147920903456307459}
@@ -2112,10 +2112,10 @@ MonoBehaviour:
   UpdateTruckHeaderText: {fileID: 6147920903155346572}
   UpdateTruckImage: {fileID: 6147920903166079931}
   BoostTruckSprites:
-  - {fileID: 21300000, guid: ab8d7b8fe2e086746b8005497c106c38, type: 3}
-  - {fileID: 21300000, guid: c15ede33954b9fb4cb05b7f30c1772cb, type: 3}
-  - {fileID: 21300000, guid: e886411fb2070404b8ceec5b154b3a51, type: 3}
-  - {fileID: 21300000, guid: c72fc8dfcda77054a9d2062b912c8734, type: 3}
+  - {fileID: 21300000, guid: a3f6018fbaed04447ab29a4a7e0e65e6, type: 3}
+  - {fileID: 21300000, guid: 8a0b5bdd81f3b304e9ff8ace8ff719eb, type: 3}
+  - {fileID: 21300000, guid: 9c15fcc7399427f4982cce0c349daaf5, type: 3}
+  - {fileID: 21300000, guid: 1555c08ae19d7c8489c5a5e3b53a89a5, type: 3}
   BoostPanel: {fileID: 6147920903207316054}
   BoostTruckButton: {fileID: 6147920903957535418}
   BoostTruckButtonText: {fileID: 6147920903205283907}
@@ -6300,7 +6300,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: d27f2cb562be8d94aa9bc21c1351ddcd, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 01d20d59942c4d149a5ff58045001dc0, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -7608,10 +7608,10 @@ RectTransform:
   m_Father: {fileID: 5069940355814389780}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 22.453094, y: -97.7}
-  m_SizeDelta: {x: 500.0736, y: 100}
+  m_SizeDelta: {x: -389.9264, y: -1228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982513408231363172
 MonoBehaviour:
@@ -7631,7 +7631,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: -20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
