@@ -147,7 +147,7 @@ public class TutorialHandler : MonoBehaviour
 
         while (true)
         {
-            await UniTask.DelayFrame(100);
+            await UniTask.DelayFrame(10);
 
             if (button.transform.position != previousPosition)
             {

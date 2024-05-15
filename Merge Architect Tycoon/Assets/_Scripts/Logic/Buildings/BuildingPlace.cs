@@ -48,6 +48,8 @@ public class BuildingPlace : MonoBehaviour
             case BuildingStateEnum.BuildInProgress:
                 buildingView.SetViewBuildInProgress();
                 buildingView.createBuildingInMomentButton.onClick.AddListener(CreateInMoment);
+                buildingView.SetSkipButtonsText(_staticDataService.BuildingInfoDictionary[buildingName]
+                    .diamondsCountToSkip.ToString());
                 break;
             case BuildingStateEnum.CreateBuilding:
                 buildingView.SetViewBuildCreated();

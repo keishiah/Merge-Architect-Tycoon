@@ -15,12 +15,14 @@ public class BuildingRenderer : MonoBehaviour
     private AudioPlayer _audio;
 
     private string _buildingName;
+    private StaticDataService _staticDataService;
 
     [Inject]
-    void Construct(EffectsPresenter effectsPresenter, AudioPlayer audio)
+    void Construct(EffectsPresenter effectsPresenter, AudioPlayer audio, StaticDataService staticDataService)
     {
         _effectsPresenter = effectsPresenter;
         _audio = audio;
+        _staticDataService = staticDataService;
     }
 
     public void SetBuildingName(string buildingName)
@@ -38,8 +40,14 @@ public class BuildingRenderer : MonoBehaviour
     {
         _effectsPresenter.PlaySmokeEffect(buildingButton.transform.position, _buildingName);
         _audio.PlayUiSound(UiSoundTypes.Building);
+
         createBuildingInMomentButton.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
+    }
+
+    public void SetSkipButtonsText(string text)
+    {
+        createBuildingInMomentButton.GetComponentInChildren<TextMeshProUGUI>().text = text;
     }
 
     public virtual void SetViewBuildCreated()
