@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef0bdbd29c87dd469fa1fd6da2714ac, type: 3}
   m_Name: Build2
   m_EditorClassIdentifier: 
-  Sprite: {fileID: -180363452, guid: 455e3fb6e773f7e4c9c78b99e2194717, type: 3}
+  Sprite: {fileID: 21300000, guid: fb528b43f3db2e342afca4a800e04177, type: 3}
   targetBuildingName: Lambermill
