@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0b114b9e4228145a2d0ddca86661d4, type: 3}
   m_Name: Buy10TruckObjective
   m_EditorClassIdentifier: 
-  Sprite: {fileID: -180363452, guid: 455e3fb6e773f7e4c9c78b99e2194717, type: 3}
+  Sprite: {fileID: 21300000, guid: 69c91bf9b239054488ae3f079d8ef7e5, type: 3}
   trucksCount: 10
