@@ -120,17 +120,26 @@ public class TutorialHandler : MonoBehaviour
         RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
         RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
 
-        buttonToClickRectTransform.SetParent(buttonToNextRect, worldPositionStays: false);
-
         buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
         buttonToClickRectTransform.position = buttonToNextRect.position;
         buttonToClickRectTransform.sizeDelta = buttonToNextRect.rect.size;
 
-        buttonToClickRectTransform.SetParent(_blockerator.transform, worldPositionStays: true);
-
         _tempButton = buttonNext;
     }
+    public void BadCodeCreateTempButton(Button buttonNext)
+    {
+        _blockerator.SetActive(true);
+        _buttonToClick.enabled = true;
+        RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
+        RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
 
+        buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
+        buttonToClickRectTransform.position = new(212*.81f,258*.81f,0);
+        buttonToClickRectTransform.sizeDelta = buttonToNextRect.rect.size;
+
+        _tempButton = buttonNext;
+        _allScreenButton.SetActive(false);
+    }
 
     private async UniTask CheckButtonMovement(Button button)
     {

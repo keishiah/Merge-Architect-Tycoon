@@ -2,7 +2,6 @@ using TMPro;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 public class ProgressItemPopup : MonoBehaviour
 {
@@ -27,13 +26,21 @@ public class ProgressItemPopup : MonoBehaviour
         
         int i = 0;
         bool isFindCategory = false;
-        for(; !isFindCategory; i++)
+        for(; !isFindCategory; )
         {
-            if (categories[i].sprites.Contains(m_mergeItem.ItemSprite))
-                isFindCategory = true;
+            foreach(Sprite sprite in categories[i].sprites)
+            {
+                if (sprite.name == m_mergeItem.ItemSprite.name)
+                    {
+                        isFindCategory = true;
+                        break;
+                    }
+            }
+            if(!isFindCategory)
+                i++;
         }
 
-        for(int j = 0;  j < stagesImage.Length; j++)
+        for(int j = 0; j < stagesImage.Length; j++)
         {
             stagesImage[j].sprite = categories[i].sprites[j];
         }
