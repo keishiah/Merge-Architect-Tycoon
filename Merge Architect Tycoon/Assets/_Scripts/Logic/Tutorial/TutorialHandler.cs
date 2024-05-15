@@ -120,9 +120,13 @@ public class TutorialHandler : MonoBehaviour
         RectTransform buttonToClickRectTransform = _buttonToClick.GetComponent<RectTransform>();
         RectTransform buttonToNextRect = buttonNext.GetComponent<RectTransform>();
 
+        buttonToClickRectTransform.SetParent(buttonToNextRect, worldPositionStays: false);
+
         buttonToClickRectTransform.pivot = buttonToNextRect.pivot;
         buttonToClickRectTransform.position = buttonToNextRect.position;
         buttonToClickRectTransform.sizeDelta = buttonToNextRect.rect.size;
+
+        buttonToClickRectTransform.SetParent(_blockerator.transform, worldPositionStays: true);
 
         _tempButton = buttonNext;
     }

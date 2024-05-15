@@ -658,7 +658,7 @@ MonoBehaviour:
   TutorialSteps:
   - {fileID: 11400000, guid: fb0eaca5ff96e2547be86fd6065846e7, type: 2}
   - {fileID: 11400000, guid: 7f40025c4f8613642a3f3aaf7d456737, type: 2}
-  - {fileID: 11400000, guid: e1c9cc06e92f5354794e2950d93c09b8, type: 2}
+  - {fileID: 11400000, guid: 02827746050e38444b7dd4fcc9f25373, type: 2}
   - {fileID: 11400000, guid: 29dde0c4dbf7b2748a7596ea03fcd082, type: 2}
   - {fileID: 11400000, guid: f2573250ecadac443b1cc65074b6571b, type: 2}
   - {fileID: 11400000, guid: 1855a186f00287243ab698ece0135dcc, type: 2}
