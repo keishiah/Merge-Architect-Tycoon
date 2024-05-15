@@ -9,7 +9,7 @@ public class MainPopup : MonoBehaviour
     public MainPlace MainPlace;
     public ResourcesPanel resourcesPanel;
     public MainRenderer mainRenderer;
-    
+
     [Inject] private BuildingProvider _buildingProvider;
     [Inject] private StaticDataService _staticDataService;
     [Inject] private ItemsCatalogue _itemsCatalogue;
@@ -30,8 +30,7 @@ public class MainPopup : MonoBehaviour
 
     private void OnEnable()
     {
-        _buildingProvider.GetNextMainPart(out var mainInfo);
-        if (mainInfo != default)
+        if (_buildingProvider.GetNextMainPart(out var mainInfo))
         {
             mainRenderer.showMainPopupButton.gameObject.SetActive(false);
             MainPlace.buildingName = mainInfo.buildingName;
@@ -68,6 +67,7 @@ public class MainPopup : MonoBehaviour
     private void Closepopup()
     {
         gameObject.SetActive(false);
-        mainRenderer.showMainPopupButton.gameObject.SetActive(true);
+        if (_buildingProvider.GetNextMainPart(out var mainInfo))
+            mainRenderer.showMainPopupButton.gameObject.SetActive(true);
     }
 }

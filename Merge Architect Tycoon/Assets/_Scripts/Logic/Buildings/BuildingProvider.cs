@@ -67,9 +67,10 @@ public class BuildingProvider : IInitializableOnSceneLoaded
         var mainParts = _staticDataService.MainInfoDictionary.Keys.ToList();
         foreach (var mainPart in mainParts)
         {
-            if (_playerProgress.Buldings.createdMainParts.Contains(
+            if (_playerProgress.Buldings.CreatedBuildings.Contains(
                     mainPart))
                 continue;
+
             mainInfo = _staticDataService.MainInfoDictionary[mainPart];
             return true;
         }

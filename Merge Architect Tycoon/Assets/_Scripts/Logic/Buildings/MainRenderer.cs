@@ -1,9 +1,12 @@
 using UnityEngine.UI;
+using Zenject;
 
 public class MainRenderer : BuildingRenderer
 {
     public Button showMainPopupButton;
     public MainPopup mainPopup;
+
+    [Inject] private BuildingProvider _buildingProvider;
 
     private void Start()
     {
@@ -26,5 +29,7 @@ public class MainRenderer : BuildingRenderer
     {
         base.SetViewBuildCreated();
         showMainPopupButton.gameObject.SetActive(true);
+        if (!_buildingProvider.GetNextMainPart(out var mainInfo))
+            showMainPopupButton.gameObject.SetActive(false);
     }
 }
