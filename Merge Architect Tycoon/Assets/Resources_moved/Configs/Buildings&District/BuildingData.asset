@@ -58,7 +58,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 60f327530a940034696ccf0201ddcf04, type: 2}
     - {fileID: 11400000, guid: cbdc84a042d65db40bb475cc482f9785, type: 2}
   - buildingName: Main
-    districtSprite: {fileID: -1447104700, guid: da31066ecb7726c409a8d38ad3ebad43, type: 3}
+    districtSprite: {fileID: 21300000, guid: b6ff96496a030e94aaafc766414fd8cc, type: 3}
     buildPopupSprite: {fileID: 21300000, guid: eb42abd07121f08499548ee0a2358ad2, type: 3}
     timeToCreate: 10800
     coinsCountToCreate: 10000
@@ -66,9 +66,10 @@ MonoBehaviour:
     itemsToCreate: []
   mainParts:
   - buildingName: main1
-    districtSprite: {fileID: -266944120, guid: ab045372d9679c04daba5dbb024d17a6, type: 3}
+    districtSprite: {fileID: 21300000, guid: e968269a2b7fc284f8d759e05766dc0d, type: 3}
     buildPopupSprite: {fileID: 21300000, guid: 7b8187347bbeae4459618291f4522d1b, type: 3}
     timeToCreate: 11111
     coinsCountToCreate: 11
     diamondsCountToSkip: 11
-    itemsToCreate: []
+    itemsToCreate:
+    - {fileID: 11400000, guid: 4c94ec0251eed88499764ebd2d246c41, type: 2}

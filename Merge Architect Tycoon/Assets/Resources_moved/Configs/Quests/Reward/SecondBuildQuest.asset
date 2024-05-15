@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SecondBuildQuest
   m_EditorClassIdentifier: 
   IsHiden: 1
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2dbec16573b27544093b23898c9b815e, type: 3}
   Amount: 0
   quest: {fileID: 11400000, guid: 762efa1b782952c4796ca33df723c8f9, type: 2}

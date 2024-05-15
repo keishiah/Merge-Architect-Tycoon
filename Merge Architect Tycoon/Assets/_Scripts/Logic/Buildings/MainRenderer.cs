@@ -7,19 +7,19 @@ public class MainRenderer : BuildingRenderer
 
     private void Start()
     {
-        showMainPopupButton.onClick.AddListener(OpenCloseMainPopup);
+        showMainPopupButton.onClick.AddListener(OpenMainPopup);
     }
 
-    private void OpenCloseMainPopup()
+    private void OpenMainPopup()
     {
-        mainPopup.gameObject.SetActive(!mainPopup.gameObject.activeSelf);
+        mainPopup.gameObject.SetActive(true);
     }
 
     public override void SetViewInactive()
     {
         base.SetViewInactive();
         showMainPopupButton.gameObject.SetActive(false);
-        mainPopup.gameObject.SetActive(false);
+        // mainPopup.gameObject.SetActive(false);
     }
 
     public override void SetViewBuildCreated()

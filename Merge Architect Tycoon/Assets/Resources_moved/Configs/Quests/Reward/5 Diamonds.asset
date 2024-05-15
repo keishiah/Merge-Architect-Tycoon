@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 5 Diamonds
   m_EditorClassIdentifier: 
   IsHiden: 0
-  Sprite: {fileID: 1845904305, guid: e86d4490498d35d47b69e3ef17448a63, type: 3}
+  Sprite: {fileID: 21300000, guid: 2dbec16573b27544093b23898c9b815e, type: 3}
   Amount: 5

@@ -12,6 +12,7 @@ public class QuestRenderer : MonoBehaviour
     public List<QuestRewardRenderer> RewardRenderers;
     public List<QuestObjectiveRenderer> ObjectiveRenderers;
     public Button ClaimButton;
+    public Image youWillGet;
     public Button OpenCloseObjectivesButton;
     public VerticalLayoutGroup ObjectivesLayout;
     private int _objectivesHeight;
@@ -19,8 +20,7 @@ public class QuestRenderer : MonoBehaviour
 
     public QuestPanel Panel;
 
-    [Space]
-    [SerializeField] private RectTransform questRewardRendererParent;
+    [Space] [SerializeField] private RectTransform questRewardRendererParent;
     [SerializeField] private QuestRewardRenderer questRewardRendererPrefab;
     [SerializeField] private RectTransform questObjectiveRendererParent;
     [SerializeField] private QuestObjectiveRenderer questObjectiveRendererPrefab;
@@ -92,7 +92,12 @@ public class QuestRenderer : MonoBehaviour
 
     private void SetButtons()
     {
-        ClaimButton.gameObject.SetActive(CurrentData.IsQuestComplete());
+        ClaimButton.gameObject.SetActive(false);
+        youWillGet.gameObject.SetActive(false);
+        if (CurrentData.IsQuestComplete())
+            ClaimButton.gameObject.SetActive(true);
+        else
+            youWillGet.gameObject.SetActive(true);
     }
 
     private void RenderQuestHeader()
