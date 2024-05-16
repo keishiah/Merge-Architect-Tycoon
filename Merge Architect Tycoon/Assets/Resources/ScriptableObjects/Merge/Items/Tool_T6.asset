@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Toolbox
   ItemDescrpition: 
   ItemLevel: 6
-  ItemCost: 15
+  ItemCost: 85
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: f07f0be4b7dd92b46ac976d06264b0b7, type: 3}
   nextItem: {fileID: 11400000, guid: 92b0239b56fbb074a9c175cd4a6d7d75, type: 2}

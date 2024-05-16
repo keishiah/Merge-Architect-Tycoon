@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26870c4cd3aa3a44ad89d6c75d039cd, type: 3}
   m_Name: BuildSecond
   m_EditorClassIdentifier: Assembly-CSharp::QuestBaseInfo
-  Discription: Build secondHouse
+  Discription: Build second House
   Sprite: {fileID: 1182848882, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
   Requires:
   - {fileID: 11400000, guid: d62dac70ab00f2a46956f364f53588ce, type: 2}
   Objectives:
   - {fileID: 11400000, guid: ad2bde76409d520439b8f4c43cde44c7, type: 2}
   RewardList:
-  - {fileID: 11400000, guid: 3e9ed8019482c604cba74a1bcf5754a3, type: 2}
+  - {fileID: 11400000, guid: 2447fadf9fab9704cb6cf004106f1c8b, type: 2}
+  - {fileID: 11400000, guid: 9b2a0afe70fb88444af5ab687ab0321f, type: 2}

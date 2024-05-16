@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Arched window
   ItemDescrpition: 
   ItemLevel: 2
-  ItemCost: 7
+  ItemCost: 25
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 2fcc5e5f40642b3448c8b70b78103dcf, type: 3}
   nextItem: {fileID: 11400000, guid: 81ba7d3dae8a87e4baa5196a18a84cfd, type: 2}

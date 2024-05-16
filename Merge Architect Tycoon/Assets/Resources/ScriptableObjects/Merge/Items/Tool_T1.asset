@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Putty knife
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 5
+  ItemCost: 10
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: e68ea1a174932fd438407dc784dba534, type: 3}
   nextItem: {fileID: 11400000, guid: 473604411a654484091699b5eee43f1c, type: 2}

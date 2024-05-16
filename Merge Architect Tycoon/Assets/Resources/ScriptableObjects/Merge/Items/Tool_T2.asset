@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Paint roller
   ItemDescrpition: 
   ItemLevel: 2
-  ItemCost: 7
+  ItemCost: 25
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 7f22efdb7f3f1524abefba2a273933cc, type: 3}
   nextItem: {fileID: 11400000, guid: e910c33a7ae05e7439efd4a05510d12f, type: 2}

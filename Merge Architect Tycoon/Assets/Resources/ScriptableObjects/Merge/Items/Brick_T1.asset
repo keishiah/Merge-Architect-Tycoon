@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: 1
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 5
+  ItemCost: 10
   itemType: 0
   ItemSprite: {fileID: 0}
   nextItem: {fileID: 11400000, guid: 959916a4a4dcfc34982596d9be17cc9c, type: 2}

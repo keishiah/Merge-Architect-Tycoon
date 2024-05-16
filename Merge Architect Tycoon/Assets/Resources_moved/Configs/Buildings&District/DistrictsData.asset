@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   districts:
   - districtId: 0
-    currencyCount: 75
-    timeToEarn: 360
+    currencyCount: 1250
+    timeToEarn: 150
     districtGrey: {fileID: 0}
     districtColored: {fileID: 0}
   - districtId: 1

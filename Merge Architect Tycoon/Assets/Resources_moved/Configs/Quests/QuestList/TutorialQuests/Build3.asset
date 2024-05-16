@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26870c4cd3aa3a44ad89d6c75d039cd, type: 3}
+  m_Name: Build3
+  m_EditorClassIdentifier: Assembly-CSharp::QuestBaseInfo
+  Discription: Build next
+  Sprite: {fileID: 1182848882, guid: 5ccb0916987dacd4590887b939396f6c, type: 3}
+  Requires:
+  - {fileID: 11400000, guid: 38ab45c4bd10e75498e46663a58beecf, type: 2}
+  Objectives:
+  - {fileID: 11400000, guid: 542dffa394cc67f4cbeb5ea4bc5c43df, type: 2}
+  RewardList:
+  - {fileID: 11400000, guid: f4478e87e22457d408371212305194c9, type: 2}
+  - {fileID: 11400000, guid: 8ac1beda63f5e874c8c8d047b3543253, type: 2}
