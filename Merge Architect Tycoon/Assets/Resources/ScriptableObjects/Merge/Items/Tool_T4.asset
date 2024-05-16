@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Hammer
   ItemDescrpition: 
   ItemLevel: 4
-  ItemCost: 11
+  ItemCost: 55
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 5eff37d40713dbd4885e1cd32aee4608, type: 3}
   nextItem: {fileID: 11400000, guid: 06d534b0ca665bc42ad2159cd3e9055b, type: 2}

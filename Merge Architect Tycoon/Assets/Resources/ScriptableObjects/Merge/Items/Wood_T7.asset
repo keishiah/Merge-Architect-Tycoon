@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Sofa
   ItemDescrpition: 
   ItemLevel: 7
-  ItemCost: 17
+  ItemCost: 100
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 57a53bf3845bb0a42a611b554099a1b3, type: 3}
   nextItem: {fileID: 0}

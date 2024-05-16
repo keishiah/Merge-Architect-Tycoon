@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Brush
   ItemDescrpition: 
   ItemLevel: 3
-  ItemCost: 9
+  ItemCost: 40
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 0cb998c66463a02469f3d973ef4f9f9f, type: 3}
   nextItem: {fileID: 11400000, guid: d791c37b96d577245901e28751d7854b, type: 2}

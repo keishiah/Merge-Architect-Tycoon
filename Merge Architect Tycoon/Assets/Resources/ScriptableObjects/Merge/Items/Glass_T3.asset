@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Semicircular window
   ItemDescrpition: 
   ItemLevel: 3
-  ItemCost: 9
+  ItemCost: 40
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: 71d03cca2ff728c43a814944e02a7743, type: 3}
   nextItem: {fileID: 11400000, guid: 3337ee787c2d27842bc8d181df1cd804, type: 2}

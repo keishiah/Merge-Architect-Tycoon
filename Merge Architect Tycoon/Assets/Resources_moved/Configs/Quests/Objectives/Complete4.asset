@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9e9203ceefe5647b7b9395e7bc2895, type: 3}
+  m_Name: Complete4
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: -180363452, guid: 455e3fb6e773f7e4c9c78b99e2194717, type: 3}
+  questInfo: {fileID: 11400000, guid: 832e79da2f347944bae1d9ec247e18ec, type: 2}

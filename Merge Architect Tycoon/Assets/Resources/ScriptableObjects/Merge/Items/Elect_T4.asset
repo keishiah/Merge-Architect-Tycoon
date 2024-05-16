@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Surveillance camera
   ItemDescrpition: 
   ItemLevel: 4
-  ItemCost: 11
+  ItemCost: 55
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: f1d40c3fd0803b04b9e6405fee80c7bb, type: 3}
   nextItem: {fileID: 11400000, guid: ab37ca1d95f9a3d43afd0bc437b3e788, type: 2}

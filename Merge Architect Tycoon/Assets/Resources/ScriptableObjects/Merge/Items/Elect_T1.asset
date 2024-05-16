@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: Electric socket
   ItemDescrpition: 
   ItemLevel: 1
-  ItemCost: 5
+  ItemCost: 10
   itemType: 0
   ItemSprite: {fileID: 21300000, guid: c89d4fbb538d4b645a9ca5a22ff77799, type: 3}
   nextItem: {fileID: 11400000, guid: e73b3daebb83b4b47b78cc1a51b854f0, type: 2}

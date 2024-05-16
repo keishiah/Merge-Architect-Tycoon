@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: 
   ItemDescrpition: 
   ItemLevel: 7
-  ItemCost: 17
+  ItemCost: 100
   itemType: 0
   ItemSprite: {fileID: 0}
   nextItem: {fileID: 0}
